@@ -1,0 +1,32 @@
+﻿<Modal Visiable="Visiable" DialogBackdropVisiable DialogCentered>
+    <TitleContent>@Title</TitleContent>
+    <BodyContent>
+        @if (ShowSpinner)
+        {
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        }
+        @if (Content != null)
+        {
+            <p>@Content</p>
+        }
+        @if (ProgressPercent.HasValue)
+        {
+            <p>
+                <Progress Visiable Striped Animated Value="ProgressPercent.Value">
+                </Progress>
+            </p>
+        }
+        @if (ProgressText != null)
+        {
+            <p>@ProgressText</p>
+        }
+    </BodyContent>
+    <FooterContent>
+        @if (CancelCallback != null)
+        {
+            <button type="button" class="btn btn-danger" data-dismiss="modal" @onclick="Cancel">取消</button>
+        }
+    </FooterContent>
+</Modal>

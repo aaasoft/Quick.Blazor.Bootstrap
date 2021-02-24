@@ -1,0 +1,8 @@
+﻿@if (Visiable)
+{
+    <div class="progress">
+        <div class="@GetClass()" role="progressbar" style="@GetStyle()" aria-valuenow="@Value" aria-valuemin="@Minimum" aria-valuemax="@Maximum">
+            @Text
+        </div>
+    </div>
+}

@@ -1,0 +1,17 @@
+﻿<Modal Visiable="Visiable" DialogBackdropVisiable DialogCentered>
+    <TitleContent>@Title</TitleContent>
+    <HeaderContent>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" @onclick="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </HeaderContent>
+    <BodyContent>
+        <div class="form-group">
+            <input type="text" class="form-control" @bind-value="Content" />
+        </div>
+    </BodyContent>
+    <FooterContent>
+        <button type="button" class="btn btn-primary" @onclick="Ok">确定</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="Cancel">取消</button>
+    </FooterContent>
+</Modal>
