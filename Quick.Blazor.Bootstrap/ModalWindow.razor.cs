@@ -29,6 +29,7 @@ namespace Quick.Blazor.Bootstrap
             Title = null;
             Content = null;
             Visiable = false;
+            InvokeAsync(StateHasChanged);
         }
     }
 }

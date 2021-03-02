@@ -43,6 +43,7 @@ namespace Quick.Blazor.Bootstrap
             OkCallback = null;
             CancelCallback = null;
             Visiable = false;
+            InvokeAsync(StateHasChanged);
         }
     }
 }

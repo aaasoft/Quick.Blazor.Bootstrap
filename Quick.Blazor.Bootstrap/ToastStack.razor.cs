@@ -24,7 +24,7 @@ namespace Quick.Blazor.Bootstrap
             public BackgroundTheme ToastBg { get; set; }
         }
 
-        public void AddToast(string title, string content, BackgroundTheme toastBg = BackgroundTheme.info)
+        public string AddToast(string title, string content, BackgroundTheme toastBg = BackgroundTheme.info)
         {
             var id = Guid.NewGuid().ToString("N");
             var model = new ToastModel()
@@ -42,17 +42,18 @@ namespace Quick.Blazor.Bootstrap
                 Task.Delay(AutoCloseTime).ContinueWith(t =>
                 {
                     CloseToast(id);
-                    this.InvokeAsync(() => StateHasChanged());
                 });
             }
-            this.InvokeAsync(() => StateHasChanged());
+            InvokeAsync(StateHasChanged);
+            return id;
         }
 
-        private void CloseToast(string id)
+        public void CloseToast(string id)
         {
             lock (dict)
                 if (dict.ContainsKey(id))
                     dict.Remove(id);
+            InvokeAsync(StateHasChanged);
         }
     }
 }
