@@ -10,10 +10,15 @@ namespace Quick.Blazor.Bootstrap
 {
     public partial class ModalWindow
     {
+        [Parameter]
+        public bool DialogSizeSmall { get; set; }
+        [Parameter]
+        public bool DialogSizeLarge { get; set; }
+        [Parameter]
+        public bool DialogSizeExtraLarge { get; set; }
+
         private string Title { get; set; }
         private RenderFragment Content { get; set; }
-        private Action OkCallback { get; set; }
-        private Action CancelCallback { get; set; }
         private bool Visiable { get; set; }
 
         public void Show(string title, Type componentType, Dictionary<string, object> parameterDict = null)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Components;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,13 @@ namespace Quick.Blazor.Bootstrap
 {
     public partial class ModalAlert
     {
+        [Parameter]
+        public bool DialogSizeSmall { get; set; }
+        [Parameter]
+        public bool DialogSizeLarge { get; set; }
+        [Parameter]
+        public bool DialogSizeExtraLarge { get; set; }
+
         private string Title { get; set; }
         private string Content { get; set; }
         private Action OkCallback { get; set; }

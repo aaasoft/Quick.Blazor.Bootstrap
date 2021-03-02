@@ -25,5 +25,11 @@ namespace Quick.Blazor.Bootstrap
         public bool DialogScrollable { get; set; }
         [Parameter]
         public bool DialogBackdropVisiable { get; set; }
+        [Parameter]
+        public bool DialogSizeSmall { get; set; }
+        [Parameter]
+        public bool DialogSizeLarge { get; set; }
+        [Parameter]
+        public bool DialogSizeExtraLarge { get; set; }
     }
 }
