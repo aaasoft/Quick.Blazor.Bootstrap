@@ -21,6 +21,11 @@ namespace Quick.Blazor.Bootstrap
         private RenderFragment Content { get; set; }
         private bool Visiable { get; set; }
 
+        public void Show<T>(string title, Dictionary<string, object> parameterDict = null)
+        {
+            Show(title, typeof(T), parameterDict);
+        }
+
         public void Show(string title, Type componentType, Dictionary<string, object> parameterDict = null)
         {
             Title = title;

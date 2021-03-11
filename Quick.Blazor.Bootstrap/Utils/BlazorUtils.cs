@@ -9,7 +9,12 @@ namespace Quick.Blazor.Bootstrap.Utils
 {
     public class BlazorUtils
     {
-        public static RenderFragment GetRenderFragment(Type componentType, Dictionary<string, object> parameterDict)
+        public static RenderFragment GetRenderFragment<T>(Dictionary<string, object> parameterDict = null)
+        {
+            return GetRenderFragment(typeof(T), parameterDict);
+        }
+
+        public static RenderFragment GetRenderFragment(Type componentType, Dictionary<string, object> parameterDict = null)
         {
             return builder =>
             {

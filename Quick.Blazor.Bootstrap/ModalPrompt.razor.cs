@@ -22,7 +22,7 @@ namespace Quick.Blazor.Bootstrap
         private Action CancelCallback { get; set; }
         private bool Visiable { get; set; }
 
-        public void Show(string title, string content, Action<string> okCallback, Action cancelCallback)
+        public void Show(string title, string content, Action<string> okCallback = null, Action cancelCallback = null)
         {
             Title = title;
             Content = content;

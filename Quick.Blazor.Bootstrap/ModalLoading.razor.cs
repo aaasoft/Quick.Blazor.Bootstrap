@@ -38,7 +38,7 @@ namespace Quick.Blazor.Bootstrap
             InvokeAsync(StateHasChanged);
         }
 
-        public void Show(string title, string content, bool showSpinner, Action cancelCallback)
+        public void Show(string title, string content, bool showSpinner, Action cancelCallback = null)
         {
             Title = title;
             Content = content;
