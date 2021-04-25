@@ -11,6 +11,8 @@ namespace Quick.Blazor.Bootstrap
     public partial class ModalWindow
     {
         [Parameter]
+        public bool DialogCentered { get; set; } = true;
+        [Parameter]
         public bool DialogSizeSmall { get; set; }
         [Parameter]
         public bool DialogSizeLarge { get; set; }
