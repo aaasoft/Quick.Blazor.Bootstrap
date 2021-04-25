@@ -18,6 +18,10 @@ namespace Quick.Blazor.Bootstrap
         public EventCallback<string> ActiveKeyChanged { get; set; }
         [Parameter]
         public EventCallback<string> OnChange { get; set; }
+        [Parameter]
+        public string NavTabsExtraClass { get; set; }
+        [Parameter]
+        public string TabContentExtraClass { get; set; }
 
         internal List<TabPane> _panes = new List<TabPane>();
 
