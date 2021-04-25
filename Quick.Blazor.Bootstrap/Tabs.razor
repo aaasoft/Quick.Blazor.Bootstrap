@@ -1,0 +1,27 @@
+﻿<CascadingValue Value="this" IsFixed="@true">
+    <CascadingValue Value="true" Name="IsEmpty" IsFixed="true">
+        @ChildContent
+    </CascadingValue>
+    <ul class="nav nav-tabs">
+        <CascadingValue Value="true" Name="IsTab" IsFixed="true">
+            @foreach (var pane in _panes)
+            {
+                <CascadingValue Value="pane" Name="Pane" @key="pane.Key">
+                    <li class="nav-item">
+                        @ChildContent
+                    </li>
+                </CascadingValue>
+            }
+        </CascadingValue>
+    </ul>
+    <div class="tab-content">
+        <CascadingValue Value="true" Name="IsPane" IsFixed="true">
+            @foreach (var pane in _panes)
+            {
+                <CascadingValue Value="pane" Name="Pane">
+                    @ChildContent
+                </CascadingValue>
+            }
+        </CascadingValue>
+    </div>
+</CascadingValue>
