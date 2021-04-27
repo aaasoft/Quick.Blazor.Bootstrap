@@ -1,0 +1,41 @@
+﻿@ChildContent
+<nav>
+    <ul class="pagination">
+        <li class="page-item @(FirstPageEnable?"":"disabled")">
+            <a href="javascript:;" class="page-link" @onclick="@(e=> { Offset = 0;})">@FirstPageText</a>
+        </li>
+        <li class="page-item @(FirstPageEnable?"":"disabled")">
+            <a href="javascript:;" class="page-link" @onclick="@(e=> { Offset -= PageSize;; })">@PreviousPageText</a>
+        </li>
+        <li class="page-item">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon2">@PageText</span>
+                </div>
+                <input type="number" class="form-control" style="width: 5rem;" @bind-value="PageIndex" />
+                @if (DisplayPageCount)
+                {
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="basic-addon2">/ @PageCount</span>
+                    </div>
+                }
+            </div>
+        </li>
+        @if (DisplayRecordCount)
+        {
+            <li class="page-item">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon2">@RecordCountText@RecordCount</span>
+                    </div>
+                </div>
+            </li>
+        }
+        <li class="page-item @(LastPageEnable?"":"disabled")">
+            <a href="javascript:;" class="page-link" @onclick="@(e=> { Offset += PageSize;})">@NextPageText</a>
+        </li>
+        <li class="page-item @(LastPageEnable?"":"disabled")">
+            <a href="javascript:;" class="page-link" @onclick="@(e=> { Offset = (PageCount-1)*PageSize;})">@LastPageText</a>
+        </li>
+    </ul>
+</nav>
