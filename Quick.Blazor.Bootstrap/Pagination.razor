@@ -12,11 +12,27 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon2">@PageText</span>
                 </div>
-                <input type="number" class="form-control" style="width: 5rem;" @bind-value="PageIndex" />
-                @if (DisplayPageCount)
+                @if (PageIndexEditable)
+                {
+                    <input type="number" class="form-control" style="width: 5rem;" @bind-value="PageIndex" />
+                    @if (DisplayPageCount)
+                    {
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="basic-addon2">/ @PageCount</span>
+                        </div>
+                    }
+                }
+                else
                 {
                     <div class="input-group-append">
-                        <span class="input-group-text" id="basic-addon2">/ @PageCount</span>
+                        @if (DisplayPageCount)
+                        {
+                            <span class="input-group-text" id="basic-addon2">@PageIndex / @PageCount</span>
+                        }
+                        else
+                        {
+                            <span class="input-group-text" id="basic-addon2">@PageIndex</span>
+                        }
                     </div>
                 }
             </div>

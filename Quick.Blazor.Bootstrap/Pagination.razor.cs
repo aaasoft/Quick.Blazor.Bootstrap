@@ -51,16 +51,33 @@ namespace Quick.Blazor.Bootstrap
                     return;
                 _Offset = value;
                 OffsetChanged.InvokeAsync(value);
+                InvokeAsync(StateHasChanged);
             }
         }
         [Parameter]
         public EventCallback<int> OffsetChanged { get; set; }
 
+        private int _RecordCount = 0;
+
         /// <summary>
         /// 记录数量
         /// </summary>
         [Parameter]
-        public int RecordCount { get; set; } = 0;
+        public int RecordCount
+        {
+            get { return _RecordCount; }
+            set
+            {
+                _RecordCount = value;
+                RecordCountChanged.InvokeAsync(value);
+                InvokeAsync(StateHasChanged);
+            }
+        }
+        [Parameter]
+        public EventCallback<int> RecordCountChanged { get; set; }
+
+        [Parameter]
+        public bool PageIndexEditable { get; set; } = true;
 
         private int PageIndex
         {
