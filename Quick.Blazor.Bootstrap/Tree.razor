@@ -1,0 +1,9 @@
+﻿<ul>
+    @if (DataSource != null)
+    {
+        @foreach (var item in DataSource)
+        {
+            <TreeNode Tree="this" DataItem="item" />
+        }
+    }
+</ul>

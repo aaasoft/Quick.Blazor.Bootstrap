@@ -1,0 +1,50 @@
+﻿<li>
+    @if (Tree.IsLeafExpression == null || !Tree.IsLeafExpression.Invoke(this))
+    {
+        <span>
+            @if (IsExpanded)
+            {
+                <a class="small" href="javascript:;" @onclick="@(()=>Expand(false))">
+                    <i class="@Tree.ArrowDownIconClass"></i>
+                </a>
+            }
+            else
+            {
+                <a class="small" href="javascript:;" @onclick="@(()=>Expand(true))">
+                    <i class="@Tree.ArrowRightIconClass"></i>
+                </a>
+            }
+        </span>
+    }
+    <span>
+        @if (IsSelected)
+        {
+            <a class="badge badge-primary" href="javascript:;">
+                @if (Tree.ShowIcon)
+                {
+                    <i class="@Tree.IconExpression?.Invoke(this)"></i>
+                }
+                <span class="ml-1">@Tree.TitleExpression?.Invoke(this)</span>
+            </a>
+        }
+        else
+        {
+            <a class="badge badge-light" href="javascript:;" @onclick="@(()=>Tree.SelectedNode=this)">
+                @if (Tree.ShowIcon)
+                {
+                    <i class="@Tree.IconExpression?.Invoke(this)"></i>
+                }
+                <span class="ml-1">@Tree.TitleExpression?.Invoke(this)</span>
+            </a>
+        }
+    </span>
+    @if (IsExpanded && GetChildren() != null)
+    {
+        <ul>
+            @foreach (var child in GetChildren())
+            {
+                <TreeNode DataItem="@child" Tree="@Tree" ParentNode="this" />
+            }
+        </ul>
+    }
+</li>

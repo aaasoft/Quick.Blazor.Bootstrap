@@ -1,0 +1,11 @@
+﻿@page "/Tree"
+
+<p>日志：@log</p>
+<Tree DataSource="@items"
+      ChildrenExpression="@(t=>((AddressInfo) t.DataItem).Children)"
+      TitleExpression="@(t=>((AddressInfo) t.DataItem).Name)"
+      IsLeafExpression="@(t=>((AddressInfo) t.DataItem).Children==null)"
+      IconExpression="@(t=>"oi oi-aperture")"
+      ShowIcon
+      SelectedNodeChanged="onSelectedNodeChanged">
+</Tree>
