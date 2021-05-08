@@ -4,13 +4,13 @@
         <span>
             @if (IsExpanded)
             {
-                <a class="small" href="javascript:;" @onclick="@(()=>Expand(false))">
+                <a href="javascript:;" @onclick="@(()=>Expand(false))">
                     <i class="@Tree.ArrowDownIconClass"></i>
                 </a>
             }
             else
             {
-                <a class="small" href="javascript:;" @onclick="@(()=>Expand(true))">
+                <a href="javascript:;" @onclick="@(()=>Expand(true))">
                     <i class="@Tree.ArrowRightIconClass"></i>
                 </a>
             }
