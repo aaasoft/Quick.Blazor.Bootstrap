@@ -2,11 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Quick.Blazor.Bootstrap
 {
-    public partial class Tabs
+    public partial class Accordion
     {
         [Parameter]
         public string ActiveKey { get; set; }
@@ -23,12 +24,12 @@ namespace Quick.Blazor.Bootstrap
         [Parameter]
         public string TabContentExtraClass { get; set; }
 
-        internal List<TabPane> _panes = new List<TabPane>();
+        internal List<AccordionPane> _panes = new List<AccordionPane>();
 
         private string _activeKey = null;
-        private TabPane _activePane = null;
+        private AccordionPane _activePane = null;
 
-        internal void AddTabPane(TabPane tabPane)
+        internal void AddTabPane(AccordionPane tabPane)
         {
             if (string.IsNullOrEmpty(tabPane.Key))
             {
@@ -37,7 +38,7 @@ namespace Quick.Blazor.Bootstrap
 
             if (_panes.Select(p => p.Key).Contains(tabPane.Key))
             {
-                throw new ArgumentException("An TabPane with the same key already exists");
+                throw new ArgumentException("An AccordionPane with the same key already exists");
             }
             _panes.Add(tabPane);
         }
@@ -48,7 +49,7 @@ namespace Quick.Blazor.Bootstrap
             if (!firstRender || _panes.Count == 0)
                 return;
 
-            TabPane panel = null;
+            AccordionPane panel = null;
             if (!string.IsNullOrEmpty(ActiveKey))
                 panel = _panes.FirstOrDefault(t => t.Key == ActiveKey);
             if (panel == null)
@@ -56,7 +57,7 @@ namespace Quick.Blazor.Bootstrap
             ActivatePane(panel);
         }
 
-        private void ActivatePane(TabPane tabPane)
+        private void ActivatePane(AccordionPane tabPane)
         {
             if (!tabPane.Disabled && _panes.Contains(tabPane))
             {
@@ -80,14 +81,13 @@ namespace Quick.Blazor.Bootstrap
                             OnChange.InvokeAsync(_activePane.Key);
                         }
                     }
-
                     _activeKey = _activePane.Key;
                 }
                 StateHasChanged();
             }
         }
 
-        internal void HandleTabClick(TabPane tabPane)
+        internal void HandleTabClick(AccordionPane tabPane)
         {
             if (tabPane.IsActive)
                 return;

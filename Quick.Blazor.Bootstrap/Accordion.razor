@@ -1,0 +1,15 @@
+﻿<CascadingValue Value="this" IsFixed="@true">
+    <CascadingValue Value="true" Name="IsEmpty" IsFixed="true">
+        @ChildContent
+    </CascadingValue>
+    <div class="accordion @NavTabsExtraClass">
+        @foreach (var pane in _panes)
+        {
+            <CascadingValue Value="pane" Name="Pane" @key="pane.Key">
+                <div class="card">
+                    @ChildContent
+                </div>
+            </CascadingValue>
+        }
+    </div>
+</CascadingValue>
