@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Quick.Blazor.Bootstrap
 {
-    public partial class AccordionPane : ComponentBase
+    public partial class AccordionPane
     {
         [Parameter]
         public string Key { get; set; }
