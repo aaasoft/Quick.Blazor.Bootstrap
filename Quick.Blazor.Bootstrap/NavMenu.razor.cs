@@ -12,7 +12,7 @@ namespace Quick.Blazor.Bootstrap
         [Parameter]
         public EventCallback OnTitleClick { get; set; }
         [Parameter]
-        public string Title { get; set; }
+        public RenderFragment Title { get; set; }
         [Parameter]
         public string ActiveKey { get; set; }
         [Parameter]
