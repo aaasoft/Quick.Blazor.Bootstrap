@@ -1,8 +1,42 @@
 ﻿@inherits LayoutComponentBase
 
+@code
+{
+    private void Show<T>()
+    {
+        Body = Quick.Blazor.Bootstrap.Utils.BlazorUtils.GetRenderFragment<T>();
+        InvokeAsync(StateHasChanged);
+    }
+}
 <div class="page">
     <div class="sidebar">
-        <NavMenu />
+        <NavMenu Title="Quick.Blazor.Bootstrap" ActiveKey="Home">
+            <NavMenuItem Key="Home" OnClick="@(()=>Show<Pages.Index>())">
+                <Tab>
+                    <span class="oi oi-home" aria-hidden="true"></span> Home
+                </Tab>
+            </NavMenuItem>
+            <NavMenuItem Key="Tabs" OnClick="@(()=>Show<Pages.TabsTest>())">
+                <Tab>
+                    <span class="oi oi-plus" aria-hidden="true"></span> Tabs
+                </Tab>
+            </NavMenuItem>
+            <NavMenuItem Key="Pagination" OnClick="@(()=>Show<Pages.PaginationTest>())">
+                <Tab>
+                    <span class="oi oi-plus" aria-hidden="true"></span> Pagination
+                </Tab>
+            </NavMenuItem>
+            <NavMenuItem Key="Tree" OnClick="@(()=>Show<Pages.TreeTest>())">
+                <Tab>
+                    <span class="oi oi-plus" aria-hidden="true"></span> Tree
+                </Tab>
+            </NavMenuItem>
+            <NavMenuItem Key="Accordion" OnClick="@(()=>Show<Pages.AccordionTest>())">
+                <Tab>
+                    <span class="oi oi-plus" aria-hidden="true"></span> Accordion
+                </Tab>
+            </NavMenuItem>
+        </NavMenu>
     </div>
 
     <div class="main">

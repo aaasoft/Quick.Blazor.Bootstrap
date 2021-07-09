@@ -1,6 +1,4 @@
-﻿@page "/Tree"
-
-<p>日志：@log</p>
+﻿<p>日志：@log</p>
 <Tree DataSource="@items"
       ChildrenExpression="@(t=>((AddressInfo) t.DataItem).Children)"
       TitleExpression="@(t=>((AddressInfo) t.DataItem).Name)"

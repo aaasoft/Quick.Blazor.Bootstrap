@@ -1,0 +1,20 @@
+﻿@if (Pane?.Key != Key || IsEmpty)
+{
+    return;
+}
+@if (Pane.IsActive)
+{
+    <li class="nav-item px-3">
+        <a href="javascript:;" class="nav-link active">
+            @Pane.Tab
+        </a>
+    </li>
+}
+else
+{
+    <li class="nav-item px-3">
+        <a href="javascript:;" class="nav-link" @onclick="@(e => Parent.HandleTabClick(Pane))">
+            @Pane.Tab
+        </a>
+    </li>
+}

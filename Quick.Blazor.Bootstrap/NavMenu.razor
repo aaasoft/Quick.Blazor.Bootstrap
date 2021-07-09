@@ -1,0 +1,21 @@
+﻿<CascadingValue Value="this" IsFixed="@true">
+    <CascadingValue Value="true" Name="IsEmpty" IsFixed="true">
+        @ChildContent
+    </CascadingValue>
+    <div class="top-row pl-4 navbar navbar-dark">
+        <a class="navbar-brand" href="javascript:;" @onclick="OnTitleClick">@Title</a>
+        <button class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+        <ul class="nav flex-column">
+            @foreach (var pane in _panes)
+            {
+                <CascadingValue Value="pane" Name="Pane" @key="pane.Key">
+                    @ChildContent
+                </CascadingValue>
+            }
+        </ul>
+    </div>
+</CascadingValue>
