@@ -28,6 +28,18 @@ namespace Quick.Blazor.Bootstrap
         [Parameter]
         public string TabContentExtraClass { get; set; }
 
+        /// <summary>
+        /// 改变激活的标识
+        /// </summary>
+        /// <param name="activeKey"></param>
+        public void ChangeActiveKey(string activeKey)
+        {
+            var pane = _panes.FirstOrDefault(t => t.Key == activeKey);
+            if (pane == null)
+                return;
+            ActivatePane(pane);
+        }
+
         internal List<NavMenuItem> _panes = new List<NavMenuItem>();
 
         private string _activeKey = null;
