@@ -1,5 +1,7 @@
-﻿<p>日志：@log</p>
-<Tree DataSource="@items"
+﻿<button class="btn btn-primary" @onclick="expandAll">Expand All</button>
+<button class="btn btn-primary" @onclick="collapseAll">Collapse All</button>
+<p>日志：@log</p>
+<Tree @ref="tree" DataSource="@items"
       ChildrenExpression="@(t=>((AddressInfo) t.DataItem).Children)"
       TitleExpression="@(t=>((AddressInfo) t.DataItem).Name)"
       IsLeafExpression="@(t=>((AddressInfo) t.DataItem).Children==null)"

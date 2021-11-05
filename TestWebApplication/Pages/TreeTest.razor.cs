@@ -15,6 +15,7 @@ namespace TestWebApplication.Pages
             public AddressInfo[] Children { get; set; }
         }
 
+        private Tree tree;
         private AddressInfo[] items;
         private string log;
 
@@ -87,6 +88,16 @@ namespace TestWebApplication.Pages
                      }
                 }
             };
+        }
+
+        private async void expandAll()
+        {
+            await tree.ExpandAllAsync();
+        }
+
+        private async void collapseAll()
+        {
+            await tree.CollapseAllAsync();
         }
     }
 }

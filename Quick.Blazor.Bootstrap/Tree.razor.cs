@@ -78,5 +78,41 @@ namespace Quick.Blazor.Bootstrap
                 currentNode = currentNode.ParentNode;
             }
         }
+
+        private async Task expandNodeAsync(List<TreeNode> nodes)
+        {
+            if (nodes == null || nodes.Count == 0)
+                return;
+            foreach (var node in nodes)
+            {
+                node.Expand(true);
+                while (!node.IsExpanded)
+                    await Task.Delay(10);
+                await expandNodeAsync(node.ChildNodes);
+            }
+        }
+
+        public async Task ExpandAllAsync()
+        {
+            await expandNodeAsync(ChildNodes);
+        }
+
+        private async Task collapseNodeAsync(List<TreeNode> nodes)
+        {
+            if (nodes == null || nodes.Count == 0)
+                return;
+            foreach (var node in nodes)
+            {
+                node.Expand(false);
+                while (node.IsExpanded)
+                    await Task.Delay(10);
+                await collapseNodeAsync(node.ChildNodes);
+            }
+
+        }
+        public async Task CollapseAllAsync()
+        {
+            await collapseNodeAsync(ChildNodes);
+        }
     }
 }
