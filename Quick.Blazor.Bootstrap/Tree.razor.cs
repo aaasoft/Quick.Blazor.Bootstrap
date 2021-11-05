@@ -30,6 +30,8 @@ namespace Quick.Blazor.Bootstrap
         [Parameter]
         public bool ShowIcon { get; set; }
         [Parameter]
+        public string TreeClass { get; set; } = "";
+        [Parameter]
         public string ArrowRightIconClass { get; set; } = "oi oi-chevron-right";
         [Parameter]
         public string ArrowDownIconClass { get; set; } = "oi oi-chevron-bottom";

@@ -2,6 +2,7 @@
 <button class="btn btn-primary" @onclick="collapseAll">Collapse All</button>
 <p>日志：@log</p>
 <Tree @ref="tree" DataSource="@items"
+      TreeClass="pl-0"
       ChildrenExpression="@(t=>((AddressInfo) t.DataItem).Children)"
       TitleExpression="@(t=>((AddressInfo) t.DataItem).Name)"
       IsLeafExpression="@(t=>((AddressInfo) t.DataItem).Children==null)"
