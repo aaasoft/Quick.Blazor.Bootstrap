@@ -15,10 +15,8 @@ namespace Quick.Blazor.Bootstrap
         public bool DialogSizeLarge { get; set; }
         [Parameter]
         public bool DialogSizeExtraLarge { get; set; }
-        [Parameter]
-        public string TextOk { get; set; } = "OK";
-        [Parameter]
-        public string TextCancel { get; set; } = "Cancel";
+        public static string TextOk { get; set; } = "OK";
+        public static string TextCancel { get; set; } = "Cancel";
 
         private string Title { get; set; }
         private string Content { get; set; }
