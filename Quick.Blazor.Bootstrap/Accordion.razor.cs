@@ -24,6 +24,20 @@ namespace Quick.Blazor.Bootstrap
         [Parameter]
         public string TabContentExtraClass { get; set; }
 
+        private bool _AllowMultiplePaneActived = false;
+        [Parameter]
+        public bool AllowMultiplePanelActived
+        {
+            get { return _AllowMultiplePaneActived; }
+            set
+            {
+                _AllowMultiplePaneActived = value;
+                if (!value)
+                    foreach (var pane in _panes)
+                        pane.IsActive = false;
+            }
+        }
+
         internal List<AccordionPane> _panes = new List<AccordionPane>();
 
         private string _activeKey = null;
@@ -41,6 +55,8 @@ namespace Quick.Blazor.Bootstrap
                 throw new ArgumentException("An AccordionPane with the same key already exists");
             }
             _panes.Add(tabPane);
+            if (AllowMultiplePanelActived)
+                tabPane.IsActive = true;
         }
 
         protected override void OnAfterRender(bool firstRender)
@@ -89,15 +105,21 @@ namespace Quick.Blazor.Bootstrap
 
         internal void HandleTabClick(AccordionPane tabPane)
         {
-            if (tabPane.IsActive)
-                return;
-
-            if (OnTabClick.HasDelegate)
+            if (AllowMultiplePanelActived)
             {
-                OnTabClick.InvokeAsync(tabPane.Key);
+                tabPane.IsActive = !tabPane.IsActive;
             }
+            else
+            {
+                if (tabPane.IsActive)
+                    return;
 
-            ActivatePane(tabPane);
+                if (OnTabClick.HasDelegate)
+                {
+                    OnTabClick.InvokeAsync(tabPane.Key);
+                }
+                ActivatePane(tabPane);
+            }
         }
     }
 }

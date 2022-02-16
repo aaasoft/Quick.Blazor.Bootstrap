@@ -1,4 +1,9 @@
-﻿<Accordion NavTabsExtraClass="mb-5">
+﻿<div class="custom-control custom-switch">
+  <input type="checkbox" class="custom-control-input" id="@switchId_AllowMultiplePaneActived" @bind-value="AllowMultiplePaneActived">
+  <label class="custom-control-label" for="@switchId_AllowMultiplePaneActived">Allow Multiple Pane Actived</label>
+</div>
+
+<Accordion NavTabsExtraClass="mb-5" AllowMultiplePanelActived="@AllowMultiplePaneActived">
     <AccordionPane Key="1">
         <Tab>Home</Tab>
         <ChildContent>
@@ -18,3 +23,7 @@
         </ChildContent>
     </AccordionPane>
 </Accordion>
+@code{
+    string switchId_AllowMultiplePaneActived = "customSwitch_" + Guid.NewGuid().ToString("N");
+    private bool AllowMultiplePaneActived;
+}
