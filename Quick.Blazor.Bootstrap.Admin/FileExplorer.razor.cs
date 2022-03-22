@@ -1,5 +1,6 @@
 ﻿using BlazorDownloadFile;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using Quick.Blazor.Bootstrap.Admin.Utils;
 using System;
 using System.Collections;
@@ -33,6 +34,9 @@ namespace Quick.Blazor.Bootstrap.Admin
         public string Dir { get; set; }
         [Parameter]
         public bool DisplayList { get; set; } = true;
+        [Parameter]
+        public Action<IJSRuntime, string> DownloadFileAction { get; set; }
+
         [Parameter]
         public string TextConfirm { get; set; } = "Confirm";
         [Parameter]
@@ -221,6 +225,12 @@ namespace Quick.Blazor.Bootstrap.Admin
             var file = SelectedItem as FileInfo;
             if (file == null)
                 return;
+
+            if (DownloadFileAction != null)
+            {
+                DownloadFileAction.Invoke(JSRuntime, file.FullName);
+                return;
+            }
 
             System.Threading.CancellationTokenSource cts = new System.Threading.CancellationTokenSource();
             loading.Show(TextDownload, file.Name, false, cts.Cancel);

@@ -1,7 +1,9 @@
 ﻿@using System.IO
+@using Microsoft.JSInterop
 @using Tewr.Blazor.FileReader
 
 @inject IFileReaderService fileReaderService;
+@inject IJSRuntime JSRuntime
 
 <div class="row">
     <div class="col-12 p-0">
