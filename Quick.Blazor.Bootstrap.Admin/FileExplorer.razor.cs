@@ -32,6 +32,8 @@ namespace Quick.Blazor.Bootstrap.Admin
         [Parameter]
         public string Dir { get; set; }
         [Parameter]
+        public bool DisplayList { get; set; } = true;
+        [Parameter]
         public string TextConfirm { get; set; } = "Confirm";
         [Parameter]
         public string TextConfirmDeleteFolder { get; set; } = "Do you want to delete folder[{0}]?";
@@ -104,6 +106,10 @@ namespace Quick.Blazor.Bootstrap.Admin
         public RenderFragment IconRename { get; set; }
         [Parameter]
         public RenderFragment IconDelete { get; set; }
+        [Parameter]
+        public RenderFragment IconDisplayList { get; set; }
+        [Parameter]
+        public RenderFragment IconDisplayIcon { get; set; }
         [Parameter]
         public RenderFragment IconGoto{ get; set; }
 

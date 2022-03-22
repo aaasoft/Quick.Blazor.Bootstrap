@@ -48,9 +48,10 @@
         }
         <div class="input-group">
             <div class="input-group-prepend">
-                <span class="input-group-text">@TextPath</span>
+                <button type="button" class="btn btn-secondary @(DisplayList?"active":"")" @onclick="e=>DisplayList=true">@IconDisplayList</button>
+                <button type="button" class="btn btn-secondary @(!DisplayList?"active":"")" @onclick="e=>DisplayList=false">@IconDisplayIcon</button>
             </div>
-            <input type="text" class="form-control col-auto" @bind-value="CurrentPath" />
+            <input type="text" title="@TextPath" class="form-control col-auto" @bind-value="CurrentPath" />
             <div class="input-group-append">
                 <button title="@TextGoto" type="button" class="btn btn-info" @onclick="btnGoto_Click">
                     @IconGoto
@@ -61,39 +62,74 @@
     <div class="card col-12 p-0 mt-2">
         <div class="card-body">
             <div class="row">
-                <table class="table table-hover table-sm">
-                    <thead>
-                        <tr>
-                            <th scope="col">@TextName</th>
-                            <th scope="col">@TextLastWriteTime</th>
-                            <th scope="col">@TextSize</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if (Dirs != null)
-                        {
-                            @foreach (var dir in Dirs)
+                @if (DisplayList)
+                {
+                    <table class="table table-hover table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">@TextName</th>
+                                <th scope="col">@TextLastWriteTime</th>
+                                <th scope="col">@TextSize</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Dirs != null)
                             {
-                                <tr class="@(SelectedItem == dir ? "table-active" : "")" @onclick="@(e => SelectedItem = dir)" @ondblclick="@(e => gotoDir(dir))">
-                                    <td>@IconFolder@dir.Name</td>
-                                    <td>@dir.LastWriteTime</td>
-                                    <td></td>
-                                </tr>
+                                @foreach (var dir in Dirs)
+                                {
+                                    <tr class="@(SelectedItem == dir ? "table-active" : "")" @onclick="@(e => SelectedItem = dir)" @ondblclick="@(e => gotoDir(dir))">
+                                        <td>@IconFolder@dir.Name</td>
+                                        <td>@dir.LastWriteTime</td>
+                                        <td></td>
+                                    </tr>
+                                }
                             }
-                        }
-                        @if (Files != null)
-                        {
-                            @foreach (var file in Files)
+                            @if (Files != null)
                             {
-                                <tr class="@(SelectedItem == file ? "table-active" : "")" @onclick="@(e => SelectedItem = file)" @ondblclick="btnDownload_Click">
-                                    <td>@IconFile@file.Name</td>
-                                    <td>@file.LastWriteTime</td>
-                                    <td>@(storageUSC.GetString(file.Length, 0, true))B</td>
-                                </tr>
+                                @foreach (var file in Files)
+                                {
+                                    <tr class="@(SelectedItem == file ? "table-active" : "")" @onclick="@(e => SelectedItem = file)" @ondblclick="btnDownload_Click">
+                                        <td>@IconFile@file.Name</td>
+                                        <td>@file.LastWriteTime</td>
+                                        <td>@(storageUSC.GetString(file.Length, 0, true))B</td>
+                                    </tr>
+                                }
                             }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    @if (Dirs != null)
+                    {
+                        @foreach (var dir in Dirs)
+                        {
+                            <div class="col-4 col-sm-3 col-md-2 col-xl-1 m-1 p-0" style="min-width:6.5rem;">
+                                <a href="javascript:;" title="@TextLastWriteTime: @dir.LastWriteTime"
+                       class="text-center list-group-item list-group-item-action border-0 p-0 @(SelectedItem == dir ? "active" : "")"
+                       @onclick="@(e => SelectedItem = dir)" @ondblclick="@(e => gotoDir(dir))">
+                                    <p class="h1 m-0 pt-1">@IconFolder</p>
+                                    <span class="text-center">@dir.Name</span>
+                                </a>
+                            </div>
                         }
-                    </tbody>
-                </table>
+                    }
+                    @if (Files != null)
+                    {
+                        @foreach (var file in Files)
+                        {
+                            <div class="col-4 col-sm-3 col-md-2 col-xl-1 m-1 p-0" style="min-width:6.5rem;">
+                                <a href="javascript:;" title="@TextSize: @(storageUSC.GetString(file.Length, 0, true))B
+@TextLastWriteTime: @file.LastWriteTime"
+                       class="text-center list-group-item list-group-item-action border-0 p-1 @(SelectedItem == file ? "active" : "")"
+                       @onclick="@(e => SelectedItem = file)" @ondblclick="btnDownload_Click">
+                                    <p class="h1 m-0 pt-1">@IconFile</p>
+                                    <span class="text-center">@file.Name</span>
+                                </a>
+                            </div>
+                        }
+                    }
+                }
             </div>
         </div>
     </div>
