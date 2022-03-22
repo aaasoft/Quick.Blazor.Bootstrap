@@ -10,15 +10,15 @@
             <div class="btn-toolbar mb-1">
                 <div class="btn-group mr-2">
                     <button title="@TextUp" type="button" class="btn btn-info" @onclick="btnGotoUpper_Click">
-                        @TextUp
+                        @IconUp
                     </button>
                 </div>
                 <div class="btn-group mr-2">
                     <button title="@TextNewFolder" type="button" class="btn btn-info" @onclick="btnCreateFolder_Click">
-                        @TextNewFolder
+                        @IconNewFolder
                     </button>
                     <div class="btn btn-info">
-                        @TextUpload
+                        @IconUpload
                         <input @ref="inputFile" id="inputFile" type="file" style="width: 0px; visibility: collapse;" @onchange="onInputFileChanged">
                         <label title="@TextUpload" style="position: absolute;top: 0;left: 0;right:0;margin:0;height:100%;cursor:pointer" for="inputFile">
                         </label>
@@ -26,21 +26,21 @@
                 </div>
                 <div class="btn-group mr-2">
                     <button title="@TextRefresh" type="button" class="btn btn-info" @onclick="refresh">
-                        @TextRefresh
+                        @IconRefresh
                     </button>
                     @if (SelectedItem != null && SelectedItem is FileInfo)
                     {
                         <button title="@TextDownload" type="button" class="btn btn-info" @onclick="btnDownload_Click">
-                            @TextDownload
+                            @IconDownload
                         </button>
                     }
                     @if (SelectedItem != null)
                     {
                         <button title="@TextRename" type="button" class="btn btn-info" @onclick="btnRename_Click">
-                            @TextRename
+                            @IconRename
                         </button>
                         <button title="@TextDelete" type="button" class="btn btn-info" @onclick="btnDelete_Click">
-                            @TextDelete
+                            @IconDelete
                         </button>
                     }
                 </div>
@@ -53,7 +53,7 @@
             <input type="text" class="form-control col-auto" @bind-value="CurrentPath" />
             <div class="input-group-append">
                 <button title="@TextGoto" type="button" class="btn btn-info" @onclick="btnGoto_Click">
-                    @TextGoto
+                    @IconGoto
                 </button>
             </div>
         </div>

@@ -90,6 +90,22 @@ namespace Quick.Blazor.Bootstrap.Admin
         public RenderFragment IconFolder { get; set; }
         [Parameter]
         public RenderFragment IconFile { get; set; }
+        [Parameter]
+        public RenderFragment IconUp { get; set; }
+        [Parameter]
+        public RenderFragment IconNewFolder { get; set; }
+        [Parameter]
+        public RenderFragment IconUpload { get; set; }
+        [Parameter]
+        public RenderFragment IconRefresh { get; set; }
+        [Parameter]
+        public RenderFragment IconDownload { get; set; }
+        [Parameter]
+        public RenderFragment IconRename { get; set; }
+        [Parameter]
+        public RenderFragment IconDelete { get; set; }
+        [Parameter]
+        public RenderFragment IconGoto{ get; set; }
 
         protected override void OnParametersSet()
         {
