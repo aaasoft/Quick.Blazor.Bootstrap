@@ -1,0 +1,58 @@
+﻿@using System.Diagnostics
+@using System.Linq
+
+<div class="row">
+    <div class="col-12">
+        <div class="btn-toolbar mb-1">
+            <div class="btn-group">
+                <button type="button" title="@TextRefresh" class="btn btn-info" @onclick="refreshProcesss">
+                    @IconRefresh
+                </button>
+            </div>
+        </div>
+        @if (Processes == null)
+        {
+            <div class="alert alert-primary" role="alert">
+               @TextPressRefreshButtonTip
+            </div>
+        }
+        else
+        {
+    <ul class="list-group">
+        @foreach (var t in Processes)
+        {
+        <li class="list-group-item list-group-item-action p-0">
+            <nav class="navbar p-0">
+                <div class="navbar-brand p-0">
+                    <h6 class="m-0 ml-2">
+                        @IconProcess
+                        <span>[@t.Id] @t.Name</span>
+                    </h6>
+                </div>
+                <div class="btn-toolbar">
+                    <div class="mt-1 mr-2">
+                        @if (t.StartTime != null)
+                        {
+                            <span class="badge badge-info h6 mr-1">@t.StartTime</span>
+                        }
+                        <span class="badge badge-info h6">@t.MemoryInfo</span>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" title="@TextKillProcess" class="btn btn-sm btn-outline-danger" @onclick="@(e => KillProcess(t, false))">
+                            @IconKillProcess
+                        </button>
+                        <button type="button" title="@TextKillProcessTree" class="btn btn-sm btn-outline-danger" @onclick="@(e => KillProcess(t, true))">
+                            @IconKillProcessTree
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        </li>
+        }
+    </ul>
+        }
+    </div>
+</div>
+
+<ModalLoading @ref="modalLoading" />
+<ModalAlert @ref="modalAlert" />

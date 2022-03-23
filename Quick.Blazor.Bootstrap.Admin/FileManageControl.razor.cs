@@ -13,7 +13,7 @@ using Tewr.Blazor.FileReader;
 
 namespace Quick.Blazor.Bootstrap.Admin
 {
-    public partial class FileExplorer
+    public partial class FileManageControl
     {
         private readonly UnitStringConverting storageUSC = UnitStringConverting.StorageUnitStringConverting;
         [Inject]
