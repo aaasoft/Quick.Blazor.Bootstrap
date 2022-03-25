@@ -185,20 +185,26 @@ namespace Quick.Blazor.Bootstrap.Admin
                 gotoPath(Dir);
                 if (!string.IsNullOrEmpty(preSelectedPath))
                 {
-                    foreach (var item in Dirs)
+                    if (Dirs != null)
                     {
-                        if (item.FullName == preSelectedPath)
+                        foreach (var item in Dirs)
                         {
-                            SelectedItem = item;
-                            break;
+                            if (item.FullName == preSelectedPath)
+                            {
+                                SelectedItem = item;
+                                break;
+                            }
                         }
                     }
-                    foreach (var item in Files)
+                    if (Files != null)
                     {
-                        if (item.FullName == preSelectedPath)
+                        foreach (var item in Files)
                         {
-                            SelectedItem = item;
-                            break;
+                            if (item.FullName == preSelectedPath)
+                            {
+                                SelectedItem = item;
+                                break;
+                            }
                         }
                     }
                 }
