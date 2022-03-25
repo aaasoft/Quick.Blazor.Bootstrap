@@ -144,6 +144,10 @@ namespace Quick.Blazor.Bootstrap.Admin
         public string TextSize { get; set; } = "Size";
         [Parameter]
         public string TextName { get; set; } = "Name";
+        
+        [Parameter]
+        public RenderFragment ToolbarAddonButtons { get; set; }
+
         [Parameter]
         public RenderFragment IconFolder { get; set; }
         [Parameter]
