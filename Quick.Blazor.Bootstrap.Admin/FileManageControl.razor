@@ -116,7 +116,7 @@
                             {
                                 @foreach (var file in Files)
                                 {
-                                    <tr class="@(SelectedItem == file ? "table-active" : "")" @onclick="@(e => SelectedItem = file)" @ondblclick="btnDownload_Click">
+                                    <tr class="@(SelectedItem == file ? "table-active" : "")" @onclick="@(e => SelectedItem = file)" @ondblclick="onFileDoubleClick">
                                         <td>@IconFile@file.Name</td>
                                         <td>@file.LastWriteTime</td>
                                         <td>@(storageUSC.GetString(file.Length, 0, true))B</td>
@@ -154,7 +154,7 @@
                                 <a href="javascript:;" title="@TextSize: @(storageUSC.GetString(file.Length, 0, true))B
 @TextLastWriteTime: @file.LastWriteTime"
                        class="text-center list-group-item list-group-item-action border-0 p-1 @(SelectedItem == file ? "active" : "")"
-                       @onclick="@(e => SelectedItem = file)" @ondblclick="btnDownload_Click">
+                       @onclick="@(e => SelectedItem = file)" @ondblclick="onFileDoubleClick">
                                     <p class="h1 m-0 pt-1">@IconFile</p>
                                     <span class="text-center">@file.Name</span>
                                 </a>

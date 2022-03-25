@@ -71,6 +71,11 @@ namespace Quick.Blazor.Bootstrap.Admin
         [Parameter]
         public Action<IJSRuntime, string> DownloadFileAction { get; set; }
         [Parameter]
+        public Action<IJSRuntime> FileDoubleClickCustomAction { get; set; }
+        [Parameter]
+        public bool FileDoubleClickToDownload { get; set; } = true;
+
+        [Parameter]
         public bool DisplayFolder { get; set; } = true;
         [Parameter]
         public bool DisplayFile { get; set; } = true;
@@ -146,7 +151,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         public string TextName { get; set; } = "Name";
         
         [Parameter]
-        public RenderFragment ToolbarAddonButtons { get; set; }
+        public RenderFragment ToolbarAddonButtons { get; set; }        
 
         [Parameter]
         public RenderFragment IconFolder { get; set; }
@@ -302,11 +307,21 @@ namespace Quick.Blazor.Bootstrap.Admin
             }
         }
 
+        private void onFileDoubleClick()
+        {
+            if (FileDoubleClickCustomAction == null)
+            {
+                if (FileDoubleClickToDownload)
+                    btnDownload_Click();
+            }
+            else
+            {
+                FileDoubleClickCustomAction(JSRuntime);
+            }
+        }
+
         private async void btnDownload_Click()
         {
-            if (!DisplayDownloadButton)
-                return;
-
             var file = SelectedItem as FileInfo;
             if (file == null)
                 return;
