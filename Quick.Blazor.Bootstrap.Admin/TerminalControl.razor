@@ -2,17 +2,17 @@
 <div class="row">
     <div class="col-12">
         <div class="btn-group mr-1" role="group">
-            <button type="button" class="btn btn-secondary" @onclick="newShell">@TextOpen</button>
-            <button type="button" class="btn btn-secondary" @onclick="killShell">@TextClose</button>
-            <button type="button" class="btn btn-secondary" @onclick="ClearConsoleHistory">@TextClear</button>
+            <button type="button" class="btn btn-sm btn-secondary" @onclick="newShell">@TextOpen</button>
+            <button type="button" class="btn btn-sm btn-secondary" @onclick="killShell">@TextClose</button>
+            <button type="button" class="btn btn-sm btn-secondary" @onclick="ClearConsoleHistory">@TextClear</button>
         </div>
         <div class="btn-group">
-            <button type="button" class="btn btn-secondary @(ConsoleHeight == 750?"active":"")" @onclick="ConsoleSetHeight(750)">▇</button>
-            <button type="button" class="btn btn-secondary @(ConsoleHeight == 500?"active":"")" @onclick="ConsoleSetHeight(500)">▅</button>
-            <button type="button" class="btn btn-secondary @(ConsoleHeight == 250?"active":"")" @onclick="ConsoleSetHeight(250)">▃</button>
+            <button type="button" class="btn btn-sm btn-secondary @(ConsoleHeight == 750?"active":"")" @onclick="ConsoleSetHeight(750)">▇</button>
+            <button type="button" class="btn btn-sm btn-secondary @(ConsoleHeight == 500?"active":"")" @onclick="ConsoleSetHeight(500)">▅</button>
+            <button type="button" class="btn btn-sm btn-secondary @(ConsoleHeight == 250?"active":"")" @onclick="ConsoleSetHeight(250)">▃</button>
         </div>
         <div class="btn-group">
-            <button type="button" class="btn btn-secondary" @onclick="Reboot">@TextReboot</button>
+            <button type="button" class="btn btn-sm btn-secondary" @onclick="Reboot">@TextReboot</button>
         </div>
     </div>
     <div class="col-12">

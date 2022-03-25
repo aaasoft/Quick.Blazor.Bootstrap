@@ -28,14 +28,66 @@ namespace Quick.Blazor.Bootstrap.Admin
         private DirectoryInfo CurrentDir;
         private DirectoryInfo[] Dirs;
         private FileInfo[] Files;
-        private Object SelectedItem;
+
+        public event EventHandler SelectedPathChanged;
+
+        private object _SelectedItem;
+        private object SelectedItem
+        {
+            get { return _SelectedItem; }
+            set
+            {
+                _SelectedItem = value;
+                SelectedPathChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        [Parameter]
+        public string SelectedPath
+        {
+            get
+            {
+                if (SelectedItem == null)
+                    return null;
+                if (SelectedItem is FileInfo)
+                    return ((FileInfo)SelectedItem).FullName;
+                if (SelectedItem is DirectoryInfo)
+                    return ((DirectoryInfo)SelectedItem).FullName;
+                return null;
+            }
+            set
+            {
+                if (File.Exists(value))
+                    SelectedItem = new FileInfo(value);
+                if (Directory.Exists(value))
+                    SelectedItem = new DirectoryInfo(value);
+            }
+        }
 
         [Parameter]
         public string Dir { get; set; }
         [Parameter]
-        public bool DisplayList { get; set; } = true;
+        public bool ListViewMode { get; set; } = true;
         [Parameter]
         public Action<IJSRuntime, string> DownloadFileAction { get; set; }
+        [Parameter]
+        public bool DisplayFolder { get; set; } = true;
+        [Parameter]
+        public bool DisplayFile { get; set; } = true;
+        [Parameter]
+        public bool DisplayAddress { get; set; } = true;
+        [Parameter]
+        public bool DisplayCreateFolderButton { get; set; } = true;
+        [Parameter]
+        public bool DisplayRenameButton { get; set; } = true;
+        [Parameter]
+        public bool DisplayDeleteButton { get; set; } = true;
+        [Parameter]
+        public bool DisplayDownloadButton { get; set; } = true;
+        [Parameter]
+        public bool DisplayUploadButton { get; set; } = true;
+        [Parameter]
+        public string FileFilter { get; set; }
 
         [Parameter]
         public string TextConfirm { get; set; } = "Confirm";
@@ -125,7 +177,27 @@ namespace Quick.Blazor.Bootstrap.Admin
             }
             else
             {
+                var preSelectedPath = SelectedPath;
                 gotoPath(Dir);
+                if (!string.IsNullOrEmpty(preSelectedPath))
+                {
+                    foreach (var item in Dirs)
+                    {
+                        if (item.FullName == preSelectedPath)
+                        {
+                            SelectedItem = item;
+                            break;
+                        }
+                    }
+                    foreach (var item in Files)
+                    {
+                        if (item.FullName == preSelectedPath)
+                        {
+                            SelectedItem = item;
+                            break;
+                        }
+                    }
+                }
             }
         }
 
@@ -222,6 +294,9 @@ namespace Quick.Blazor.Bootstrap.Admin
 
         private async void btnDownload_Click()
         {
+            if (!DisplayDownloadButton)
+                return;
+
             var file = SelectedItem as FileInfo;
             if (file == null)
                 return;
@@ -431,10 +506,13 @@ namespace Quick.Blazor.Bootstrap.Admin
         private void refresh()
         {
             SelectedItem = null;
+            Dirs = null;
+            Files = null;
+
             if (CurrentDir == null)
             {
-                Dirs = DriveInfo.GetDrives().Where(t => t.IsReady).Select(t => t.RootDirectory).ToArray();
-                Files = null;
+                if (DisplayFolder)
+                    Dirs = DriveInfo.GetDrives().Where(t => t.IsReady).Select(t => t.RootDirectory).ToArray();
             }
             else
             {
@@ -442,20 +520,21 @@ namespace Quick.Blazor.Bootstrap.Admin
                 {
                     try
                     {
-                        Dirs = CurrentDir.GetDirectories();
-                        Files = CurrentDir.GetFiles();
+                        if (DisplayFolder)
+                            Dirs = CurrentDir.GetDirectories();
+                        if (DisplayFile)
+                            if (string.IsNullOrEmpty(FileFilter))
+                                Files = CurrentDir.GetFiles();
+                            else
+                                Files = CurrentDir.GetFiles("*" + FileFilter);
                     }
                     catch (Exception ex)
                     {
                         alert.Show(TextFailed, ExceptionUtils.GetExceptionMessage(ex));
-                        Dirs = null;
-                        Files = null;
                     }
                 }
                 else
                 {
-                    Dirs = null;
-                    Files = null;
                     alert.Show(TextFailed, string.Format(TextFolderNotExist, CurrentDir.FullName));
                 }
             }
