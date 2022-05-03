@@ -15,18 +15,26 @@ namespace Quick.Blazor.Bootstrap.Admin
         [Parameter]
         public string TextFailed { get; set; } = "Failed";
         [Parameter]
-        public string TextRefresh { get; set; } = "Refresh";
-        [Parameter]
-        public string TextPressRefreshButtonTip { get; set; } = "Press 'Refresh' button to load process list.";
+        public string TextPressSearchButtonTip { get; set; } = "Press 'Search' button to load process list.";
         [Parameter]
         public string TextKillProcess { get; set; } = "Kill Process";
         [Parameter]
         public string TextKillProcessTree { get; set; } = "Kill Process Tree";
+        [Parameter]
+        public string TextKeywords { get; set; } = "Keywords";
+        [Parameter]
+        public string TextColumnPID { get; set; } = "PID";
+        [Parameter]
+        public string TextColumnName { get; set; } = "Name";
+        [Parameter]
+        public string TextColumnThreads { get; set; } = "Threads";
+        [Parameter]
+        public string TextColumnMemory { get; set; } = "Memory";
+        [Parameter]
+        public string TextColumnOperate { get; set; } = "Operate";
 
         [Parameter]
-        public RenderFragment IconRefresh { get; set; }
-        [Parameter]
-        public RenderFragment IconProcess { get; set; }
+        public RenderFragment IconSearch { get; set; }
         [Parameter]
         public RenderFragment IconKillProcess { get; set; }
         [Parameter]
@@ -34,6 +42,7 @@ namespace Quick.Blazor.Bootstrap.Admin
 
         private ModalLoading modalLoading;
         private ModalAlert modalAlert;
+        private string searchKeywords;
         private Utils.UnitStringConverting storageUSC = Utils.UnitStringConverting.StorageUnitStringConverting;
 
         private ProcessInfo[] Processes;
@@ -43,6 +52,7 @@ namespace Quick.Blazor.Bootstrap.Admin
             public int Id { get; set; }
             public string Name { get; set; }
             public string MemoryInfo { get; set; }
+            public int Threads { get; set; }
             public string StartTime { get; set; }
         }
 
@@ -51,17 +61,20 @@ namespace Quick.Blazor.Bootstrap.Admin
             base.OnInitialized();
         }
 
-        private void refreshProcesss()
+        private void search()
         {
             modalLoading.Show(null, null, true, null);
             Task.Run(() =>
             {
 #pragma warning disable CA1416 // 验证平台兼容性
-                Processes = Process.GetProcesses().Select(t => new ProcessInfo()
+                Processes = Process.GetProcesses()
+                .Where(t => string.IsNullOrEmpty(searchKeywords) || t.Id.ToString() == searchKeywords || t.ProcessName.Contains(searchKeywords))
+                .Select(t => new ProcessInfo()
                 {
                     Id = t.Id,
                     Name = t.ProcessName,
                     MemoryInfo = getProcessMemInfo(t),
+                    Threads = t.Threads.Count,
                     StartTime = getProcessStartTime(t)
                 }).ToArray();
 #pragma warning restore CA1416 // 验证平台兼容性
@@ -112,7 +125,7 @@ namespace Quick.Blazor.Bootstrap.Admin
                           if (process == null)
                               throw new ApplicationException($"Can't found process[Id:{info.Id}].");
                           process.Kill(entireProcessTree);
-                          refreshProcesss();
+                          search();
 #pragma warning restore CA1416 // 验证平台兼容性
                       }
                       catch (Exception ex)
