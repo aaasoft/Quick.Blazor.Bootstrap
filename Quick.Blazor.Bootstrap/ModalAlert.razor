@@ -6,7 +6,14 @@
         </button>
     </HeaderContent>
     <BodyContent>
-        <p>@Content</p>
+        @if (UsePreTag)
+        {
+            <pre>@Content</pre>
+        }
+        else
+        {
+            <p>@Content</p>
+        }
     </BodyContent>
     <FooterContent>
         <button type="button" class="btn btn-primary" @onclick="Ok">@TextOk</button>

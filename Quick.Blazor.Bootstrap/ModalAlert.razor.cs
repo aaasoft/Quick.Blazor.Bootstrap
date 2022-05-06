@@ -24,13 +24,14 @@ namespace Quick.Blazor.Bootstrap
         private Action OkCallback { get; set; }
         private Action CancelCallback { get; set; }
         private bool Visiable { get; set; }
-
-        public void Show(string title, string content, Action okCallback = null, Action cancelCallback = null)
+        private bool UsePreTag { get; set; } = false;
+        public void Show(string title, string content, Action okCallback = null, Action cancelCallback = null, bool usePreTag = false)
         {
             Title = title;
             Content = content;
             OkCallback = okCallback;
             CancelCallback = cancelCallback;
+            UsePreTag = usePreTag;
             Visiable = true;
             InvokeAsync(StateHasChanged);
         }
