@@ -26,6 +26,8 @@ namespace Quick.Blazor.Bootstrap
         public EventCallback<TreeEventArgs> OnNodeLoadDelayAsync { get; set; }
         [Parameter]
         public EventCallback<TreeNode> SelectedNodeChanged { get; set; }
+        [Parameter]
+        public EventCallback<TreeNode> TreeNodeDblClicked { get; set; }
 
         [Parameter]
         public bool ShowIcon { get; set; }
@@ -48,6 +50,11 @@ namespace Quick.Blazor.Bootstrap
                 travelTreeNode(ChildNodes, t => t.SetSelected(t == value));
                 SelectedNodeChanged.InvokeAsync(value);
             }
+        }
+
+        internal void OnTreeNodeDblClick(TreeNode treeNode)
+        {
+            TreeNodeDblClicked.InvokeAsync(treeNode);
         }
 
         internal void AddNode(TreeNode treeNode)

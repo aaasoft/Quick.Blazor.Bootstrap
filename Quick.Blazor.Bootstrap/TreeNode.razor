@@ -19,7 +19,7 @@
     <span>
         @if (IsSelected)
         {
-            <a class="badge badge-primary" href="javascript:;">
+            <a class="badge badge-primary" href="javascript:;" @onclick="@(()=>Tree.SelectedNode=this)" @ondblclick="@(()=>Tree.OnTreeNodeDblClick(this))">
                 @if (Tree.ShowIcon)
                 {
                     <i class="@Tree.IconExpression?.Invoke(this)"></i>
@@ -29,7 +29,7 @@
         }
         else
         {
-            <a class="badge badge-light" href="javascript:;" @onclick="@(()=>Tree.SelectedNode=this)">
+            <a class="badge badge-light" href="javascript:;" @onclick="@(()=>Tree.SelectedNode=this)" @ondblclick="@(()=>Tree.OnTreeNodeDblClick(this))">
                 @if (Tree.ShowIcon)
                 {
                     <i class="@Tree.IconExpression?.Invoke(this)"></i>

@@ -24,6 +24,11 @@ namespace TestWebApplication.Pages
             log = "Selected TreeNode: " + treeNode.Tree.TitleExpression.Invoke(treeNode);
         }
 
+        private void onTreeNodeDblClicked(TreeNode treeNode)
+        {
+            log = "TreeNode double clicked: " + treeNode.Tree.TitleExpression.Invoke(treeNode);
+        }
+
         protected override void OnInitialized()
         {
             items = new[]
