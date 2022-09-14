@@ -1,9 +1,11 @@
-﻿<ul class="@TreeClass">
-    @if (DataSource != null)
-    {
-        @foreach (var item in DataSource)
+﻿<div class="@TreeClass">
+    <ul class="@TreeUlClass">
+        @if (DataSource != null)
         {
-            <TreeNode Tree="this" DataItem="item" />
+            @foreach (var item in DataSource)
+            {
+                <TreeNode Tree="this" Level="0" DataItem="item" />
+            }
         }
-    }
-</ul>
+    </ul>
+</div>

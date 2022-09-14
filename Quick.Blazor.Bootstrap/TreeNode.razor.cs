@@ -11,6 +11,8 @@ namespace Quick.Blazor.Bootstrap
     public partial class TreeNode
     {
         [Parameter]
+        public int Level { get; set; }
+        [Parameter]
         public Tree Tree { get; set; }
         [Parameter]
         public TreeNode ParentNode { get; set; }

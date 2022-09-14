@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Primitives;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -32,7 +33,11 @@ namespace Quick.Blazor.Bootstrap
         [Parameter]
         public bool ShowIcon { get; set; }
         [Parameter]
-        public string TreeClass { get; set; } = "";
+        public string TreeClass { get; set; } = "treeview";
+        [Parameter]
+        public string TreeUlClass { get; set; } = "list-group";
+        [Parameter]
+        public string TreeLiClass { get; set; } = "list-group-item list-group-item-action";
         [Parameter]
         public string ArrowRightIconClass { get; set; } = "oi oi-chevron-right";
         [Parameter]

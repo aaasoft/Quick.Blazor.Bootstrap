@@ -1,50 +1,30 @@
-﻿<li>
+﻿<li class="@Tree.TreeLiClass @(IsSelected?"active":"")" @onclick="@(()=>Tree.SelectedNode=this)" @ondblclick="@(()=>Tree.OnTreeNodeDblClick(this))">
+    @for (var i = 0; i < Level; i++)
+    {
+        <span class="indent"></span>
+    }
     @if (Tree.IsLeafExpression == null || !Tree.IsLeafExpression.Invoke(this))
     {
-        <span>
-            @if (IsExpanded)
-            {
-                <a href="javascript:;" @onclick="@(()=>Expand(false))">
-                    <i class="@Tree.ArrowDownIconClass"></i>
-                </a>
-            }
-            else
-            {
-                <a href="javascript:;" @onclick="@(()=>Expand(true))">
-                    <i class="@Tree.ArrowRightIconClass"></i>
-                </a>
-            }
+        <span @onclick="@(()=>Expand(!IsExpanded))">
+            <i class="@(IsExpanded?Tree.ArrowDownIconClass:Tree.ArrowRightIconClass)" style="min-width:1rem;"></i>
         </span>
     }
-    <span>
-        @if (IsSelected)
-        {
-            <a class="badge badge-primary" href="javascript:;" @onclick="@(()=>Tree.SelectedNode=this)" @ondblclick="@(()=>Tree.OnTreeNodeDblClick(this))">
-                @if (Tree.ShowIcon)
-                {
-                    <i class="@Tree.IconExpression?.Invoke(this)"></i>
-                }
-                <span class="ml-1">@Tree.TitleExpression?.Invoke(this)</span>
-            </a>
-        }
-        else
-        {
-            <a class="badge badge-light" href="javascript:;" @onclick="@(()=>Tree.SelectedNode=this)" @ondblclick="@(()=>Tree.OnTreeNodeDblClick(this))">
-                @if (Tree.ShowIcon)
-                {
-                    <i class="@Tree.IconExpression?.Invoke(this)"></i>
-                }
-                <span class="ml-1">@Tree.TitleExpression?.Invoke(this)</span>
-            </a>
-        }
-    </span>
-    @if (IsExpanded && GetChildren() != null)
+    else
     {
-        <ul>
-            @foreach (var child in GetChildren())
-            {
-                <TreeNode DataItem="@child" Tree="@Tree" ParentNode="this" />
-            }
-        </ul>
+        <span style="margin-left:1rem;"></span>
     }
+    @if (Tree.ShowIcon)
+    {
+        <span class="ml-1">
+            <i class="@Tree.IconExpression?.Invoke(this)"></i>
+        </span>
+    }
+    <span class="ml-1">@Tree.TitleExpression?.Invoke(this)</span>
 </li>
+@if (IsExpanded && GetChildren() != null)
+{
+    @foreach (var child in GetChildren())
+    {
+        <TreeNode DataItem="@child" Level="@(Level+1)" Tree="@Tree" ParentNode="this" />
+    }
+}

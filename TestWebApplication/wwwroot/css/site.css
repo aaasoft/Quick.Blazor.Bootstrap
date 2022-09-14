@@ -48,3 +48,12 @@ a, .btn-link {
         right: 0.75rem;
         top: 0.5rem;
     }
+
+.treeview span.indent {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.treeview .list-group-item {
+    cursor: pointer;
+}
