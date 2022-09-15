@@ -24,8 +24,6 @@ namespace Quick.Blazor.Bootstrap
         [Parameter]
         public Func<TreeNode, IEnumerable> ChildrenExpression { get; set; }
         [Parameter]
-        public EventCallback<TreeEventArgs> OnNodeLoadDelayAsync { get; set; }
-        [Parameter]
         public EventCallback<TreeNode> SelectedNodeChanged { get; set; }
         [Parameter]
         public EventCallback<TreeNode> TreeNodeDblClicked { get; set; }
@@ -51,8 +49,18 @@ namespace Quick.Blazor.Bootstrap
             get { return _SelectedNode; }
             set
             {
-                _SelectedNode = value;
-                travelTreeNode(ChildNodes, t => t.SetSelected(t == value));
+                travelTreeNode(ChildNodes, t =>
+                {
+                    if (t == value || t.DataItem == value.DataItem)
+                    {
+                        t.SetSelected(true);
+                        _SelectedNode = t;
+                    }
+                    else
+                    {
+                        t.SetSelected(false);
+                    }
+                });
                 SelectedNodeChanged.InvokeAsync(value);
             }
         }
@@ -99,9 +107,7 @@ namespace Quick.Blazor.Bootstrap
                 return;
             foreach (var node in nodes)
             {
-                node.Expand(true);
-                while (!node.IsExpanded)
-                    await Task.Delay(10);
+                node.ExpandAll(true);
                 await expandNodeAsync(node.ChildNodes);
             }
         }
@@ -117,16 +123,23 @@ namespace Quick.Blazor.Bootstrap
                 return;
             foreach (var node in nodes)
             {
-                node.Expand(false);
-                while (node.IsExpanded)
-                    await Task.Delay(10);
+                node.ExpandAll(false);
                 await collapseNodeAsync(node.ChildNodes);
             }
 
         }
         public async Task CollapseAllAsync()
         {
+            ClearIsExpandedFirst();
             await collapseNodeAsync(ChildNodes);
+        }
+
+        public void ClearIsExpandedFirst()
+        {
+            travelTreeNode(ChildNodes, t =>
+            {
+                t.SetIsExpandedFirstFalse();
+            });
         }
     }
 }

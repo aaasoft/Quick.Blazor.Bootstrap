@@ -21,10 +21,14 @@
     }
     <span class="ml-1">@Tree.TitleExpression?.Invoke(this)</span>
 </li>
-@if (IsExpanded && GetChildren() != null)
+@if (IsExpanded && children != null)
 {
-    @foreach (var child in GetChildren())
+    @foreach (var child in children)
     {
-        <TreeNode DataItem="@child" Level="@(Level+1)" Tree="@Tree" ParentNode="this" />
+        <TreeNode DataItem="@child"
+          Level="@(Level+1)"
+          Tree="@Tree"
+          ParentNode="this"
+          IsExpandedFirst="IsExpandedFirst" />
     }
 }
