@@ -49,9 +49,10 @@ namespace Quick.Blazor.Bootstrap
             get { return _SelectedNode; }
             set
             {
+                _SelectedNode = null;
                 travelTreeNode(ChildNodes, t =>
                 {
-                    if (value != null && (t == value || t.DataItem == value.DataItem))
+                    if (value != null && (t == value || t.DataItem.Equals(value.DataItem)))
                     {
                         t.SetSelected(true);
                         _SelectedNode = t;
@@ -61,7 +62,7 @@ namespace Quick.Blazor.Bootstrap
                         t.SetSelected(false);
                     }
                 });
-                SelectedNodeChanged.InvokeAsync(value);
+                SelectedNodeChanged.InvokeAsync(_SelectedNode);
             }
         }
 
