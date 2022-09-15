@@ -51,7 +51,7 @@ namespace Quick.Blazor.Bootstrap
             {
                 travelTreeNode(ChildNodes, t =>
                 {
-                    if (t == value || t.DataItem == value.DataItem)
+                    if (value != null && (t == value || t.DataItem == value.DataItem))
                     {
                         t.SetSelected(true);
                         _SelectedNode = t;
