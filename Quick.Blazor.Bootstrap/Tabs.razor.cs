@@ -19,6 +19,8 @@ namespace Quick.Blazor.Bootstrap
         [Parameter]
         public EventCallback<string> OnChange { get; set; }
         [Parameter]
+        public bool IsNavPills { get; set; } = false;
+        [Parameter]
         public string NavTabsExtraClass { get; set; }
         [Parameter]
         public string TabContentExtraClass { get; set; }

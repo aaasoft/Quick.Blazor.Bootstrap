@@ -2,7 +2,7 @@
     <CascadingValue Value="true" Name="IsEmpty" IsFixed="true">
         @ChildContent
     </CascadingValue>
-    <ul class="nav nav-tabs @NavTabsExtraClass">
+    <ul class="nav @(IsNavPills?"nav-pills":"nav-tabs")  @NavTabsExtraClass">
         <CascadingValue Value="true" Name="IsTab" IsFixed="true">
             @foreach (var pane in _panes)
             {
