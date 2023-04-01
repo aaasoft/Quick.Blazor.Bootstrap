@@ -6,7 +6,7 @@
     <RepositoryUrl>https://github.com/aaasoft/Quick.Blazor.Bootstrap</RepositoryUrl>
     <PackageProjectUrl>https://github.com/aaasoft/Quick.Blazor.Bootstrap</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Version>4.0.3</Version>
+    <Version>4.0.4</Version>
     <Description>Some component use Quick.Blazor.Bootstrap for Admin.</Description>
   </PropertyGroup>
 
@@ -17,7 +17,7 @@
 
   <ItemGroup>
     <PackageReference Include="BlazorDownloadFile" Version="2.4.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.14" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.15" />
     <PackageReference Include="Tewr.Blazor.FileReader" Version="3.3.1.21360" />
   </ItemGroup>
 
