@@ -1,8 +1,6 @@
 ﻿@using System.IO
 @using Microsoft.JSInterop
-@using Tewr.Blazor.FileReader
 
-@inject IFileReaderService fileReaderService;
 @inject IJSRuntime JSRuntime
 
 <div class="row">
@@ -167,8 +165,7 @@
     </div>
 </div>
 
-<input @ref="inputFile" id="inputFile" type="file" accept="@FileFilter" style="width: 0px; height: 0px; visibility: collapse;" @onchange="onInputFileChanged">
-
+<InputFile id="inputFile" accept="@FileFilter" style="width: 0px; height: 0px; visibility: collapse;" OnChange="@onInputFileChanged" />
 <ModalLoading @ref="loading" />
 <ModalAlert @ref="alert" />
 <ModalPrompt @ref="prompt" />

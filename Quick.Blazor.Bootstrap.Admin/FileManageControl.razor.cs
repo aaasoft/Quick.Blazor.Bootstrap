@@ -1,5 +1,6 @@
 ﻿using BlazorDownloadFile;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 using Quick.Blazor.Bootstrap.Admin.Utils;
 using System;
@@ -9,11 +10,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tewr.Blazor.FileReader;
 
 namespace Quick.Blazor.Bootstrap.Admin
 {
-    public partial class FileManageControl
+    public partial class FileManageControl : IDisposable
     {
         private readonly UnitStringConverting storageUSC = UnitStringConverting.StorageUnitStringConverting;
         [Inject]
@@ -22,7 +22,6 @@ namespace Quick.Blazor.Bootstrap.Admin
         private ModalLoading loading;
         private ModalAlert alert;
         private ModalPrompt prompt;
-        private ElementReference inputFile;
 
         private string CurrentPath;
         private DirectoryInfo CurrentDir;
@@ -149,9 +148,9 @@ namespace Quick.Blazor.Bootstrap.Admin
         public string TextSize { get; set; } = "Size";
         [Parameter]
         public string TextName { get; set; } = "Name";
-        
+
         [Parameter]
-        public RenderFragment ToolbarAddonButtons { get; set; }        
+        public RenderFragment ToolbarAddonButtons { get; set; }
 
         [Parameter]
         public RenderFragment IconFolder { get; set; }
@@ -176,7 +175,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         [Parameter]
         public RenderFragment IconDisplayIcon { get; set; }
         [Parameter]
-        public RenderFragment IconGoto{ get; set; }
+        public RenderFragment IconGoto { get; set; }
 
         protected override void OnParametersSet()
         {
@@ -272,19 +271,19 @@ namespace Quick.Blazor.Bootstrap.Admin
                 var dir = (DirectoryInfo)SelectedItem;
                 prompt.Show(string.Format(TextInputNewName, dir.Name), dir.Name, name =>
                  {
-                    try
-                    {
-                        var newPath = Path.Combine(CurrentPath, name);
-                        dir.MoveTo(newPath);
-                        alert.Show(TextRename, TextSuccess);
-                        refresh();
-                        InvokeAsync(StateHasChanged);
-                    }
-                    catch (Exception ex)
-                    {
-                        alert.Show(TextRename, TextFailed + Environment.NewLine + ExceptionUtils.GetExceptionMessage(ex));
-                    }
-                }, () => { });
+                     try
+                     {
+                         var newPath = Path.Combine(CurrentPath, name);
+                         dir.MoveTo(newPath);
+                         alert.Show(TextRename, TextSuccess);
+                         refresh();
+                         InvokeAsync(StateHasChanged);
+                     }
+                     catch (Exception ex)
+                     {
+                         alert.Show(TextRename, TextFailed + Environment.NewLine + ExceptionUtils.GetExceptionMessage(ex));
+                     }
+                 }, () => { });
             }
             else if (SelectedItem is FileInfo)
             {
@@ -394,78 +393,87 @@ namespace Quick.Blazor.Bootstrap.Admin
             }
         }
 
-        private async Task onInputFileChanged()
+        private System.Threading.CancellationTokenSource uploadCts;
+
+        private async Task onInputFileChanged(InputFileChangeEventArgs e)
         {
-            IFileInfo fileInfo = null;
+            IBrowserFile firstFile = null;
             try
             {
                 //1MB缓存
                 var buffer = new byte[1 * 1024 * 1024];
-                System.Threading.CancellationTokenSource cts = new System.Threading.CancellationTokenSource();
+                uploadCts = new System.Threading.CancellationTokenSource();
+                var cancellationToken = uploadCts.Token;
 
-                foreach (var file in await fileReaderService.CreateReference(inputFile).EnumerateFilesAsync())
+                foreach (var file in e.GetMultipleFiles())
                 {
-                    loading.Show(TextUpload, TextUploadReadFileInfo, false, cts.Cancel);
-                    fileInfo = await file.ReadFileInfoAsync();
-                    var tmpFile = Path.Combine(CurrentPath, fileInfo.Name);
+                    if (firstFile == null)
+                        firstFile = file;
+
+                    loading.Show(TextUpload, TextUploadReadFileInfo, false, uploadCts.Cancel);
+                    var tmpFile = Path.Combine(CurrentPath, file.Name);
                     if (File.Exists(tmpFile))
-                        throw new IOException(string.Format(TextUploadFileExist, fileInfo.Name));
-                    var fileSize = fileInfo.Size;
-                    var fileInfoStr = $"{fileInfo.Name} ({storageUSC.GetString(fileSize, 0, true)}B)";
-                    loading.Show(TextUpload, string.Format(TextUploadFileUploading, fileInfoStr), false, cts.Cancel);
+                        throw new IOException(string.Format(TextUploadFileExist, file.Name));
+                    var fileSize = file.Size;
+                    var fileInfoStr = $"{file.Name} ({storageUSC.GetString(fileSize, 0, true)}B)";
+                    loading.Show(TextUpload, string.Format(TextUploadFileUploading, fileInfoStr), false, uploadCts.Cancel);
                     var stopwatch = new System.Diagnostics.Stopwatch();
 
                     stopwatch.Start();
                     DateTime lastDisplayTime = DateTime.MinValue;
 
                     long readTotalCount = 0;
-                    using (Stream stream = await file.OpenReadAsync())
-                    using (var fileStream = System.IO.File.OpenWrite(tmpFile))
+                    try
                     {
-                        while (true)
+                        using (Stream stream = file.OpenReadStream(file.Size, cancellationToken))
+                        using (var fileStream = File.OpenWrite(tmpFile))
                         {
-                            //如果已取消
-                            if (cts.IsCancellationRequested)
-                                break;
-                            var ret = await stream.ReadAsync(buffer, 0, buffer.Length);
-                            if (ret == 0)
+                            while (true)
                             {
-                                await Task.Delay(100);
-                                continue;
-                            }
-                            else
-                            {
-                                readTotalCount += ret;
-                                fileStream.Write(buffer, 0, ret);
-                                if (readTotalCount >= fileSize)
+                                //如果已取消
+                                if (cancellationToken.IsCancellationRequested)
                                     break;
-
-                                if ((DateTime.Now - lastDisplayTime).TotalSeconds > 0.5 && stopwatch.ElapsedMilliseconds > 0)
+                                var ret = await stream.ReadAsync(buffer, 0, buffer.Length, cancellationToken);
+                                if (ret == 0)
                                 {
-                                    StringBuilder sb = new StringBuilder();
-                                    var speed = Convert.ToDouble(readTotalCount / stopwatch.ElapsedMilliseconds);
-                                    sb.Append(TextTransferSpeed + ": " + storageUSC.GetString(Convert.ToDecimal(speed * 1000), 1, true) + "B/s");
-                                    var remainingTime = TimeSpan.FromMilliseconds((fileSize - readTotalCount) / speed);
-                                    sb.Append("," + TextRemainingTime + ": " + remainingTime.ToString(@"hh\:mm\:ss"));
-                                    loading.UpdateProgress(Convert.ToInt32(readTotalCount * 100 / fileSize), sb.ToString());
-                                    await InvokeAsync(StateHasChanged);
-                                    lastDisplayTime = DateTime.Now;
+                                    await Task.Delay(100);
+                                    continue;
+                                }
+                                else
+                                {
+                                    readTotalCount += ret;
+                                    fileStream.Write(buffer, 0, ret);
+                                    if (readTotalCount >= fileSize)
+                                        break;
+
+                                    if ((DateTime.Now - lastDisplayTime).TotalSeconds > 0.5 && stopwatch.ElapsedMilliseconds > 0)
+                                    {
+                                        StringBuilder sb = new StringBuilder();
+                                        var speed = Convert.ToDouble(readTotalCount / stopwatch.ElapsedMilliseconds);
+                                        sb.Append(TextTransferSpeed + ": " + storageUSC.GetString(Convert.ToDecimal(speed * 1000), 1, true) + "B/s");
+                                        var remainingTime = TimeSpan.FromMilliseconds((fileSize - readTotalCount) / speed);
+                                        sb.Append("," + TextRemainingTime + ": " + remainingTime.ToString(@"hh\:mm\:ss"));
+                                        loading.UpdateProgress(Convert.ToInt32(readTotalCount * 100 / fileSize), sb.ToString());
+                                        await InvokeAsync(StateHasChanged);
+                                        lastDisplayTime = DateTime.Now;
+                                    }
                                 }
                             }
                         }
+                        if (cancellationToken.IsCancellationRequested)
+                            throw new OperationCanceledException();
                     }
-
-                    stopwatch.Stop();
-                    if (cts.IsCancellationRequested)
+                    catch (OperationCanceledException)
                     {
                         alert.Show(TextUpload, TextCanceled);
                         File.Delete(tmpFile);
-                        return;
+                        throw;
                     }
+                    stopwatch.Stop();
                     alert.Show(TextUpload, TextSuccess);
                 }
             }
-            catch(TaskCanceledException)
+            catch (OperationCanceledException)
             {
                 alert.Show(TextUpload, TextCanceled);
             }
@@ -475,10 +483,9 @@ namespace Quick.Blazor.Bootstrap.Admin
             }
             finally
             {
-                await fileReaderService.CreateReference(inputFile).ClearValue();
                 loading.Close();
                 refresh();
-                SelectedItem = Files?.FirstOrDefault(t => t.Name == fileInfo?.Name);
+                SelectedItem = Files?.FirstOrDefault(t => t.Name == firstFile?.Name);
             }
         }
 
@@ -563,6 +570,12 @@ namespace Quick.Blazor.Bootstrap.Admin
                     alert.Show(TextFailed, string.Format(TextFolderNotExist, CurrentDir.FullName));
                 }
             }
+        }
+
+        public void Dispose()
+        {
+            uploadCts?.Cancel();
+            uploadCts = null;
         }
     }
 }
