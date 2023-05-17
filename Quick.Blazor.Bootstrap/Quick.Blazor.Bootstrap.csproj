@@ -6,7 +6,7 @@
     <RepositoryUrl>https://github.com/aaasoft/Quick.Blazor.Bootstrap</RepositoryUrl>
     <PackageProjectUrl>https://github.com/aaasoft/Quick.Blazor.Bootstrap</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Version>4.0.9</Version>
+    <Version>4.0.10</Version>
     <Description>A simple component use Bootstrap for Blazor.</Description>
   </PropertyGroup>
 
