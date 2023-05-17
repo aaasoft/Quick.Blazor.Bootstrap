@@ -78,6 +78,13 @@ namespace Quick.Blazor.Bootstrap.ReverseProxy
             return builder;
         }
 
+        public IReverseProxyBuilder LoadWithoutData(IReverseProxyBuilder builder)
+        {
+            ruleList = new List<ReverseProxyRule>();
+            builder.Services.AddSingleton<IProxyConfigProvider>(this);
+            return builder;
+        }
+
         public void AddRule(ReverseProxyRule rule)
         {
             lock (ruleList)
