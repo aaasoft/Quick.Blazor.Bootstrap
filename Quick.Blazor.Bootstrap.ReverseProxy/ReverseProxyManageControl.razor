@@ -3,7 +3,7 @@
         <div class="btn-toolbar">
             <div class="btn-group mr-2 mb-1">
                 <button type="button" class="btn btn-sm btn-secondary" @onclick="Create">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    @IconNew
                     @TextNew
                 </button>
             </div>
@@ -14,7 +14,7 @@
                 <input type="text" class="form-control" @bind-value="searchKeywords">
                 <div class="input-group-append">
                     <button type="button" class="btn btn-sm btn-secondary">
-                        <i class="fa fa-search"></i>
+                        @IconSearch
                     </button>
                 </div>
             </div>
@@ -30,7 +30,7 @@
             <div class="col-xl-4 col-lg-6 col-sm-12 mt-2">
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-paper-plane mr-1" aria-hidden="true"></i>@t.Name
+                        @IconRule@t.Name
                     </div>
                     <div class="card-body small p-2">
                         <p class="mb-0">
@@ -42,14 +42,14 @@
                     </div>
                     <div class="card-footer p-1">
                         <div class="btn-group">
-                            <a class="btn btn-sm btn-secondary" href="@t.Path" target="_blank" title="@TextView">
-                                <i class="fa fa-globe" aria-hidden="true"></i>
+                            <a class="btn btn-sm btn-secondary" href="@t.Path" target="_blank" title="@TextVisit">
+                                @IconVisit
                             </a>
                             <button type="button" title="@TextEdit" class="btn btn-sm btn-secondary" @onclick="() => Edit(t)">
-                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                @IconEdit
                             </button>
                             <button type="button" title="@TextDelete" class="btn btn-sm btn-secondary" @onclick="@(e=>Delete(t))">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                @IconDelete
                             </button>
                         </div>
                     </div>

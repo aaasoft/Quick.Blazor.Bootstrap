@@ -2,15 +2,11 @@
 using Quick.Blazor.Bootstrap.ReverseProxy.Model;
 using Quick.EntityFrameworkCore.Plus;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Quick.Blazor.Bootstrap.ReverseProxy.Pages
+namespace Quick.Blazor.Bootstrap.ReverseProxy
 {
-    public partial class ReverseProxyManage
+    public partial class ReverseProxyManageControl
     {
         private ModalAlert modalAlert;
         private ModalWindow modalWindow;
@@ -29,7 +25,7 @@ namespace Quick.Blazor.Bootstrap.ReverseProxy.Pages
         [Parameter]
         public string TextOK { get; set; } = "OK";
         [Parameter]
-        public string TextView { get; set; } = "View";
+        public string TextVisit { get; set; } = "Visit";
         [Parameter]
         public string TextEdit { get; set; } = "Edit";
         [Parameter]
@@ -38,6 +34,19 @@ namespace Quick.Blazor.Bootstrap.ReverseProxy.Pages
         public string TextError { get; set; } = "Error";
         [Parameter]
         public string TextConfirmDelete { get; set; } = "Do you want to delete Rule[{0}]?";
+        
+        [Parameter]
+        public RenderFragment IconNew { get; set; }
+        [Parameter]
+        public RenderFragment IconSearch { get; set; }
+        [Parameter]
+        public RenderFragment IconRule { get; set; }
+        [Parameter]
+        public RenderFragment IconVisit { get; set; }
+        [Parameter]
+        public RenderFragment IconEdit { get; set; }
+        [Parameter]
+        public RenderFragment IconDelete { get; set; }
 
         private void validateModel(ReverseProxyRule oldModel, ReverseProxyRule newModel)
         {
