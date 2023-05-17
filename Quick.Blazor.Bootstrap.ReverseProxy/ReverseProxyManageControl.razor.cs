@@ -104,7 +104,7 @@ namespace Quick.Blazor.Bootstrap.ReverseProxy
                         try
                         {
                             validateModel(model, newModel);
-                            ConfigDbContext.CacheContext.Update(model);
+                            ConfigDbContext.CacheContext.Update(newModel);
                         }
                         catch (Exception ex)
                         {

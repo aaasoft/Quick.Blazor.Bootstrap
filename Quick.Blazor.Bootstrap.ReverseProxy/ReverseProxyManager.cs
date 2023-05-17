@@ -170,5 +170,14 @@ namespace Quick.Blazor.Bootstrap.ReverseProxy
                     RemoveRule(path);
             }
         }
+
+        public void RemoveAllRule()
+        {
+            var pathList = getRulePathArray();
+            foreach (var path in pathList)
+            {
+                RemoveRule(path);
+            }
+        }
     }
 }
