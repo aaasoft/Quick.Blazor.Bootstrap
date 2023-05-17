@@ -4,6 +4,7 @@ using Quick.Blazor.Bootstrap.ReverseProxy.Model;
 using Quick.EntityFrameworkCore.Plus;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading;
 using Yarp.ReverseProxy.Configuration;
@@ -171,12 +172,11 @@ namespace Quick.Blazor.Bootstrap.ReverseProxy
             }
         }
 
-        public void RemoveAllRule()
+        public void RemoveAllRules()
         {
-            var pathList = getRulePathArray();
-            foreach (var path in pathList)
+            foreach (var rule in GetRules(null))
             {
-                RemoveRule(path);
+                RemoveRule(rule);
             }
         }
     }
