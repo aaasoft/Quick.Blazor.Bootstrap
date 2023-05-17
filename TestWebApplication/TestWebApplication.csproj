@@ -1,13 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Quick.Blazor.Bootstrap.Admin\Quick.Blazor.Bootstrap.Admin.csproj" />
-    <ProjectReference Include="..\Quick.Blazor.Bootstrap.ReverseProxy\Quick.Blazor.Bootstrap.ReverseProxy.csproj" />
-    <ProjectReference Include="..\Quick.Blazor.Bootstrap\Quick.Blazor.Bootstrap.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Quick.EntityFrameworkCore.Plus.SQLite" Version="5.0.2" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Quick.Blazor.Bootstrap.Admin\Quick.Blazor.Bootstrap.Admin.csproj" />
+		<ProjectReference Include="..\Quick.Blazor.Bootstrap.ReverseProxy\Quick.Blazor.Bootstrap.ReverseProxy.csproj" />
+		<ProjectReference Include="..\Quick.Blazor.Bootstrap\Quick.Blazor.Bootstrap.csproj" />
+	</ItemGroup>
 
 </Project>
