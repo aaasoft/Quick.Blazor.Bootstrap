@@ -1,0 +1,23 @@
+﻿<div class="row">
+    <div class="col-12">
+        <EditForm Model="@createModel" OnValidSubmit="Ok">
+            <DataAnnotationsValidator />
+            <div class="form-group">
+                <label>@TextName</label>
+                <InputText class="form-control" @bind-Value="createModel.Name" />
+                <ValidationMessage For="@(() => createModel.Name)" />
+            </div>
+            <div class="form-group">
+                <label>@TextPath</label>
+                <InputText class="form-control" @bind-Value="createModel.Path" />
+                <ValidationMessage For="@(() => createModel.Path)" />
+            </div>
+            <div class="form-group">
+                <label>@TextUrl</label>
+                <InputText class="form-control" @bind-Value="createModel.Url" />
+                <ValidationMessage For="@(() => createModel.Url)" />
+            </div>
+            <button type="submit" class="btn btn-primary col-sm-5 col-md-4 col-lg-2">@TextOK</button>
+        </EditForm>
+    </div>
+</div>

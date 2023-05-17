@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Quick.Blazor.Bootstrap.Admin\Quick.Blazor.Bootstrap.Admin.csproj" />
+    <ProjectReference Include="..\Quick.Blazor.Bootstrap.ReverseProxy\Quick.Blazor.Bootstrap.ReverseProxy.csproj" />
     <ProjectReference Include="..\Quick.Blazor.Bootstrap\Quick.Blazor.Bootstrap.csproj" />
   </ItemGroup>
 

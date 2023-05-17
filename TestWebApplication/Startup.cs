@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Quick.Blazor.Bootstrap.ReverseProxy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,7 @@ namespace TestWebApplication
             services.AddBlazorDownloadFile();
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            ReverseProxyManager.Instance.Load(services.AddReverseProxy());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,11 +45,11 @@ namespace TestWebApplication
             }
 
             app.UseStaticFiles();
-
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapReverseProxy();
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });
