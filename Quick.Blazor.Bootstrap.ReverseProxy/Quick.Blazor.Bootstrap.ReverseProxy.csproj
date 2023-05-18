@@ -6,10 +6,9 @@
 		<RepositoryUrl>https://github.com/aaasoft/Quick.Blazor.Bootstrap</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/aaasoft/Quick.Blazor.Bootstrap</PackageProjectUrl>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-		<Version>4.0.10</Version>
+		<Version>4.0.11</Version>
 		<Description>Quick.Blazor.Bootstrap.ReverseProxy</Description>
 	</PropertyGroup>
-
 
 	<ItemGroup>
 		<SupportedPlatform Include="browser" />
