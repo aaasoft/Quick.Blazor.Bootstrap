@@ -367,7 +367,7 @@ namespace Quick.Blazor.Bootstrap.Admin
                 }
                 if (cts.IsCancellationRequested)
                 {
-                    alert.Show(TextUpload, TextCanceled);
+                    alert.Show(TextDownload, TextCanceled);
                     return;
                 }
                 var result = await BlazorDownloadFileService.DownloadBinaryBuffers(file.Name, cts.Token);
@@ -379,11 +379,11 @@ namespace Quick.Blazor.Bootstrap.Admin
             }
             catch (TaskCanceledException)
             {
-                alert.Show(TextUpload, TextCanceled);
+                alert.Show(TextDownload, TextCanceled);
             }
             catch (Exception ex)
             {
-                alert.Show(TextUpload, TextFailed + Environment.NewLine + ExceptionUtils.GetExceptionMessage(ex));
+                alert.Show(TextDownload, TextFailed + Environment.NewLine + ExceptionUtils.GetExceptionMessage(ex));
             }
             finally
             {
