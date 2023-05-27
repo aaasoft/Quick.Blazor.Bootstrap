@@ -16,6 +16,8 @@ namespace Quick.Blazor.Bootstrap.ReverseProxy
     {
         public static ReverseProxyManager Instance { get; } = new ReverseProxyManager();
         private List<ReverseProxyRule> ruleList;
+        public event EventHandler<string> RuleAdded;
+        public event EventHandler<string> RuleRemoved;
 
         public bool IsEmpty()
         {
@@ -142,6 +144,7 @@ namespace Quick.Blazor.Bootstrap.ReverseProxy
                 };
                 Update();
             }
+            RuleAdded?.Invoke(this, path);
         }
 
         public void RemoveRule(string path)
@@ -154,6 +157,7 @@ namespace Quick.Blazor.Bootstrap.ReverseProxy
                     clusterDict.Remove(path);
                 Update();
             }
+            RuleRemoved?.Invoke(this, path);
         }
 
         private string[] getRulePathArray()
