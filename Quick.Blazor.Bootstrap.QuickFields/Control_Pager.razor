@@ -1,0 +1,36 @@
+﻿@using Quick.Fields
+
+<Quick.Blazor.Bootstrap.Pagination @bind-Offset="Offset"
+                                   PageSize="@PageSize"
+                                   RecordCount="@RecordCount"
+                                   FirstPageText="First" PreviousPageText="Prev" NextPageText="Next" LastPageText="Last" RecordCountText="Records:" PageText="Page:" />
+
+@code
+{
+    [Parameter]
+    public FieldForGet Field { get; set; }
+
+    public int PageSize
+    {
+        get { return Field.Pager_PageSize ?? 0; }
+        set
+        {
+            Field.Pager_PageSize = value;
+        }
+    }
+
+    public int RecordCount
+    {
+        get { return Field.Pager_RecordCount ?? 0; }
+        set
+        {
+            Field.Pager_RecordCount = value;
+        }
+    }
+
+    private int Offset
+    {
+        get { return int.Parse(Field.Value); }
+        set { Field.Value = value.ToString(); }
+    }
+}

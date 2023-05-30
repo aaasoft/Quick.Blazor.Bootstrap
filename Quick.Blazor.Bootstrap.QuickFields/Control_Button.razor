@@ -1,0 +1,14 @@
+﻿@using Quick.Fields
+
+<button type="button" class="btn btn-primary @Field.Html_Class" style="@Field.Html_Style" @onclick="OnClick">@Field.Name</button>
+
+@code
+{
+    [Parameter]
+    public FieldForGet Field { get; set; }
+
+    public void OnClick()
+    {
+        Field.Value = Field.Value;
+    }
+}

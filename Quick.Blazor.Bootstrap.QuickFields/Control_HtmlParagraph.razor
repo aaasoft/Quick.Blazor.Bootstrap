@@ -1,0 +1,17 @@
+﻿@using Quick.Fields
+
+<p class="@Field.Html_Class" style="@Field.Html_Style">@Field.Value
+    @if (Field.Children != null)
+    {
+        @foreach (var child in Field.Children)
+        {
+            <Control Field="@child" />
+        }
+    }
+</p>
+
+@code
+{
+    [Parameter]
+    public FieldForGet Field { get; set; }
+}

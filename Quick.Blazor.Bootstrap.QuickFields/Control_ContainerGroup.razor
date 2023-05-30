@@ -1,0 +1,25 @@
+﻿@using Quick.Fields
+
+<div class="mt-2 card">
+    @if (!string.IsNullOrEmpty(Field.Name))
+    {
+        <div class="card-header">
+            @Field.Name
+        </div>
+    }
+    @if (Field.Children != null)
+    {
+        <div class="card-body pb-0">
+            @foreach (var child in Field.Children)
+            {
+                <Control Field="child"></Control>
+            }
+        </div>
+    }
+</div>
+
+@code
+{
+    [Parameter]
+    public FieldForGet Field { get; set; }
+}

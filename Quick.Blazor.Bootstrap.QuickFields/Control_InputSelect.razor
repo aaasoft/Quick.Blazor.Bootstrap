@@ -1,0 +1,48 @@
+﻿@using Quick.Fields
+
+<div class="form-group">
+    <label>@Field.Name</label>
+    @if (Field.Input_ReadOnly.HasValue && Field.Input_ReadOnly.Value)
+    {
+        <select class="form-control @(string.IsNullOrEmpty(Field.Input_ValidationMessage)?"":"invalid")" @bind="@Field.Value" disabled>
+            @if (string.IsNullOrEmpty(Field.Value))
+            {
+                <option value=""></option>
+            }
+            @foreach (var t in Field.InputSelect_Options)
+            {
+                <option value="@t.Key">@t.Value</option>
+            }
+        </select>
+    }
+    else
+    {
+        <select class="form-control @(string.IsNullOrEmpty(Field.Input_ValidationMessage)?"":"invalid")" @bind="@Field.Value">
+            @if (string.IsNullOrEmpty(Field.Value))
+            {
+                <option value=""></option>
+            }
+            @if (Field.InputSelect_Options != null)
+            {
+                @foreach (var t in Field.InputSelect_Options)
+                {
+                    <option value="@t.Key">@t.Value</option>
+                }
+            }
+        </select>
+    }
+    @if (!string.IsNullOrEmpty(Field.Description))
+    {
+        <small class="form-text text-muted">@Field.Description</small>
+    }
+    @if (!string.IsNullOrEmpty(Field.Input_ValidationMessage))
+    {
+        <div class="validation-message">@Field.Input_ValidationMessage</div>
+    }
+</div>
+
+@code
+{
+    [Parameter]
+    public FieldForGet Field { get; set; }
+}

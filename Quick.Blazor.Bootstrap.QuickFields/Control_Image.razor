@@ -1,0 +1,9 @@
+﻿@using Quick.Fields
+
+<img src="@Field.Value" class="@Field.Html_Class" style="@Field.Html_Style" />
+
+@code
+{
+    [Parameter]
+    public FieldForGet Field { get; set; }
+}

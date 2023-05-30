@@ -1,0 +1,28 @@
+﻿@using Quick.Fields
+
+<div class="form-group">
+    <label>@Field.Name</label>
+    @if (Field.Input_ReadOnly.HasValue && Field.Input_ReadOnly.Value)
+    {
+        <input type="text" class="form-control @(string.IsNullOrEmpty(Field.Input_ValidationMessage) ? "" : "invalid")" @bind="@Field.Value" readonly>
+    }
+    else
+    {
+        <input type="text" class="form-control @(string.IsNullOrEmpty(Field.Input_ValidationMessage) ? "" : "invalid")" @bind="@Field.Value">
+    }
+
+    @if (!string.IsNullOrEmpty(Field.Description))
+    {
+        <small class="form-text text-muted">@Field.Description</small>
+    }
+    @if (!string.IsNullOrEmpty(Field.Input_ValidationMessage))
+    {
+        <div class="validation-message">@Field.Input_ValidationMessage</div>
+    }
+</div>
+
+@code
+{
+    [Parameter]
+    public FieldForGet Field { get; set; }
+}

@@ -1,0 +1,27 @@
+﻿@using Quick.Fields
+@using Quick.Blazor.Bootstrap
+
+<Tabs>
+    @if (Field.Children != null)
+    {
+        @foreach (var field in Field.Children)
+        {
+            <TabPane Key="@field.Id">
+                <Tab>@field.Name</Tab>
+                <ChildContent>
+                    <div class="form-group"></div>
+                    @foreach (var child in field.Children)
+                    {
+                        <Control Field="child"></Control>
+                    }
+                </ChildContent>
+            </TabPane>
+        }
+    }
+</Tabs>
+
+@code
+{
+    [Parameter]
+    public FieldForGet Field { get; set; }
+}

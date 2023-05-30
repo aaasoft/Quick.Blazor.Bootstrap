@@ -1,0 +1,19 @@
+﻿@using Quick.Fields
+
+<div class="row">
+    @if (Field.Children != null)
+    {
+        @foreach (var field in Field.Children)
+        {
+            <div class="@(field.Width==null?"col":"col-"+ field.Width.Value)">
+                <Control Field="field" />
+            </div>
+        }
+    }
+</div>
+
+@code
+{
+    [Parameter]
+    public FieldForGet Field { get; set; }
+}

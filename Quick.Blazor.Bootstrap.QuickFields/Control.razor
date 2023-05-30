@@ -1,0 +1,81 @@
+﻿@using Quick.Fields
+
+@switch (Field.Type)
+{
+    case FieldType.Alert:
+        <Control_Alert Field="Field" />
+        break;
+    case FieldType.Button:
+        <Control_Button Field="Field" />
+        break;
+    case FieldType.ContainerGroup:
+        <Control_ContainerGroup Field="Field" />
+        break;
+    case FieldType.ContainerSplit:
+        <Control_ContainerSplit Field="Field" />
+        break;
+    case FieldType.ContainerTab:
+        <Control_ContainerTab Field="Field" />
+        break;
+    case FieldType.ContainerTable:
+        <Control_ContainerTable Field="Field" />
+        break;
+    case FieldType.ContainerTableTr:
+        <Control_ContainerTableTr Field="Field" />
+        break;
+    case FieldType.ContainerTableTh:
+        <Control_ContainerTableTh Field="Field" />
+        break;
+    case FieldType.ContainerTableTd:
+        <Control_ContainerTableTd Field="Field" />
+        break;
+    case FieldType.HtmlDiv:
+        <Control_HtmlDiv Field="Field" />
+        break;
+    case FieldType.HtmlParagraph:
+        <Control_HtmlParagraph Field="Field" />
+        break;
+    case FieldType.HtmlPre:
+        <Control_HtmlPre Field="Field" />
+        break;
+    case FieldType.HtmlSpan:
+        <Control_HtmlSpan Field="Field" />
+        break;
+    case FieldType.Image:
+        <Control_Image Field="Field" />
+        break;
+    case FieldType.InputFile:
+        <Control_InputFile Field="Field" />
+        break;
+    case FieldType.InputNumber:
+        <Control_InputNumber Field="Field" />
+        break;
+    case FieldType.InputPassword:
+        <Control_InputPassword Field="Field" />
+        break;
+    case FieldType.InputSelect:
+        <Control_InputSelect Field="Field" />
+        break;
+    case FieldType.InputText:
+        <Control_InputText Field="Field" />
+        break;
+    case FieldType.InputTextArea:
+        <Control_InputTextArea Field="Field" />
+        break;
+    case FieldType.Pager:
+        <Control_Pager Field="Field" />
+        break;
+    case FieldType.InputHidden:
+    case FieldType.MessageBox:
+    case FieldType.Toast:
+        break;
+    default:
+        <p>Unknown control type[@Field.Type]</p>
+        break;
+}
+
+@code
+{
+    [Parameter]
+    public FieldForGet Field { get; set; }
+}

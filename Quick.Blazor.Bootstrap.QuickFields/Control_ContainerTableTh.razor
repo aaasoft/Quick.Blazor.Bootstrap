@@ -1,0 +1,18 @@
+﻿@using Quick.Fields
+
+<th class="@Field.Html_Class" style="@Field.Html_Style" rowspan="@Field.ContainerTableTd_RowSpan" colspan="@Field.ContainerTableTd_ColSpan">
+    @Field.Value
+    @if (Field.Children != null)
+    {
+        @foreach (var child in Field.Children)
+        {
+            <Control Field="@child" />
+        }
+    }
+</th>
+
+@code
+{
+    [Parameter]
+    public FieldForGet Field { get; set; }
+}

@@ -1,0 +1,30 @@
+﻿@using Quick.Fields
+
+<div class="form-group">
+    <div class="alert @Field.Html_Class" style="@Field.Html_Style" role="alert">
+        @if (!string.IsNullOrEmpty(Field.Name))
+        {
+            <h4 class="alert-heading">@Field.Name</h4>
+        }
+        @if (!string.IsNullOrEmpty(Field.Description))
+        {
+            @foreach (var line in Field.Description.Split('\r', '\n'))
+            {
+                <p class="m-0">@line</p>
+            }
+        }
+        @if (Field.Children != null)
+        {
+            @foreach (var child in Field.Children)
+            {
+                <Control Field="@child" />
+            }
+        }
+    </div>
+</div>
+
+@code
+{
+    [Parameter]
+    public FieldForGet Field { get; set; }
+}
