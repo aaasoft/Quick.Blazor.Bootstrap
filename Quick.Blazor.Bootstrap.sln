@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestWebApplication", "TestW
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Blazor.Bootstrap.Admin", "Quick.Blazor.Bootstrap.Admin\Quick.Blazor.Bootstrap.Admin.csproj", "{82E40A1C-AFC5-4FED-9476-FC51C1D4CA7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Blazor.Bootstrap.ReverseProxy", "Quick.Blazor.Bootstrap.ReverseProxy\Quick.Blazor.Bootstrap.ReverseProxy.csproj", "{A1A76E0D-4BE3-4BF9-AB58-2F624C04D207}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Blazor.Bootstrap.ReverseProxy", "Quick.Blazor.Bootstrap.ReverseProxy\Quick.Blazor.Bootstrap.ReverseProxy.csproj", "{A1A76E0D-4BE3-4BF9-AB58-2F624C04D207}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Blazor.Bootstrap.QuickFields", "Quick.Blazor.Bootstrap.QuickFields\Quick.Blazor.Bootstrap.QuickFields.csproj", "{9E9BBC58-583B-410D-BF40-7F665A2AD1C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{A1A76E0D-4BE3-4BF9-AB58-2F624C04D207}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1A76E0D-4BE3-4BF9-AB58-2F624C04D207}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1A76E0D-4BE3-4BF9-AB58-2F624C04D207}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E9BBC58-583B-410D-BF40-7F665A2AD1C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E9BBC58-583B-410D-BF40-7F665A2AD1C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E9BBC58-583B-410D-BF40-7F665A2AD1C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E9BBC58-583B-410D-BF40-7F665A2AD1C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
