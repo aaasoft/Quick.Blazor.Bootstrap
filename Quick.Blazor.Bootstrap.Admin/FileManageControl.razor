@@ -105,7 +105,7 @@
                                                 gotoDir(dir);
                                        })">
                                         <td>@IconFolder@dir.Name</td>
-                                        <td>@dir.LastWriteTime</td>
+                                        <td>@getLastWriteString(dir)</td>
                                         <td></td>
                                     </tr>
                                 }
@@ -116,8 +116,8 @@
                                 {
                                     <tr class="@(SelectedItem == file ? "table-active" : "")" @onclick="@(e => SelectedItem = file)" @ondblclick="onFileDoubleClick">
                                         <td>@IconFile@file.Name</td>
-                                        <td>@file.LastWriteTime</td>
-                                        <td>@(storageUSC.GetString(file.Length, 0, true))B</td>
+                                        <td>@getLastWriteString(file)</td>
+                                        <td>@getFileLengthString(file)B</td>
                                     </tr>
                                 }
                             }
