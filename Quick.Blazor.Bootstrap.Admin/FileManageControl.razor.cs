@@ -177,6 +177,28 @@ namespace Quick.Blazor.Bootstrap.Admin
         [Parameter]
         public RenderFragment IconGoto { get; set; }
 
+        private string getFileLengthString(FileInfo fileInfo)
+        {
+            try
+            {
+                if (fileInfo.Exists)
+                    return storageUSC.GetString(fileInfo.Length, 0, true);
+            }
+            catch { }
+            return string.Empty;
+        }
+
+        private string getLastWriteString(FileSystemInfo fileInfo)
+        {
+            try
+            {
+                if (fileInfo.Exists)
+                    return fileInfo.LastWriteTime.ToString();
+            }
+            catch { }
+            return string.Empty;
+        }
+
         protected override void OnParametersSet()
         {
             if (string.IsNullOrEmpty(Dir))
