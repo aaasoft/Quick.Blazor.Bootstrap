@@ -267,19 +267,19 @@ namespace Quick.Blazor.Bootstrap.Admin
 
         private void btnCreateFolder_Click()
         {
-            prompt.Show(TextNewFolderPrompt, TextNewFolder, dir_name =>
+            prompt?.Show(TextNewFolderPrompt, TextNewFolder, dir_name =>
             {
                 try
                 {
                     var newDirPath = Path.Combine(CurrentPath, dir_name);
                     Directory.CreateDirectory(newDirPath);
-                    alert.Show(TextNewFolder, TextSuccess);
+                    alert?.Show(TextNewFolder, TextSuccess);
                     refresh();
                     InvokeAsync(StateHasChanged);
                 }
                 catch (Exception ex)
                 {
-                    alert.Show(TextNewFolder, TextFailed + Environment.NewLine + ExceptionUtils.GetExceptionMessage(ex));
+                    alert?.Show(TextNewFolder, TextFailed + Environment.NewLine + ExceptionUtils.GetExceptionMessage(ex));
                 }
             }, () => { });
         }
@@ -291,38 +291,38 @@ namespace Quick.Blazor.Bootstrap.Admin
             if (SelectedItem is DirectoryInfo)
             {
                 var dir = (DirectoryInfo)SelectedItem;
-                prompt.Show(string.Format(TextInputNewName, dir.Name), dir.Name, name =>
+                prompt?.Show(string.Format(TextInputNewName, dir.Name), dir.Name, name =>
                  {
                      try
                      {
                          var newPath = Path.Combine(CurrentPath, name);
                          dir.MoveTo(newPath);
-                         alert.Show(TextRename, TextSuccess);
+                         alert?.Show(TextRename, TextSuccess);
                          refresh();
                          InvokeAsync(StateHasChanged);
                      }
                      catch (Exception ex)
                      {
-                         alert.Show(TextRename, TextFailed + Environment.NewLine + ExceptionUtils.GetExceptionMessage(ex));
+                         alert?.Show(TextRename, TextFailed + Environment.NewLine + ExceptionUtils.GetExceptionMessage(ex));
                      }
                  }, () => { });
             }
             else if (SelectedItem is FileInfo)
             {
                 var file = (FileInfo)SelectedItem;
-                prompt.Show(string.Format(TextInputNewName, file.Name), file.Name, name =>
+                prompt?.Show(string.Format(TextInputNewName, file.Name), file.Name, name =>
                 {
                     try
                     {
                         var newPath = Path.Combine(CurrentPath, name);
                         file.MoveTo(newPath);
-                        alert.Show(TextRename, TextSuccess);
+                        alert?.Show(TextRename, TextSuccess);
                         refresh();
                         InvokeAsync(StateHasChanged);
                     }
                     catch (Exception ex)
                     {
-                        alert.Show(TextRename, TextFailed + Environment.NewLine + ExceptionUtils.GetExceptionMessage(ex));
+                        alert?.Show(TextRename, TextFailed + Environment.NewLine + ExceptionUtils.GetExceptionMessage(ex));
                     }
                 }, () => { });
             }
@@ -354,7 +354,7 @@ namespace Quick.Blazor.Bootstrap.Admin
             }
 
             System.Threading.CancellationTokenSource cts = new System.Threading.CancellationTokenSource();
-            loading.Show(TextDownload, file.Name, false, cts.Cancel);
+            loading?.Show(TextDownload, file.Name, false, cts.Cancel);
             var stopwatch = new System.Diagnostics.Stopwatch();
             stopwatch.Start();
             DateTime lastDisplayTime = DateTime.MinValue;
@@ -389,29 +389,29 @@ namespace Quick.Blazor.Bootstrap.Admin
                 }
                 if (cts.IsCancellationRequested)
                 {
-                    alert.Show(TextDownload, TextCanceled);
+                    alert?.Show(TextDownload, TextCanceled);
                     return;
                 }
                 var result = await BlazorDownloadFileService.DownloadBinaryBuffers(file.Name, cts.Token);
 
                 if (!result.Succeeded)
                 {
-                    alert.Show(TextDownload, TextFailed + Environment.NewLine + result.ErrorName + Environment.NewLine + result.ErrorMessage);
+                    alert?.Show(TextDownload, TextFailed + Environment.NewLine + result.ErrorName + Environment.NewLine + result.ErrorMessage);
                 }
             }
             catch (TaskCanceledException)
             {
-                alert.Show(TextDownload, TextCanceled);
+                alert?.Show(TextDownload, TextCanceled);
             }
             catch (Exception ex)
             {
-                alert.Show(TextDownload, TextFailed + Environment.NewLine + ExceptionUtils.GetExceptionMessage(ex));
+                alert?.Show(TextDownload, TextFailed + Environment.NewLine + ExceptionUtils.GetExceptionMessage(ex));
             }
             finally
             {
                 await BlazorDownloadFileService.ClearBuffers();
                 stopwatch.Stop();
-                loading.Close();
+                loading?.Close();
             }
         }
 
@@ -432,13 +432,13 @@ namespace Quick.Blazor.Bootstrap.Admin
                     if (firstFile == null)
                         firstFile = file;
 
-                    loading.Show(TextUpload, TextUploadReadFileInfo, false, uploadCts.Cancel);
+                    loading?.Show(TextUpload, TextUploadReadFileInfo, false, uploadCts.Cancel);
                     var tmpFile = Path.Combine(CurrentPath, file.Name);
                     if (File.Exists(tmpFile))
                         throw new IOException(string.Format(TextUploadFileExist, file.Name));
                     var fileSize = file.Size;
                     var fileInfoStr = $"{file.Name} ({storageUSC.GetString(fileSize, 0, true)}B)";
-                    loading.Show(TextUpload, string.Format(TextUploadFileUploading, fileInfoStr), false, uploadCts.Cancel);
+                    loading?.Show(TextUpload, string.Format(TextUploadFileUploading, fileInfoStr), false, uploadCts.Cancel);
                     var stopwatch = new System.Diagnostics.Stopwatch();
 
                     stopwatch.Start();
@@ -487,25 +487,25 @@ namespace Quick.Blazor.Bootstrap.Admin
                     }
                     catch (OperationCanceledException)
                     {
-                        alert.Show(TextUpload, TextCanceled);
+                        alert?.Show(TextUpload, TextCanceled);
                         File.Delete(tmpFile);
                         throw;
                     }
                     stopwatch.Stop();
-                    alert.Show(TextUpload, TextSuccess);
+                    alert?.Show(TextUpload, TextSuccess);
                 }
             }
             catch (OperationCanceledException)
             {
-                alert.Show(TextUpload, TextCanceled);
+                alert?.Show(TextUpload, TextCanceled);
             }
             catch (Exception ex)
             {
-                alert.Show(TextUpload, TextFailed + Environment.NewLine + ExceptionUtils.GetExceptionMessage(ex));
+                alert?.Show(TextUpload, TextFailed + Environment.NewLine + ExceptionUtils.GetExceptionMessage(ex));
             }
             finally
             {
-                loading.Close();
+                loading?.Close();
                 refresh();
                 SelectedItem = Files?.FirstOrDefault(t => t.Name == firstFile?.Name);
             }
@@ -518,37 +518,37 @@ namespace Quick.Blazor.Bootstrap.Admin
             if (SelectedItem is FileInfo)
             {
                 var file = (FileInfo)SelectedItem;
-                alert.Show(TextConfirm, string.Format(TextConfirmDeleteFile, file.Name), () =>
+                alert?.Show(TextConfirm, string.Format(TextConfirmDeleteFile, file.Name), () =>
                 {
-                    loading.Show(TextConfirm, file.Name, true, null);
+                    loading?.Show(TextConfirm, file.Name, true, null);
                     try
                     {
                         file.Delete();
-                        alert.Show(TextDelete, TextSuccess);
+                        alert?.Show(TextDelete, TextSuccess);
                     }
                     catch (Exception ex)
                     {
-                        alert.Show(TextDelete, TextFailed + Environment.NewLine + ExceptionUtils.GetExceptionMessage(ex));
+                        alert?.Show(TextDelete, TextFailed + Environment.NewLine + ExceptionUtils.GetExceptionMessage(ex));
                     }
                     refresh();
-                    loading.Close();
+                    loading?.Close();
                     InvokeAsync(StateHasChanged);
                 }, () => { });
             }
             else if (SelectedItem is DirectoryInfo)
             {
                 var dir = (DirectoryInfo)SelectedItem;
-                alert.Show(TextConfirm, string.Format(TextConfirmDeleteFolder, dir.Name), () =>
+                alert?.Show(TextConfirm, string.Format(TextConfirmDeleteFolder, dir.Name), () =>
                  {
                      loading.Show(TextDelete, dir.Name, true, null);
                      try
                      {
                          dir.Delete(true);
-                         alert.Show(TextDelete, TextSuccess);
+                         alert?.Show(TextDelete, TextSuccess);
                      }
                      catch (Exception ex)
                      {
-                         alert.Show(TextDelete, TextFailed + Environment.NewLine + ExceptionUtils.GetExceptionMessage(ex));
+                         alert?.Show(TextDelete, TextFailed + Environment.NewLine + ExceptionUtils.GetExceptionMessage(ex));
                      }
                      refresh();
                      loading.Close();
@@ -584,12 +584,12 @@ namespace Quick.Blazor.Bootstrap.Admin
                     }
                     catch (Exception ex)
                     {
-                        alert.Show(TextFailed, ExceptionUtils.GetExceptionMessage(ex));
+                        alert?.Show(TextFailed, ExceptionUtils.GetExceptionMessage(ex));
                     }
                 }
                 else
                 {
-                    alert.Show(TextFailed, string.Format(TextFolderNotExist, CurrentDir.FullName));
+                    alert?.Show(TextFailed, string.Format(TextFolderNotExist, CurrentDir.FullName));
                 }
             }
         }
