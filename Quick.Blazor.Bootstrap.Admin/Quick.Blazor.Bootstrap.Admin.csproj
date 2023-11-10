@@ -16,7 +16,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="BlazorDownloadFile" Version="2.4.0.2" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.16" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.24" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -15,9 +15,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.16" />
-		<PackageReference Include="Quick.EntityFrameworkCore.Plus" Version="6.0.0" />
-		<PackageReference Include="Yarp.ReverseProxy" Version="2.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.24" />
+		<PackageReference Include="Quick.EntityFrameworkCore.Plus" Version="6.0.1" />
+		<PackageReference Include="Yarp.ReverseProxy" Version="2.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>
