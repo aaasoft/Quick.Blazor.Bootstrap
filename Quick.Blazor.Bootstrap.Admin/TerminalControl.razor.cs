@@ -92,7 +92,7 @@ namespace Quick.Blazor.Bootstrap.Admin
                 Name = "Quick.Blazor.Bootstrap Terminal",
                 Cols = await terminal.GetColumns(),
                 Rows = await terminal.GetRows(),
-                Cwd = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                Cwd = Environment.CurrentDirectory,
                 App = app,
                 ForceWinPty = true
             };
