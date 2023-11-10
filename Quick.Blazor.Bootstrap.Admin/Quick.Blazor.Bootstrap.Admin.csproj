@@ -15,8 +15,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="AvalonStudio.winpty.NET" Version="0.4.6" />
 		<PackageReference Include="BlazorDownloadFile" Version="2.4.0.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.24" />
+		<PackageReference Include="sch.pty.net" Version="0.3.36-pre" />
+		<PackageReference Include="XtermBlazor" Version="1.10.0" />
 	</ItemGroup>
 
 	<ItemGroup>
