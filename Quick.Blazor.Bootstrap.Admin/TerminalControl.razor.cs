@@ -16,6 +16,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         private TerminalOptions terminalOptions;
         private Xterm terminal;        
         private IPtyConnection pty;
+        private CancellationTokenSource cts;
 
         [Parameter]
         public string TextOpen { get; set; } = "Open";
@@ -72,6 +73,9 @@ namespace Quick.Blazor.Bootstrap.Admin
 
         private void killShell()
         {
+            cts?.Cancel();
+            cts = null;
+
             pty?.Kill();
             pty?.Dispose();
             pty = null;
@@ -92,7 +96,8 @@ namespace Quick.Blazor.Bootstrap.Admin
                 App = app,
                 ForceWinPty = true
             };
-            pty = await PtyProvider.SpawnAsync(options, CancellationToken.None);
+            cts = new CancellationTokenSource();
+            pty = await PtyProvider.SpawnAsync(options, cts.Token);
             pty.ProcessExited += Pty_ProcessExited;
             _ = Task.Run(() =>
             {
@@ -113,6 +118,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         private void Pty_ProcessExited(object sender, PtyExitedEventArgs e)
         {
             terminal.WriteLine($"{Environment.NewLine}Terminal has exited，exit code：{e.ExitCode}");
+            killShell();
         }
 
         public void Dispose()
