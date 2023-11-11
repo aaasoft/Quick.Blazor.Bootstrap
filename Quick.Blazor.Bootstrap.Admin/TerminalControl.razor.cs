@@ -28,29 +28,33 @@ namespace Quick.Blazor.Bootstrap.Admin
         [Parameter]
         public string TextRow { get; set; } = "Row";
 
-        private int _Columns = 80;
+        private int _Columns = 120;
+        [Parameter]
         public int Columns
         {
             get { return _Columns; }
             set
             {
                 _Columns = value;
-                terminal.Resize(Columns, Rows);
-                pty.Resize(Columns, Rows);
+                terminal?.Resize(Columns, Rows);
+                pty?.Resize(Columns, Rows);
             }
         }
 
-        private int _Rows = 24;
+        private int _Rows = 30;
+        [Parameter]
         public int Rows
         {
             get { return _Rows; }
             set
             {
                 _Rows = value;
-                terminal.Resize(Columns, Rows);
-                pty.Resize(Columns, Rows);
+                terminal?.Resize(Columns, Rows);
+                pty?.Resize(Columns, Rows);
             }
         }
+        [Parameter]
+        public string WorkingDir { get; set; }
 
         public TerminalControl()
         {
@@ -91,14 +95,19 @@ namespace Quick.Blazor.Bootstrap.Admin
         {
             killShell();
             await terminal.Clear();
+            var cwd = WorkingDir;
+            if (string.IsNullOrEmpty(cwd))
+                cwd = Environment.CurrentDirectory;
+            string app = "sh";
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                app = Path.Combine(Environment.SystemDirectory, "cmd.exe");
 
-            string app = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? Path.Combine(Environment.SystemDirectory, "cmd.exe") : "sh";
             var options = new PtyOptions
             {
                 Name = "Quick.Blazor.Bootstrap Terminal",
-                Cols = await terminal.GetColumns(),
-                Rows = await terminal.GetRows(),
-                Cwd = Environment.CurrentDirectory,
+                Cols = Columns,
+                Rows = Rows,
+                Cwd = cwd,
                 App = app,
                 ForceWinPty = true
             };
