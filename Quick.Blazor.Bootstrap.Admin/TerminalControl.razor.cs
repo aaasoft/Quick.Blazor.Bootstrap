@@ -35,6 +35,8 @@ namespace Quick.Blazor.Bootstrap.Admin
             get { return _Columns; }
             set
             {
+                if (value <= 0)
+                    return;
                 _Columns = value;
                 terminal?.Resize(Columns, Rows);
                 pty?.Resize(Columns, Rows);
@@ -48,11 +50,15 @@ namespace Quick.Blazor.Bootstrap.Admin
             get { return _Rows; }
             set
             {
+                if (value <= 0)
+                    return;
                 _Rows = value;
                 terminal?.Resize(Columns, Rows);
                 pty?.Resize(Columns, Rows);
             }
         }
+        [Parameter]
+        public string WelcomeText { get; set; }
         [Parameter]
         public string WorkingDir { get; set; }
 
@@ -62,13 +68,17 @@ namespace Quick.Blazor.Bootstrap.Admin
             {
                 CursorBlink = true,
                 CursorStyle = CursorStyle.Bar,
-                WindowsMode = OperatingSystem.IsWindows()
+                WindowsMode = OperatingSystem.IsWindows(),
+                Columns = Columns,
+                Rows = Rows
             };
         }
 
         private async Task OnFirstRender()
         {
-            await newShell();            
+            if (!string.IsNullOrEmpty(WelcomeText))
+                await terminal.WriteLine(WelcomeText);
+            await newShell();
         }
 
         private void OnData(string t)
