@@ -6,7 +6,7 @@
 		<RepositoryUrl>https://github.com/aaasoft/Quick.Blazor.Bootstrap</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/aaasoft/Quick.Blazor.Bootstrap</PackageProjectUrl>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-		<Version>4.0.17-preview1</Version>
+		<Version>4.0.17</Version>
 		<Description>Some component use Quick.Blazor.Bootstrap for Admin.</Description>
 	</PropertyGroup>
 
@@ -17,7 +17,7 @@
 	<ItemGroup>
 		<PackageReference Include="BlazorDownloadFile" Version="2.4.0.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.24" />
-		<PackageReference Include="Quick.PtyNet" Version="1.0.1-preview2" />
+		<PackageReference Include="Quick.PtyNet" Version="1.0.1" />
 		<PackageReference Include="XtermBlazor" Version="1.10.0" />
 	</ItemGroup>
 

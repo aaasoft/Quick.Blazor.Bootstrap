@@ -16,6 +16,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         private TerminalOptions terminalOptions;
         private Xterm terminal;        
         private IPtyConnection pty;
+        private Stream ptyWriteStream;
         private CancellationTokenSource cts;
 
         [Parameter]
@@ -68,7 +69,8 @@ namespace Quick.Blazor.Bootstrap.Admin
 
         private void OnData(string t)
         {
-            pty?.WriterStream?.Write(Encoding.Default.GetBytes(t));
+            ptyWriteStream?.Write(Encoding.Default.GetBytes(t));
+            ptyWriteStream?.Flush();
         }
 
         private void killShell()
@@ -76,13 +78,17 @@ namespace Quick.Blazor.Bootstrap.Admin
             cts?.Cancel();
             cts = null;
 
-            pty?.Kill();
-            pty?.Dispose();
+            ptyWriteStream = null;
+            if (OperatingSystem.IsWindows())
+            {
+                pty?.Kill();
+                pty?.Dispose();
+            }            
             pty = null;
         }
 
         private async Task newShell()
-        {            
+        {
             killShell();
             await terminal.Clear();
 
@@ -97,18 +103,20 @@ namespace Quick.Blazor.Bootstrap.Admin
                 ForceWinPty = true
             };
             cts = new CancellationTokenSource();
-            pty = await PtyProvider.SpawnAsync(options, cts.Token);
+            var cancallationToken = cts.Token;
+            pty = await PtyProvider.SpawnAsync(options, cancallationToken);
+            ptyWriteStream = pty.WriterStream;
             pty.ProcessExited += Pty_ProcessExited;
-            _ = Task.Run(() =>
+            _ = Task.Run(async () =>
             {
-                var stream = pty.ReaderStream;
+                var ptyReaderStream = pty.ReaderStream;
                 var buffer = new byte[1024];
                 try
                 {
                     while (true)
                     {
-                        var ret = stream.Read(buffer);
-                        terminal.Write(buffer.Take(ret).ToArray());
+                        var ret = await ptyReaderStream.ReadAsync(buffer, 0, buffer.Length, cancallationToken);
+                        await terminal.Write(buffer.Take(ret).ToArray());
                     }
                 }
                 catch { }
@@ -117,7 +125,7 @@ namespace Quick.Blazor.Bootstrap.Admin
 
         private void Pty_ProcessExited(object sender, PtyExitedEventArgs e)
         {
-            terminal.WriteLine($"{Environment.NewLine}Terminal has exited，exit code：{e.ExitCode}");
+            terminal.WriteLine($"{Environment.NewLine}. Terminal process has exited with exit code {e.ExitCode}");
             killShell();
         }
 
