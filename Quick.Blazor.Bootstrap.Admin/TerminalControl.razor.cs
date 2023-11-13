@@ -108,10 +108,17 @@ namespace Quick.Blazor.Bootstrap.Admin
             var cwd = WorkingDir;
             if (string.IsNullOrEmpty(cwd))
                 cwd = Environment.CurrentDirectory;
-            string app = "sh";
+            string app = null;
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
                 app = Path.Combine(Environment.SystemDirectory, "cmd.exe");
-
+            }
+            else
+            {
+                app = Environment.GetEnvironmentVariable("SHELL");
+                if (string.IsNullOrEmpty(app))
+                    app = "sh";
+            }
             var options = new PtyOptions
             {
                 Name = "Quick.Blazor.Bootstrap Terminal",
@@ -135,6 +142,8 @@ namespace Quick.Blazor.Bootstrap.Admin
                     while (true)
                     {
                         var ret = await ptyReaderStream.ReadAsync(buffer, 0, buffer.Length, cancallationToken);
+                        if (ret <= 0)
+                            break;
                         await terminal.Write(buffer.Take(ret).ToArray());
                     }
                 }
