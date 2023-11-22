@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Blazor.Bootstrap.Admi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Blazor.Bootstrap.ReverseProxy", "Quick.Blazor.Bootstrap.ReverseProxy\Quick.Blazor.Bootstrap.ReverseProxy.csproj", "{A1A76E0D-4BE3-4BF9-AB58-2F624C04D207}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Blazor.Bootstrap.QuickFields", "Quick.Blazor.Bootstrap.QuickFields\Quick.Blazor.Bootstrap.QuickFields.csproj", "{9E9BBC58-583B-410D-BF40-7F665A2AD1C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Blazor.Bootstrap.QuickFields", "Quick.Blazor.Bootstrap.QuickFields\Quick.Blazor.Bootstrap.QuickFields.csproj", "{9E9BBC58-583B-410D-BF40-7F665A2AD1C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -6,7 +6,7 @@
 		<RepositoryUrl>https://github.com/aaasoft/Quick.Blazor.Bootstrap</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/aaasoft/Quick.Blazor.Bootstrap</PackageProjectUrl>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-		<Version>4.0.11</Version>
+		<Version>4.0.12</Version>
 		<Description>[Quick.Blazor.Bootstrap]Controls for Quick.Fields</Description>
 	</PropertyGroup>
 
