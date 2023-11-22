@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Quick.Blazor.Bootstrap
 {
@@ -15,10 +11,12 @@ namespace Quick.Blazor.Bootstrap
         public bool DialogSizeLarge { get; set; }
         [Parameter]
         public bool DialogSizeExtraLarge { get; set; }
+        [Parameter]
+        public bool DialogScrollable { get; set; } = true;
 
         public static string TextOk { get; set; } = "OK";
         public static string TextCancel { get; set; } = "Cancel";
-
+        public string[] ContentLines => Content.Split('\n');
         private string Title { get; set; }
         private string Content { get; set; }
         private Action OkCallback { get; set; }
@@ -46,6 +44,11 @@ namespace Quick.Blazor.Bootstrap
         {
             CancelCallback?.Invoke();
             Close();
+        }
+
+        public void Max()
+        {
+            DialogSizeExtraLarge = !DialogSizeExtraLarge;
         }
 
         public void Close()

@@ -1,9 +1,18 @@
-﻿<Modal Visiable="Visiable" DialogBackdropVisiable DialogCentered DialogSizeSmall="@DialogSizeSmall" DialogSizeLarge="@DialogSizeLarge" DialogSizeExtraLarge="@DialogSizeExtraLarge">
-    <TitleContent>@Title</TitleContent>
+﻿<Modal Visiable="Visiable" DialogBackdropVisiable DialogCentered
+        DialogSizeSmall="@DialogSizeSmall"
+        DialogSizeLarge="@DialogSizeLarge"
+        DialogSizeExtraLarge="@DialogSizeExtraLarge"
+        DialogScrollable="@DialogScrollable">
+     <TitleContent>@Title</TitleContent>
     <HeaderContent>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" @onclick="Close">
-            <span aria-hidden="true">×</span>
-        </button>
+        <div>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" @onclick="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Max" @onclick="Max">
+                <span aria-hidden="true">◻</span>
+            </button>
+        </div>
     </HeaderContent>
     <BodyContent>
         @if (UsePreTag)
@@ -12,7 +21,10 @@
         }
         else
         {
-            <p>@Content</p>
+            @foreach (var line in ContentLines)
+            {
+                <p>@line</p>
+            }
         }
     </BodyContent>
     <FooterContent>
