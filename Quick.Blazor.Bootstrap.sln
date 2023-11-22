@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Blazor.Bootstrap.Reve
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Blazor.Bootstrap.QuickFields", "Quick.Blazor.Bootstrap.QuickFields\Quick.Blazor.Bootstrap.QuickFields.csproj", "{9E9BBC58-583B-410D-BF40-7F665A2AD1C1}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Blazor.Bootstrap.Terminal", "Quick.Blazor.Bootstrap.Terminal\Quick.Blazor.Bootstrap.Terminal.csproj", "{2D7BF503-9C6F-483E-9312-4FD4E97496CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{9E9BBC58-583B-410D-BF40-7F665A2AD1C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E9BBC58-583B-410D-BF40-7F665A2AD1C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E9BBC58-583B-410D-BF40-7F665A2AD1C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D7BF503-9C6F-483E-9312-4FD4E97496CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D7BF503-9C6F-483E-9312-4FD4E97496CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D7BF503-9C6F-483E-9312-4FD4E97496CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D7BF503-9C6F-483E-9312-4FD4E97496CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
