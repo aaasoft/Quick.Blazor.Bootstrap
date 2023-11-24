@@ -46,11 +46,6 @@ namespace Quick.Blazor.Bootstrap
             Close();
         }
 
-        public void Max()
-        {
-            DialogSizeExtraLarge = !DialogSizeExtraLarge;
-        }
-
         public void Close()
         {
             Title = null;
@@ -59,6 +54,11 @@ namespace Quick.Blazor.Bootstrap
             CancelCallback = null;
             Visiable = false;
             InvokeAsync(StateHasChanged);
+        }
+
+        public void SwitchDialogSizeExtraLarge()
+        {
+            DialogSizeExtraLarge = !DialogSizeExtraLarge;
         }
     }
 }

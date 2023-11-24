@@ -1,9 +1,14 @@
 ﻿<Modal Visiable="Visiable" DialogBackdropVisiable DialogCentered="@DialogCentered" DialogSizeSmall="@DialogSizeSmall" DialogSizeLarge="@DialogSizeLarge" DialogSizeExtraLarge="@DialogSizeExtraLarge">
     <TitleContent>@Title</TitleContent>
     <HeaderContent>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" @onclick="Close">
-            <span aria-hidden="true">×</span>
-        </button>
+        <div>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" @onclick="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Max" @onclick="SwitchDialogSizeExtraLarge">
+                <span aria-hidden="true">◻</span>
+            </button>
+        </div>
     </HeaderContent>
     <BodyContent>
         @Content

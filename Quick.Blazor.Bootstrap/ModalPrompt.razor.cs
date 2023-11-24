@@ -55,5 +55,10 @@ namespace Quick.Blazor.Bootstrap
             Visiable = false;
             InvokeAsync(StateHasChanged);
         }
+
+        public void SwitchDialogSizeExtraLarge()
+        {
+            DialogSizeExtraLarge = !DialogSizeExtraLarge;
+        }
     }
 }
