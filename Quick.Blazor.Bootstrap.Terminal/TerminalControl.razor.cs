@@ -78,7 +78,14 @@ namespace Quick.Blazor.Bootstrap.Terminal
         {
             if (!string.IsNullOrEmpty(WelcomeText))
                 await terminal.WriteLine(WelcomeText);
-            await newShell();
+            try
+            {
+                await newShell();
+            }
+            catch (Exception ex)
+            {
+                await terminal.WriteLine(ex.ToString());
+            }
         }
 
         private void OnData(string t)
