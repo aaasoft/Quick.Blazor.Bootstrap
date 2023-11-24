@@ -21,14 +21,12 @@ namespace Quick.Blazor.Bootstrap.Utils
                 builder.OpenComponent(0, componentType);
                 if (parameterDict != null)
                 {
-                    var currentIndex = 1;
                     foreach (var key in parameterDict.Keys)
                     {
                         var pi = componentType.GetProperty(key);
                         if (pi == null)
                             continue;
-                        builder.AddAttribute(currentIndex, key, parameterDict[key]);
-                        currentIndex++;
+                        builder.AddAttribute(0, key, parameterDict[key]);
                     }
                 }
                 builder.CloseComponent();
