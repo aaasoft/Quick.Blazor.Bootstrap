@@ -28,35 +28,38 @@ namespace Quick.Blazor.Bootstrap.Terminal
         [Parameter]
         public string TextRow { get; set; } = "Row";
 
-        private int _Columns = 120;
         [Parameter]
-        public int Columns
+        public string App { get; set; }
+        [Parameter]
+        public int Columns { get; set; } = 120;
+        [Parameter]
+        public int Rows { get; set; } = 30;
+        public int ActualColumns
         {
-            get { return _Columns; }
+            get { return Columns; }
             set
             {
                 if (value <= 0)
                     return;
-                _Columns = value;
+                Columns = value;
                 terminal?.Resize(Columns, Rows);
                 pty?.Resize(Columns, Rows);
             }
         }
 
-        private int _Rows = 30;
-        [Parameter]
-        public int Rows
+        public int ActualRows
         {
-            get { return _Rows; }
+            get { return Rows; }
             set
             {
                 if (value <= 0)
                     return;
-                _Rows = value;
+                Rows = value;
                 terminal?.Resize(Columns, Rows);
                 pty?.Resize(Columns, Rows);
             }
         }
+
         [Parameter]
         public string WelcomeText { get; set; }
         [Parameter]
@@ -121,16 +124,19 @@ namespace Quick.Blazor.Bootstrap.Terminal
             var cwd = WorkingDir;
             if (string.IsNullOrEmpty(cwd))
                 cwd = Environment.CurrentDirectory;
-            string app = null;
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            string app = App;
+            if (string.IsNullOrEmpty(app))
             {
-                app = Path.Combine(Environment.SystemDirectory, "cmd.exe");
-            }
-            else
-            {
-                app = Environment.GetEnvironmentVariable("SHELL");
-                if (string.IsNullOrEmpty(app))
-                    app = "sh";
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                {
+                    app = "powershell";
+                }
+                else
+                {
+                    app = "/bin/bash";
+                    if (!File.Exists(app))
+                        app = "sh";
+                }
             }
             var options = new PtyOptions
             {
