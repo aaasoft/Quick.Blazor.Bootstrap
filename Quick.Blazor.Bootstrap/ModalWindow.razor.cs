@@ -13,6 +13,8 @@ namespace Quick.Blazor.Bootstrap
         [Parameter]
         public bool DialogCentered { get; set; } = true;
         [Parameter]
+        public bool DialogScrollable { get; set; }
+        [Parameter]
         public bool DialogSizeSmall { get; set; }
         [Parameter]
         public bool DialogSizeLarge { get; set; }
