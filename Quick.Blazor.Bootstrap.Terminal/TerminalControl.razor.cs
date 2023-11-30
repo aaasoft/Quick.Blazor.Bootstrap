@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Pty.Net;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -14,7 +15,7 @@ namespace Quick.Blazor.Bootstrap.Terminal
     public partial class TerminalControl : IDisposable
     {
         private TerminalOptions terminalOptions;
-        private Xterm terminal;        
+        private Xterm terminal;
         private IPtyConnection pty;
         private Stream ptyWriteStream;
         private CancellationTokenSource cts;
@@ -22,7 +23,7 @@ namespace Quick.Blazor.Bootstrap.Terminal
         [Parameter]
         public string TextOpen { get; set; } = "Open";
         [Parameter]
-        public string TextClose{ get; set; } = "Close";
+        public string TextClose { get; set; } = "Close";
         [Parameter]
         public string TextColumn { get; set; } = "Column";
         [Parameter]
@@ -99,16 +100,8 @@ namespace Quick.Blazor.Bootstrap.Terminal
 
         private void killShell()
         {
-            cts?.Cancel();
-            cts = null;
-
-            ptyWriteStream = null;
-            if (OperatingSystem.IsWindows())
-            {
-                pty?.Kill();
-                pty?.Dispose();
-            }            
-            pty = null;
+            if (pty != null)
+                pty.Kill();
         }
 
         private async Task newShell()
@@ -166,8 +159,15 @@ namespace Quick.Blazor.Bootstrap.Terminal
 
         private void Pty_ProcessExited(object sender, PtyExitedEventArgs e)
         {
-            terminal.WriteLine($"{Environment.NewLine}. Terminal process has exited with exit code {e.ExitCode}");
-            killShell();
+            pty.ProcessExited -= Pty_ProcessExited;
+            terminal?.WriteLine($"{Environment.NewLine}. Terminal process has exited with exit code {e.ExitCode}");
+            if (OperatingSystem.IsWindows())
+            {
+                pty.Kill();
+                pty.Dispose();
+            }
+            ptyWriteStream = null;
+            pty = null;
         }
 
         public void Dispose()
