@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
 	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
+		<TargetFrameworks>net6.0;net8.0</TargetFrameworks>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<RepositoryUrl>https://github.com/aaasoft/Quick.Blazor.Bootstrap</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/aaasoft/Quick.Blazor.Bootstrap</PackageProjectUrl>
@@ -14,8 +14,20 @@
 		<SupportedPlatform Include="browser" />
 	</ItemGroup>
 
+	<Choose>
+		<When Condition=" '$(TargetFramework)'=='net6.0' ">
+			<ItemGroup>
+				<PackageReference Include="Quick.EntityFrameworkCore.Plus" Version="6.0.1" />
+			</ItemGroup>
+		</When>
+		<Otherwise>
+			<ItemGroup>
+				<PackageReference Include="Quick.EntityFrameworkCore.Plus" Version="8.0.0" />
+			</ItemGroup>
+		</Otherwise>
+	</Choose>
+	
 	<ItemGroup>
-		<PackageReference Include="Quick.EntityFrameworkCore.Plus" Version="8.0.0" />
 		<PackageReference Include="Yarp.ReverseProxy" Version="2.1.0" />
 	</ItemGroup>
 
