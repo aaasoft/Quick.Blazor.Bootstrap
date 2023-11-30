@@ -81,12 +81,6 @@ namespace Quick.Blazor.Bootstrap.Terminal
         {
             if (!string.IsNullOrEmpty(WelcomeText))
                 await terminal.WriteLine(WelcomeText);
-            //如果是在Linux系统上，且在docker中运行
-            if (OperatingSystem.IsLinux() && File.Exists("/.dockerenv"))
-            {
-                await terminal.WriteLine("Error: Pty.net not working in docker container.");
-                return;
-            }
             try
             {
                 await newShell();

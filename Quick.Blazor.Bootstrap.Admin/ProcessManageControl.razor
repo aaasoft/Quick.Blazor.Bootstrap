@@ -15,6 +15,16 @@
                     </button>
                 </div>
             </div>
+            <div class="input-group mb-1 ml-2">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">@TextOrderBy</div>
+                    </div>
+                    <button type="button" class="btn btn-secondary @getFieldButtonClass("pid")" @onclick="@(()=>changeOrderField("pid"))">@TextOrderByPID</button>
+                    <button type="button" class="btn btn-secondary @getFieldButtonClass("name")" @onclick="@(()=>changeOrderField("name"))">@TextOrderByName</button>
+                    <button type="button" class="btn btn-secondary @getFieldButtonClass("memory")" @onclick="@(()=>changeOrderField("memory"))">@TextOrderByMemory</button>
+                </div>
+            </div>
         </div>
         @if (Processes == null)
         {

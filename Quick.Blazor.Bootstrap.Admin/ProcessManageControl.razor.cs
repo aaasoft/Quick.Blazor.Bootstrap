@@ -34,6 +34,15 @@ namespace Quick.Blazor.Bootstrap.Admin
         public string TextColumnOperate { get; set; } = "Operate";
 
         [Parameter]
+        public string TextOrderBy { get; set; } = "OrderBy";
+        [Parameter]
+        public string TextOrderByPID { get; set; } = "PID";
+        [Parameter]
+        public string TextOrderByName { get; set; } = "Name";
+        [Parameter]
+        public string TextOrderByMemory { get; set; } = "Memory";
+
+        [Parameter]
         public RenderFragment IconSearch { get; set; }
         [Parameter]
         public RenderFragment IconKillProcess { get; set; }
@@ -44,6 +53,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         private ModalAlert modalAlert;
         private string searchKeywords;
         private Utils.UnitStringConverting storageUSC = Utils.UnitStringConverting.StorageUnitStringConverting;
+        private string orderByField = "pid";
 
         private ProcessInfo[] Processes;
 
@@ -51,6 +61,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         {
             public int Id { get; set; }
             public string Name { get; set; }
+            public long MemoryUsed { get; set; }
             public string MemoryInfo { get; set; }
             public int Threads { get; set; }
             public string StartTime { get; set; }
@@ -61,22 +72,48 @@ namespace Quick.Blazor.Bootstrap.Admin
             base.OnInitialized();
         }
 
+        private string getFieldButtonClass(string field)
+        {
+            if (field == orderByField)
+                return "";
+            return "disabled";
+        }
+        private void changeOrderField(string orderByField)
+        {
+            this.orderByField = orderByField;
+            search();
+        }
+
         private void search()
         {
             modalLoading.Show(null, null, true, null);
             Task.Run(() =>
             {
 #pragma warning disable CA1416 // 验证平台兼容性
-                Processes = Process.GetProcesses()
+                var processInfos = Process.GetProcesses()
                 .Where(t => string.IsNullOrEmpty(searchKeywords) || t.Id.ToString() == searchKeywords || t.ProcessName.Contains(searchKeywords))
                 .Select(t => new ProcessInfo()
                 {
                     Id = t.Id,
                     Name = t.ProcessName,
+                    MemoryUsed = t.WorkingSet64,
                     MemoryInfo = getProcessMemInfo(t),
                     Threads = t.Threads.Count,
                     StartTime = getProcessStartTime(t)
-                }).ToArray();
+                });
+                switch (orderByField)
+                {
+                    case "pid":
+                        processInfos = processInfos.OrderBy(t => t.Id);
+                        break;
+                    case "name":
+                        processInfos = processInfos.OrderBy(t => t.Name);
+                        break;
+                    case "memory":
+                        processInfos = processInfos.OrderByDescending(t => t.MemoryUsed);
+                        break;
+                }
+                Processes = processInfos.ToArray();
 #pragma warning restore CA1416 // 验证平台兼容性
                 modalLoading.Close();
                 InvokeAsync(StateHasChanged);

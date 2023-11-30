@@ -10,7 +10,7 @@ namespace Quick.Blazor.Bootstrap
     public partial class ModalLoading
     {
         [Parameter]
-        public bool DialogScrollable { get; set; }
+        public bool DialogScrollable { get; set; } = true;
         [Parameter]
         public bool DialogSizeSmall { get; set; }
         [Parameter]
