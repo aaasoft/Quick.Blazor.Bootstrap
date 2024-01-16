@@ -5,7 +5,7 @@
     @if (Field.Input_ReadOnly.HasValue && Field.Input_ReadOnly.Value)
     {
         <select class="form-control @(string.IsNullOrEmpty(Field.Input_ValidationMessage)?"":"invalid")" @bind="@Field.Value" disabled>
-            @if (string.IsNullOrEmpty(Field.Value))
+            @if (string.IsNullOrEmpty(Field.Value) && !Field.InputSelect_Options.ContainsKey(""))
             {
                 <option value=""></option>
             }
@@ -18,7 +18,7 @@
     else
     {
         <select class="form-control @(string.IsNullOrEmpty(Field.Input_ValidationMessage)?"":"invalid")" @bind="@Field.Value">
-            @if (string.IsNullOrEmpty(Field.Value))
+            @if (string.IsNullOrEmpty(Field.Value) && !Field.InputSelect_Options.ContainsKey(""))
             {
                 <option value=""></option>
             }
