@@ -6,7 +6,7 @@
 		<RepositoryUrl>https://github.com/aaasoft/Quick.Blazor.Bootstrap</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/aaasoft/Quick.Blazor.Bootstrap</PackageProjectUrl>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-		<Version>4.0.28</Version>
+		<Version>4.0.29</Version>
 		<Description>Some component use Quick.Blazor.Bootstrap for Admin.</Description>
 	</PropertyGroup>
 
@@ -23,11 +23,5 @@
 	</ItemGroup>
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
-	</ItemGroup>
-	<ItemGroup>
-	  <UpToDateCheckInput Remove="TextEditControl.razor" />
-	</ItemGroup>
-	<ItemGroup>
-	  <_ContentIncludedByDefault Remove="TextEditControl.razor" />
 	</ItemGroup>
 </Project>
