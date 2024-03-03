@@ -15,7 +15,7 @@
 	<Choose>
 		<When Condition=" '$(TargetFramework)'=='net6.0' ">
 			<ItemGroup>
-				<PackageReference Include="Quick.Fields" Version="1.1.8" />
+				<PackageReference Include="Quick.Fields" Version="1.2.4" />
 			</ItemGroup>
 		</When>
 		<Otherwise>
