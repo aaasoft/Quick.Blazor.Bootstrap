@@ -10,7 +10,7 @@
                 <button type="button" class="btn btn-sm btn-secondary @(ListViewMode?"active":"")" @onclick="e=>ListViewMode=true">@IconDisplayList</button>
                 <button type="button" class="btn btn-sm btn-secondary @(!ListViewMode?"active":"")" @onclick="e=>ListViewMode=false">@IconDisplayIcon</button>
             </div>
-            @if (CurrentDir!=null)
+            @if (CurrentDir != null)
             {
                 <div class="btn-group mr-2">
                     <button title="@TextRefresh" type="button" class="btn btn-sm btn-secondary" @onclick="refresh">
@@ -23,9 +23,9 @@
                         </button>
                     }
                 </div>
-                
+
                 <div class="btn-group mr-2">
-                    @if(DisplayCreateFolderButton)
+                    @if (DisplayCreateFolderButton)
                     {
                         <button title="@TextNewFolder" type="button" class="btn btn-sm btn-secondary" @onclick="btnCreateFolder_Click">
                             @IconNewFolder
@@ -53,6 +53,12 @@
                                 @IconRename
                             </button>
                         }
+                        @if (DisplayEditButton && SelectedItem is FileInfo)
+                        {
+                            <button title="@TextEdit" type="button" class="btn btn-sm btn-secondary" @onclick="btnEdit_Click">
+                                @IconEdit
+                            </button>
+                        }
                         @if (DisplayDeleteButton)
                         {
                             <button title="@TextDelete" type="button" class="btn btn-sm btn-secondary" @onclick="btnDelete_Click">
@@ -70,8 +76,8 @@
         {
             <div class="input-group">
                 <div class="input-group-prepend">
-                <span class="input-group-text">@TextPath</span>
-            </div>
+                    <span class="input-group-text">@TextPath</span>
+                </div>
                 <input type="text" title="@TextPath" class="form-control col-auto" @bind-value="CurrentPath" />
                 <div class="input-group-append">
                     <button title="@TextGoto" type="button" class="btn btn-secondary" @onclick="btnGoto_Click">
@@ -99,7 +105,7 @@
                             {
                                 @foreach (var dir in Dirs)
                                 {
-                                    <tr class="@(SelectedItem == dir ? "table-active" : "")" @onclick="@(e => SelectedItem = dir)" @ondblclick="@(e => 
+                                    <tr class="@(SelectedItem == dir ? "table-active" : "")" @onclick="@(e => SelectedItem = dir)" @ondblclick="@(e =>
                                        {
                                            if(DisplayAddress)
                                                 gotoDir(dir);
@@ -132,8 +138,8 @@
                         {
                             <div class="col-4 col-sm-3 col-md-2 col-xl-1 m-1 p-0" style="min-width:6.5rem;">
                                 <a href="javascript:;" title="@TextLastWriteTime: @getLastWriteString(dir)"
-                       class="text-center list-group-item list-group-item-action border-0 p-0 @(SelectedItem == dir ? "active" : "")"
-                       @onclick="@(e => SelectedItem = dir)" @ondblclick="@(e => 
+                                   class="text-center list-group-item list-group-item-action border-0 p-0 @(SelectedItem == dir ? "active" : "")"
+                                   @onclick="@(e => SelectedItem = dir)" @ondblclick="@(e =>
                        {
                            if(DisplayAddress)
                                 gotoDir(dir);
@@ -151,8 +157,8 @@
                             <div class="col-4 col-sm-3 col-md-2 col-xl-1 m-1 p-0" style="min-width:6.5rem;">
                                 <a href="javascript:;" title="@TextSize: @getFileLengthString(file)B
 @TextLastWriteTime: @getLastWriteString(file)"
-                       class="text-center list-group-item list-group-item-action border-0 p-1 @(SelectedItem == file ? "active" : "")"
-                       @onclick="@(e => SelectedItem = file)" @ondblclick="onFileDoubleClick">
+                                   class="text-center list-group-item list-group-item-action border-0 p-1 @(SelectedItem == file ? "active" : "")"
+                                   @onclick="@(e => SelectedItem = file)" @ondblclick="onFileDoubleClick">
                                     <p class="h1 m-0 pt-1">@IconFile</p>
                                     <span class="text-center">@file.Name</span>
                                 </a>
@@ -166,6 +172,7 @@
 </div>
 
 <InputFile id="inputFile" accept="@FileFilter" style="width: 0px; height: 0px; visibility: collapse;" OnChange="@onInputFileChanged" />
-<ModalLoading @ref="loading" />
-<ModalAlert @ref="alert" />
-<ModalPrompt @ref="prompt" />
+<ModalLoading @ref="modalLoading" />
+<ModalAlert @ref="modalAlert" />
+<ModalPrompt @ref="modalPrompt" />
+<ModalWindow @ref="modalWindow" DialogCentered="false" DialogSizeExtraLarge />

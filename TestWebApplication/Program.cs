@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace TestWebApplication
@@ -18,6 +19,7 @@ namespace TestWebApplication
     {
         public static void Main(string[] args)
         {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
             var dbFile = SQLiteDbContextConfigHandler.CONFIG_DB_FILE;
 #if DEBUG

@@ -24,4 +24,10 @@
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
+	<ItemGroup>
+	  <UpToDateCheckInput Remove="TextEditControl.razor" />
+	</ItemGroup>
+	<ItemGroup>
+	  <_ContentIncludedByDefault Remove="TextEditControl.razor" />
+	</ItemGroup>
 </Project>
