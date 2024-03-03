@@ -545,7 +545,7 @@ namespace Quick.Blazor.Bootstrap.Admin
             //如果文件大小大于1MB，则弹出提示是否打开
             if (file.Length > 1 * 1024 * 1024)
             {
-                modalAlert.Show(TextConfirm, $"File {0} is to large,are you sure to open it?", openTextEditWindowAction);
+                modalAlert.Show(TextConfirm, $"File [{file.Name}] is to large,are you sure to open it?", openTextEditWindowAction);
             }
             else
             {
