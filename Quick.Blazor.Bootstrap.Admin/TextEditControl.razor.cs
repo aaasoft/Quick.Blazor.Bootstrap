@@ -15,7 +15,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         [Parameter]
         public string File { get; set; }
         private string _FileEncoding = "UTF-8";
-        private Encoding FileEncodingObj = Encoding.UTF8;
+        private Encoding FileEncodingObj = new UTF8Encoding(false);
         [Parameter]
         public string FileEncoding
         {
@@ -23,12 +23,23 @@ namespace Quick.Blazor.Bootstrap.Admin
             set
             {
                 _FileEncoding = value;
-                FileEncodingObj = Encoding.GetEncoding(value);
+                switch (value)
+                {
+                    case "UTF-8":
+                        FileEncodingObj = new UTF8Encoding(false);
+                        break;
+                    case "UTF8 BOM":
+                        FileEncodingObj = new UTF8Encoding(true);
+                        break;
+                    default:
+                        FileEncodingObj = Encoding.GetEncoding(value);
+                        break;
+                }
                 _ = loadFileContent();
             }
         }
 
-        public string[] AllEncodings = new[] { "UTF-8", "GB18030", "Unicode" };
+        public string[] AllEncodings = new[] { "UTF-8", "UTF-8 BOM", "GB18030", "Unicode" };
 
         [Parameter]
         public string TextSuccess { get; set; } = "Success";
