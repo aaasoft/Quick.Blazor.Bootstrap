@@ -13,7 +13,7 @@
                     <div class="input-group-text">@TextEncoding</div>
                 </div>
                 <InputSelect @bind-Value="FileEncoding" class="form-control">
-                    @foreach (var t in AllEncodings)
+                    @foreach (var t in EncodingDict.Keys)
                     {
                         <option value="@t">@t</option>
                     }

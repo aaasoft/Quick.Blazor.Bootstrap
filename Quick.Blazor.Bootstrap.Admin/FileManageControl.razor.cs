@@ -144,6 +144,8 @@ namespace Quick.Blazor.Bootstrap.Admin
         [Parameter]
         public string TextEncoding { get; set; } = "Encoding";
         [Parameter]
+        public Dictionary<string, Encoding> EncodingDict { get; set; }
+        [Parameter]
         public string TextDelete { get; set; } = "Delete";
         [Parameter]
         public string TextPath { get; set; } = "Path";
@@ -539,7 +541,8 @@ namespace Quick.Blazor.Bootstrap.Admin
                     [nameof(TextEditControl.TextSuccess)] = TextSuccess,
                     [nameof(TextEditControl.TextFailed)] = TextFailed,
                     [nameof(TextEditControl.TextEncoding)] = TextEncoding,
-                    [nameof(TextEditControl.TextRows)] = TextRows
+                    [nameof(TextEditControl.TextRows)] = TextRows,
+                    [nameof(TextEditControl.EncodingDict)] = EncodingDict
                 });
             };
             //如果文件大小大于1MB，则弹出提示是否打开

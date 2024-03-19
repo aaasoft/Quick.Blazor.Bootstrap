@@ -15,7 +15,6 @@ namespace Quick.Blazor.Bootstrap.Admin
         [Parameter]
         public string File { get; set; }
         private string _FileEncoding = "UTF-8";
-        private Encoding FileEncodingObj = new UTF8Encoding(false);
         [Parameter]
         public string FileEncoding
         {
@@ -23,23 +22,12 @@ namespace Quick.Blazor.Bootstrap.Admin
             set
             {
                 _FileEncoding = value;
-                switch (value)
-                {
-                    case "UTF-8":
-                        FileEncodingObj = new UTF8Encoding(false);
-                        break;
-                    case "UTF8 BOM":
-                        FileEncodingObj = new UTF8Encoding(true);
-                        break;
-                    default:
-                        FileEncodingObj = Encoding.GetEncoding(value);
-                        break;
-                }
                 _ = loadFileContent();
             }
         }
 
-        public string[] AllEncodings = new[] { "UTF-8", "UTF-8 BOM", "GB18030", "Unicode" };
+        [Parameter]
+        public Dictionary<string, Encoding> EncodingDict { get; set; }
 
         [Parameter]
         public string TextSuccess { get; set; } = "Success";
@@ -59,7 +47,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         {
             try
             {
-                Content = await System.IO.File.ReadAllTextAsync(File, FileEncodingObj);
+                Content = await System.IO.File.ReadAllTextAsync(File, EncodingDict[FileEncoding]);
                 await InvokeAsync(StateHasChanged);
             }
             catch (Exception ex)
@@ -71,6 +59,17 @@ namespace Quick.Blazor.Bootstrap.Admin
 
         protected override async Task OnParametersSetAsync()
         {
+            if (EncodingDict == null)
+            {
+                EncodingDict = new Dictionary<string, Encoding>()
+                {
+                    ["UTF-8"] = new UTF8Encoding(false),
+                    ["UTF-8 BOM"] = new UTF8Encoding(true),
+                    ["ASCII"] = Encoding.ASCII,
+                    ["Latin1"] = Encoding.Latin1,
+                    ["Unicode"] = Encoding.Unicode
+                };
+            }
             await loadFileContent();
         }
 
@@ -78,7 +77,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         {
             try
             {
-                System.IO.File.WriteAllText(File, Content, FileEncodingObj);
+                System.IO.File.WriteAllText(File, Content, EncodingDict[FileEncoding]);
                 modalAlert.Show(TextSuccess, File);
             }
             catch (Exception ex)
