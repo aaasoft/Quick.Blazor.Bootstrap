@@ -21,7 +21,8 @@ namespace Quick.Blazor.Bootstrap.Admin
             get { return _FileEncoding; }
             set
             {
-                _FileEncoding = value;
+                if (!string.IsNullOrEmpty(value))
+                    _FileEncoding = value;
                 _ = loadFileContent();
             }
         }
