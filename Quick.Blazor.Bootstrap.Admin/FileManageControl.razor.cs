@@ -441,12 +441,15 @@ namespace Quick.Blazor.Bootstrap.Admin
                 var buffer = new byte[1 * 1024 * 1024];
                 uploadCts = new System.Threading.CancellationTokenSource();
                 var cancellationToken = uploadCts.Token;
+                var files = e.GetMultipleFiles(int.MaxValue);
+                var totalFileSize = files.Sum(t => t.Size);
+                long totalReadCount = 0;
 
-                foreach (var file in e.GetMultipleFiles())
+                foreach (var file in files)
                 {
                     if (firstFile == null)
                         firstFile = file;
-
+                    
                     modalLoading?.Show(TextUpload, TextUploadReadFileInfo, false, uploadCts.Cancel);
                     var tmpFile = Path.Combine(CurrentPath, file.Name);
                     if (File.Exists(tmpFile))
@@ -459,12 +462,12 @@ namespace Quick.Blazor.Bootstrap.Admin
                     stopwatch.Start();
                     DateTime lastDisplayTime = DateTime.MinValue;
 
-                    long readTotalCount = 0;
                     try
                     {
-                        using (Stream stream = file.OpenReadStream(file.Size, cancellationToken))
+                        using (Stream stream = file.OpenReadStream(fileSize, cancellationToken))
                         using (var fileStream = File.OpenWrite(tmpFile))
                         {
+                            long readCount = 0;
                             while (true)
                             {
                                 //如果已取消
@@ -478,19 +481,20 @@ namespace Quick.Blazor.Bootstrap.Admin
                                 }
                                 else
                                 {
-                                    readTotalCount += ret;
+                                    readCount += ret;
+                                    totalReadCount += ret;
                                     fileStream.Write(buffer, 0, ret);
-                                    if (readTotalCount >= fileSize)
+                                    if (readCount >= fileSize)
                                         break;
 
                                     if ((DateTime.Now - lastDisplayTime).TotalSeconds > 0.5 && stopwatch.ElapsedMilliseconds > 0)
                                     {
                                         StringBuilder sb = new StringBuilder();
-                                        var speed = Convert.ToDouble(readTotalCount / stopwatch.ElapsedMilliseconds);
+                                        var speed = Convert.ToDouble(totalReadCount / stopwatch.ElapsedMilliseconds);
                                         sb.Append(TextTransferSpeed + ": " + storageUSC.GetString(Convert.ToDecimal(speed * 1000), 1, true) + "B/s");
-                                        var remainingTime = TimeSpan.FromMilliseconds((fileSize - readTotalCount) / speed);
+                                        var remainingTime = TimeSpan.FromMilliseconds((totalFileSize - totalReadCount) / speed);
                                         sb.Append("," + TextRemainingTime + ": " + remainingTime.ToString(@"hh\:mm\:ss"));
-                                        modalLoading.UpdateProgress(Convert.ToInt32(readTotalCount * 100 / fileSize), sb.ToString());
+                                        modalLoading.UpdateProgress(Convert.ToInt32(totalReadCount * 100 / totalFileSize), sb.ToString());
                                         await InvokeAsync(StateHasChanged);
                                         lastDisplayTime = DateTime.Now;
                                     }
