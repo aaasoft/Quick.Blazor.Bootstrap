@@ -72,21 +72,29 @@
                 @ToolbarAddonButtons
             </div>
         </div>
+    </div>    
         @if (DisplayAddress)
         {
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">@TextPath</span>
+                <div class="input-group p-0 col-xl-9 col-lg-8 col-md-6 col-sm-12">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">@TextPath</span>
+                    </div>
+                    <input type="text" title="@TextPath" class="form-control col-auto" @bind-value="CurrentPath" />
+                    <div class="input-group-append">
+                        <button title="@TextGoto" type="button" class="btn btn-secondary" @onclick="btnGoto_Click">
+                            @IconGoto
+                        </button>
+                    </div>
                 </div>
-                <input type="text" title="@TextPath" class="form-control col-auto" @bind-value="CurrentPath" />
-                <div class="input-group-append">
-                    <button title="@TextGoto" type="button" class="btn btn-secondary" @onclick="btnGoto_Click">
-                        @IconGoto
-                    </button>
+                <div class="input-group pr-0 col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                    <input type="text" title="@TextPath" class="form-control col-auto" @bind-value="Search" />
+                    <div class="input-group-append">
+                        <button title="@TextGoto" type="button" class="btn btn-secondary" @onclick="btnGoto_Click">
+                            @IconSearch
+                        </button>
+                    </div>
                 </div>
-            </div>
         }
-    </div>
     <div class="card col-12 p-0 mt-2">
         <div class="card-body pt-0 pb-0">
             <div class="row">
