@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Quick.Blazor.Bootstrap
 {
-    public partial class TreeNode
+    public partial class TreeNode : ComponentBase
     {
         [Parameter]
         public int Level { get; set; }

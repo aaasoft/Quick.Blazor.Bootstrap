@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Quick.Blazor.Bootstrap
 {
-    public partial class Tabs
+    public partial class Tabs : ComponentBase
     {
         [Parameter]
         public string ActiveKey { get; set; }

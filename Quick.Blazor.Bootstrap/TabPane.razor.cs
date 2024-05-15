@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Quick.Blazor.Bootstrap
 {
-    public partial class TabPane
+    public partial class TabPane : ComponentBase
     {
         [Parameter]
         public string Key { get; set; }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Quick.Blazor.Bootstrap
 {
-    public partial class Tree
+    public partial class Tree : ComponentBase
     {
         [Parameter]
         public IEnumerable DataSource { get; set; }

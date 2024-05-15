@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Quick.Blazor.Bootstrap
 {
-    public partial class ToastStack
+    public partial class ToastStack : ComponentBase
     {
         private Dictionary<string, ToastModel> dict = new Dictionary<string, ToastModel>();
 
