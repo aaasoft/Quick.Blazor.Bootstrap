@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Quick.Blazor.Bootstrap.Admin
 {
-    public partial class LogViewControl
+    public partial class LogViewControl : ComponentBase
     {
         [Parameter]
         public int Rows { get; set; } = 20;

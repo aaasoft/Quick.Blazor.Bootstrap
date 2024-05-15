@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Quick.Blazor.Bootstrap
 {
-    public partial class ModalLoading
+    public partial class ModalLoading : ComponentBase
     {
         [Parameter]
         public bool DialogScrollable { get; set; } = true;

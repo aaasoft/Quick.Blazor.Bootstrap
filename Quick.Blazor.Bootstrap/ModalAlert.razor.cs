@@ -3,7 +3,7 @@ using System;
 
 namespace Quick.Blazor.Bootstrap
 {
-    public partial class ModalAlert
+    public partial class ModalAlert : ComponentBase
     {
         [Parameter]
         public bool DialogSizeSmall { get; set; }

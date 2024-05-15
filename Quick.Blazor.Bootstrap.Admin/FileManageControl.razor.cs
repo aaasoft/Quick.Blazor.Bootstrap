@@ -13,9 +13,11 @@ using System.Threading.Tasks;
 
 namespace Quick.Blazor.Bootstrap.Admin
 {
-    public partial class FileManageControl : IDisposable
+    public partial class FileManageControl : ComponentBase, IDisposable
     {
         private readonly UnitStringConverting storageUSC = UnitStringConverting.StorageUnitStringConverting;
+        [Inject]
+        private IJSRuntime JSRuntime { get; set; }
         [Inject]
         private IBlazorDownloadFileService BlazorDownloadFileService { get; set; }
 
@@ -452,7 +454,7 @@ namespace Quick.Blazor.Bootstrap.Admin
                 {
                     if (firstFile == null)
                         firstFile = file;
-                    
+
                     modalLoading?.Show(TextUpload, TextUploadReadFileInfo, false, uploadCts.Cancel);
                     var tmpFile = Path.Combine(CurrentPath, file.Name);
                     if (File.Exists(tmpFile))
@@ -621,7 +623,7 @@ namespace Quick.Blazor.Bootstrap.Admin
                     Dirs = DriveInfo.GetDrives()
                         .Where(t => t.IsReady)
                         .Select(t => t.RootDirectory)
-                        .Where(t=>string.IsNullOrEmpty(Search) || t.Name.Contains(Search))
+                        .Where(t => string.IsNullOrEmpty(Search) || t.Name.Contains(Search))
                         .ToArray();
             }
             else
@@ -632,16 +634,16 @@ namespace Quick.Blazor.Bootstrap.Admin
                     {
                         if (DisplayFolder)
                             Dirs = CurrentDir.GetDirectories()
-                                .Where(t=>string.IsNullOrEmpty(Search) || t.Name.Contains(Search))
+                                .Where(t => string.IsNullOrEmpty(Search) || t.Name.Contains(Search))
                                 .ToArray();
                         if (DisplayFile)
                             if (string.IsNullOrEmpty(FileFilter))
                                 Files = CurrentDir.GetFiles()
-                                    .Where(t=>string.IsNullOrEmpty(Search) || t.Name.Contains(Search))
+                                    .Where(t => string.IsNullOrEmpty(Search) || t.Name.Contains(Search))
                                     .ToArray();
                             else
                                 Files = CurrentDir.GetFiles("*" + FileFilter)
-                                    .Where(t=>string.IsNullOrEmpty(Search) || t.Name.Contains(Search))
+                                    .Where(t => string.IsNullOrEmpty(Search) || t.Name.Contains(Search))
                                     .ToArray();
                     }
                     catch (Exception ex)

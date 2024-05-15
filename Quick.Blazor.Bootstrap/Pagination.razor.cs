@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Quick.Blazor.Bootstrap
 {
-    public partial class Pagination
+    public partial class Pagination : ComponentBase
     {
         [Parameter]
         public RenderFragment ChildContent { get; set; }

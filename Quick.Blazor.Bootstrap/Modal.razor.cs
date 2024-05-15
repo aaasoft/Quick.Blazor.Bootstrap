@@ -2,7 +2,7 @@
 
 namespace Quick.Blazor.Bootstrap
 {
-    public partial class Modal
+    public partial class Modal : ComponentBase
     {
         [Parameter]
         public bool Visiable { get; set; }

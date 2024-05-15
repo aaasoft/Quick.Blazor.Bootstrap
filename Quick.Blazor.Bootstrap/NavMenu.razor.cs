@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Quick.Blazor.Bootstrap
 {
-    public partial class NavMenu
+    public partial class NavMenu : ComponentBase
     {
         [Parameter]
         public EventCallback OnTitleClick { get; set; }

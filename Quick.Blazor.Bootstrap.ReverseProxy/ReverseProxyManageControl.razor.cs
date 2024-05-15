@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Quick.Blazor.Bootstrap.ReverseProxy
 {
-    public partial class ReverseProxyManageControl
+    public partial class ReverseProxyManageControl : ComponentBase
     {
         private ModalAlert modalAlert;
         private ModalWindow modalWindow;

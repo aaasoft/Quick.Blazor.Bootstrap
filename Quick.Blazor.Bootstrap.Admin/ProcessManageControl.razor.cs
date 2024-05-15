@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Quick.Blazor.Bootstrap.Admin
 {
-    public partial class ProcessManageControl
+    public partial class ProcessManageControl : ComponentBase
     {
         [Parameter]
         public string TextAskToKillProcess { get; set; } = "Are you sure to kill process[Id: {0},Name: {1}]?";

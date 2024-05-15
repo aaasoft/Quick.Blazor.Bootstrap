@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Quick.Blazor.Bootstrap
 {
-    public partial class ModalWindow
+    public partial class ModalWindow : ComponentBase
     {
         [Parameter]
         public bool DialogCentered { get; set; } = true;

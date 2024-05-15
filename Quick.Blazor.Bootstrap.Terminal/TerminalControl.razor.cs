@@ -12,7 +12,7 @@ using XtermBlazor;
 
 namespace Quick.Blazor.Bootstrap.Terminal
 {
-    public partial class TerminalControl : IDisposable
+    public partial class TerminalControl : ComponentBase, IDisposable
     {
         private TerminalOptions terminalOptions;
         private Xterm terminal;

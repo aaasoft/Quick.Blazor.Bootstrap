@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Quick.Blazor.Bootstrap
 {
-    public partial class Progress
+    public partial class Progress : ComponentBase
     {
         [Parameter]
         public bool Visiable { get; set; }

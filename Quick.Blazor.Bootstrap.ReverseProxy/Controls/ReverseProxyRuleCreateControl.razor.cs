@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Quick.Blazor.Bootstrap.ReverseProxy.Controls
 {
-    public partial class ReverseProxyRuleCreateControl
+    public partial class ReverseProxyRuleCreateControl : ComponentBase
     {
         private CreateReverseProxyRuleModel createModel = new CreateReverseProxyRuleModel();
 
