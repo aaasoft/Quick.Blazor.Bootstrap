@@ -7,8 +7,16 @@
 		<PackageProjectUrl>https://github.com/aaasoft/Quick.Blazor.Bootstrap</PackageProjectUrl>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<Version>4.0.33</Version>
-		<Description>Some component use Quick.Blazor.Bootstrap for Admin.</Description>
+		<Description>Quick.Blazor.Bootstrap.Admin is a component library for admin built on top of Blazor and CSS frameworks Bootstrap.</Description>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
+	
+	<ItemGroup>
+		<None Include="README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
 	<ItemGroup>
 		<SupportedPlatform Include="browser" />

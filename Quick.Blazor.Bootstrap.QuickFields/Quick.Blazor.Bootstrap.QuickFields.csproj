@@ -7,8 +7,15 @@
 		<PackageProjectUrl>https://github.com/aaasoft/Quick.Blazor.Bootstrap</PackageProjectUrl>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<Version>4.0.18</Version>
-		<Description>[Quick.Blazor.Bootstrap]Controls for Quick.Fields</Description>
+		<Description>Quick.Blazor.Bootstrap.QuickFields is a component library for Quick.Fields built on top of Blazor and CSS frameworks Bootstrap.</Description>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
+	<ItemGroup>
+		<None Include="README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 	<ItemGroup>
 		<SupportedPlatform Include="browser" />
 	</ItemGroup>
