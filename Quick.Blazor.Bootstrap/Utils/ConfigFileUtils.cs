@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Quick.Blazor.Bootstrap.Utils
@@ -34,7 +34,7 @@ namespace Quick.Blazor.Bootstrap.Utils
                 if (!File.Exists(file))
                     return default(T);
                 var content = File.ReadAllText(file);
-                return JsonConvert.DeserializeObject<T>(content);
+                return JsonSerializer.Deserialize<T>(content);
             }
             catch
             {
@@ -46,11 +46,10 @@ namespace Quick.Blazor.Bootstrap.Utils
         {
             if (configObj == null)
                 return;
-
             var file = getTypeFilePath(configObj.GetType(), fileSuffix, folder);
             if (File.Exists(file))
                 File.Delete(file);
-            var content = JsonConvert.SerializeObject(configObj);
+            var content = JsonSerializer.Serialize(configObj);
             File.WriteAllText(file, content, Encoding.UTF8);
         }
     }
