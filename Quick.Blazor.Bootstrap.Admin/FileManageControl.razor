@@ -1,98 +1,118 @@
 ﻿@using System.IO
 @using Microsoft.JSInterop
+<div class="sticky-top" style="top: -16px;">
+    <div class="row bg-white pt-2 pb-2"></div>
+</div>
+<div class="sticky-top">
+    <div class="row shadow bg-light pt-2 pb-2">
+        <div class="col-12">
+            <nav class="navbar p-0 pb-1">
+                <div class="btn-toolbar" role="toolbar">
+                    <div class="btn-group mr-2">
+                        <button type="button" class="btn btn-sm btn-secondary @(ListViewMode?"active":"")"
+                            @onclick="e=>ListViewMode=true">@IconDisplayList</button>
+                        <button type="button" class="btn btn-sm btn-secondary @(!ListViewMode?"active":"")"
+                            @onclick="e=>ListViewMode=false">@IconDisplayIcon</button>
+                    </div>
+                    @if (CurrentDir != null)
+                    {
+                        <div class="btn-group mr-2">
+                            <button title="@TextRefresh" type="button" class="btn btn-sm btn-secondary" @onclick="refresh">
+                                @IconRefresh
+                            </button>
+                            @if (DisplayAddress)
+                            {
+                                <button title="@TextUp" type="button" class="btn btn-sm btn-secondary"
+                                    @onclick="btnGotoUpper_Click">
+                                    @IconUp
+                                </button>
+                            }
+                        </div>
 
-<div class="row">
-    <div class="col-12 p-0">
-        <div class="btn-toolbar mb-1">
-            <div class="btn-group mr-2">
-                <button type="button" class="btn btn-sm btn-secondary @(ListViewMode?"active":"")" @onclick="e=>ListViewMode=true">@IconDisplayList</button>
-                <button type="button" class="btn btn-sm btn-secondary @(!ListViewMode?"active":"")" @onclick="e=>ListViewMode=false">@IconDisplayIcon</button>
-            </div>
-            @if (CurrentDir != null)
-            {
-                <div class="btn-group mr-2">
-                    <button title="@TextRefresh" type="button" class="btn btn-sm btn-secondary" @onclick="refresh">
-                        @IconRefresh
-                    </button>
-                    @if (DisplayAddress)
-                    {
-                        <button title="@TextUp" type="button" class="btn btn-sm btn-secondary" @onclick="btnGotoUpper_Click">
-                            @IconUp
-                        </button>
-                    }
-                </div>
-
-                <div class="btn-group mr-2">
-                    @if (DisplayCreateFolderButton)
-                    {
-                        <button title="@TextNewFolder" type="button" class="btn btn-sm btn-secondary" @onclick="btnCreateFolder_Click">
-                            @IconNewFolder
-                        </button>
-                    }
-                    @if (DisplayUploadButton)
-                    {
-                        <div class="btn btn-sm btn-secondary">
-                            @IconUpload
-                            <label title="@TextUpload" style="position: absolute;top: 0;left: 0;right:0;margin:0;height:100%;cursor:pointer" for="inputFile">
-                            </label>
+                        <div class="btn-group mr-2">
+                        @if (DisplayCreateFolderButton)
+                            {
+                                <button title="@TextNewFolder" type="button" class="btn btn-sm btn-secondary"
+                                    @onclick="btnCreateFolder_Click">
+                                    @IconNewFolder
+                                </button>
+                            }
+                            @if (DisplayUploadButton)
+                            {
+                                <div class="btn btn-sm btn-secondary">
+                                    @IconUpload
+                                    <label title="@TextUpload"
+                                        style="position: absolute;top: 0;left: 0;right:0;margin:0;height:100%;cursor:pointer"
+                                        for="inputFile">
+                                    </label>
+                                </div>
+                            }
+                            @if (DisplayDownloadButton && SelectedItem != null && SelectedItem is FileInfo)
+                            {
+                                <button title="@TextDownload" type="button" class="btn btn-sm btn-secondary"
+                                    @onclick="btnDownload_Click">
+                                    @IconDownload
+                                </button>
+                            }
+                            @if (SelectedItem != null)
+                            {
+                                @if (DisplayRenameButton)
+                                {
+                                    <button title="@TextRename" type="button" class="btn btn-sm btn-secondary"
+                                        @onclick="btnRename_Click">
+                                        @IconRename
+                                    </button>
+                                }
+                                @if (DisplayEditButton && SelectedItem is FileInfo)
+                                {
+                                    <button title="@TextEdit" type="button" class="btn btn-sm btn-secondary"
+                                        @onclick="btnEdit_Click">
+                                        @IconEdit
+                                    </button>
+                                }
+                                @if (DisplayDeleteButton)
+                                {
+                                    <button title="@TextDelete" type="button" class="btn btn-sm btn-secondary"
+                                        @onclick="btnDelete_Click">
+                                        @IconDelete
+                                    </button>
+                                }
+                            }
                         </div>
                     }
-                    @if (DisplayDownloadButton && SelectedItem != null && SelectedItem is FileInfo)
-                    {
-                        <button title="@TextDownload" type="button" class="btn btn-sm btn-secondary" @onclick="btnDownload_Click">
-                            @IconDownload
-                        </button>
-                    }
-                    @if (SelectedItem != null)
-                    {
-                        @if (DisplayRenameButton)
-                        {
-                            <button title="@TextRename" type="button" class="btn btn-sm btn-secondary" @onclick="btnRename_Click">
-                                @IconRename
-                            </button>
-                        }
-                        @if (DisplayEditButton && SelectedItem is FileInfo)
-                        {
-                            <button title="@TextEdit" type="button" class="btn btn-sm btn-secondary" @onclick="btnEdit_Click">
-                                @IconEdit
-                            </button>
-                        }
-                        @if (DisplayDeleteButton)
-                        {
-                            <button title="@TextDelete" type="button" class="btn btn-sm btn-secondary" @onclick="btnDelete_Click">
-                                @IconDelete
-                            </button>
-                        }
-                    }
-                </div>
-            }
-            <div class="btn-group">
-                @ToolbarAddonButtons
-            </div>
-        </div>
-    </div>    
-        @if (DisplayAddress)
-        {
-                <div class="input-group p-0 col-xl-9 col-lg-8 col-md-6 col-sm-12">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">@TextPath</span>
-                    </div>
-                    <input type="text" title="@TextPath" class="form-control col-auto" @bind-value="CurrentPath" />
-                    <div class="input-group-append">
-                        <button title="@TextGoto" type="button" class="btn btn-secondary" @onclick="btnGoto_Click">
-                            @IconGoto
-                        </button>
+                    <div class="btn-group">
+                        @ToolbarAddonButtons
                     </div>
                 </div>
-                <div class="input-group pr-0 col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                    <input type="text" title="@TextPath" class="form-control col-auto" @bind-value="Search" />
+                <div class="btn-toolbar" role="toolbar">
+                    <div class="input-group input-group-sm">
+                    <input type="text" class="form-control col-auto" @bind-value="Search" />
                     <div class="input-group-append">
-                        <button title="@TextGoto" type="button" class="btn btn-secondary" @onclick="btnGoto_Click">
+                        <button type="button" class="btn btn-secondary" @onclick="btnGoto_Click">
                             @IconSearch
                         </button>
                     </div>
                 </div>
+                </div>
+            </nav>
+        </div>
+        @if (DisplayAddress)
+        {
+            <div class="input-group col-12">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">@TextPath</span>
+                </div>
+                <input type="text" title="@TextPath" class="form-control col-auto" @bind-value="CurrentPath" />
+                <div class="input-group-append">
+                    <button title="@TextGoto" type="button" class="btn btn-secondary" @onclick="btnGoto_Click">
+                        @IconGoto
+                    </button>
+                </div>
+            </div>
         }
+    </div>
+</div>
+<div class="row">
     <div class="card col-12 p-0 mt-2">
         <div class="card-body pt-0 pb-0">
             <div class="row">
@@ -111,7 +131,8 @@
                             {
                                 @foreach (var dir in Dirs)
                                 {
-                                    <tr class="@(SelectedItem == dir ? "table-active" : "")" @onclick="@(e => SelectedItem = dir)" @ondblclick="@(e =>
+                                    <tr class="@(SelectedItem == dir ? "table-active" : "")" @onclick="@(e => SelectedItem = dir)"
+                                        @ondblclick="@(e =>
                                        {
                                            if(DisplayAddress)
                                                 gotoDir(dir);
@@ -126,7 +147,8 @@
                             {
                                 @foreach (var file in Files)
                                 {
-                                    <tr class="@(SelectedItem == file ? "table-active" : "")" @onclick="@(e => SelectedItem = file)" @ondblclick="onFileDoubleClick">
+                                    <tr class="@(SelectedItem == file ? "table-active" : "")" @onclick="@(e => SelectedItem = file)"
+                                        @ondblclick="onFileDoubleClick">
                                         <td>@IconFile@file.Name</td>
                                         <td>@getLastWriteString(file)</td>
                                         <td>@getFileLengthString(file)B</td>
@@ -144,8 +166,8 @@
                         {
                             <div class="col-4 col-sm-3 col-md-2 col-xl-1 m-1 p-0" style="min-width:6.5rem;">
                                 <a href="javascript:;" title="@TextLastWriteTime: @getLastWriteString(dir)"
-                                   class="text-center list-group-item list-group-item-action border-0 p-0 @(SelectedItem == dir ? "active" : "")"
-                                   @onclick="@(e => SelectedItem = dir)" @ondblclick="@(e =>
+                                    class="text-center list-group-item list-group-item-action border-0 p-0 @(SelectedItem == dir ? "active" : "")"
+                                    @onclick="@(e => SelectedItem = dir)" @ondblclick="@(e =>
                        {
                            if(DisplayAddress)
                                 gotoDir(dir);
@@ -163,8 +185,8 @@
                             <div class="col-4 col-sm-3 col-md-2 col-xl-1 m-1 p-0" style="min-width:6.5rem;">
                                 <a href="javascript:;" title="@TextSize: @getFileLengthString(file)B
 @TextLastWriteTime: @getLastWriteString(file)"
-                                   class="text-center list-group-item list-group-item-action border-0 p-1 @(SelectedItem == file ? "active" : "")"
-                                   @onclick="@(e => SelectedItem = file)" @ondblclick="onFileDoubleClick">
+                                    class="text-center list-group-item list-group-item-action border-0 p-1 @(SelectedItem == file ? "active" : "")"
+                                    @onclick="@(e => SelectedItem = file)" @ondblclick="onFileDoubleClick">
                                     <p class="h1 m-0 pt-1">@IconFile</p>
                                     <span class="text-center">@file.Name</span>
                                 </a>
@@ -177,7 +199,8 @@
     </div>
 </div>
 
-<InputFile id="inputFile" accept="@FileFilter" style="width: 0px; height: 0px; visibility: collapse;" OnChange="@onInputFileChanged" multiple />
+<InputFile id="inputFile" accept="@FileFilter" style="width: 0px; height: 0px; visibility: collapse;"
+    OnChange="@onInputFileChanged" multiple />
 <ModalLoading @ref="modalLoading" />
 <ModalAlert @ref="modalAlert" />
 <ModalPrompt @ref="modalPrompt" />
