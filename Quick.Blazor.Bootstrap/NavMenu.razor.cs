@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Quick.Blazor.Bootstrap.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,12 +59,12 @@ namespace Quick.Blazor.Bootstrap
         {
             if (string.IsNullOrEmpty(tabPane.Key))
             {
-                throw new ArgumentNullException(nameof(tabPane), "Key is null");
+                throw new ArgumentNullException(nameof(tabPane), LocaleUtils.Catalog.GetString("NavMenuItem's Key is null"));
             }
 
             if (_panes.Select(p => p.Key).Contains(tabPane.Key))
             {
-                throw new ArgumentException("An NavMenuItem with the same key already exists");
+                throw new ArgumentException(LocaleUtils.Catalog.GetString("An NavMenuItem with the same key already exists"));
             }
             _panes.Add(tabPane);
         }

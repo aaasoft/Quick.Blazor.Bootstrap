@@ -22,4 +22,10 @@
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Quick.Localize" Version="2.0.1" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="locale\zh.mo" />
+	</ItemGroup>
 </Project>

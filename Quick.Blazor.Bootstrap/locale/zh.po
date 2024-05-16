@@ -1,0 +1,61 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2024-05-16 16:54:42+0800\n"
+"PO-Revision-Date: 2024-05-16 16:56+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: ../../Pagination.razor.cs:26
+msgid "Record Count:"
+msgstr "记录数:"
+
+#: ../../ModalLoading.razor.cs:21 ../../ModalAlert.razor.cs:19
+#: ../../ModalPrompt.razor.cs:20
+msgid "Cancel"
+msgstr "取消"
+
+#: ../../Pagination.razor.cs:24
+msgid "Page"
+msgstr "页"
+
+#: ../../NavMenu.razor.cs:62
+msgid "NavMenuItem's Key is null"
+msgstr "NavMenuItem的Key为null"
+
+#: ../../Pagination.razor.cs:16
+msgid "First Page"
+msgstr "首页"
+
+#: ../../ModalAlert.razor.cs:18 ../../ModalPrompt.razor.cs:19
+msgid "OK"
+msgstr "确定"
+
+#: ../../Pagination.razor.cs:22
+msgid "Next Page"
+msgstr "下一页"
+
+#: ../../NavMenu.razor.cs:67
+msgid "An NavMenuItem with the same key already exists"
+msgstr "已经存在相关键的NavMenuItem"
+
+#: ../../Tabs.razor.cs:38
+msgid "TabPane's Key is null"
+msgstr "TabPane的Key为null"
+
+#: ../../Pagination.razor.cs:20
+msgid "Previous Page"
+msgstr "上一页"
+
+#: ../../Pagination.razor.cs:18
+msgid "Last Page"
+msgstr "末页"
+
+#: ../../Tabs.razor.cs:43
+msgid "An TabPane with the same key already exists"
+msgstr "已经存在相关键的TabPane"
