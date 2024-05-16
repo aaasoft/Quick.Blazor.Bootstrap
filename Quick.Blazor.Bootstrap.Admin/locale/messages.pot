@@ -1,0 +1,191 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Quick.Blazor.Bootstrap.Admin\n"
+"POT-Creation-Date: 2024-05-16 21:09:41+0800\n"
+"PO-Revision-Date: 2024-05-16 21:09:41+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: GetText.NET Extractor\n"
+
+#: ../../ProcessManageControl.razor.cs:22
+msgid "Kill Process Tree"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:138
+msgid "Refresh"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:560
+#, csharp-format
+msgid "File [{0}] is to large,are you sure to open it?"
+msgstr ""
+
+#: ../../ProcessManageControl.razor.cs:37
+msgid "OrderBy"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:148
+#: ../../TextEditControl.razor.cs:40
+msgid "Encoding"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:131
+msgid "Reading upload file info..."
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:160
+msgid "Last Write Time"
+msgstr ""
+
+#: ../../ProcessManageControl.razor.cs:34
+msgid "Operate"
+msgstr ""
+
+#: ../../ProcessManageControl.razor.cs:18
+msgid "Press 'Search' button to load process list."
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:103
+msgid "Confirm"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:146
+#: ../../TextEditControl.razor.cs:38
+msgid "Rows"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:129
+msgid "Upload"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:127
+msgid "Please input new folder name"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:125
+msgid "Remaining Time"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:123
+msgid "Transfer Speed"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:113
+msgid "Canceled"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:109
+msgid "Please input new name of [{0}]?"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:115
+#: ../../TextEditControl.razor.cs:36
+#: ../../ProcessManageControl.razor.cs:16
+msgid "Failed"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:140
+msgid "Download"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:121
+msgid "New Folder"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:107
+msgid "Do you want to delete file[{0}]?"
+msgstr ""
+
+#: ../../ProcessManageControl.razor.cs:20
+msgid "Kill Process"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:142
+msgid "Rename"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:117
+msgid "Folder [{0}] not exist"
+msgstr ""
+
+#: ../../ProcessManageControl.razor.cs:14
+msgid "Are you sure to kill process[Id: {0},Name: {1}]?"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:154
+msgid "Path"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:164
+#: ../../ProcessManageControl.razor.cs:28
+#: ../../ProcessManageControl.razor.cs:41
+msgid "Name"
+msgstr ""
+
+#: ../../ProcessManageControl.razor.cs:163
+#, csharp-format
+msgid "Can't found process[Id:{0}]."
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:105
+msgid "Do you want to delete folder[{0}]?"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:135
+msgid "Uploading file [{0}]..."
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:156
+msgid "Goto"
+msgstr ""
+
+#: ../../ProcessManageControl.razor.cs:24
+msgid "Keywords"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:133
+msgid "File [{0}] was exist."
+msgstr ""
+
+#: ../../ProcessManageControl.razor.cs:26
+#: ../../ProcessManageControl.razor.cs:39
+msgid "PID"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:119
+msgid "Up"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:144
+msgid "Edit"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:158
+msgid "Creation Time"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:162
+msgid "Size"
+msgstr ""
+
+#: ../../ProcessManageControl.razor.cs:32
+#: ../../ProcessManageControl.razor.cs:43
+msgid "Memory"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:152
+msgid "Delete"
+msgstr ""
+
+#: ../../ProcessManageControl.razor.cs:30
+msgid "Threads"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:111
+#: ../../TextEditControl.razor.cs:34
+msgid "Success"
+msgstr ""
+

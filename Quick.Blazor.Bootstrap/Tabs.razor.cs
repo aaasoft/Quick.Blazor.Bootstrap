@@ -35,12 +35,12 @@ namespace Quick.Blazor.Bootstrap
         {
             if (string.IsNullOrEmpty(tabPane.Key))
             {
-                throw new ArgumentNullException(nameof(tabPane), LocaleUtils.Catalog.GetString("TabPane's Key is null"));
+                throw new ArgumentNullException(nameof(tabPane), Locale.Catalog.GetString("TabPane's Key is null"));
             }
 
             if (_panes.Select(p => p.Key).Contains(tabPane.Key))
             {
-                throw new ArgumentException(LocaleUtils.Catalog.GetString("An TabPane with the same key already exists"));
+                throw new ArgumentException(Locale.Catalog.GetString("An TabPane with the same key already exists"));
             }
             _panes.Add(tabPane);
         }

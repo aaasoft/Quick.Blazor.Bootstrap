@@ -100,102 +100,102 @@ namespace Quick.Blazor.Bootstrap.Admin
         public string FileFilter { get; set; }
 
         [Parameter]
-        public string TextConfirm { get; set; } = "Confirm";
+        public string TextConfirm { get; set; } = Locale.Catalog.GetString("Confirm");
         [Parameter]
-        public string TextConfirmDeleteFolder { get; set; } = "Do you want to delete folder[{0}]?";
+        public string TextConfirmDeleteFolder { get; set; } = Locale.Catalog.GetString("Do you want to delete folder[{0}]?");
         [Parameter]
-        public string TextConfirmDeleteFile { get; set; } = "Do you want to delete file[{0}]?";
+        public string TextConfirmDeleteFile { get; set; } = Locale.Catalog.GetString("Do you want to delete file[{0}]?");
         [Parameter]
-        public string TextInputNewName { get; set; } = "Please input new name of [{0}]?";
+        public string TextInputNewName { get; set; } = Locale.Catalog.GetString("Please input new name of [{0}]?");
         [Parameter]
-        public string TextSuccess { get; set; } = "Success";
+        public string TextSuccess { get; set; } = Locale.Catalog.GetString("Success");
         [Parameter]
-        public string TextCanceled { get; set; } = "Canceled";
+        public string TextCanceled { get; set; } = Locale.Catalog.GetString("Canceled");
         [Parameter]
-        public string TextFailed { get; set; } = "Failed";
+        public string TextFailed { get; set; } = Locale.Catalog.GetString("Failed");
         [Parameter]
-        public string TextFolderNotExist { get; set; } = "Folder [{0}] not exist";
+        public string TextFolderNotExist { get; set; } = Locale.Catalog.GetString("Folder [{0}] not exist");
         [Parameter]
-        public string TextUp { get; set; } = "Up";
+        public string TextUp { get; set; } = Locale.Catalog.GetString("Up");
         [Parameter]
-        public string TextNewFolder { get; set; } = "New Folder";
+        public string TextNewFolder { get; set; } = Locale.Catalog.GetString("New Folder");
         [Parameter]
-        public string TextTransferSpeed { get; set; } = "Transfer Speed";
+        public string TextTransferSpeed { get; set; } = Locale.Catalog.GetString("Transfer Speed");
         [Parameter]
-        public string TextRemainingTime { get; set; } = "Remaining Time";
+        public string TextRemainingTime { get; set; } = Locale.Catalog.GetString("Remaining Time");
         [Parameter]
-        public string TextNewFolderPrompt { get; set; } = "Please input new folder name";
+        public string TextNewFolderPrompt { get; set; } = Locale.Catalog.GetString("Please input new folder name");
         [Parameter]
-        public string TextUpload { get; set; } = "Upload";
+        public string TextUpload { get; set; } = Locale.Catalog.GetString("Upload");
         [Parameter]
-        public string TextUploadReadFileInfo { get; set; } = "Reading upload file info...";
+        public string TextUploadReadFileInfo { get; set; } = Locale.Catalog.GetString("Reading upload file info...");
         [Parameter]
-        public string TextUploadFileExist { get; set; } = "File [{0}] was exist.";
+        public string TextUploadFileExist { get; set; } = Locale.Catalog.GetString("File [{0}] was exist.");
         [Parameter]
-        public string TextUploadFileUploading { get; set; } = "Uploading file [{0}]...";
+        public string TextUploadFileUploading { get; set; } = Locale.Catalog.GetString("Uploading file [{0}]...");
 
         [Parameter]
-        public string TextRefresh { get; set; } = "Refresh";
+        public string TextRefresh { get; set; } = Locale.Catalog.GetString("Refresh");
         [Parameter]
-        public string TextDownload { get; set; } = "Download";
+        public string TextDownload { get; set; } = Locale.Catalog.GetString("Download");
         [Parameter]
-        public string TextRename { get; set; } = "Rename";
+        public string TextRename { get; set; } = Locale.Catalog.GetString("Rename");
         [Parameter]
-        public string TextEdit { get; set; } = "Edit";
+        public string TextEdit { get; set; } = Locale.Catalog.GetString("Edit");
         [Parameter]
-        public string TextRows { get; set; } = "Rows";
+        public string TextRows { get; set; } = Locale.Catalog.GetString("Rows");
         [Parameter]
-        public string TextEncoding { get; set; } = "Encoding";
+        public string TextEncoding { get; set; } = Locale.Catalog.GetString("Encoding");
         [Parameter]
         public Dictionary<string, Encoding> EncodingDict { get; set; }
         [Parameter]
-        public string TextDelete { get; set; } = "Delete";
+        public string TextDelete { get; set; } = Locale.Catalog.GetString("Delete");
         [Parameter]
-        public string TextPath { get; set; } = "Path";
+        public string TextPath { get; set; } = Locale.Catalog.GetString("Path");
         [Parameter]
-        public string TextGoto { get; set; } = "Goto";
+        public string TextGoto { get; set; } = Locale.Catalog.GetString("Goto");
         [Parameter]
-        public string TextCreationTime { get; set; } = "Creation Time";
+        public string TextCreationTime { get; set; } = Locale.Catalog.GetString("Creation Time");
         [Parameter]
-        public string TextLastWriteTime { get; set; } = "Last Write Time";
+        public string TextLastWriteTime { get; set; } = Locale.Catalog.GetString("Last Write Time");
         [Parameter]
-        public string TextSize { get; set; } = "Size";
+        public string TextSize { get; set; } = Locale.Catalog.GetString("Size");
         [Parameter]
-        public string TextName { get; set; } = "Name";
+        public string TextName { get; set; } = Locale.Catalog.GetString("Name");
 
         [Parameter]
         public RenderFragment ToolbarAddonButtons { get; set; }
 
         [Parameter]
-        public RenderFragment IconFolder { get; set; }
+        public string IconFolder { get; set; } = "fa fa-folder m-1";
         [Parameter]
-        public RenderFragment IconFile { get; set; }
+        public string IconFile { get; set; } = "fa fa-file m-1";
         [Parameter]
-        public RenderFragment IconUp { get; set; }
+        public string IconUp { get; set; } = "fa fa-arrow-up";
         [Parameter]
-        public RenderFragment IconNewFolder { get; set; }
+        public string IconNewFolder { get; set; } = "fa fa-plus-square";
         [Parameter]
-        public RenderFragment IconUpload { get; set; }
+        public string IconUpload { get; set; } = "fa fa-upload";
         [Parameter]
-        public RenderFragment IconRefresh { get; set; }
+        public string IconRefresh { get; set; } = "fa fa-refresh";
         [Parameter]
-        public RenderFragment IconDownload { get; set; }
+        public string IconDownload { get; set; } = "fa fa-download";
         [Parameter]
-        public RenderFragment IconRename { get; set; }
+        public string IconRename { get; set; } = "fa fa-i-cursor";
         [Parameter]
-        public RenderFragment IconEdit { get; set; }
+        public string IconEdit { get; set; } = "fa fa-edit";
         [Parameter]
-        public RenderFragment IconSave { get; set; }
+        public string IconSave { get; set; } = "fa fa-save";
         [Parameter]
-        public RenderFragment IconDelete { get; set; }
+        public string IconDelete { get; set; } = "fa fa-trash";
         [Parameter]
-        public RenderFragment IconDisplayList { get; set; }
+        public string IconDisplayList { get; set; } = "fa fa-list";
         [Parameter]
-        public RenderFragment IconDisplayIcon { get; set; }
+        public string IconDisplayIcon { get; set; } = "fa fa-th-large";
         [Parameter]
-        public RenderFragment IconGoto { get; set; }
+        public string IconGoto { get; set; } = "fa fa-arrow-right";
         [Parameter]
-        public RenderFragment IconSearch { get; set; }
+        public string IconSearch { get; set; } = "fa fa-search";
 
         private string getFileLengthString(FileInfo fileInfo)
         {
@@ -557,7 +557,7 @@ namespace Quick.Blazor.Bootstrap.Admin
             //如果文件大小大于1MB，则弹出提示是否打开
             if (file.Length > 1 * 1024 * 1024)
             {
-                modalAlert.Show(TextConfirm, $"File [{file.Name}] is to large,are you sure to open it?", openTextEditWindowAction);
+                modalAlert.Show(TextConfirm, Locale.Catalog.GetString($"File [{0}] is to large,are you sure to open it?", file.Name), openTextEditWindowAction);
             }
             else
             {

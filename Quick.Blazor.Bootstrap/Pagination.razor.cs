@@ -13,17 +13,17 @@ namespace Quick.Blazor.Bootstrap
         [Parameter]
         public RenderFragment ChildContent { get; set; }
         [Parameter]
-        public string FirstPageText { get; set; } = LocaleUtils.Catalog.GetString("First Page");
+        public string FirstPageText { get; set; } = Locale.Catalog.GetString("First Page");
         [Parameter]
-        public string LastPageText { get; set; } = LocaleUtils.Catalog.GetString("Last Page");
+        public string LastPageText { get; set; } = Locale.Catalog.GetString("Last Page");
         [Parameter]
-        public string PreviousPageText { get; set; } = LocaleUtils.Catalog.GetString("Previous Page");
+        public string PreviousPageText { get; set; } = Locale.Catalog.GetString("Previous Page");
         [Parameter]
-        public string NextPageText { get; set; } = LocaleUtils.Catalog.GetString("Next Page");
+        public string NextPageText { get; set; } = Locale.Catalog.GetString("Next Page");
         [Parameter]
-        public string PageText { get; set; } = LocaleUtils.Catalog.GetString("Page");
+        public string PageText { get; set; } = Locale.Catalog.GetString("Page");
         [Parameter]
-        public string RecordCountText { get; set; } = LocaleUtils.Catalog.GetString("Record Count:");
+        public string RecordCountText { get; set; } = Locale.Catalog.GetString("Record Count:");
         [Parameter]
         public bool DisplayRecordCount { get; set; } = true;
         [Parameter]

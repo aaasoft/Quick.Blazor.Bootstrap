@@ -31,15 +31,15 @@ namespace Quick.Blazor.Bootstrap.Admin
         public Dictionary<string, Encoding> EncodingDict { get; set; }
 
         [Parameter]
-        public string TextSuccess { get; set; } = "Success";
+        public string TextSuccess { get; set; } = Locale.Catalog.GetString("Success");
         [Parameter]
-        public string TextFailed { get; set; } = "Failed";
+        public string TextFailed { get; set; } = Locale.Catalog.GetString("Failed");
         [Parameter]
-        public string TextRows { get; set; } = "Rows";
+        public string TextRows { get; set; } = Locale.Catalog.GetString("Rows");
         [Parameter]
-        public string TextEncoding { get; set; } = "Encoding";
+        public string TextEncoding { get; set; } = Locale.Catalog.GetString("Encoding");
         [Parameter]
-        public RenderFragment IconSave { get; set; }
+        public string IconSave { get; set; }
 
         private Exception OpenException;
         private string Content { get; set; }

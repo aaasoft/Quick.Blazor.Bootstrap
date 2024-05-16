@@ -16,8 +16,8 @@ namespace Quick.Blazor.Bootstrap
         public bool DialogSizeLarge { get; set; }
         [Parameter]
         public bool DialogSizeExtraLarge { get; set; }
-        public static string TextOk { get; set; } = LocaleUtils.Catalog.GetString("OK");
-        public static string TextCancel { get; set; } = LocaleUtils.Catalog.GetString("Cancel");
+        public static string TextOk { get; set; } = Locale.Catalog.GetString("OK");
+        public static string TextCancel { get; set; } = Locale.Catalog.GetString("Cancel");
 
         private string Title { get; set; }
         private string Content { get; set; }

@@ -26,6 +26,10 @@
 		<PackageReference Include="Quick.Localize" Version="2.0.1" />
 	</ItemGroup>
 	<ItemGroup>
-		<EmbeddedResource Include="locale\zh.mo" />
+		<Compile Include="../Common/Locale.cs" Link="Locale.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="locale/zh.mo" />
 	</ItemGroup>
 </Project>

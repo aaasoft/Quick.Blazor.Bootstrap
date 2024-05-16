@@ -11,43 +11,43 @@ namespace Quick.Blazor.Bootstrap.Admin
     public partial class ProcessManageControl : ComponentBase
     {
         [Parameter]
-        public string TextAskToKillProcess { get; set; } = "Are you sure to kill process[Id: {0},Name: {1}]?";
+        public string TextAskToKillProcess { get; set; } = Locale.Catalog.GetString("Are you sure to kill process[Id: {0},Name: {1}]?");
         [Parameter]
-        public string TextFailed { get; set; } = "Failed";
+        public string TextFailed { get; set; } = Locale.Catalog.GetString("Failed");
         [Parameter]
-        public string TextPressSearchButtonTip { get; set; } = "Press 'Search' button to load process list.";
+        public string TextPressSearchButtonTip { get; set; } = Locale.Catalog.GetString("Press 'Search' button to load process list.");
         [Parameter]
-        public string TextKillProcess { get; set; } = "Kill Process";
+        public string TextKillProcess { get; set; } = Locale.Catalog.GetString("Kill Process");
         [Parameter]
-        public string TextKillProcessTree { get; set; } = "Kill Process Tree";
+        public string TextKillProcessTree { get; set; } = Locale.Catalog.GetString("Kill Process Tree");
         [Parameter]
-        public string TextKeywords { get; set; } = "Keywords";
+        public string TextKeywords { get; set; } = Locale.Catalog.GetString("Keywords");
         [Parameter]
-        public string TextColumnPID { get; set; } = "PID";
+        public string TextColumnPID { get; set; } = Locale.Catalog.GetString("PID");
         [Parameter]
-        public string TextColumnName { get; set; } = "Name";
+        public string TextColumnName { get; set; } = Locale.Catalog.GetString("Name");
         [Parameter]
-        public string TextColumnThreads { get; set; } = "Threads";
+        public string TextColumnThreads { get; set; } = Locale.Catalog.GetString("Threads");
         [Parameter]
-        public string TextColumnMemory { get; set; } = "Memory";
+        public string TextColumnMemory { get; set; } = Locale.Catalog.GetString("Memory");
         [Parameter]
-        public string TextColumnOperate { get; set; } = "Operate";
+        public string TextColumnOperate { get; set; } = Locale.Catalog.GetString("Operate");
 
         [Parameter]
-        public string TextOrderBy { get; set; } = "OrderBy";
+        public string TextOrderBy { get; set; } = Locale.Catalog.GetString("OrderBy");
         [Parameter]
-        public string TextOrderByPID { get; set; } = "PID";
+        public string TextOrderByPID { get; set; } = Locale.Catalog.GetString("PID");
         [Parameter]
-        public string TextOrderByName { get; set; } = "Name";
+        public string TextOrderByName { get; set; } = Locale.Catalog.GetString("Name");
         [Parameter]
-        public string TextOrderByMemory { get; set; } = "Memory";
+        public string TextOrderByMemory { get; set; } = Locale.Catalog.GetString("Memory");
 
         [Parameter]
-        public RenderFragment IconSearch { get; set; }
+        public string IconSearch { get; set; }="fa fa-search";
         [Parameter]
-        public RenderFragment IconKillProcess { get; set; }
+        public string IconKillProcess { get; set; }="fa fa-stop";
         [Parameter]
-        public RenderFragment IconKillProcessTree { get; set; }
+        public string IconKillProcessTree { get; set; }="fa fa-tree";
 
         private ModalLoading modalLoading;
         private ModalAlert modalAlert;
@@ -160,7 +160,7 @@ namespace Quick.Blazor.Bootstrap.Admin
 #pragma warning disable CA1416 // 验证平台兼容性
                           var process = Process.GetProcessById(info.Id);
                           if (process == null)
-                              throw new ApplicationException($"Can't found process[Id:{info.Id}].");
+                              throw new ApplicationException(Locale.Catalog.GetString("Can't found process[Id:{0}].", info.Id));
                           process.Kill(entireProcessTree);
                           search();
 #pragma warning restore CA1416 // 验证平台兼容性

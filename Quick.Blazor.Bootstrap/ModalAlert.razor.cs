@@ -15,8 +15,8 @@ namespace Quick.Blazor.Bootstrap
         [Parameter]
         public bool DialogScrollable { get; set; } = true;
 
-        public static string TextOk { get; set; } = LocaleUtils.Catalog.GetString("OK");
-        public static string TextCancel { get; set; } = LocaleUtils.Catalog.GetString("Cancel");
+        public static string TextOk { get; set; } = Locale.Catalog.GetString("OK");
+        public static string TextCancel { get; set; } = Locale.Catalog.GetString("Cancel");
         public string[] ContentLines => Content.Split('\n');
         private string Title { get; set; }
         private string Content { get; set; }

@@ -10,21 +10,21 @@
                 <div class="btn-toolbar" role="toolbar">
                     <div class="btn-group mr-2">
                         <button type="button" class="btn btn-sm btn-secondary @(ListViewMode?"active":"")"
-                            @onclick="e=>ListViewMode=true">@IconDisplayList</button>
+                            @onclick="e=>ListViewMode=true"><i class="@IconDisplayList" aria-hidden="true"></i></button>
                         <button type="button" class="btn btn-sm btn-secondary @(!ListViewMode?"active":"")"
-                            @onclick="e=>ListViewMode=false">@IconDisplayIcon</button>
+                            @onclick="e=>ListViewMode=false"><i class="@IconDisplayIcon" aria-hidden="true"></i></button>
                     </div>
                     @if (CurrentDir != null)
                     {
                         <div class="btn-group mr-2">
-                            <button title="@TextRefresh" type="button" class="btn btn-sm btn-secondary" @onclick="refresh">
-                                @IconRefresh
+                            <button title="@TextRefresh" type="button" class="btn btn-sm btn-secondary" @onclick="refresh">                                
+                                <i class="@IconRefresh" aria-hidden="true"></i>
                             </button>
                             @if (DisplayAddress)
                             {
                                 <button title="@TextUp" type="button" class="btn btn-sm btn-secondary"
                                     @onclick="btnGotoUpper_Click">
-                                    @IconUp
+                                    <i class="@IconUp" aria-hidden="true"></i>                                    
                                 </button>
                             }
                         </div>
@@ -34,13 +34,13 @@
                             {
                                 <button title="@TextNewFolder" type="button" class="btn btn-sm btn-secondary"
                                     @onclick="btnCreateFolder_Click">
-                                    @IconNewFolder
+                                    <i class="@IconNewFolder" aria-hidden="true"></i>                                    
                                 </button>
                             }
                             @if (DisplayUploadButton)
                             {
                                 <div class="btn btn-sm btn-secondary">
-                                    @IconUpload
+                                    <i class="@IconUpload" aria-hidden="true"></i>                                    
                                     <label title="@TextUpload"
                                         style="position: absolute;top: 0;left: 0;right:0;margin:0;height:100%;cursor:pointer"
                                         for="inputFile">
@@ -51,7 +51,7 @@
                             {
                                 <button title="@TextDownload" type="button" class="btn btn-sm btn-secondary"
                                     @onclick="btnDownload_Click">
-                                    @IconDownload
+                                    <i class="@IconDownload" aria-hidden="true"></i>
                                 </button>
                             }
                             @if (SelectedItem != null)
@@ -60,21 +60,21 @@
                                 {
                                     <button title="@TextRename" type="button" class="btn btn-sm btn-secondary"
                                         @onclick="btnRename_Click">
-                                        @IconRename
+                                        <i class="@IconRename" aria-hidden="true"></i>                                        
                                     </button>
                                 }
                                 @if (DisplayEditButton && SelectedItem is FileInfo)
                                 {
                                     <button title="@TextEdit" type="button" class="btn btn-sm btn-secondary"
                                         @onclick="btnEdit_Click">
-                                        @IconEdit
+                                        <i class="@IconEdit" aria-hidden="true"></i>                                        
                                     </button>
                                 }
                                 @if (DisplayDeleteButton)
                                 {
                                     <button title="@TextDelete" type="button" class="btn btn-sm btn-secondary"
                                         @onclick="btnDelete_Click">
-                                        @IconDelete
+                                        <i class="@IconDelete" aria-hidden="true"></i>                                        
                                     </button>
                                 }
                             }
@@ -89,7 +89,7 @@
                     <input type="text" class="form-control col-auto" @bind-value="Search" />
                     <div class="input-group-append">
                         <button type="button" class="btn btn-secondary" @onclick="btnGoto_Click">
-                            @IconSearch
+                            <i class="@IconSearch" aria-hidden="true"></i>
                         </button>
                     </div>
                 </div>
@@ -105,7 +105,7 @@
                 <input type="text" title="@TextPath" class="form-control col-auto" @bind-value="CurrentPath" />
                 <div class="input-group-append">
                     <button title="@TextGoto" type="button" class="btn btn-secondary" @onclick="btnGoto_Click">
-                        @IconGoto
+                        <i class="@IconGoto" aria-hidden="true"></i>                        
                     </button>
                 </div>
             </div>
@@ -137,7 +137,9 @@
                                            if(DisplayAddress)
                                                 gotoDir(dir);
                                        })">
-                                        <td>@IconFolder@dir.Name</td>
+                                        <td>
+                                            <i class="@IconFolder" aria-hidden="true"></i>
+                                            @dir.Name</td>
                                         <td>@getLastWriteString(dir)</td>
                                         <td></td>
                                     </tr>
@@ -149,7 +151,7 @@
                                 {
                                     <tr class="@(SelectedItem == file ? "table-active" : "")" @onclick="@(e => SelectedItem = file)"
                                         @ondblclick="onFileDoubleClick">
-                                        <td>@IconFile@file.Name</td>
+                                        <td><i class="@IconFile" aria-hidden="true"></i>@file.Name</td>
                                         <td>@getLastWriteString(file)</td>
                                         <td>@getFileLengthString(file)B</td>
                                     </tr>
@@ -172,7 +174,7 @@
                            if(DisplayAddress)
                                 gotoDir(dir);
                        })">
-                                    <p class="h1 m-0 pt-1">@IconFolder</p>
+                                    <p class="h1 m-0 pt-1"><i class="@IconFolder" aria-hidden="true"></i></p>
                                     <span class="text-center">@dir.Name</span>
                                 </a>
                             </div>
@@ -187,7 +189,7 @@
 @TextLastWriteTime: @getLastWriteString(file)"
                                     class="text-center list-group-item list-group-item-action border-0 p-1 @(SelectedItem == file ? "active" : "")"
                                     @onclick="@(e => SelectedItem = file)" @ondblclick="onFileDoubleClick">
-                                    <p class="h1 m-0 pt-1">@IconFile</p>
+                                    <p class="h1 m-0 pt-1"><i class="@IconFile" aria-hidden="true"></i></p>
                                     <span class="text-center">@file.Name</span>
                                 </a>
                             </div>

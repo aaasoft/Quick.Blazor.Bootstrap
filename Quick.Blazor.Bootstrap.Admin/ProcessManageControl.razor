@@ -11,7 +11,7 @@
                 <input type="text" class="form-control" @bind-value="searchKeywords">
                 <div class="input-group-append">
                     <button type="button" class="btn btn-primary" @onclick="search">
-                        @IconSearch
+                        <span class="@IconSearch"></span>                        
                     </button>
                 </div>
             </div>
@@ -55,10 +55,10 @@
                             <td>
                                 <div class="btn-group">
                                     <button type="button" title="@TextKillProcess" class="btn btn-sm btn-outline-danger" @onclick="@(e => KillProcess(t, false))">
-                                        @IconKillProcess
+                                        <span class="@IconKillProcess"></span>                                        
                                     </button>
                                     <button type="button" title="@TextKillProcessTree" class="btn btn-sm btn-outline-danger" @onclick="@(e => KillProcess(t, true))">
-                                        @IconKillProcessTree
+                                        <span class="@IconKillProcessTree"></span>                                        
                                     </button>
                                 </div>
                             </td>
