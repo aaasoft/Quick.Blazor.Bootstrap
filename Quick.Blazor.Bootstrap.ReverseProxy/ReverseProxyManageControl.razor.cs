@@ -13,47 +13,47 @@ namespace Quick.Blazor.Bootstrap.ReverseProxy
         private string searchKeywords;
 
         [Parameter]
-        public string TextNew { get; set; } = "New";
+        public string TextNew { get; set; } = Locale.Catalog.GetString("New");
         [Parameter]
-        public string TextKeywords { get; set; } = "Keywords";
+        public string TextKeywords { get; set; } = Locale.Catalog.GetString("Keywords");
         [Parameter]
-        public string TextName{ get; set; } = "Name";
+        public string TextName{ get; set; } = Locale.Catalog.GetString("Name");
         [Parameter]
-        public string TextPath { get; set; } = "Path";
+        public string TextPath { get; set; } = Locale.Catalog.GetString("Path");
         [Parameter]
-        public string TextUrl { get; set; } = "URL";
+        public string TextUrl { get; set; } = Locale.Catalog.GetString("URL");
         [Parameter]
-        public string TextOK { get; set; } = "OK";
+        public string TextOK { get; set; } = Locale.Catalog.GetString("OK");
         [Parameter]
-        public string TextVisit { get; set; } = "Visit";
+        public string TextVisit { get; set; } = Locale.Catalog.GetString("Visit");
         [Parameter]
-        public string TextEdit { get; set; } = "Edit";
+        public string TextEdit { get; set; } = Locale.Catalog.GetString("Edit");
         [Parameter]
-        public string TextDelete { get; set; } = "Delete";
+        public string TextDelete { get; set; } = Locale.Catalog.GetString("Delete");
         [Parameter]
-        public string TextError { get; set; } = "Error";
+        public string TextError { get; set; } = Locale.Catalog.GetString("Error");
         [Parameter]
-        public string TextConfirmDelete { get; set; } = "Do you want to delete Rule[{0}]?";
+        public string TextConfirmDelete { get; set; } = Locale.Catalog.GetString("Do you want to delete Rule[{0}]?");
         
         [Parameter]
-        public RenderFragment IconNew { get; set; }
+        public string IconNew { get; set; }="fa fa-plus";
         [Parameter]
-        public RenderFragment IconSearch { get; set; }
+        public string IconSearch { get; set; }="fa fa-search";
         [Parameter]
-        public RenderFragment IconRule { get; set; }
+        public string IconRule { get; set; }="fa fa-paper-plane mr-1";
         [Parameter]
-        public RenderFragment IconVisit { get; set; }
+        public string IconVisit { get; set; }="fa fa-globe";
         [Parameter]
-        public RenderFragment IconEdit { get; set; }
+        public string IconEdit { get; set; }="fa fa-pencil";
         [Parameter]
-        public RenderFragment IconDelete { get; set; }
+        public string IconDelete { get; set; }="fa fa-trash";
 
         private void validateModel(ReverseProxyRule oldModel, ReverseProxyRule newModel)
         {
             if (!newModel.Path.StartsWith("/"))
-                throw new ArgumentException("Path must start with '/'.");
+                throw new ArgumentException(Locale.Catalog.GetString("Path must start with '/'."));
             if ((oldModel == null || oldModel.Path != newModel.Path) && ReverseProxyManager.Instance.Exists(newModel.Path))
-                throw new ArgumentException($"Path [{newModel.Path}] already exist.");
+                throw new ArgumentException(Locale.Catalog.GetString("Path [{0}] already exist.", newModel.Path));
         }
 
         private void Create()

@@ -3,7 +3,7 @@
         <div class="btn-toolbar">
             <div class="btn-group mr-2 mb-1">
                 <button type="button" class="btn btn-sm btn-secondary" @onclick="Create">
-                    @IconNew
+                    <i class="@IconNew" aria-hidden="true"></i>                    
                     @TextNew
                 </button>
             </div>
@@ -14,7 +14,7 @@
                 <input type="text" class="form-control" @bind-value="searchKeywords">
                 <div class="input-group-append">
                     <button type="button" class="btn btn-sm btn-secondary">
-                        @IconSearch
+                        <i class="@IconSearch" aria-hidden="true"></i>
                     </button>
                 </div>
             </div>
@@ -30,7 +30,7 @@
             <div class="col-xl-4 col-lg-6 col-sm-12 mt-2">
                 <div class="card">
                     <div class="card-header">
-                        @IconRule@t.Name
+                        <i class="@IconRule" aria-hidden="true"></i>@t.Name
                     </div>
                     <div class="card-body small p-2">
                         <p class="mb-0">
@@ -43,13 +43,13 @@
                     <div class="card-footer p-1">
                         <div class="btn-group">
                             <a class="btn btn-sm btn-secondary" href=".@t.Path" target="_blank" title="@TextVisit">
-                                @IconVisit
+                                <i class="@IconVisit" aria-hidden="true"></i>
                             </a>
                             <button type="button" title="@TextEdit" class="btn btn-sm btn-secondary" @onclick="() => Edit(t)">
-                                @IconEdit
+                                <i class="@IconEdit" aria-hidden="true"></i>
                             </button>
                             <button type="button" title="@TextDelete" class="btn btn-sm btn-secondary" @onclick="@(e=>Delete(t))">
-                                @IconDelete
+                                <i class="@IconDelete" aria-hidden="true"></i>
                             </button>
                         </div>
                     </div>
