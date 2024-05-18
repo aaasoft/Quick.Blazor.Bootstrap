@@ -21,13 +21,13 @@ namespace Quick.Blazor.Bootstrap.Terminal
         private CancellationTokenSource cts;
 
         [Parameter]
-        public string TextOpen { get; set; } = "Open";
+        public string TextOpen { get; set; } = Locale.Catalog.GetString("Open");
         [Parameter]
-        public string TextClose { get; set; } = "Close";
+        public string TextClose { get; set; } = Locale.Catalog.GetString("Close");
         [Parameter]
-        public string TextColumn { get; set; } = "Column";
+        public string TextColumn { get; set; } = Locale.Catalog.GetString("Column");
         [Parameter]
-        public string TextRow { get; set; } = "Row";
+        public string TextRow { get; set; } = Locale.Catalog.GetString("Row");
 
         [Parameter]
         public string App { get; set; }
@@ -160,7 +160,8 @@ namespace Quick.Blazor.Bootstrap.Terminal
         private void Pty_ProcessExited(object sender, PtyExitedEventArgs e)
         {
             pty.ProcessExited -= Pty_ProcessExited;
-            terminal?.WriteLine($"{Environment.NewLine}. Terminal process has exited with exit code {e.ExitCode}");
+            var message = Locale.Catalog.GetString("Terminal process has exited with exit code {0}",e.ExitCode);
+            terminal?.WriteLine(message);
             if (OperatingSystem.IsWindows())
             {
                 pty.Kill();

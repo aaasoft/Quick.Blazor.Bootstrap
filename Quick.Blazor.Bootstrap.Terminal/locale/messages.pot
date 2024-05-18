@@ -1,0 +1,33 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Quick.Blazor.Bootstrap.Terminal\n"
+"POT-Creation-Date: 2024-05-18 09:58:08+0800\n"
+"PO-Revision-Date: 2024-05-18 09:58:08+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: GetText.NET Extractor\n"
+
+#: ../../TerminalControl.razor.cs:30
+msgid "Row"
+msgstr ""
+
+#: ../../TerminalControl.razor.cs:28
+msgid "Column"
+msgstr ""
+
+#: ../../TerminalControl.razor.cs:24
+msgid "Open"
+msgstr ""
+
+#: ../../TerminalControl.razor.cs:26
+msgid "Close"
+msgstr ""
+
+#: ../../TerminalControl.razor.cs:163
+#, csharp-format
+msgid "Terminal process has exited with exit code {0}"
+msgstr ""
+

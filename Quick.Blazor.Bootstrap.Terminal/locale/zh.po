@@ -1,0 +1,33 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Quick.Blazor.Bootstrap.Terminal\n"
+"POT-Creation-Date: 2024-05-18 09:58:08+0800\n"
+"PO-Revision-Date: 2024-05-18 09:59+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: ../../TerminalControl.razor.cs:30
+msgid "Row"
+msgstr "行"
+
+#: ../../TerminalControl.razor.cs:28
+msgid "Column"
+msgstr "列"
+
+#: ../../TerminalControl.razor.cs:24
+msgid "Open"
+msgstr "打开"
+
+#: ../../TerminalControl.razor.cs:26
+msgid "Close"
+msgstr "关闭"
+
+#: ../../TerminalControl.razor.cs:163
+#, csharp-format
+msgid "Terminal process has exited with exit code {0}"
+msgstr "终端进程已经退出，退出码：{0}"
