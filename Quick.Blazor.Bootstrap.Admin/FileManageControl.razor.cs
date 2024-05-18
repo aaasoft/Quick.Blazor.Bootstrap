@@ -3,11 +3,14 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 using Quick.Blazor.Bootstrap.Admin.Utils;
+using Quick.Localize;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -99,69 +102,39 @@ namespace Quick.Blazor.Bootstrap.Admin
         [Parameter]
         public string FileFilter { get; set; }
 
-        [Parameter]
-        public string TextConfirm { get; set; } = Locale.Catalog.GetString("Confirm");
-        [Parameter]
-        public string TextConfirmDeleteFolder { get; set; } = Locale.Catalog.GetString("Do you want to delete folder[{0}]?");
-        [Parameter]
-        public string TextConfirmDeleteFile { get; set; } = Locale.Catalog.GetString("Do you want to delete file[{0}]?");
-        [Parameter]
-        public string TextInputNewName { get; set; } = Locale.Catalog.GetString("Please input new name of [{0}]?");
-        [Parameter]
-        public string TextSuccess { get; set; } = Locale.Catalog.GetString("Success");
-        [Parameter]
-        public string TextCanceled { get; set; } = Locale.Catalog.GetString("Canceled");
-        [Parameter]
-        public string TextFailed { get; set; } = Locale.Catalog.GetString("Failed");
-        [Parameter]
-        public string TextFolderNotExist { get; set; } = Locale.Catalog.GetString("Folder [{0}] not exist");
-        [Parameter]
-        public string TextUp { get; set; } = Locale.Catalog.GetString("Up");
-        [Parameter]
-        public string TextNewFolder { get; set; } = Locale.Catalog.GetString("New Folder");
-        [Parameter]
-        public string TextTransferSpeed { get; set; } = Locale.Catalog.GetString("Transfer Speed");
-        [Parameter]
-        public string TextRemainingTime { get; set; } = Locale.Catalog.GetString("Remaining Time");
-        [Parameter]
-        public string TextNewFolderPrompt { get; set; } = Locale.Catalog.GetString("Please input new folder name");
-        [Parameter]
-        public string TextUpload { get; set; } = Locale.Catalog.GetString("Upload");
-        [Parameter]
-        public string TextUploadReadFileInfo { get; set; } = Locale.Catalog.GetString("Reading upload file info...");
-        [Parameter]
-        public string TextUploadFileExist { get; set; } = Locale.Catalog.GetString("File [{0}] was exist.");
-        [Parameter]
-        public string TextUploadFileUploading { get; set; } = Locale.Catalog.GetString("Uploading file [{0}]...");
-
-        [Parameter]
-        public string TextRefresh { get; set; } = Locale.Catalog.GetString("Refresh");
-        [Parameter]
-        public string TextDownload { get; set; } = Locale.Catalog.GetString("Download");
-        [Parameter]
-        public string TextRename { get; set; } = Locale.Catalog.GetString("Rename");
-        [Parameter]
-        public string TextEdit { get; set; } = Locale.Catalog.GetString("Edit");
-        [Parameter]
-        public string TextRows { get; set; } = Locale.Catalog.GetString("Rows");
-        [Parameter]
-        public string TextEncoding { get; set; } = Locale.Catalog.GetString("Encoding");
+        public string TextConfirm => Locale.Catalog.GetString("Confirm");
+        public string TextConfirmDeleteFolder => Locale.Catalog.GetString("Do you want to delete folder[{0}]?");
+        public string TextConfirmDeleteFile => Locale.Catalog.GetString("Do you want to delete file[{0}]?");
+        public string TextInputNewName => Locale.Catalog.GetString("Please input new name of [{0}]?");
+        public string TextSuccess => Locale.Catalog.GetString("Success");
+        public string TextCanceled => Locale.Catalog.GetString("Canceled");
+        public string TextFailed => Locale.Catalog.GetString("Failed");
+        public string TextFolderNotExist => Locale.Catalog.GetString("Folder [{0}] not exist");
+        public string TextUp => Locale.Catalog.GetString("Up");
+        public string TextNewFolder => Locale.Catalog.GetString("New Folder");
+        public string TextTransferSpeed => Locale.Catalog.GetString("Transfer Speed");
+        public string TextRemainingTime => Locale.Catalog.GetString("Remaining Time");
+        public string TextNewFolderPrompt => Locale.Catalog.GetString("Please input new folder name");
+        public string TextUpload => Locale.Catalog.GetString("Upload");
+        public string TextUploadReadFileInfo => Locale.Catalog.GetString("Reading upload file info...");
+        public string TextUploadFileExist => Locale.Catalog.GetString("File [{0}] was exist.");
+        public string TextUploadFileUploading => Locale.Catalog.GetString("Uploading file [{0}]...");
+        public string TextRefresh => Locale.Catalog.GetString("Refresh");
+        public string TextDownload => Locale.Catalog.GetString("Download");
+        public string TextRename => Locale.Catalog.GetString("Rename");
+        public string TextEdit => Locale.Catalog.GetString("Edit");
+        public string TextRows => Locale.Catalog.GetString("Rows");
+        public string TextEncoding => Locale.Catalog.GetString("Encoding");
         [Parameter]
         public Dictionary<string, Encoding> EncodingDict { get; set; }
-        [Parameter]
-        public string TextDelete { get; set; } = Locale.Catalog.GetString("Delete");
-        [Parameter]
-        public string TextPath { get; set; } = Locale.Catalog.GetString("Path");
-        [Parameter]
-        public string TextGoto { get; set; } = Locale.Catalog.GetString("Goto");
-        [Parameter]
-        public string TextCreationTime { get; set; } = Locale.Catalog.GetString("Creation Time");
-        [Parameter]
-        public string TextLastWriteTime { get; set; } = Locale.Catalog.GetString("Last Write Time");
-        [Parameter]
-        public string TextSize { get; set; } = Locale.Catalog.GetString("Size");
-        [Parameter]
-        public string TextName { get; set; } = Locale.Catalog.GetString("Name");
+
+        public string TextDelete => Locale.Catalog.GetString("Delete");
+        public string TextPath => Locale.Catalog.GetString("Path");
+        public string TextGoto => Locale.Catalog.GetString("Goto");
+        public string TextCreationTime => Locale.Catalog.GetString("Creation Time");
+        public string TextLastWriteTime => Locale.Catalog.GetString("Last Write Time");
+        public string TextSize => Locale.Catalog.GetString("Size");
+        public string TextName => Locale.Catalog.GetString("Name");
 
         [Parameter]
         public RenderFragment ToolbarAddonButtons { get; set; }
@@ -217,6 +190,17 @@ namespace Quick.Blazor.Bootstrap.Admin
             }
             catch { }
             return string.Empty;
+        }
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            GettextResourceManager.CurrentCultureChanged += GettextResourceManager_CurrentCultureChanged;
+        }
+
+        private void GettextResourceManager_CurrentCultureChanged(object sender, CultureInfo e)
+        {
+            InvokeAsync(StateHasChanged);
         }
 
         protected override void OnParametersSet()
@@ -660,6 +644,7 @@ namespace Quick.Blazor.Bootstrap.Admin
 
         public void Dispose()
         {
+            GettextResourceManager.CurrentCultureChanged -= GettextResourceManager_CurrentCultureChanged;
             uploadCts?.Cancel();
             uploadCts = null;
         }

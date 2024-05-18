@@ -1,0 +1,13 @@
+﻿<EditForm Model="@this">
+    <div class="input-group input-group-sm mr-2 mb-1">
+        <div class="input-group-prepend">
+            <div class="input-group-text"><i class="fa fa-globe" aria-hidden="true" /></div>
+        </div>
+        <InputSelect class="form-control" @bind-Value="Language">
+            @foreach (var item in LanguageDict)
+            {
+                <option value="@item.Key">@item.Value</option>
+            }
+        </InputSelect>
+    </div>
+</EditForm>

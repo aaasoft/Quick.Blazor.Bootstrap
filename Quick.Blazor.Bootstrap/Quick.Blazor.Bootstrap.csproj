@@ -23,7 +23,7 @@
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Quick.Localize" Version="2.0.1" />
+		<PackageReference Include="Quick.Localize" Version="2.0.2" />
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Include="../Common/Locale.cs" Link="Locale.cs" />
