@@ -8,46 +8,31 @@ using System.Threading.Tasks;
 
 namespace Quick.Blazor.Bootstrap.Admin
 {
-    public partial class ProcessManageControl : ComponentBase
+    public partial class ProcessManageControl : ComponentBase_WithGettextSupport
     {
-        [Parameter]
-        public string TextAskToKillProcess { get; set; } = Locale.Catalog.GetString("Are you sure to kill process[Id: {0},Name: {1}]?");
-        [Parameter]
-        public string TextFailed { get; set; } = Locale.Catalog.GetString("Failed");
-        [Parameter]
-        public string TextPressSearchButtonTip { get; set; } = Locale.Catalog.GetString("Press 'Search' button to load process list.");
-        [Parameter]
-        public string TextKillProcess { get; set; } = Locale.Catalog.GetString("Kill Process");
-        [Parameter]
-        public string TextKillProcessTree { get; set; } = Locale.Catalog.GetString("Kill Process Tree");
-        [Parameter]
-        public string TextKeywords { get; set; } = Locale.Catalog.GetString("Keywords");
-        [Parameter]
-        public string TextColumnPID { get; set; } = Locale.Catalog.GetString("PID");
-        [Parameter]
-        public string TextColumnName { get; set; } = Locale.Catalog.GetString("Name");
-        [Parameter]
-        public string TextColumnThreads { get; set; } = Locale.Catalog.GetString("Threads");
-        [Parameter]
-        public string TextColumnMemory { get; set; } = Locale.Catalog.GetString("Memory");
-        [Parameter]
-        public string TextColumnOperate { get; set; } = Locale.Catalog.GetString("Operate");
+        public string TextAskToKillProcess => Locale.Catalog.GetString("Are you sure to kill process[Id: {0},Name: {1}]?");
+        private string TextFailed => Locale.Catalog.GetString("Failed");
+        private string TextPressSearchButtonTip => Locale.Catalog.GetString("Press 'Search' button to load process list.");
+        private string TextKillProcess => Locale.Catalog.GetString("Kill Process");
+        private string TextKillProcessTree => Locale.Catalog.GetString("Kill Process Tree");
+        private string TextKeywords => Locale.Catalog.GetString("Keywords");
+        private string TextColumnPID => Locale.Catalog.GetString("PID");
+        private string TextColumnName => Locale.Catalog.GetString("Name");
+        private string TextColumnThreads => Locale.Catalog.GetString("Threads");
+        private string TextColumnMemory =>  Locale.Catalog.GetString("Memory");
+        private string TextColumnOperate => Locale.Catalog.GetString("Operate");
+
+        private string TextOrderBy => Locale.Catalog.GetString("OrderBy");
+        private string TextOrderByPID =>  Locale.Catalog.GetString("PID");
+        private string TextOrderByName =>  Locale.Catalog.GetString("Name");
+        private string TextOrderByMemory =>  Locale.Catalog.GetString("Memory");
 
         [Parameter]
-        public string TextOrderBy { get; set; } = Locale.Catalog.GetString("OrderBy");
+        public string IconSearch { get; set; } = "fa fa-search";
         [Parameter]
-        public string TextOrderByPID { get; set; } = Locale.Catalog.GetString("PID");
+        public string IconKillProcess { get; set; } = "fa fa-stop";
         [Parameter]
-        public string TextOrderByName { get; set; } = Locale.Catalog.GetString("Name");
-        [Parameter]
-        public string TextOrderByMemory { get; set; } = Locale.Catalog.GetString("Memory");
-
-        [Parameter]
-        public string IconSearch { get; set; }="fa fa-search";
-        [Parameter]
-        public string IconKillProcess { get; set; }="fa fa-stop";
-        [Parameter]
-        public string IconKillProcessTree { get; set; }="fa fa-tree";
+        public string IconKillProcessTree { get; set; } = "fa fa-tree";
 
         private ModalLoading modalLoading;
         private ModalAlert modalAlert;
@@ -65,11 +50,6 @@ namespace Quick.Blazor.Bootstrap.Admin
             public string MemoryInfo { get; set; }
             public int Threads { get; set; }
             public string StartTime { get; set; }
-        }
-
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
         }
 
         private string getFieldButtonClass(string field)

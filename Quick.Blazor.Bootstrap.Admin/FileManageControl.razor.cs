@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Quick.Blazor.Bootstrap.Admin
 {
-    public partial class FileManageControl : ComponentBase, IDisposable
+    public partial class FileManageControl : ComponentBase_WithGettextSupport
     {
         private readonly UnitStringConverting storageUSC = UnitStringConverting.StorageUnitStringConverting;
         [Inject]
@@ -123,9 +123,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         public string TextDownload => Locale.Catalog.GetString("Download");
         public string TextRename => Locale.Catalog.GetString("Rename");
         public string TextEdit => Locale.Catalog.GetString("Edit");
-        public string TextRows => Locale.Catalog.GetString("Rows");
-        public string TextEncoding => Locale.Catalog.GetString("Encoding");
-        [Parameter]
+                [Parameter]
         public Dictionary<string, Encoding> EncodingDict { get; set; }
 
         public string TextDelete => Locale.Catalog.GetString("Delete");
@@ -190,17 +188,6 @@ namespace Quick.Blazor.Bootstrap.Admin
             }
             catch { }
             return string.Empty;
-        }
-
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-            GettextResourceManager.CurrentCultureChanged += GettextResourceManager_CurrentCultureChanged;
-        }
-
-        private void GettextResourceManager_CurrentCultureChanged(object sender, CultureInfo e)
-        {
-            InvokeAsync(StateHasChanged);
         }
 
         protected override void OnParametersSet()
@@ -531,10 +518,6 @@ namespace Quick.Blazor.Bootstrap.Admin
                 {
                     [nameof(TextEditControl.File)] = file.FullName,
                     [nameof(TextEditControl.IconSave)] = IconSave,
-                    [nameof(TextEditControl.TextSuccess)] = TextSuccess,
-                    [nameof(TextEditControl.TextFailed)] = TextFailed,
-                    [nameof(TextEditControl.TextEncoding)] = TextEncoding,
-                    [nameof(TextEditControl.TextRows)] = TextRows,
                     [nameof(TextEditControl.EncodingDict)] = EncodingDict
                 });
             };
@@ -642,9 +625,9 @@ namespace Quick.Blazor.Bootstrap.Admin
             }
         }
 
-        public void Dispose()
+        public override void Dispose()
         {
-            GettextResourceManager.CurrentCultureChanged -= GettextResourceManager_CurrentCultureChanged;
+            base.Dispose();
             uploadCts?.Cancel();
             uploadCts = null;
         }

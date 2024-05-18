@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Quick.Blazor.Bootstrap.Admin
 {
-    public partial class TextEditControl : ComponentBase
+    public partial class TextEditControl : ComponentBase_WithGettextSupport
     {
         private ModalAlert modalAlert;
         [Parameter]
@@ -30,16 +30,12 @@ namespace Quick.Blazor.Bootstrap.Admin
         [Parameter]
         public Dictionary<string, Encoding> EncodingDict { get; set; }
 
+        private string TextSuccess => Locale.Catalog.GetString("Success");
+        private string TextFailed => Locale.Catalog.GetString("Failed");
+        private string TextRows => Locale.Catalog.GetString("Rows");
+        private string TextEncoding => Locale.Catalog.GetString("Encoding");
         [Parameter]
-        public string TextSuccess { get; set; } = Locale.Catalog.GetString("Success");
-        [Parameter]
-        public string TextFailed { get; set; } = Locale.Catalog.GetString("Failed");
-        [Parameter]
-        public string TextRows { get; set; } = Locale.Catalog.GetString("Rows");
-        [Parameter]
-        public string TextEncoding { get; set; } = Locale.Catalog.GetString("Encoding");
-        [Parameter]
-        public string IconSave { get; set; }
+        public string IconSave { get; set; } = "fa fa-save";
 
         private Exception OpenException;
         private string Content { get; set; }

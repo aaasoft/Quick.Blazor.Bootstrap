@@ -1,4 +1,6 @@
-﻿<EditForm Model="@this">
+﻿@inherits ComponentBase_WithGettextSupport
+
+<EditForm Model="@this">
     @if (OpenException == null)
     {
         <div class="btn-toolbar mb-1">
