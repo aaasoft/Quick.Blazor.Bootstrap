@@ -4,7 +4,7 @@ using System;
 
 namespace Quick.Blazor.Bootstrap
 {
-    public partial class ModalAlert : ComponentBase
+    public partial class ModalAlert : ComponentBase_WithGettextSupport
     {
         [Parameter]
         public bool DialogSizeSmall { get; set; }
@@ -15,8 +15,8 @@ namespace Quick.Blazor.Bootstrap
         [Parameter]
         public bool DialogScrollable { get; set; } = true;
 
-        public static string TextOk { get; set; } = Locale.Catalog.GetString("OK");
-        public static string TextCancel { get; set; } = Locale.Catalog.GetString("Cancel");
+        public static string TextOk => Locale.Catalog.GetString("OK");
+        public static string TextCancel => Locale.Catalog.GetString("Cancel");
         public string[] ContentLines => Content.Split('\n');
         private string Title { get; set; }
         private string Content { get; set; }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Quick.Blazor.Bootstrap
 {
-    public partial class ModalPrompt : ComponentBase
+    public partial class ModalPrompt : ComponentBase_WithGettextSupport
     {
         [Parameter]
         public bool DialogSizeSmall { get; set; }
@@ -16,8 +16,8 @@ namespace Quick.Blazor.Bootstrap
         public bool DialogSizeLarge { get; set; }
         [Parameter]
         public bool DialogSizeExtraLarge { get; set; }
-        public static string TextOk { get; set; } = Locale.Catalog.GetString("OK");
-        public static string TextCancel { get; set; } = Locale.Catalog.GetString("Cancel");
+        public static string TextOk => Locale.Catalog.GetString("OK");
+        public static string TextCancel => Locale.Catalog.GetString("Cancel");
 
         private string Title { get; set; }
         private string Content { get; set; }

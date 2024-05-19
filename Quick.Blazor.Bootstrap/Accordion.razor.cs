@@ -24,18 +24,15 @@ namespace Quick.Blazor.Bootstrap
         [Parameter]
         public string TabContentExtraClass { get; set; }
 
-        private bool _AllowMultiplePaneActived = false;
         [Parameter]
-        public bool AllowMultiplePanelActived
+        public bool AllowMultiplePanelActived { get; set; } = false;
+
+        public void SetAllowMultiplePanelActived(bool value)
         {
-            get { return _AllowMultiplePaneActived; }
-            set
-            {
-                _AllowMultiplePaneActived = value;
-                if (!value)
-                    foreach (var pane in _panes)
-                        pane.IsActive = false;
-            }
+            AllowMultiplePanelActived = value;
+            if (!value)
+                foreach (var pane in _panes)
+                    pane.IsActive = false;
         }
 
         internal List<AccordionPane> _panes = new List<AccordionPane>();
@@ -47,12 +44,12 @@ namespace Quick.Blazor.Bootstrap
         {
             if (string.IsNullOrEmpty(tabPane.Key))
             {
-                throw new ArgumentNullException(nameof(tabPane), "Key is null");
+                throw new ArgumentNullException(nameof(tabPane), Locale.Catalog.GetString("AccordionPane'sKey is null"));
             }
 
             if (_panes.Select(p => p.Key).Contains(tabPane.Key))
             {
-                throw new ArgumentException("An AccordionPane with the same key already exists");
+                throw new ArgumentException(Locale.Catalog.GetString("An AccordionPane with the same key already exists"));
             }
             _panes.Add(tabPane);
             if (AllowMultiplePanelActived)

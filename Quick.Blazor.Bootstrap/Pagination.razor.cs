@@ -8,22 +8,16 @@ using System.Threading.Tasks;
 
 namespace Quick.Blazor.Bootstrap
 {
-    public partial class Pagination : ComponentBase
+    public partial class Pagination : ComponentBase_WithGettextSupport
     {
         [Parameter]
         public RenderFragment ChildContent { get; set; }
-        [Parameter]
-        public string FirstPageText { get; set; } = Locale.Catalog.GetString("First Page");
-        [Parameter]
-        public string LastPageText { get; set; } = Locale.Catalog.GetString("Last Page");
-        [Parameter]
-        public string PreviousPageText { get; set; } = Locale.Catalog.GetString("Previous Page");
-        [Parameter]
-        public string NextPageText { get; set; } = Locale.Catalog.GetString("Next Page");
-        [Parameter]
-        public string PageText { get; set; } = Locale.Catalog.GetString("Page");
-        [Parameter]
-        public string RecordCountText { get; set; } = Locale.Catalog.GetString("Record Count:");
+        private string FirstPageText => Locale.Catalog.GetString("First Page");
+        private string LastPageText => Locale.Catalog.GetString("Last Page");
+        private string PreviousPageText => Locale.Catalog.GetString("Previous Page");
+        private string NextPageText => Locale.Catalog.GetString("Next Page");
+        private string PageText =>Locale.Catalog.GetString("Page");
+        private string RecordCountText =>Locale.Catalog.GetString("Record Count:");
         [Parameter]
         public bool DisplayRecordCount { get; set; } = true;
         [Parameter]
