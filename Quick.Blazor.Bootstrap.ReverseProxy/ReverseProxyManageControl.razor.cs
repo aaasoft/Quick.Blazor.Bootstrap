@@ -6,34 +6,23 @@ using System.Threading.Tasks;
 
 namespace Quick.Blazor.Bootstrap.ReverseProxy
 {
-    public partial class ReverseProxyManageControl : ComponentBase
+    public partial class ReverseProxyManageControl : ComponentBase_WithGettextSupport
     {
         private ModalAlert modalAlert;
         private ModalWindow modalWindow;
         private string searchKeywords;
 
-        [Parameter]
-        public string TextNew { get; set; } = Locale.Catalog.GetString("New");
-        [Parameter]
-        public string TextKeywords { get; set; } = Locale.Catalog.GetString("Keywords");
-        [Parameter]
-        public string TextName{ get; set; } = Locale.Catalog.GetString("Name");
-        [Parameter]
-        public string TextPath { get; set; } = Locale.Catalog.GetString("Path");
-        [Parameter]
-        public string TextUrl { get; set; } = Locale.Catalog.GetString("URL");
-        [Parameter]
-        public string TextOK { get; set; } = Locale.Catalog.GetString("OK");
-        [Parameter]
-        public string TextVisit { get; set; } = Locale.Catalog.GetString("Visit");
-        [Parameter]
-        public string TextEdit { get; set; } = Locale.Catalog.GetString("Edit");
-        [Parameter]
-        public string TextDelete { get; set; } = Locale.Catalog.GetString("Delete");
-        [Parameter]
-        public string TextError { get; set; } = Locale.Catalog.GetString("Error");
-        [Parameter]
-        public string TextConfirmDelete { get; set; } = Locale.Catalog.GetString("Do you want to delete Rule[{0}]?");
+        private static string TextNew => Locale.Catalog.GetString("New");
+        private static string TextKeywords =>Locale.Catalog.GetString("Keywords");
+        private static string TextName => Locale.Catalog.GetString("Name");
+        private static string TextPath => Locale.Catalog.GetString("Path");
+        private static string TextUrl => Locale.Catalog.GetString("URL");
+        private static string TextOK => Locale.Catalog.GetString("OK");
+        private static string TextVisit => Locale.Catalog.GetString("Visit");
+        private static string TextEdit => Locale.Catalog.GetString("Edit");
+        private static string TextDelete => Locale.Catalog.GetString("Delete");
+        private static string TextError => Locale.Catalog.GetString("Error");
+        private static string TextConfirmDelete => Locale.Catalog.GetString("Do you want to delete Rule[{0}]?");
         
         [Parameter]
         public string IconNew { get; set; }="fa fa-plus";

@@ -12,7 +12,7 @@ using XtermBlazor;
 
 namespace Quick.Blazor.Bootstrap.Terminal
 {
-    public partial class TerminalControl : ComponentBase, IDisposable
+    public partial class TerminalControl : ComponentBase_WithGettextSupport
     {
         private TerminalOptions terminalOptions;
         private Xterm terminal;
@@ -20,14 +20,10 @@ namespace Quick.Blazor.Bootstrap.Terminal
         private Stream ptyWriteStream;
         private CancellationTokenSource cts;
 
-        [Parameter]
-        public string TextOpen { get; set; } = Locale.Catalog.GetString("Open");
-        [Parameter]
-        public string TextClose { get; set; } = Locale.Catalog.GetString("Close");
-        [Parameter]
-        public string TextColumn { get; set; } = Locale.Catalog.GetString("Column");
-        [Parameter]
-        public string TextRow { get; set; } = Locale.Catalog.GetString("Row");
+        private static string TextOpen => Locale.Catalog.GetString("Open");
+        private static string TextClose => Locale.Catalog.GetString("Close");
+        private static string TextColumn => Locale.Catalog.GetString("Column");
+        private static string TextRow => Locale.Catalog.GetString("Row");
 
         [Parameter]
         public string App { get; set; }
@@ -171,8 +167,9 @@ namespace Quick.Blazor.Bootstrap.Terminal
             pty = null;
         }
 
-        public void Dispose()
+        public override void Dispose()
         {
+            base.Dispose();
             killShell();
         }
     }
