@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Quick.Blazor.Bootstrap.Utils;
+using Quick.Localize;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,12 +36,12 @@ namespace Quick.Blazor.Bootstrap
         {
             if (string.IsNullOrEmpty(tabPane.Key))
             {
-                throw new ArgumentNullException(nameof(tabPane), Locale.Catalog.GetString("TabPane's Key is null"));
+                throw new ArgumentNullException(nameof(tabPane), Locale.GetString("TabPane's Key is null"));
             }
 
             if (_panes.Select(p => p.Key).Contains(tabPane.Key))
             {
-                throw new ArgumentException(Locale.Catalog.GetString("An TabPane with the same key already exists"));
+                throw new ArgumentException(Locale.GetString("An TabPane with the same key already exists"));
             }
             _panes.Add(tabPane);
         }

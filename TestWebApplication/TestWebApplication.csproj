@@ -14,9 +14,6 @@
 		<ProjectReference Include="..\Quick.Blazor.Bootstrap\Quick.Blazor.Bootstrap.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<Compile Include="../Common/Locale.cs" Link="Locale.cs" />
-	</ItemGroup>
-	<ItemGroup>
 		<EmbeddedResource Include="locale/zh.mo" />
 	</ItemGroup>
 </Project>

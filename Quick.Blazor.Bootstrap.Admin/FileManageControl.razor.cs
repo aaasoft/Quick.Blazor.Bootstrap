@@ -102,37 +102,37 @@ namespace Quick.Blazor.Bootstrap.Admin
         [Parameter]
         public string FileFilter { get; set; }
 
-        private static string TextConfirm => Locale.Catalog.GetString("Confirm");
-        private static string TextConfirmDeleteFolder => Locale.Catalog.GetString("Do you want to delete folder[{0}]?");
-        private static string TextConfirmDeleteFile => Locale.Catalog.GetString("Do you want to delete file[{0}]?");
-        private static string TextInputNewName => Locale.Catalog.GetString("Please input new name of [{0}]?");
-        private static string TextSuccess => Locale.Catalog.GetString("Success");
-        private static string TextCanceled => Locale.Catalog.GetString("Canceled");
-        private static string TextFailed => Locale.Catalog.GetString("Failed");
-        private static string TextFolderNotExist => Locale.Catalog.GetString("Folder [{0}] not exist");
-        private static string TextUp => Locale.Catalog.GetString("Up");
-        private static string TextNewFolder => Locale.Catalog.GetString("New Folder");
-        private static string TextTransferSpeed => Locale.Catalog.GetString("Transfer Speed");
-        private static string TextRemainingTime => Locale.Catalog.GetString("Remaining Time");
-        private static string TextNewFolderPrompt => Locale.Catalog.GetString("Please input new folder name");
-        private static string TextUpload => Locale.Catalog.GetString("Upload");
-        private static string TextUploadReadFileInfo => Locale.Catalog.GetString("Reading upload file info...");
-        private static string TextUploadFileExist => Locale.Catalog.GetString("File [{0}] was exist.");
-        private static string TextUploadFileUploading => Locale.Catalog.GetString("Uploading file [{0}]...");
-        private static string TextRefresh => Locale.Catalog.GetString("Refresh");
-        private static string TextDownload => Locale.Catalog.GetString("Download");
-        private static string TextRename => Locale.Catalog.GetString("Rename");
-        private static string TextEdit => Locale.Catalog.GetString("Edit");
+        private static string TextConfirm => Locale.GetString("Confirm");
+        private static string TextConfirmDeleteFolder => Locale.GetString("Do you want to delete folder[{0}]?");
+        private static string TextConfirmDeleteFile => Locale.GetString("Do you want to delete file[{0}]?");
+        private static string TextInputNewName => Locale.GetString("Please input new name of [{0}]?");
+        private static string TextSuccess => Locale.GetString("Success");
+        private static string TextCanceled => Locale.GetString("Canceled");
+        private static string TextFailed => Locale.GetString("Failed");
+        private static string TextFolderNotExist => Locale.GetString("Folder [{0}] not exist");
+        private static string TextUp => Locale.GetString("Up");
+        private static string TextNewFolder => Locale.GetString("New Folder");
+        private static string TextTransferSpeed => Locale.GetString("Transfer Speed");
+        private static string TextRemainingTime => Locale.GetString("Remaining Time");
+        private static string TextNewFolderPrompt => Locale.GetString("Please input new folder name");
+        private static string TextUpload => Locale.GetString("Upload");
+        private static string TextUploadReadFileInfo => Locale.GetString("Reading upload file info...");
+        private static string TextUploadFileExist => Locale.GetString("File [{0}] was exist.");
+        private static string TextUploadFileUploading => Locale.GetString("Uploading file [{0}]...");
+        private static string TextRefresh => Locale.GetString("Refresh");
+        private static string TextDownload => Locale.GetString("Download");
+        private static string TextRename => Locale.GetString("Rename");
+        private static string TextEdit => Locale.GetString("Edit");
                 [Parameter]
         public Dictionary<string, Encoding> EncodingDict { get; set; }
 
-        private static string TextDelete => Locale.Catalog.GetString("Delete");
-        private static string TextPath => Locale.Catalog.GetString("Path");
-        private static string TextGoto => Locale.Catalog.GetString("Goto");
-        private static string TextCreationTime => Locale.Catalog.GetString("Creation Time");
-        private static string TextLastWriteTime => Locale.Catalog.GetString("Last Write Time");
-        private static string TextSize => Locale.Catalog.GetString("Size");
-        private static string TextName => Locale.Catalog.GetString("Name");
+        private static string TextDelete => Locale.GetString("Delete");
+        private static string TextPath => Locale.GetString("Path");
+        private static string TextGoto => Locale.GetString("Goto");
+        private static string TextCreationTime => Locale.GetString("Creation Time");
+        private static string TextLastWriteTime => Locale.GetString("Last Write Time");
+        private static string TextSize => Locale.GetString("Size");
+        private static string TextName => Locale.GetString("Name");
 
         [Parameter]
         public RenderFragment ToolbarAddonButtons { get; set; }
@@ -524,7 +524,7 @@ namespace Quick.Blazor.Bootstrap.Admin
             //如果文件大小大于1MB，则弹出提示是否打开
             if (file.Length > 1 * 1024 * 1024)
             {
-                modalAlert.Show(TextConfirm, Locale.Catalog.GetString($"File [{0}] is to large,are you sure to open it?", file.Name), openTextEditWindowAction);
+                modalAlert.Show(TextConfirm, Locale.GetString($"File [{0}] is to large,are you sure to open it?", file.Name), openTextEditWindowAction);
             }
             else
             {

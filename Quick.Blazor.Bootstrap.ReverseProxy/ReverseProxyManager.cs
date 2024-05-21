@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Primitives;
 using Quick.Blazor.Bootstrap.ReverseProxy.Model;
 using Quick.EntityFrameworkCore.Plus;
+using Quick.Localize;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -93,7 +94,7 @@ namespace Quick.Blazor.Bootstrap.ReverseProxy
             lock (ruleList)
             {
                 if (ruleList.Any(t => t.Path == rule.Path))
-                    throw new ApplicationException(Locale.Catalog.GetString("Rule with path[{0}] already exist.", rule.Path));
+                    throw new ApplicationException(Locale.GetString("Rule with path[{0}] already exist.", rule.Path));
                 ruleList.Add(rule);
             }
             AddRule(rule.Path, rule.Url);

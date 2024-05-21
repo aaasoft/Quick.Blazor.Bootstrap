@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Quick.Localize;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,10 +31,10 @@ namespace Quick.Blazor.Bootstrap.Admin
         [Parameter]
         public Dictionary<string, Encoding> EncodingDict { get; set; }
 
-        private string TextSuccess => Locale.Catalog.GetString("Success");
-        private string TextFailed => Locale.Catalog.GetString("Failed");
-        private string TextRows => Locale.Catalog.GetString("Rows");
-        private string TextEncoding => Locale.Catalog.GetString("Encoding");
+        private string TextSuccess => Locale.GetString("Success");
+        private string TextFailed => Locale.GetString("Failed");
+        private string TextRows => Locale.GetString("Rows");
+        private string TextEncoding => Locale.GetString("Encoding");
         [Parameter]
         public string IconSave { get; set; } = "fa fa-save";
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Quick.Localize;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,22 +11,22 @@ namespace Quick.Blazor.Bootstrap.Admin
 {
     public partial class ProcessManageControl : ComponentBase_WithGettextSupport
     {
-        public string TextAskToKillProcess => Locale.Catalog.GetString("Are you sure to kill process[Id: {0},Name: {1}]?");
-        private string TextFailed => Locale.Catalog.GetString("Failed");
-        private string TextPressSearchButtonTip => Locale.Catalog.GetString("Press 'Search' button to load process list.");
-        private string TextKillProcess => Locale.Catalog.GetString("Kill Process");
-        private string TextKillProcessTree => Locale.Catalog.GetString("Kill Process Tree");
-        private string TextKeywords => Locale.Catalog.GetString("Keywords");
-        private string TextColumnPID => Locale.Catalog.GetString("PID");
-        private string TextColumnName => Locale.Catalog.GetString("Name");
-        private string TextColumnThreads => Locale.Catalog.GetString("Threads");
-        private string TextColumnMemory =>  Locale.Catalog.GetString("Memory");
-        private string TextColumnOperate => Locale.Catalog.GetString("Operate");
+        private string TextAskToKillProcess => Locale.GetString("Are you sure to kill process[Id: {0},Name: {1}]?");
+        private string TextFailed => Locale.GetString("Failed");
+        private string TextPressSearchButtonTip => Locale.GetString("Press 'Search' button to load process list.");
+        private string TextKillProcess => Locale.GetString("Kill Process");
+        private string TextKillProcessTree => Locale.GetString("Kill Process Tree");
+        private string TextKeywords => Locale.GetString("Keywords");
+        private string TextColumnPID => Locale.GetString("PID");
+        private string TextColumnName => Locale.GetString("Name");
+        private string TextColumnThreads => Locale.GetString("Threads");
+        private string TextColumnMemory =>  Locale.GetString("Memory");
+        private string TextColumnOperate => Locale.GetString("Operate");
 
-        private string TextOrderBy => Locale.Catalog.GetString("OrderBy");
-        private string TextOrderByPID =>  Locale.Catalog.GetString("PID");
-        private string TextOrderByName =>  Locale.Catalog.GetString("Name");
-        private string TextOrderByMemory =>  Locale.Catalog.GetString("Memory");
+        private string TextOrderBy => Locale.GetString("OrderBy");
+        private string TextOrderByPID =>  Locale.GetString("PID");
+        private string TextOrderByName =>  Locale.GetString("Name");
+        private string TextOrderByMemory =>  Locale.GetString("Memory");
 
         [Parameter]
         public string IconSearch { get; set; } = "fa fa-search";
@@ -140,7 +141,7 @@ namespace Quick.Blazor.Bootstrap.Admin
 #pragma warning disable CA1416 // 验证平台兼容性
                           var process = Process.GetProcessById(info.Id);
                           if (process == null)
-                              throw new ApplicationException(Locale.Catalog.GetString("Can't found process[Id:{0}].", info.Id));
+                              throw new ApplicationException(Locale.GetString("Can't found process[Id:{0}].", info.Id));
                           process.Kill(entireProcessTree);
                           search();
 #pragma warning restore CA1416 // 验证平台兼容性

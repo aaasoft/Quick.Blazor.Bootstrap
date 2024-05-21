@@ -1,4 +1,5 @@
 ﻿using Quick.Blazor.Bootstrap;
+using Quick.Localize;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,9 @@ namespace TestWebApplication.Pages
 {
     public partial class TreeTest:ComponentBase_WithGettextSupport
     {
-        public static string TextExpandAll=> Locale.Catalog.GetString("Expand All");
-        public static string TextCollapseAll=> Locale.Catalog.GetString("Collapse All");
-        public static string TextLog=> Locale.Catalog.GetString("Log: ");
+        public static string TextExpandAll=> Locale.GetString("Expand All");
+        public static string TextCollapseAll=> Locale.GetString("Collapse All");
+        public static string TextLog=> Locale.GetString("Log: ");
 
         public class AddressInfo
         {

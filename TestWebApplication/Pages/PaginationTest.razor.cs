@@ -1,4 +1,5 @@
 ﻿using Quick.Blazor.Bootstrap;
+using Quick.Localize;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +9,8 @@ namespace TestWebApplication.Pages
 {
     public partial class PaginationTest : ComponentBase_WithGettextSupport
     {
-        public static string TextFirstName => Locale.Catalog.GetString("First Name");
-        public static string TextLastName => Locale.Catalog.GetString("Last Name");
+        public static string TextFirstName => Locale.GetString("First Name");
+        public static string TextLastName => Locale.GetString("Last Name");
 
         public class UserInfo
         {

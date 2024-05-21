@@ -1,19 +1,20 @@
 ﻿using System;
 using Quick.Blazor.Bootstrap;
+using Quick.Localize;
 
 namespace TestWebApplication.Shared;
 
 public partial class MainLayout : LayoutComponentBase_WithGettextSupport
 {
-    public static string TextHome => Locale.Catalog.GetString("Home");
-    public static string TextTabs => Locale.Catalog.GetString("Tabs");
-    public static string TextPagination => Locale.Catalog.GetString("Pagination");
-    public static string TextTree => Locale.Catalog.GetString("Tree");
-    public static string TextAccordion => Locale.Catalog.GetString("Accordion");
-    public static string TextFileManage => Locale.Catalog.GetString("FileManage");
-    public static string TextProcessManage => Locale.Catalog.GetString("ProcessManage");
-    public static string TextTerminal => Locale.Catalog.GetString("Terminal");
-    public static string TextLogView => Locale.Catalog.GetString("LogView");
-    public static string TextReverseProxy => Locale.Catalog.GetString("ReverseProxy");
+    public static string TextHome => Locale.GetString("Home");
+    public static string TextTabs => Locale.GetString("Tabs");
+    public static string TextPagination => Locale.GetString("Pagination");
+    public static string TextTree => Locale.GetString("Tree");
+    public static string TextAccordion => Locale.GetString("Accordion");
+    public static string TextFileManage => Locale.GetString("FileManage");
+    public static string TextProcessManage => Locale.GetString("ProcessManage");
+    public static string TextTerminal => Locale.GetString("Terminal");
+    public static string TextLogView => Locale.GetString("LogView");
+    public static string TextReverseProxy => Locale.GetString("ReverseProxy");
     
 }

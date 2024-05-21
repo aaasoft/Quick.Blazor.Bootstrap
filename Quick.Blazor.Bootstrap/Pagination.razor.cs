@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Quick.Blazor.Bootstrap.Utils;
+using Quick.Localize;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +13,12 @@ namespace Quick.Blazor.Bootstrap
     {
         [Parameter]
         public RenderFragment ChildContent { get; set; }
-        private string FirstPageText => Locale.Catalog.GetString("First Page");
-        private string LastPageText => Locale.Catalog.GetString("Last Page");
-        private string PreviousPageText => Locale.Catalog.GetString("Previous Page");
-        private string NextPageText => Locale.Catalog.GetString("Next Page");
-        private string PageText =>Locale.Catalog.GetString("Page");
-        private string RecordCountText =>Locale.Catalog.GetString("Record Count:");
+        private string FirstPageText => Locale.GetString("First Page");
+        private string LastPageText => Locale.GetString("Last Page");
+        private string PreviousPageText => Locale.GetString("Previous Page");
+        private string NextPageText => Locale.GetString("Next Page");
+        private string PageText =>Locale.GetString("Page");
+        private string RecordCountText =>Locale.GetString("Record Count:");
         [Parameter]
         public bool DisplayRecordCount { get; set; } = true;
         [Parameter]

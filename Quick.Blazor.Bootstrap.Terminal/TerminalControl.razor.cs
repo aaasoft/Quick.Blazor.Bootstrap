@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Pty.Net;
+using Quick.Localize;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -20,10 +21,10 @@ namespace Quick.Blazor.Bootstrap.Terminal
         private Stream ptyWriteStream;
         private CancellationTokenSource cts;
 
-        private static string TextOpen => Locale.Catalog.GetString("Open");
-        private static string TextClose => Locale.Catalog.GetString("Close");
-        private static string TextColumn => Locale.Catalog.GetString("Column");
-        private static string TextRow => Locale.Catalog.GetString("Row");
+        private static string TextOpen => Locale.GetString("Open");
+        private static string TextClose => Locale.GetString("Close");
+        private static string TextColumn => Locale.GetString("Column");
+        private static string TextRow => Locale.GetString("Row");
 
         [Parameter]
         public string App { get; set; }
@@ -156,7 +157,7 @@ namespace Quick.Blazor.Bootstrap.Terminal
         private void Pty_ProcessExited(object sender, PtyExitedEventArgs e)
         {
             pty.ProcessExited -= Pty_ProcessExited;
-            var message = Locale.Catalog.GetString("Terminal process has exited with exit code {0}",e.ExitCode);
+            var message = Locale.GetString("Terminal process has exited with exit code {0}",e.ExitCode);
             terminal?.WriteLine(message);
             if (OperatingSystem.IsWindows())
             {

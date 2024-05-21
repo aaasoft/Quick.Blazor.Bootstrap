@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Quick.Blazor.Bootstrap.Utils;
+using Quick.Localize;
 using System;
 
 namespace Quick.Blazor.Bootstrap
@@ -15,8 +16,8 @@ namespace Quick.Blazor.Bootstrap
         [Parameter]
         public bool DialogScrollable { get; set; } = true;
 
-        public static string TextOk => Locale.Catalog.GetString("OK");
-        public static string TextCancel => Locale.Catalog.GetString("Cancel");
+        public static string TextOk => Locale.GetString("OK");
+        public static string TextCancel => Locale.GetString("Cancel");
         public string[] ContentLines => Content.Split('\n');
         private string Title { get; set; }
         private string Content { get; set; }

@@ -44,9 +44,6 @@
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
 	<ItemGroup>
-		<Compile Include="../Common/Locale.cs" Link="Locale.cs" />
-	</ItemGroup>
-	<ItemGroup>
 		<EmbeddedResource Include="locale/zh.mo" />
 	</ItemGroup>
 </Project>
