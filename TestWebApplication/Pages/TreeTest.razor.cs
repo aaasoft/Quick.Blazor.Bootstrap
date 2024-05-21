@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace TestWebApplication.Pages
 {
-    public partial class TreeTest
+    public partial class TreeTest:ComponentBase_WithGettextSupport
     {
+        public static string TextExpandAll=> Locale.Catalog.GetString("Expand All");
+        public static string TextCollapseAll=> Locale.Catalog.GetString("Collapse All");
+        public static string TextLog=> Locale.Catalog.GetString("Log: ");
+
         public class AddressInfo
         {
             public string Name { get; set; }

@@ -1,4 +1,4 @@
-﻿@inherits LayoutComponentBase
+﻿@inherits LayoutComponentBase_WithGettextSupport
 
 @code
 {
@@ -16,52 +16,52 @@
             <ChildContent>
                 <NavMenuItem Key="Home" OnClick="@(()=>Show<Pages.Index>())">
                     <Tab>
-                        <i class="fa fa-home" aria-hidden="true"></i> Home
+                        <i class="fa fa-home" aria-hidden="true"></i> @TextHome
                     </Tab>
                 </NavMenuItem>
                 <NavMenuItem Key="Tabs" OnClick="@(()=>Show<Pages.TabsTest>())">
                     <Tab>
-                        <i class="fa fa-plus" aria-hidden="true"></i> Tabs
+                        <i class="fa fa-plus" aria-hidden="true"></i> @TextTabs
                     </Tab>
                 </NavMenuItem>
                 <NavMenuItem Key="Pagination" OnClick="@(()=>Show<Pages.PaginationTest>())">
                     <Tab>
-                        <i class="fa fa-plus" aria-hidden="true"></i> Pagination
+                        <i class="fa fa-plus" aria-hidden="true"></i> @TextPagination
                     </Tab>
                 </NavMenuItem>
                 <NavMenuItem Key="Tree" OnClick="@(()=>Show<Pages.TreeTest>())">
                     <Tab>
-                        <i class="fa fa-plus" aria-hidden="true"></i> Tree
+                        <i class="fa fa-plus" aria-hidden="true"></i> @TextTree
                     </Tab>
                 </NavMenuItem>
                 <NavMenuItem Key="Accordion" OnClick="@(()=>Show<Pages.AccordionTest>())">
                     <Tab>
-                        <i class="fa fa-plus" aria-hidden="true"></i> Accordion
+                        <i class="fa fa-plus" aria-hidden="true"></i> @TextAccordion
                     </Tab>
                 </NavMenuItem>
                 <NavMenuItem Key="FileManage" OnClick="@(()=>Show<Quick.Blazor.Bootstrap.Admin.FileManageControl>())">
                     <Tab>
-                        <i class="fa fa-plus" aria-hidden="true"></i> FileManage
+                        <i class="fa fa-plus" aria-hidden="true"></i> @TextFileManage
                     </Tab>
                 </NavMenuItem>
                 <NavMenuItem Key="ProcessManage" OnClick="@(()=>Show<Quick.Blazor.Bootstrap.Admin.ProcessManageControl>())">
                     <Tab>
-                        <i class="fa fa-plus" aria-hidden="true"></i> ProcessManage
+                        <i class="fa fa-plus" aria-hidden="true"></i> @TextProcessManage
                     </Tab>
                 </NavMenuItem>
                 <NavMenuItem Key="Terminal" OnClick="@(()=>Show<Quick.Blazor.Bootstrap.Terminal.TerminalControl>())">
                     <Tab>
-                        <i class="fa fa-plus" aria-hidden="true"></i> Terminal
+                        <i class="fa fa-plus" aria-hidden="true"></i> @TextTerminal
                     </Tab>
                 </NavMenuItem>
                 <NavMenuItem Key="LogViewTest" OnClick="@(()=>Show<Pages.LogViewTest>())">
                     <Tab>
-                        <i class="fa fa-plus" aria-hidden="true"></i> LogView
+                        <i class="fa fa-plus" aria-hidden="true"></i> @TextLogView
                     </Tab>
                 </NavMenuItem>
                 <NavMenuItem Key="ReverseProxy" OnClick="@(()=>Show<Quick.Blazor.Bootstrap.ReverseProxy.ReverseProxyManageControl>())">
                     <Tab>
-                        <i class="fa fa-plus" aria-hidden="true"></i> ReverseProxy
+                        <i class="fa fa-plus" aria-hidden="true"></i> @TextReverseProxy
                     </Tab>
                 </NavMenuItem>
             </ChildContent>

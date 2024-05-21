@@ -1,0 +1,96 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: TestWebApplication\n"
+"POT-Creation-Date: 2024-05-21 12:03:57+0800\n"
+"PO-Revision-Date: 2024-05-21 12:06+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.4\n"
+
+#: ../../Shared/MainLayout.razor.cs:15
+msgid "Terminal"
+msgstr "终端"
+
+#: ../../Shared/SurveyPrompt.razor.cs:8
+msgid "Please take our"
+msgstr "请查看我们的"
+
+#: ../../Shared/SurveyPrompt.razor.cs:10
+msgid "and tell us what you think."
+msgstr "并告诉我们您的想法。"
+
+#: ../../Pages/Index.razor.cs:8
+msgid "Welcome to use Quick.Blazor.Bootstrap."
+msgstr "欢迎使用Quick.Blazor.Bootstrap。"
+
+#: ../../Shared/MainLayout.razor.cs:17
+msgid "ReverseProxy"
+msgstr "反向代理"
+
+#: ../../Pages/PaginationTest.razor.cs:12
+msgid "Last Name"
+msgstr "姓"
+
+#: ../../Pages/Index.razor.cs:9
+msgid "How is Blazor working for you?"
+msgstr "Blazor 如何为你工作？"
+
+#: ../../Pages/TreeTest.razor.cs:12
+msgid "Collapse All"
+msgstr "全部收缩"
+
+#: ../../Shared/MainLayout.razor.cs:11
+msgid "Tree"
+msgstr "树形"
+
+#: ../../Shared/MainLayout.razor.cs:16
+msgid "LogView"
+msgstr "日志查看"
+
+#: ../../Shared/MainLayout.razor.cs:12
+msgid "Accordion"
+msgstr "手风琴"
+
+#: ../../Pages/PaginationTest.razor.cs:11
+msgid "First Name"
+msgstr "名"
+
+#: ../../Pages/TreeTest.razor.cs:13
+msgid "Log: "
+msgstr "日志："
+
+#: ../../Pages/AccordionTest.razor.cs:8
+msgid "Allow Multiple Pane Actived"
+msgstr "允许多个面板激活"
+
+#: ../../Shared/MainLayout.razor.cs:8
+msgid "Home"
+msgstr "主页"
+
+#: ../../Pages/TreeTest.razor.cs:11
+msgid "Expand All"
+msgstr "全部展开"
+
+#: ../../Shared/SurveyPrompt.razor.cs:9
+msgid "brief survey"
+msgstr "简单介绍"
+
+#: ../../Shared/MainLayout.razor.cs:9
+msgid "Tabs"
+msgstr "选项卡"
+
+#: ../../Shared/MainLayout.razor.cs:14
+msgid "ProcessManage"
+msgstr "进程管理"
+
+#: ../../Shared/MainLayout.razor.cs:13
+msgid "FileManage"
+msgstr "文件管理器"
+
+#: ../../Shared/MainLayout.razor.cs:10
+msgid "Pagination"
+msgstr "分页器"

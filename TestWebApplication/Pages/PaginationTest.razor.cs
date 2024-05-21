@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace TestWebApplication.Pages
 {
-    public partial class PaginationTest
+    public partial class PaginationTest : ComponentBase_WithGettextSupport
     {
+        public static string TextFirstName => Locale.Catalog.GetString("First Name");
+        public static string TextLastName => Locale.Catalog.GetString("Last Name");
+
         public class UserInfo
         {
             public int Index { get; set; }

@@ -1,6 +1,8 @@
-﻿<div class="custom-control custom-switch">
+﻿@inherits ComponentBase_WithGettextSupport;
+
+<div class="custom-control custom-switch">
   <input type="checkbox" class="custom-control-input" id="@switchId_AllowMultiplePaneActived" @bind-value="AllowMultiplePaneActived">
-  <label class="custom-control-label" for="@switchId_AllowMultiplePaneActived">Allow Multiple Pane Actived</label>
+  <label class="custom-control-label" for="@switchId_AllowMultiplePaneActived">@TextAllowMultiplePaneActived</label>
 </div>
 
 <Accordion NavTabsExtraClass="mb-5" AllowMultiplePanelActived="@AllowMultiplePaneActived">
