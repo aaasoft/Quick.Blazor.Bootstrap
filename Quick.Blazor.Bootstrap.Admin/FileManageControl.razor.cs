@@ -1,6 +1,7 @@
 ﻿using BlazorDownloadFile;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using Quick.Blazor.Bootstrap.Admin.Utils;
 using Quick.Localize;
@@ -279,6 +280,16 @@ namespace Quick.Blazor.Bootstrap.Admin
             CurrentDir = dir;
             Dir = CurrentPath = dir?.FullName;
             refresh();
+        }
+
+        private async void txtCurrentPath_KeyPress(KeyboardEventArgs e)
+        {
+            if (e.Key == "Enter")
+            {
+                await Task.Delay(100);
+                btnGoto_Click();
+                await InvokeAsync(StateHasChanged);
+            }
         }
 
         private void btnGoto_Click()

@@ -118,7 +118,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">@TextPath</span>
                 </div>
-                <input type="text" title="@TextPath" class="form-control col-auto" @bind-value="CurrentPath" />
+                <input type="text" title="@TextPath" class="form-control col-auto" @bind-value="CurrentPath" @onkeypress="txtCurrentPath_KeyPress" />
                 <div class="input-group-append">
                     <button title="@TextGoto" type="button" class="btn btn-secondary" @onclick="btnGoto_Click">
                         <i class="@IconGoto" aria-hidden="true"></i>                        
