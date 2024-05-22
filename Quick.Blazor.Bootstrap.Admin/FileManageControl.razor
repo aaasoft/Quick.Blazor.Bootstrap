@@ -56,11 +56,18 @@
                                     <i class="@IconDownload" aria-hidden="true"></i>
                                 </button>
                             }
-                            @if (DisplayCompressButton && SelectedItem != null)
+                            @if (DisplayCompressButton && SelectedItem != null && !isSelectedZipFile())
                             {
                                 <button title="@TextCompress" type="button" class="btn btn-sm btn-secondary"
                                     @onclick="btnCompress_Click">
                                     <i class="@IconCompress" aria-hidden="true"></i>
+                                </button>
+                            }
+                            @if (DisplayDecompressButton && isSelectedZipFile())
+                            {
+                                <button title="@TextDecompress" type="button" class="btn btn-sm btn-secondary"
+                                    @onclick="btnDecompress_Click">
+                                    <i class="@IconDecompress" aria-hidden="true"></i>
                                 </button>
                             }
                             @if (SelectedItem != null)
@@ -160,7 +167,14 @@
                                 {
                                     <tr class="@(SelectedItem == file ? "table-active" : "")" @onclick="@(e => SelectedItem = file)"
                                         @ondblclick="onFileDoubleClick">
-                                        <td><i class="@IconFile" aria-hidden="true"></i>@file.Name</td>
+                                        @if(isSelectedZipFile(file))
+                                        {
+                                            <td><i class="@IconZipFile" aria-hidden="true"></i>@file.Name</td>
+                                        }
+                                        else
+                                        {
+                                            <td><i class="@IconFile" aria-hidden="true"></i>@file.Name</td>
+                                        }
                                         <td>@getLastWriteString(file)</td>
                                         <td>@getFileLengthString(file)B</td>
                                     </tr>
@@ -197,8 +211,15 @@
                                 <a href="javascript:;" title="@TextSize: @getFileLengthString(file)B
 @TextLastWriteTime: @getLastWriteString(file)"
                                     class="text-center list-group-item list-group-item-action border-0 p-1 @(SelectedItem == file ? "active" : "")"
-                                    @onclick="@(e => SelectedItem = file)" @ondblclick="onFileDoubleClick">
-                                    <p class="h1 m-0 pt-1"><i class="@IconFile" aria-hidden="true"></i></p>
+                                    @onclick="@(e => SelectedItem = file)" @ondblclick="onFileDoubleClick">                                    
+                                    @if(isSelectedZipFile(file))
+                                    {
+                                        <p class="h1 m-0 pt-1"><i class="@IconZipFile" aria-hidden="true"></i></p>
+                                    }
+                                    else
+                                    {
+                                        <p class="h1 m-0 pt-1"><i class="@IconFile" aria-hidden="true"></i></p>
+                                    }
                                     <span class="text-center">@file.Name</span>
                                 </a>
                             </div>

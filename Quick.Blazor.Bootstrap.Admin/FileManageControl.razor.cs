@@ -9,6 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -118,6 +119,9 @@ namespace Quick.Blazor.Bootstrap.Admin
         [Parameter]
         public bool DisplayCompressButton { get; set; } = true;
         [Parameter]
+        public bool DisplayDecompressButton { get; set; } = true;
+        
+        [Parameter]
         public string FileFilter { get; set; }
 
         private static string TextConfirm => Locale.GetString("Confirm");
@@ -144,7 +148,7 @@ namespace Quick.Blazor.Bootstrap.Admin
 
         private static string TextRename => Locale.GetString("Rename");
         private static string TextEdit => Locale.GetString("Edit");
-                [Parameter]
+        [Parameter]
         public Dictionary<string, Encoding> EncodingDict { get; set; }
 
         private static string TextDelete => Locale.GetString("Delete");
@@ -161,7 +165,9 @@ namespace Quick.Blazor.Bootstrap.Admin
         [Parameter]
         public string IconFolder { get; set; } = "fa fa-folder m-1";
         [Parameter]
-        public string IconFile { get; set; } = "fa fa-file m-1";
+        public string IconFile { get; set; } = "fa fa-file-o m-1";
+        [Parameter]
+        public string IconZipFile { get; set; } = "fa fa-file-zip-o m-1";
         [Parameter]
         public string IconUp { get; set; } = "fa fa-arrow-up";
         [Parameter]
@@ -192,6 +198,16 @@ namespace Quick.Blazor.Bootstrap.Admin
         public string IconGoto { get; set; } = "fa fa-arrow-right";
         [Parameter]
         public string IconSearch { get; set; } = "fa fa-search";
+
+        private bool isSelectedZipFile()
+        {
+            return isSelectedZipFile(SelectedItem as FileInfo);
+        }
+
+        private bool isSelectedZipFile(FileInfo fileInfo)
+        {
+            return fileInfo != null && fileInfo.Name.EndsWith(".zip");
+        }
 
         private string getFileLengthString(FileInfo fileInfo)
         {
@@ -369,7 +385,8 @@ namespace Quick.Blazor.Bootstrap.Admin
                 return;
             }
 
-            System.Threading.CancellationTokenSource cts = new System.Threading.CancellationTokenSource();
+            var cts = new System.Threading.CancellationTokenSource();
+            var cancellationToken= cts.Token;
             modalLoading?.Show(TextDownload, file.Name, false, cts.Cancel);
             var stopwatch = new System.Diagnostics.Stopwatch();
             stopwatch.Start();
@@ -384,7 +401,7 @@ namespace Quick.Blazor.Bootstrap.Admin
                 {
                     while (!cts.IsCancellationRequested)
                     {
-                        var ret = fs.Read(buffer, 0, buffer.Length);
+                        var ret = await fs.ReadAsync(buffer, 0, buffer.Length, cancellationToken);
                         if (ret <= 0)
                             break;
                         readTotalCount += ret;
@@ -400,16 +417,15 @@ namespace Quick.Blazor.Bootstrap.Admin
                             await InvokeAsync(StateHasChanged);
                             lastDisplayTime = DateTime.Now;
                         }
-                        await BlazorDownloadFileService.AddBuffer(new ArraySegment<byte>(buffer, 0, ret), cts.Token);
+                        await BlazorDownloadFileService.AddBuffer(new ArraySegment<byte>(buffer, 0, ret), cancellationToken);
                     }
                 }
-                if (cts.IsCancellationRequested)
+                if (cancellationToken.IsCancellationRequested)
                 {
                     modalAlert?.Show(TextDownload, TextCanceled);
                     return;
                 }
-                var result = await BlazorDownloadFileService.DownloadBinaryBuffers(file.Name, cts.Token);
-
+                var result = await BlazorDownloadFileService.DownloadBinaryBuffers(file.Name, cancellationToken);
                 if (!result.Succeeded)
                 {
                     modalAlert?.Show(TextDownload, TextFailed + Environment.NewLine + result.ErrorName + Environment.NewLine + result.ErrorMessage);
@@ -436,9 +452,7 @@ namespace Quick.Blazor.Bootstrap.Admin
             var fsInfo = (FileSystemInfo)SelectedItem;
             var cts = new System.Threading.CancellationTokenSource();
             var cancellationToken = cts.Token;
-
-            modalLoading?.Show(TextCompress, fsInfo.Name, false, cts.Cancel);
-
+            modalLoading?.Show($"{TextCompress} - {fsInfo.Name}", null, false, cts.Cancel);
             var fileList = new List<FileInfo>();
             long totalFileSize=0;
             //统计要压缩的文件列表信息
@@ -490,7 +504,7 @@ namespace Quick.Blazor.Bootstrap.Admin
                         {
                             while (!cancellationToken.IsCancellationRequested)
                             {
-                                var ret = fs.Read(buffer, 0, buffer.Length);
+                                var ret = await fs.ReadAsync(buffer, 0, buffer.Length, cancellationToken);
                                 if (ret <= 0)
                                     break;
                                 readTotalCount += ret;
@@ -502,6 +516,7 @@ namespace Quick.Blazor.Bootstrap.Admin
                                     sb.Append(TextTransferSpeed + ": " + storageUSC.GetString(Convert.ToDecimal(speed * 1000), 1, true) + "B/s");
                                     var remainingTime = TimeSpan.FromMilliseconds((totalFileSize - readTotalCount) / speed);
                                     sb.Append("," + TextRemainingTime + ": " + remainingTime.ToString(@"hh\:mm\:ss"));
+                                    modalLoading.UpdateContent(entryName);
                                     modalLoading.UpdateProgress(Convert.ToInt32(readTotalCount * 100 / totalFileSize), sb.ToString());
                                     await InvokeAsync(StateHasChanged);
                                     lastDisplayTime = DateTime.Now;
@@ -511,14 +526,100 @@ namespace Quick.Blazor.Bootstrap.Admin
                         }
                     }
                 }
-                if (cts.IsCancellationRequested)
+                if (cancellationToken.IsCancellationRequested)
                 {
-                    File.Delete(zipFileName);
+                    try { File.Delete(zipFileName); } catch { }
                     modalAlert?.Show(TextCompress, TextCanceled);
                     return;
                 }
                 Files = new[] { new FileInfo(zipFileName) }.Concat(Files).ToArray();
                 SelectedPath = zipFileName;
+                await InvokeAsync(StateHasChanged);
+            }
+            catch (TaskCanceledException)
+            {
+                try { File.Delete(zipFileName); } catch { }
+                modalAlert?.Show(TextDownload, TextCanceled);
+            }
+            catch (Exception ex)
+            {
+                try { File.Delete(zipFileName); } catch { }
+                modalAlert?.Show(TextDownload, TextFailed + Environment.NewLine + ExceptionUtils.GetExceptionMessage(ex));
+            }
+            finally
+            {
+                stopwatch.Stop();
+                modalLoading?.Close();
+            }
+        }
+
+
+        private async void btnDecompress_Click()
+        {
+            var zipFileInfo = SelectedItem as FileInfo;
+            if(zipFileInfo==null)
+                return;
+            var cts = new System.Threading.CancellationTokenSource();
+            var cancellationToken = cts.Token;
+            modalLoading?.Show($"{TextDecompress} - {zipFileInfo.Name}", null, false, cts.Cancel);
+
+            long totalFileSize=0;
+            var baseFolder = zipFileInfo.DirectoryName;
+            //开始解压
+            var stopwatch = new System.Diagnostics.Stopwatch();
+            stopwatch.Start();
+            DateTime lastDisplayTime = DateTime.MinValue;
+            byte[] buffer = new byte[24 * 1024];
+            long readTotalCount = 0;
+
+            try
+            {
+                using (var zipFileStream = zipFileInfo.OpenRead())
+                using (var zipArchive = new ZipArchive(zipFileStream, ZipArchiveMode.Read))
+                {
+                    foreach (var zipEntry in zipArchive.Entries)
+                    {
+                        totalFileSize += zipEntry.Length;
+                    }
+                    foreach (var zipEntry in zipArchive.Entries)
+                    {
+                        var fileName = Path.Combine(baseFolder, zipEntry.FullName);
+                        var fileFolder = Path.GetDirectoryName(fileName);
+                        if (!Directory.Exists(fileFolder))
+                            Directory.CreateDirectory(fileFolder);
+                        using (var zipEntryStream = zipEntry.Open())
+                        using (var fileStream = File.OpenWrite(fileName))
+                        {
+                            while (!cancellationToken.IsCancellationRequested)
+                            {
+                                var ret = await zipEntryStream.ReadAsync(buffer, 0, buffer.Length, cancellationToken);
+                                if (ret <= 0)
+                                    break;
+                                readTotalCount += ret;
+
+                                if ((DateTime.Now - lastDisplayTime).TotalSeconds > 0.5 && stopwatch.ElapsedMilliseconds > 0)
+                                {
+                                    StringBuilder sb = new StringBuilder();
+                                    var speed = Convert.ToDouble(readTotalCount / stopwatch.ElapsedMilliseconds);
+                                    sb.Append(TextTransferSpeed + ": " + storageUSC.GetString(Convert.ToDecimal(speed * 1000), 1, true) + "B/s");
+                                    var remainingTime = TimeSpan.FromMilliseconds((totalFileSize - readTotalCount) / speed);
+                                    sb.Append("," + TextRemainingTime + ": " + remainingTime.ToString(@"hh\:mm\:ss"));
+                                    modalLoading.UpdateContent(zipEntry.FullName);
+                                    modalLoading.UpdateProgress(Convert.ToInt32(readTotalCount * 100 / totalFileSize), sb.ToString());
+                                    await InvokeAsync(StateHasChanged);
+                                    lastDisplayTime = DateTime.Now;
+                                }
+                                await fileStream.WriteAsync(buffer, 0, ret, cancellationToken);
+                            }
+                        }
+                    }
+                }
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    modalAlert?.Show(TextCompress, TextCanceled);
+                    return;
+                }
+                refresh();
                 await InvokeAsync(StateHasChanged);
             }
             catch (TaskCanceledException)
@@ -531,7 +632,6 @@ namespace Quick.Blazor.Bootstrap.Admin
             }
             finally
             {
-                await BlazorDownloadFileService.ClearBuffers();
                 stopwatch.Stop();
                 modalLoading?.Close();
             }
