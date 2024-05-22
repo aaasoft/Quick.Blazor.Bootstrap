@@ -56,6 +56,13 @@
                                     <i class="@IconDownload" aria-hidden="true"></i>
                                 </button>
                             }
+                            @if (DisplayCompressButton && SelectedItem != null)
+                            {
+                                <button title="@TextCompress" type="button" class="btn btn-sm btn-secondary"
+                                    @onclick="btnCompress_Click">
+                                    <i class="@IconCompress" aria-hidden="true"></i>
+                                </button>
+                            }
                             @if (SelectedItem != null)
                             {
                                 @if (DisplayRenameButton)

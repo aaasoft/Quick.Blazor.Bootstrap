@@ -64,9 +64,25 @@ namespace Quick.Blazor.Bootstrap.Admin
             set
             {
                 if (File.Exists(value))
-                    SelectedItem = new FileInfo(value);
+                {
+                    SelectedItem = Files.FirstOrDefault(t => t.FullName == value);
+                    if (SelectedItem == null)
+                    {
+                        var fileInfo = new FileInfo(value);
+                        Files = new[] { fileInfo }.Concat(Files).ToArray();
+                        SelectedItem = fileInfo;
+                    }
+                }
                 if (Directory.Exists(value))
-                    SelectedItem = new DirectoryInfo(value);
+                {
+                    SelectedItem = Dirs.FirstOrDefault(t => t.FullName == value);
+                    if (SelectedItem == null)
+                    {
+                        var dirInfo = new DirectoryInfo(value);
+                        Dirs = new[] { dirInfo }.Concat(Dirs).ToArray();
+                        SelectedItem = dirInfo;
+                    }
+                }
             }
         }
 
@@ -100,6 +116,8 @@ namespace Quick.Blazor.Bootstrap.Admin
         [Parameter]
         public bool DisplayUploadButton { get; set; } = true;
         [Parameter]
+        public bool DisplayCompressButton { get; set; } = true;
+        [Parameter]
         public string FileFilter { get; set; }
 
         private static string TextConfirm => Locale.GetString("Confirm");
@@ -121,6 +139,9 @@ namespace Quick.Blazor.Bootstrap.Admin
         private static string TextUploadFileUploading => Locale.GetString("Uploading file [{0}]...");
         private static string TextRefresh => Locale.GetString("Refresh");
         private static string TextDownload => Locale.GetString("Download");
+        private static string TextCompress => Locale.GetString("Compress");
+        private static string TextDecompress => Locale.GetString("Decompress");
+
         private static string TextRename => Locale.GetString("Rename");
         private static string TextEdit => Locale.GetString("Edit");
                 [Parameter]
@@ -151,6 +172,10 @@ namespace Quick.Blazor.Bootstrap.Admin
         public string IconRefresh { get; set; } = "fa fa-refresh";
         [Parameter]
         public string IconDownload { get; set; } = "fa fa-download";
+        [Parameter]
+        public string IconCompress { get; set; } = "fa fa-inbox";
+        [Parameter]
+        public string IconDecompress { get; set; } = "fa fa-dropbox";
         [Parameter]
         public string IconRename { get; set; } = "fa fa-i-cursor";
         [Parameter]
@@ -389,6 +414,112 @@ namespace Quick.Blazor.Bootstrap.Admin
                 {
                     modalAlert?.Show(TextDownload, TextFailed + Environment.NewLine + result.ErrorName + Environment.NewLine + result.ErrorMessage);
                 }
+            }
+            catch (TaskCanceledException)
+            {
+                modalAlert?.Show(TextDownload, TextCanceled);
+            }
+            catch (Exception ex)
+            {
+                modalAlert?.Show(TextDownload, TextFailed + Environment.NewLine + ExceptionUtils.GetExceptionMessage(ex));
+            }
+            finally
+            {
+                await BlazorDownloadFileService.ClearBuffers();
+                stopwatch.Stop();
+                modalLoading?.Close();
+            }
+        }
+
+        private async void btnCompress_Click()
+        {
+            var fsInfo = (FileSystemInfo)SelectedItem;
+            var cts = new System.Threading.CancellationTokenSource();
+            var cancellationToken = cts.Token;
+
+            modalLoading?.Show(TextCompress, fsInfo.Name, false, cts.Cancel);
+
+            var fileList = new List<FileInfo>();
+            long totalFileSize=0;
+            //统计要压缩的文件列表信息
+            string baseFolder = null;
+            if (SelectedItem is FileInfo)
+            {
+                var fileInfo = (FileInfo)SelectedItem;
+                baseFolder=fileInfo.DirectoryName;
+                fileList.Add(fileInfo);
+                totalFileSize=fileInfo.Length;
+            }
+            else if (SelectedItem is DirectoryInfo)
+            {
+                var dirInfo = (DirectoryInfo)SelectedItem;
+                baseFolder = dirInfo.Parent.FullName;
+                fileList.AddRange(dirInfo.GetFiles("*", SearchOption.AllDirectories));
+                totalFileSize = fileList.Sum(t=>t.Length);
+            }
+            //文件名
+            string zipFileName = $"{fsInfo.Name}.zip";
+            if(File.Exists(Path.Combine(baseFolder,zipFileName)))
+            {
+                for(var i=1;i<int.MaxValue;i++)
+                {
+                    zipFileName = $"{fsInfo.Name}({i}).zip";
+                    if(!File.Exists(Path.Combine(baseFolder,zipFileName)))
+                        break;
+                }
+            }
+            zipFileName = Path.Combine(baseFolder, zipFileName);
+            //开始压缩
+            var stopwatch = new System.Diagnostics.Stopwatch();
+            stopwatch.Start();
+            DateTime lastDisplayTime = DateTime.MinValue;
+            byte[] buffer = new byte[24 * 1024];
+            long readTotalCount = 0;
+
+            try
+            {
+                using (var zipFileStream = File.Create(zipFileName))
+                using (var zipArchive = new System.IO.Compression.ZipArchive(zipFileStream, System.IO.Compression.ZipArchiveMode.Create, true))
+                {
+                    foreach (var file in fileList)
+                    {
+                        var entryName = file.FullName.Substring(baseFolder.Length + 1);
+                        var zipEntry = zipArchive.CreateEntry(entryName);
+                        using (var fs = file.OpenRead())
+                        using (var zs = zipEntry.Open())
+                        {
+                            while (!cancellationToken.IsCancellationRequested)
+                            {
+                                var ret = fs.Read(buffer, 0, buffer.Length);
+                                if (ret <= 0)
+                                    break;
+                                readTotalCount += ret;
+
+                                if ((DateTime.Now - lastDisplayTime).TotalSeconds > 0.5 && stopwatch.ElapsedMilliseconds > 0)
+                                {
+                                    StringBuilder sb = new StringBuilder();
+                                    var speed = Convert.ToDouble(readTotalCount / stopwatch.ElapsedMilliseconds);
+                                    sb.Append(TextTransferSpeed + ": " + storageUSC.GetString(Convert.ToDecimal(speed * 1000), 1, true) + "B/s");
+                                    var remainingTime = TimeSpan.FromMilliseconds((totalFileSize - readTotalCount) / speed);
+                                    sb.Append("," + TextRemainingTime + ": " + remainingTime.ToString(@"hh\:mm\:ss"));
+                                    modalLoading.UpdateProgress(Convert.ToInt32(readTotalCount * 100 / totalFileSize), sb.ToString());
+                                    await InvokeAsync(StateHasChanged);
+                                    lastDisplayTime = DateTime.Now;
+                                }
+                                await zs.WriteAsync(buffer, 0, ret, cancellationToken);
+                            }
+                        }
+                    }
+                }
+                if (cts.IsCancellationRequested)
+                {
+                    File.Delete(zipFileName);
+                    modalAlert?.Show(TextCompress, TextCanceled);
+                    return;
+                }
+                Files = new[] { new FileInfo(zipFileName) }.Concat(Files).ToArray();
+                SelectedPath = zipFileName;
+                await InvokeAsync(StateHasChanged);
             }
             catch (TaskCanceledException)
             {
