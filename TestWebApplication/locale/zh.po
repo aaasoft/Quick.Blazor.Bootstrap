@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TestWebApplication\n"
-"POT-Creation-Date: 2024-05-21 12:03:57+0800\n"
-"PO-Revision-Date: 2024-05-21 12:06+0800\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2024-05-22 20:07:27+0800\n"
+"PO-Revision-Date: 2024-05-22 20:08+0800\n"
+"Last-Translator: 张鹏 <scbeta@qq.com>\n"
 "Language-Team: \n"
 "Language: zh\n"
 "MIME-Version: 1.0\n"
@@ -11,86 +11,110 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.4\n"
 
-#: ../../Shared/MainLayout.razor.cs:15
-msgid "Terminal"
-msgstr "终端"
-
-#: ../../Shared/SurveyPrompt.razor.cs:8
-msgid "Please take our"
-msgstr "请查看我们的"
-
-#: ../../Shared/SurveyPrompt.razor.cs:10
-msgid "and tell us what you think."
-msgstr "并告诉我们您的想法。"
-
-#: ../../Pages/Index.razor.cs:8
-msgid "Welcome to use Quick.Blazor.Bootstrap."
-msgstr "欢迎使用Quick.Blazor.Bootstrap。"
-
-#: ../../Shared/MainLayout.razor.cs:17
-msgid "ReverseProxy"
-msgstr "反向代理"
-
-#: ../../Pages/PaginationTest.razor.cs:12
-msgid "Last Name"
-msgstr "姓"
-
-#: ../../Pages/Index.razor.cs:9
-msgid "How is Blazor working for you?"
-msgstr "Blazor 如何为你工作？"
-
-#: ../../Pages/TreeTest.razor.cs:12
-msgid "Collapse All"
-msgstr "全部收缩"
-
-#: ../../Shared/MainLayout.razor.cs:11
-msgid "Tree"
-msgstr "树形"
-
-#: ../../Shared/MainLayout.razor.cs:16
-msgid "LogView"
-msgstr "日志查看"
-
-#: ../../Shared/MainLayout.razor.cs:12
-msgid "Accordion"
-msgstr "手风琴"
-
-#: ../../Pages/PaginationTest.razor.cs:11
-msgid "First Name"
-msgstr "名"
-
-#: ../../Pages/TreeTest.razor.cs:13
-msgid "Log: "
-msgstr "日志："
-
-#: ../../Pages/AccordionTest.razor.cs:8
-msgid "Allow Multiple Pane Actived"
-msgstr "允许多个面板激活"
-
-#: ../../Shared/MainLayout.razor.cs:8
+#: ../../Shared/MainLayout.razor.cs:9
 msgid "Home"
 msgstr "主页"
 
-#: ../../Pages/TreeTest.razor.cs:11
-msgid "Expand All"
-msgstr "全部展开"
+#: ../../Shared/MainLayout.razor.cs:18
+msgid "ReverseProxy"
+msgstr "反向代理"
 
-#: ../../Shared/SurveyPrompt.razor.cs:9
-msgid "brief survey"
-msgstr "简单介绍"
-
-#: ../../Shared/MainLayout.razor.cs:9
-msgid "Tabs"
-msgstr "选项卡"
-
-#: ../../Shared/MainLayout.razor.cs:14
+#: ../../Shared/MainLayout.razor.cs:15
 msgid "ProcessManage"
 msgstr "进程管理"
 
+#: ../../Shared/SurveyPrompt.razor.cs:11
+msgid "and tell us what you think."
+msgstr "并告诉我们您的想法。"
+
+#: ../../Pages/TreeTest.razor.cs:12
+msgid "Expand All"
+msgstr "全部展开"
+
+#: ../../Shared/MainLayout.razor.cs:10
+msgid "Tabs"
+msgstr "选项卡"
+
+#: ../../Shared/MainLayout.razor.cs:11
+msgid "Pagination"
+msgstr "分页器"
+
+#: ../../Pages/PaginationTest.razor.cs:13
+msgid "Last Name"
+msgstr "姓"
+
+#: ../../Shared/MainLayout.razor.cs:12
+msgid "Tree"
+msgstr "树形"
+
+#: ../../Shared/SurveyPrompt.razor.cs:9
+msgid "Please take our"
+msgstr "请查看我们的"
+
+#: ../../Pages/PaginationTest.razor.cs:12
+msgid "First Name"
+msgstr "名"
+
+#: ../../Pages/AccordionTest.razor.cs:13
+msgid "Allow Multiple Pane Actived"
+msgstr "允许多个面板激活"
+
+#: ../../Pages/Index.razor.cs:9
+msgid "Welcome to use Quick.Blazor.Bootstrap."
+msgstr "欢迎使用Quick.Blazor.Bootstrap。"
+
 #: ../../Shared/MainLayout.razor.cs:13
+msgid "Accordion"
+msgstr "手风琴"
+
+#: ../../Pages/Index.razor.cs:10
+msgid "How is Blazor working for you?"
+msgstr "Blazor 如何为你工作？"
+
+#: ../../Shared/MainLayout.razor.cs:16
+msgid "Terminal"
+msgstr "终端"
+
+#: ../../Shared/SurveyPrompt.razor.cs:10
+msgid "brief survey"
+msgstr "简单介绍"
+
+#: ../../Pages/TreeTest.razor.cs:13
+msgid "Collapse All"
+msgstr "全部收缩"
+
+#: ../../Pages/AccordionTest.razor.cs:16
+msgid ""
+"The Lord of the Rings is an epic high-fantasy novel by J.R.R. Tolkien. Set "
+"in Middle-earth, the story began as a sequel to Tolkien's earlier work, The "
+"Hobbit, but eventually developed into a much larger work. The writing began "
+"in 1937, and was published in three volumes in 1954 and 1955. The Lord of "
+"the Rings is one of the best-selling books ever written, with over 150 "
+"million copies sold.\\nThe book's title refers to the story's main "
+"antagonist, the Dark Lord Sauron, who in an earlier age created the One Ring "
+"to rule the other Rings of Power given to Men, Dwarves, and Elves, in his "
+"campaign to conquer all of Middle-earth. From homely beginnings in the "
+"Shire, a hobbit land reminiscent of the English countryside, the story "
+"ranges across Middle-earth, following the quest to destroy the One Ring "
+"mainly through the eyes of the hobbits Frodo, Sam, Merry, and Pippin."
+msgstr ""
+"《指环王》是 JRR 托尔金的一部史诗般的高奇幻小说。故事以中土世界为背景，最初是"
+"托尔金早期作品《霍比特人》的续集，但最终发展成为一部更大的作品。写作始于 "
+"1937 年，并于 1954 年和 1955 年分三卷出版。《指环王》是有史以来最畅销的书籍之"
+"一，销量超过 1.5 亿册。\n"
+"这本书的标题指的是故事的主要反派，黑魔王索伦，他在早期创造了一环来统治赋予人"
+"类、矮人和精灵的其他力量之戒，以征服整个中土世界。故事从夏尔（Shire）的家常开"
+"始，这是一个让人想起英国乡村的霍比特人土地，故事横跨中土世界，主要通过霍比特"
+"人佛罗多、山姆、梅里和皮平的眼睛来摧毁至尊魔戒。"
+
+#: ../../Shared/MainLayout.razor.cs:14
 msgid "FileManage"
 msgstr "文件管理器"
 
-#: ../../Shared/MainLayout.razor.cs:10
-msgid "Pagination"
-msgstr "分页器"
+#: ../../Shared/MainLayout.razor.cs:17
+msgid "LogView"
+msgstr "日志查看"
+
+#: ../../Pages/TreeTest.razor.cs:14
+msgid "Log: "
+msgstr "日志："

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TestWebApplication\n"
-"POT-Creation-Date: 2024-05-21 12:03:57+0800\n"
-"PO-Revision-Date: 2024-05-21 12:03:57+0800\n"
+"POT-Creation-Date: 2024-05-22 20:07:27+0800\n"
+"PO-Revision-Date: 2024-05-22 20:07:28+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -10,87 +10,103 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: GetText.NET Extractor\n"
 
-#: ../../Shared/MainLayout.razor.cs:15
-msgid "Terminal"
-msgstr ""
-
-#: ../../Shared/SurveyPrompt.razor.cs:8
-msgid "Please take our"
-msgstr ""
-
-#: ../../Shared/SurveyPrompt.razor.cs:10
-msgid "and tell us what you think."
-msgstr ""
-
-#: ../../Pages/Index.razor.cs:8
-msgid "Welcome to use Quick.Blazor.Bootstrap."
-msgstr ""
-
-#: ../../Shared/MainLayout.razor.cs:17
-msgid "ReverseProxy"
-msgstr ""
-
-#: ../../Pages/PaginationTest.razor.cs:12
-msgid "Last Name"
-msgstr ""
-
-#: ../../Pages/Index.razor.cs:9
-msgid "How is Blazor working for you?"
-msgstr ""
-
-#: ../../Pages/TreeTest.razor.cs:12
-msgid "Collapse All"
-msgstr ""
-
-#: ../../Shared/MainLayout.razor.cs:11
-msgid "Tree"
-msgstr ""
-
-#: ../../Shared/MainLayout.razor.cs:16
-msgid "LogView"
-msgstr ""
-
-#: ../../Shared/MainLayout.razor.cs:12
-msgid "Accordion"
-msgstr ""
-
-#: ../../Pages/PaginationTest.razor.cs:11
-msgid "First Name"
-msgstr ""
-
-#: ../../Pages/TreeTest.razor.cs:13
-msgid "Log: "
-msgstr ""
-
-#: ../../Pages/AccordionTest.razor.cs:8
-msgid "Allow Multiple Pane Actived"
-msgstr ""
-
-#: ../../Shared/MainLayout.razor.cs:8
+#: ../../Shared/MainLayout.razor.cs:9
 msgid "Home"
 msgstr ""
 
-#: ../../Pages/TreeTest.razor.cs:11
-msgid "Expand All"
+#: ../../Shared/MainLayout.razor.cs:18
+msgid "ReverseProxy"
 msgstr ""
 
-#: ../../Shared/SurveyPrompt.razor.cs:9
-msgid "brief survey"
-msgstr ""
-
-#: ../../Shared/MainLayout.razor.cs:9
-msgid "Tabs"
-msgstr ""
-
-#: ../../Shared/MainLayout.razor.cs:14
+#: ../../Shared/MainLayout.razor.cs:15
 msgid "ProcessManage"
 msgstr ""
 
-#: ../../Shared/MainLayout.razor.cs:13
-msgid "FileManage"
+#: ../../Shared/SurveyPrompt.razor.cs:11
+msgid "and tell us what you think."
+msgstr ""
+
+#: ../../Pages/TreeTest.razor.cs:12
+msgid "Expand All"
 msgstr ""
 
 #: ../../Shared/MainLayout.razor.cs:10
+msgid "Tabs"
+msgstr ""
+
+#: ../../Shared/MainLayout.razor.cs:11
 msgid "Pagination"
+msgstr ""
+
+#: ../../Pages/PaginationTest.razor.cs:13
+msgid "Last Name"
+msgstr ""
+
+#: ../../Shared/MainLayout.razor.cs:12
+msgid "Tree"
+msgstr ""
+
+#: ../../Shared/SurveyPrompt.razor.cs:9
+msgid "Please take our"
+msgstr ""
+
+#: ../../Pages/PaginationTest.razor.cs:12
+msgid "First Name"
+msgstr ""
+
+#: ../../Pages/AccordionTest.razor.cs:13
+msgid "Allow Multiple Pane Actived"
+msgstr ""
+
+#: ../../Pages/Index.razor.cs:9
+msgid "Welcome to use Quick.Blazor.Bootstrap."
+msgstr ""
+
+#: ../../Shared/MainLayout.razor.cs:13
+msgid "Accordion"
+msgstr ""
+
+#: ../../Pages/Index.razor.cs:10
+msgid "How is Blazor working for you?"
+msgstr ""
+
+#: ../../Shared/MainLayout.razor.cs:16
+msgid "Terminal"
+msgstr ""
+
+#: ../../Shared/SurveyPrompt.razor.cs:10
+msgid "brief survey"
+msgstr ""
+
+#: ../../Pages/TreeTest.razor.cs:13
+msgid "Collapse All"
+msgstr ""
+
+#: ../../Pages/AccordionTest.razor.cs:16
+msgid ""
+"The Lord of the Rings is an epic high-fantasy novel by J.R.R. Tolkien. Set in "
+"Middle-earth, the story began as a sequel to Tolkien's earlier work, The "
+"Hobbit, but eventually developed into a much larger work. The writing began in "
+"1937, and was published in three volumes in 1954 and 1955. The Lord of the "
+"Rings is one of the best-selling books ever written, with over 150 million "
+"copies sold.\\nThe book's title refers to the story's main antagonist, the Dark "
+"Lord Sauron, who in an earlier age created the One Ring to rule the other Rings "
+"of Power given to Men, Dwarves, and Elves, in his campaign to conquer all of "
+"Middle-earth. From homely beginnings in the Shire, a hobbit land reminiscent "
+"of the English countryside, the story ranges across Middle-earth, following "
+"the quest to destroy the One Ring mainly through the eyes of the hobbits "
+"Frodo, Sam, Merry, and Pippin."
+msgstr ""
+
+#: ../../Shared/MainLayout.razor.cs:14
+msgid "FileManage"
+msgstr ""
+
+#: ../../Shared/MainLayout.razor.cs:17
+msgid "LogView"
+msgstr ""
+
+#: ../../Pages/TreeTest.razor.cs:14
+msgid "Log: "
 msgstr ""
 
