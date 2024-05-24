@@ -32,8 +32,14 @@ namespace Quick.Blazor.Bootstrap
 
         public void Show(string title, Type componentType, Dictionary<string, object> parameterDict = null)
         {
+            Show(title, BlazorUtils.GetRenderFragment(componentType, parameterDict));
+            InvokeAsync(StateHasChanged);
+        }
+
+        public void Show(string title, RenderFragment content)
+        {
             Title = title;
-            Content = BlazorUtils.GetRenderFragment(componentType, parameterDict);
+            Content = content;
             Visiable = true;
             InvokeAsync(StateHasChanged);
         }
