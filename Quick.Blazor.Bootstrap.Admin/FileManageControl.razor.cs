@@ -135,7 +135,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         private static string TextFolderNotExist => Locale.GetString("Folder [{0}] not exist");
         private static string TextUp => Locale.GetString("Up");
         private static string TextNewFolder => Locale.GetString("New Folder");
-        private static string TextTransferSpeed => Locale.GetString("Transfer Speed");
+        private static string TextSpeed => Locale.GetString("Speed");
         private static string TextRemainingTime => Locale.GetString("Remaining Time");
         private static string TextNewFolderPrompt => Locale.GetString("Please input new folder name");
         private static string TextUpload => Locale.GetString("Upload");
@@ -421,7 +421,7 @@ namespace Quick.Blazor.Bootstrap.Admin
                         {
                             StringBuilder sb = new StringBuilder();
                             var speed = Convert.ToDouble(readTotalCount / stopwatch.ElapsedMilliseconds);
-                            sb.Append(TextTransferSpeed + ": " + storageUSC.GetString(Convert.ToDecimal(speed * 1000), 1, true) + "B/s");
+                            sb.Append(TextSpeed + ": " + storageUSC.GetString(Convert.ToDecimal(speed * 1000), 1, true) + "B/s");
                             var remainingTime = TimeSpan.FromMilliseconds((fileSize - readTotalCount) / speed);
                             sb.Append("," + TextRemainingTime + ": " + remainingTime.ToString(@"hh\:mm\:ss"));
                             modalLoading.UpdateProgress(Convert.ToInt32(readTotalCount * 100 / fileSize), sb.ToString());
@@ -464,23 +464,26 @@ namespace Quick.Blazor.Bootstrap.Admin
             var cts = new System.Threading.CancellationTokenSource();
             var cancellationToken = cts.Token;
             modalLoading?.Show($"{TextCompress} - {fsInfo.Name}", null, false, cts.Cancel);
+            var folderList = new List<DirectoryInfo>();
             var fileList = new List<FileInfo>();
-            long totalFileSize=0;
+            long totalFileSize = 0;
             //统计要压缩的文件列表信息
             string baseFolder = null;
             if (SelectedItem is FileInfo)
             {
                 var fileInfo = (FileInfo)SelectedItem;
-                baseFolder=fileInfo.DirectoryName;
+                baseFolder = fileInfo.DirectoryName;
                 fileList.Add(fileInfo);
-                totalFileSize=fileInfo.Length;
+                totalFileSize = fileInfo.Length;
             }
             else if (SelectedItem is DirectoryInfo)
             {
                 var dirInfo = (DirectoryInfo)SelectedItem;
                 baseFolder = dirInfo.Parent.FullName;
                 fileList.AddRange(dirInfo.GetFiles("*", SearchOption.AllDirectories));
-                totalFileSize = fileList.Sum(t=>t.Length);
+                folderList.Add(dirInfo);
+                folderList.AddRange(dirInfo.GetDirectories("*", SearchOption.AllDirectories));
+                totalFileSize = fileList.Sum(t => t.Length);
             }
             //文件名
             string zipFileName = $"{fsInfo.Name}.zip";
@@ -506,6 +509,13 @@ namespace Quick.Blazor.Bootstrap.Admin
                 using (var zipFileStream = File.Create(zipFileName))
                 using (var zipArchive = new System.IO.Compression.ZipArchive(zipFileStream, System.IO.Compression.ZipArchiveMode.Create, true))
                 {
+                    //添加文件夹
+                    foreach(var folder in folderList)
+                    {
+                        var entryName = folder.FullName.Substring(baseFolder.Length + 1) + Path.DirectorySeparatorChar;
+                        zipArchive.CreateEntry(entryName);
+                    }
+                    //添加文件
                     foreach (var file in fileList)
                     {
                         var entryName = file.FullName.Substring(baseFolder.Length + 1);
@@ -524,7 +534,7 @@ namespace Quick.Blazor.Bootstrap.Admin
                                 {
                                     StringBuilder sb = new StringBuilder();
                                     var speed = Convert.ToDouble(readTotalCount / stopwatch.ElapsedMilliseconds);
-                                    sb.Append(TextTransferSpeed + ": " + storageUSC.GetString(Convert.ToDecimal(speed * 1000), 1, true) + "B/s");
+                                    sb.Append(TextSpeed + ": " + storageUSC.GetString(Convert.ToDecimal(speed * 1000), 1, true) + "B/s");
                                     var remainingTime = TimeSpan.FromMilliseconds((totalFileSize - readTotalCount) / speed);
                                     sb.Append("," + TextRemainingTime + ": " + remainingTime.ToString(@"hh\:mm\:ss"));
                                     modalLoading.UpdateContent(entryName);
@@ -550,12 +560,12 @@ namespace Quick.Blazor.Bootstrap.Admin
             catch (TaskCanceledException)
             {
                 try { File.Delete(zipFileName); } catch { }
-                modalAlert?.Show(TextDownload, TextCanceled);
+                modalAlert?.Show(TextCompress, TextCanceled);
             }
             catch (Exception ex)
             {
                 try { File.Delete(zipFileName); } catch { }
-                modalAlert?.Show(TextDownload, TextFailed + Environment.NewLine + ExceptionUtils.GetExceptionMessage(ex));
+                modalAlert?.Show(TextCompress, TextFailed + Environment.NewLine + ExceptionUtils.GetExceptionMessage(ex));
             }
             finally
             {
@@ -595,6 +605,13 @@ namespace Quick.Blazor.Bootstrap.Admin
                     foreach (var zipEntry in zipArchive.Entries)
                     {
                         var fileName = Path.Combine(baseFolder, zipEntry.FullName);
+                        //如果是文件夹
+                        if (string.IsNullOrEmpty(zipEntry.Name))
+                        {
+                            if (!Directory.Exists(fileName))
+                                Directory.CreateDirectory(fileName);
+                            continue;
+                        }
                         var fileFolder = Path.GetDirectoryName(fileName);
                         if (!Directory.Exists(fileFolder))
                             Directory.CreateDirectory(fileFolder);
@@ -612,7 +629,7 @@ namespace Quick.Blazor.Bootstrap.Admin
                                 {
                                     StringBuilder sb = new StringBuilder();
                                     var speed = Convert.ToDouble(readTotalCount / stopwatch.ElapsedMilliseconds);
-                                    sb.Append(TextTransferSpeed + ": " + storageUSC.GetString(Convert.ToDecimal(speed * 1000), 1, true) + "B/s");
+                                    sb.Append(TextSpeed + ": " + storageUSC.GetString(Convert.ToDecimal(speed * 1000), 1, true) + "B/s");
                                     var remainingTime = TimeSpan.FromMilliseconds((totalFileSize - readTotalCount) / speed);
                                     sb.Append("," + TextRemainingTime + ": " + remainingTime.ToString(@"hh\:mm\:ss"));
                                     modalLoading.UpdateContent(zipEntry.FullName);
@@ -627,7 +644,7 @@ namespace Quick.Blazor.Bootstrap.Admin
                 }
                 if (cancellationToken.IsCancellationRequested)
                 {
-                    modalAlert?.Show(TextCompress, TextCanceled);
+                    modalAlert?.Show(TextDecompress, TextCanceled);
                     return;
                 }
                 refresh();
@@ -635,11 +652,11 @@ namespace Quick.Blazor.Bootstrap.Admin
             }
             catch (TaskCanceledException)
             {
-                modalAlert?.Show(TextDownload, TextCanceled);
+                modalAlert?.Show(TextDecompress, TextCanceled);
             }
             catch (Exception ex)
             {
-                modalAlert?.Show(TextDownload, TextFailed + Environment.NewLine + ExceptionUtils.GetExceptionMessage(ex));
+                modalAlert?.Show(TextDecompress, TextFailed + Environment.NewLine + ExceptionUtils.GetExceptionMessage(ex));
             }
             finally
             {
@@ -709,7 +726,7 @@ namespace Quick.Blazor.Bootstrap.Admin
                                     {
                                         StringBuilder sb = new StringBuilder();
                                         var speed = Convert.ToDouble(totalReadCount / stopwatch.ElapsedMilliseconds);
-                                        sb.Append(TextTransferSpeed + ": " + storageUSC.GetString(Convert.ToDecimal(speed * 1000), 1, true) + "B/s");
+                                        sb.Append(TextSpeed + ": " + storageUSC.GetString(Convert.ToDecimal(speed * 1000), 1, true) + "B/s");
                                         var remainingTime = TimeSpan.FromMilliseconds((totalFileSize - totalReadCount) / speed);
                                         sb.Append("," + TextRemainingTime + ": " + remainingTime.ToString(@"hh\:mm\:ss"));
                                         modalLoading.UpdateProgress(Convert.ToInt32(totalReadCount * 100 / totalFileSize), sb.ToString());
