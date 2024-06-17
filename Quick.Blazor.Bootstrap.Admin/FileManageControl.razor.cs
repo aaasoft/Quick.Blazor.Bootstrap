@@ -507,18 +507,20 @@ namespace Quick.Blazor.Bootstrap.Admin
             try
             {
                 using (var zipFileStream = File.Create(zipFileName))
-                using (var zipArchive = new System.IO.Compression.ZipArchive(zipFileStream, System.IO.Compression.ZipArchiveMode.Create, true))
+                using (var zipArchive = new ZipArchive(zipFileStream, ZipArchiveMode.Create, true))
                 {
                     //添加文件夹
-                    foreach(var folder in folderList)
+                    foreach (var folder in folderList)
                     {
                         var entryName = folder.FullName.Substring(baseFolder.Length + 1) + Path.DirectorySeparatorChar;
+                        entryName = PathUtils.UseUnixDirectorySeparatorChar(entryName);
                         zipArchive.CreateEntry(entryName);
                     }
                     //添加文件
                     foreach (var file in fileList)
                     {
                         var entryName = file.FullName.Substring(baseFolder.Length + 1);
+                        entryName = PathUtils.UseUnixDirectorySeparatorChar(entryName);
                         var zipEntry = zipArchive.CreateEntry(entryName);
                         using (var fs = file.OpenRead())
                         using (var zs = zipEntry.Open())
