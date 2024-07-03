@@ -128,7 +128,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         private static string TextConfirm => Locale.GetString("Confirm");
         private static string TextConfirmDeleteFolder => Locale.GetString("Do you want to delete folder[{0}]?");
         private static string TextConfirmDeleteFile => Locale.GetString("Do you want to delete file[{0}]?");
-        private static string TextInputNewName => Locale.GetString("Please input new name of [{0}]?");
+        private static string TextInputNewName => Locale.GetString("Please input new name of [{0}]");
         private static string TextSuccess => Locale.GetString("Success");
         private static string TextCanceled => Locale.GetString("Canceled");
         private static string TextFailed => Locale.GetString("Failed");

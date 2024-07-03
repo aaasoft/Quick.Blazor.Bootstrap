@@ -49,12 +49,15 @@
                     @foreach (var t in Processes)
                     {
                         <tr>
-                            <th scope="row">@t.Id</th>
+                            <th scope="row">@t.PID</th>
                             <td>@t.Name</td>
-                            <td>@t.Threads</td>
-                            <td>@t.MemoryInfo</td>                            
+                            <td>@t.ThreadsCount</td>
+                            <td>@getProcessMemInfo(t)</td>                            
                             <td>
                                 <div class="btn-group">
+                                    <button type="button" title="@TextViewProcess" class="btn btn-sm btn-outline-info" @onclick="@(e => ViewProcess(t))">
+                                        <span class="@IconViewProcess"></span>                                        
+                                    </button>
                                     <button type="button" title="@TextKillProcess" class="btn btn-sm btn-outline-danger" @onclick="@(e => KillProcess(t, false))">
                                         <span class="@IconKillProcess"></span>                                        
                                     </button>
@@ -73,3 +76,4 @@
 
 <ModalLoading @ref="modalLoading" />
 <ModalAlert @ref="modalAlert" />
+<ModalWindow @ref="modalWindow" DialogSizeExtraLarge />

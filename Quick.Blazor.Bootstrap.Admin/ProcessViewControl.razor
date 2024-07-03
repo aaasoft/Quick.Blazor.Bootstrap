@@ -1,0 +1,82 @@
+﻿@inherits ComponentBase_WithGettextSupport;
+
+<div class="card">
+    <div class="card-header pl-2">
+        @if (ProcessHasExited)
+        {
+            <span>@TextProcessHasExited</span>
+        }
+        else
+        {
+            <div>
+                <button type="button" class="btn btn-sm btn-secondary" @onclick="RefreshProcess">
+                    @TextRefresh
+                </button>
+
+                <button type="button" class="btn btn-sm btn-secondary" @onclick="btnKillProcess_Click">
+                    @TextKillProcessTree
+                </button>
+                @if(OtherButtons!=null)
+                {
+                    @foreach(var button in OtherButtons)
+                    {
+                    <button type="button" class="btn btn-sm btn-secondary" @onclick="button.Value">
+                        @button.Key
+                    </button>
+                    }
+                }
+            </div>
+        }
+    </div>
+
+    <div class="card-body small p-0">
+        <table class="table table-sm table-striped table-borderless table-hover mb-0">
+            <tbody>
+                <tr>
+                    <th>@TextColumnPID</th>
+                    <td>@ProcessInfo.PID</td>
+                </tr>
+                @if (!ProcessHasExited)
+                {
+                    <tr>
+                        <th>@TextColumnName</th>
+                        <td>@ProcessInfo.Name</td>
+                    </tr>
+                    <tr>
+                    <th>@TextColumnMemory</th>
+                    <td>@getProcessMemInfo(ProcessInfo)</td>
+                </tr>
+                    <tr>
+                    <th>@TextColumnThreads</th>
+                    <td>@ProcessInfo.ThreadsCount</td>
+                </tr>
+                    <tr>
+                    <th>@TextColumnFileName</th>
+                    <td>@ProcessInfo.FileName</td>
+                </tr>
+                    <tr>
+                    <th>@TextColumnCmdLine</th>
+                    <td>@ProcessInfo.CmdLine</td>
+                </tr>
+                    <tr>
+                    <th>@TextColumnWorkDirectory</th>
+                    <td>@ProcessInfo.WorkingDirectory</td>
+                </tr>
+                    <tr>
+                    <th>@TextColumnStartTime</th>
+                    <td>@ProcessInfo.StartTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                </tr>
+                }
+                @if (!string.IsNullOrEmpty(ExceptionString))
+                {
+                    <tr>
+                        <th>@TextColumnError</th>
+                        <td>@ExceptionString</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<ModalAlert @ref="modalAlert" DialogSizeExtraLarge />
+<ModalLoading @ref="modalLoading" />
