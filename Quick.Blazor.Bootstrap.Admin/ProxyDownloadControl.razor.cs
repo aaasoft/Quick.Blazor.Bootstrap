@@ -92,10 +92,10 @@ public partial class ProxyDownloadControl : ComponentBase_WithGettextSupport
                 }
             }
             if (string.IsNullOrEmpty(fileName))
-                fileName = getFileNameFromUrl(url);
+                fileName = getFileNameFromUrl(downloadUrl);
             var loadingContent = fileName;
-            if(fileSize>0)
-            loadingContent+=$" ({storageUSC.GetString(fileSize, 1, true)}B)";
+            if (fileSize > 0)
+                loadingContent += $" ({storageUSC.GetString(fileSize, 1, true)}B)";
             modalLoading.UpdateContent(loadingContent);
             using (var repStream = await rep.Content.ReadAsStreamAsync())
             {
