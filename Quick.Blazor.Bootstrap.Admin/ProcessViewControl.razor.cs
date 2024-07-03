@@ -39,7 +39,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         [Parameter]
         public int PID { get; set; }
         [Parameter]
-        public Dictionary<string, Action> OtherButtons { get; set; }
+        public Dictionary<string, Action<ProcessInfo>> OtherButtons { get; set; }
         private ProcessInfo ProcessInfo;
 
         private string ExceptionString;
@@ -50,6 +50,15 @@ namespace Quick.Blazor.Bootstrap.Admin
 
         private ModalAlert modalAlert;
         private ModalLoading modalLoading;
+
+        public static Dictionary<string, object> PrepareParameters(int pid, Dictionary<string, Action<ProcessInfo>> otherButtons)
+        {
+            return new Dictionary<string, object>()
+            {
+                [nameof(PID)] = pid,
+                [nameof(OtherButtons)] = otherButtons,
+            };
+        }
 
         protected override void OnParametersSet()
         {

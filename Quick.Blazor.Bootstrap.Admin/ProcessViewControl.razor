@@ -13,16 +13,16 @@
                     @TextRefresh
                 </button>
 
-                <button type="button" class="btn btn-sm btn-secondary" @onclick="btnKillProcess_Click">
+                <button type="button" class="btn btn-sm btn-secondary mr-1" @onclick="btnKillProcess_Click">
                     @TextKillProcessTree
                 </button>
-                @if(OtherButtons!=null)
+                @if (OtherButtons != null)
                 {
-                    @foreach(var button in OtherButtons)
+                    @foreach (var button in OtherButtons)
                     {
-                    <button type="button" class="btn btn-sm btn-secondary" @onclick="button.Value">
-                        @button.Key
-                    </button>
+                        <button type="button" class="btn btn-sm btn-secondary mr-1" @onclick="@(()=>button.Value(ProcessInfo))">
+                            @button.Key
+                        </button>
                     }
                 }
             </div>
