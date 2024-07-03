@@ -4,11 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Quick.Blazor.Bootstrap.Admin
 {
+    [UnsupportedOSPlatform("browser")]
     public partial class ProcessManageControl : ComponentBase_WithGettextSupport
     {
         private string TextAskToKillProcess => Locale.GetString("Are you sure to kill process[Id: {0},Name: {1}]?");
@@ -70,7 +72,6 @@ namespace Quick.Blazor.Bootstrap.Admin
             modalLoading.Show(null, null, true, null);
             Task.Run(() =>
             {
-#pragma warning disable CA1416 // 验证平台兼容性
                 var processInfos = Process.GetProcesses()
                 .Where(t => string.IsNullOrEmpty(searchKeywords) || t.Id.ToString() == searchKeywords || t.ProcessName.Contains(searchKeywords))
                 .Select(t => new ProcessInfo()
@@ -95,7 +96,6 @@ namespace Quick.Blazor.Bootstrap.Admin
                         break;
                 }
                 Processes = processInfos.ToArray();
-#pragma warning restore CA1416 // 验证平台兼容性
                 modalLoading.Close();
                 InvokeAsync(StateHasChanged);
             });
@@ -105,9 +105,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         {
             try
             {
-#pragma warning disable CA1416 // 验证平台兼容性
                 return storageUSC.GetString(process.WorkingSet64, 2, true) + "B";
-#pragma warning restore CA1416 // 验证平台兼容性
             }
             catch
             {
@@ -119,9 +117,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         {
             try
             {
-#pragma warning disable CA1416 // 验证平台兼容性
                 return process.StartTime.ToString();
-#pragma warning restore CA1416 // 验证平台兼容性
             }
             catch
             {
@@ -138,13 +134,11 @@ namespace Quick.Blazor.Bootstrap.Admin
                   {
                       try
                       {
-#pragma warning disable CA1416 // 验证平台兼容性
                           var process = Process.GetProcessById(info.Id);
                           if (process == null)
                               throw new ApplicationException(Locale.GetString("Can't found process[Id:{0}].", info.Id));
                           process.Kill(entireProcessTree);
                           search();
-#pragma warning restore CA1416 // 验证平台兼容性
                       }
                       catch (Exception ex)
                       {
