@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Quick.Blazor.Bootstrap.Admin\n"
-"POT-Creation-Date: 2024-07-03 16:23:31+0800\n"
-"PO-Revision-Date: 2024-07-03 16:23:31+0800\n"
+"POT-Creation-Date: 2024-07-04 17:18:12+0800\n"
+"PO-Revision-Date: 2024-07-04 17:18:12+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -10,94 +10,151 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: GetText.NET Extractor\n"
 
-#: ../../FileManageControl.razor.cs:143
-msgid "File [{0}] was exist."
-msgstr ""
-
-#: ../../FileManageControl.razor.cs:141
-msgid "Upload"
-msgstr ""
-
-#: ../../FileManageControl.razor.cs:159
-msgid "Last Write Time"
-msgstr ""
-
-#: ../../FileManageControl.razor.cs:129
-msgid "Do you want to delete folder[{0}]?"
-msgstr ""
-
-#: ../../FileManageControl.razor.cs:144
-msgid "Uploading file [{0}]..."
-msgstr ""
-
-#: ../../ProcessManageControl.razor.cs:19
-msgid "Press 'Search' button to load process list."
-msgstr ""
-
-#: ../../ProcessManageControl.razor.cs:132
-#, csharp-format
-msgid "Can't found process[Id:{0}]."
-msgstr ""
-
-#: ../../FileManageControl.razor.cs:137
-msgid "New Folder"
-msgstr ""
-
-#: ../../ProxyDownloadControl.razor.cs:19
-#: ../../FileManageControl.razor.cs:133
-msgid "Canceled"
-msgstr ""
-
-#: ../../FileManageControl.razor.cs:142
-msgid "Reading upload file info..."
-msgstr ""
-
 #: ../../TextEditControl.razor.cs:37
 msgid "Encoding"
 msgstr ""
 
-#: ../../FileManageControl.razor.cs:158
-msgid "Creation Time"
+#: ../../ProcessManageControl.razor.cs:31
+msgid "OrderBy"
+msgstr ""
+
+#: ../../ProxyDownloadControl.razor.cs:19
+#: ../../FileManageControl.razor.cs:135
+msgid "Canceled"
+msgstr ""
+
+#: ../../ProcessManageControl.razor.cs:22
+msgid "Kill Process"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:133
+msgid "Please input new name of [{0}]"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:153
+msgid "Rename"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:146
+msgid "Uploading file [{0}]..."
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:132
+msgid "Do you want to delete file[{0}]?"
+msgstr ""
+
+#: ../../TextEditControl.razor.cs:36
+msgid "Rows"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:142
+msgid "Please input new folder name"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:150
+msgid "Compress"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:131
+msgid "Do you want to delete folder[{0}]?"
+msgstr ""
+
+#: ../../ProcessManageControl.razor.cs:26
+#: ../../ProcessManageControl.razor.cs:33
+#: ../../ProcessViewControl.razor.cs:27
+#: ../../FileManageControl.razor.cs:164
+msgid "Name"
 msgstr ""
 
 #: ../../ProcessManageControl.razor.cs:20
 msgid "View Process"
 msgstr ""
 
+#: ../../FileManageControl.razor.cs:162
+msgid "Last Write Time"
+msgstr ""
+
+#: ../../ProcessManageControl.razor.cs:23
+#: ../../ProcessViewControl.razor.cs:25
+msgid "Kill Process Tree"
+msgstr ""
+
+#: ../../ProxyDownloadControl.razor.cs:22
+#: ../../FileManageControl.razor.cs:141
+msgid "Remaining Time"
+msgstr ""
+
 #: ../../ProxyDownloadControl.razor.cs:21
-#: ../../FileManageControl.razor.cs:138
+#: ../../FileManageControl.razor.cs:140
 msgid "Speed"
+msgstr ""
+
+#: ../../TextEditControl.razor.cs:34
+#: ../../ProcessViewControl.razor.cs:22
+#: ../../FileManageControl.razor.cs:134
+msgid "Success"
+msgstr ""
+
+#: ../../ProcessViewControl.razor.cs:30
+msgid "File Name"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:143
+msgid "Upload"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:144
+msgid "Reading upload file info..."
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:137
+msgid "Folder [{0}] not exist"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:130
+msgid "Confirm"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:154
+msgid "Edit"
+msgstr ""
+
+#: ../../ProcessManageControl.razor.cs:29
+msgid "Operate"
+msgstr ""
+
+#: ../../ProcessViewControl.razor.cs:34
+msgid "Error"
+msgstr ""
+
+#: ../../ProxyDownloadControl.razor.cs:18
+#: ../../FileManageControl.razor.cs:148
+msgid "Download"
 msgstr ""
 
 #: ../../ProcessViewControl.razor.cs:32
 msgid "Work Directory"
 msgstr ""
 
-#: ../../FileManageControl.razor.cs:147
-msgid "Compress"
+#: ../../ProcessManageControl.razor.cs:142
+#, csharp-format
+msgid "Can't found process[Id:{0}]."
 msgstr ""
 
-#: ../../FileManageControl.razor.cs:130
-msgid "Do you want to delete file[{0}]?"
+#: ../../ProcessViewControl.razor.cs:31
+msgid "Cmd Line"
 msgstr ""
 
-#: ../../FileManageControl.razor.cs:150
-msgid "Rename"
+#: ../../FileManageControl.razor.cs:145
+msgid "File [{0}] was exist."
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:138
+msgid "Up"
 msgstr ""
 
 #: ../../ProcessManageControl.razor.cs:24
 msgid "Keywords"
-msgstr ""
-
-#: ../../ProcessManageControl.razor.cs:26
-#: ../../ProcessManageControl.razor.cs:33
-#: ../../ProcessViewControl.razor.cs:27
-#: ../../FileManageControl.razor.cs:161
-msgid "Name"
-msgstr ""
-
-#: ../../ProcessManageControl.razor.cs:21
-msgid "View Process[Id:{0}, Name:{1}]"
 msgstr ""
 
 #: ../../ProcessManageControl.razor.cs:17
@@ -105,50 +162,16 @@ msgstr ""
 msgid "Are you sure to kill process[Id: {0},Name: {1}]?"
 msgstr ""
 
-#: ../../TextEditControl.razor.cs:35
-#: ../../ProcessManageControl.razor.cs:18
-#: ../../ProcessViewControl.razor.cs:23
-#: ../../ProxyDownloadControl.razor.cs:20
-#: ../../FileManageControl.razor.cs:134
-msgid "Failed"
-msgstr ""
-
-#: ../../ProcessViewControl.razor.cs:21
-#: ../../FileManageControl.razor.cs:145
-msgid "Refresh"
-msgstr ""
-
-#: ../../ProcessManageControl.razor.cs:29
-msgid "Operate"
-msgstr ""
-
-#: ../../FileManageControl.razor.cs:157
-msgid "Goto"
-msgstr ""
-
-#: ../../FileManageControl.razor.cs:148
-msgid "Decompress"
-msgstr ""
-
-#: ../../ProcessViewControl.razor.cs:35
-msgid "Process has exited"
-msgstr ""
-
-#: ../../FileManageControl.razor.cs:155
-msgid "Delete"
-msgstr ""
-
-#: ../../FileManageControl.razor.cs:131
-msgid "Please input new name of [{0}]"
-msgstr ""
-
-#: ../../FileManageControl.razor.cs:160
+#: ../../FileManageControl.razor.cs:163
 msgid "Size"
 msgstr ""
 
-#: ../../ProcessManageControl.razor.cs:23
-#: ../../ProcessViewControl.razor.cs:25
-msgid "Kill Process Tree"
+#: ../../FileManageControl.razor.cs:160
+msgid "Goto"
+msgstr ""
+
+#: ../../ProcessManageControl.razor.cs:19
+msgid "Press 'Search' button to load process list."
 msgstr ""
 
 #: ../../ProcessManageControl.razor.cs:25
@@ -157,60 +180,16 @@ msgstr ""
 msgid "PID"
 msgstr ""
 
-#: ../../FileManageControl.razor.cs:128
-msgid "Confirm"
+#: ../../ProcessManageControl.razor.cs:21
+msgid "View Process[Id:{0}, Name:{1}]"
 msgstr ""
 
-#: ../../TextEditControl.razor.cs:34
-#: ../../ProcessViewControl.razor.cs:22
-#: ../../FileManageControl.razor.cs:132
-msgid "Success"
+#: ../../ProcessViewControl.razor.cs:35
+msgid "Process has exited"
 msgstr ""
 
-#: ../../FileManageControl.razor.cs:156
-msgid "Path"
-msgstr ""
-
-#: ../../ProcessManageControl.razor.cs:31
-msgid "OrderBy"
-msgstr ""
-
-#: ../../FileManageControl.razor.cs:136
-msgid "Up"
-msgstr ""
-
-#: ../../ProcessViewControl.razor.cs:31
-msgid "Cmd Line"
-msgstr ""
-
-#: ../../TextEditControl.razor.cs:36
-msgid "Rows"
-msgstr ""
-
-#: ../../FileManageControl.razor.cs:135
-msgid "Folder [{0}] not exist"
-msgstr ""
-
-#: ../../ProcessViewControl.razor.cs:33
-msgid "Start Time"
-msgstr ""
-
-#: ../../ProxyDownloadControl.razor.cs:18
-#: ../../FileManageControl.razor.cs:146
-msgid "Download"
-msgstr ""
-
-#: ../../FileManageControl.razor.cs:151
-msgid "Edit"
-msgstr ""
-
-#: ../../ProxyDownloadControl.razor.cs:22
-#: ../../FileManageControl.razor.cs:139
-msgid "Remaining Time"
-msgstr ""
-
-#: ../../ProcessManageControl.razor.cs:22
-msgid "Kill Process"
+#: ../../FileManageControl.razor.cs:149
+msgid "Verify"
 msgstr ""
 
 #: ../../ProcessManageControl.razor.cs:28
@@ -219,16 +198,12 @@ msgstr ""
 msgid "Memory"
 msgstr ""
 
-#: ../../ProcessViewControl.razor.cs:34
-msgid "Error"
+#: ../../FileManageControl.razor.cs:158
+msgid "Delete"
 msgstr ""
 
-#: ../../ProcessViewControl.razor.cs:30
-msgid "File Name"
-msgstr ""
-
-#: ../../FileManageControl.razor.cs:140
-msgid "Please input new folder name"
+#: ../../FileManageControl.razor.cs:151
+msgid "Decompress"
 msgstr ""
 
 #: ../../ProcessManageControl.razor.cs:27
@@ -236,8 +211,37 @@ msgstr ""
 msgid "Threads"
 msgstr ""
 
-#: ../../FileManageControl.razor.cs:788
+#: ../../FileManageControl.razor.cs:159
+msgid "Path"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:139
+msgid "New Folder"
+msgstr ""
+
+#: ../../ProcessViewControl.razor.cs:21
+#: ../../FileManageControl.razor.cs:147
+msgid "Refresh"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:876
 #, csharp-format
 msgid "File [{0}] is to large,are you sure to open it?"
+msgstr ""
+
+#: ../../FileManageControl.razor.cs:161
+msgid "Creation Time"
+msgstr ""
+
+#: ../../ProcessViewControl.razor.cs:33
+msgid "Start Time"
+msgstr ""
+
+#: ../../TextEditControl.razor.cs:35
+#: ../../ProcessManageControl.razor.cs:18
+#: ../../ProcessViewControl.razor.cs:23
+#: ../../ProxyDownloadControl.razor.cs:20
+#: ../../FileManageControl.razor.cs:136
+msgid "Failed"
 msgstr ""
 

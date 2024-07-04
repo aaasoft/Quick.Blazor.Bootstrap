@@ -56,6 +56,13 @@
                                     <i class="@IconDownload" aria-hidden="true"></i>
                                 </button>
                             }
+                            @if (DisplayVerifyButton && SelectedItem != null && isSelectedFile())
+                            {
+                                <button title="@TextVerify" type="button" class="btn btn-sm btn-secondary"
+                                    @onclick="btnVerify_Click">
+                                    <i class="@IconVerify" aria-hidden="true"></i>
+                                </button>
+                            }
                             @if (DisplayCompressButton && SelectedItem != null && !isSelectedZipFile())
                             {
                                 <button title="@TextCompress" type="button" class="btn btn-sm btn-secondary"

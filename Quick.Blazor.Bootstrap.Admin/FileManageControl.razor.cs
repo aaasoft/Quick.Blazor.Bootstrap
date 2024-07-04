@@ -118,6 +118,8 @@ namespace Quick.Blazor.Bootstrap.Admin
         [Parameter]
         public bool DisplayUploadButton { get; set; } = true;
         [Parameter]
+        public bool DisplayVerifyButton { get; set; } = true;
+        [Parameter]
         public bool DisplayCompressButton { get; set; } = true;
         [Parameter]
         public bool DisplayDecompressButton { get; set; } = true;
@@ -144,6 +146,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         private static string TextUploadFileUploading => Locale.GetString("Uploading file [{0}]...");
         private static string TextRefresh => Locale.GetString("Refresh");
         private static string TextDownload => Locale.GetString("Download");
+        private static string TextVerify => Locale.GetString("Verify");
         private static string TextCompress => Locale.GetString("Compress");
         private static string TextDecompress => Locale.GetString("Decompress");
 
@@ -180,6 +183,8 @@ namespace Quick.Blazor.Bootstrap.Admin
         [Parameter]
         public string IconDownload { get; set; } = "fa fa-download";
         [Parameter]
+        public string IconVerify { get; set; } = "fa fa-check-circle-o";
+        [Parameter]
         public string IconCompress { get; set; } = "fa fa-inbox";
         [Parameter]
         public string IconDecompress { get; set; } = "fa fa-dropbox";
@@ -199,6 +204,11 @@ namespace Quick.Blazor.Bootstrap.Admin
         public string IconGoto { get; set; } = "fa fa-arrow-right";
         [Parameter]
         public string IconSearch { get; set; } = "fa fa-search";
+
+        private bool isSelectedFile()
+        {
+            return SelectedItem != null && SelectedItem is FileInfo;
+        }
 
         private bool isSelectedZipFile()
         {
@@ -453,6 +463,84 @@ namespace Quick.Blazor.Bootstrap.Admin
             finally
             {
                 await BlazorDownloadFileService.ClearBuffers();
+                stopwatch.Stop();
+                modalLoading?.Close();
+            }
+        }
+
+        private async void btnVerify_Click()
+        {
+            var fileInfo = (FileInfo)SelectedItem;
+            var cts = new System.Threading.CancellationTokenSource();
+            var cancellationToken = cts.Token;
+            modalLoading?.Show(TextVerify, fileInfo.Name, false, cts.Cancel);
+            //开始校验
+            var stopwatch = new System.Diagnostics.Stopwatch();
+            stopwatch.Start();
+            DateTime lastDisplayTime = DateTime.MinValue;
+            byte[] buffer = new byte[24 * 1024];
+            var totalCount = fileInfo.Length;
+            long readTotalCount = 0;
+
+            try
+            {
+                var md5 = System.Security.Cryptography.MD5.Create();
+                var sha1 = System.Security.Cryptography.SHA1.Create();
+                var sha256 = System.Security.Cryptography.SHA256.Create();
+
+                using (var fs = fileInfo.OpenRead())
+                {
+                    while (!cancellationToken.IsCancellationRequested)
+                    {
+                        var ret = await fs.ReadAsync(buffer, 0, buffer.Length, cancellationToken);
+                        if (ret <= 0)
+                            break;
+                        readTotalCount += ret;
+                        if ((DateTime.Now - lastDisplayTime).TotalSeconds > 0.5 && stopwatch.ElapsedMilliseconds > 0)
+                        {
+                            StringBuilder sb = new StringBuilder();
+                            var speed = Convert.ToDouble(readTotalCount / stopwatch.ElapsedMilliseconds);
+                            sb.Append(TextSpeed + ": " + storageUSC.GetString(Convert.ToDecimal(speed * 1000), 1, true) + "B/s");
+                            var remainingTime = TimeSpan.FromMilliseconds((totalCount - readTotalCount) / speed);
+                            sb.Append("," + TextRemainingTime + ": " + remainingTime.ToString(@"hh\:mm\:ss"));
+                            modalLoading.UpdateProgress(Convert.ToInt32(readTotalCount * 100 / totalCount), sb.ToString());
+                            await InvokeAsync(StateHasChanged);
+                            lastDisplayTime = DateTime.Now;
+                        }
+                        md5.TransformBlock(buffer, 0, ret, null, 0);
+                        sha1.TransformBlock(buffer, 0, ret, null, 0);
+                        sha256.TransformBlock(buffer, 0, ret, null, 0);
+                    }
+                }
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    modalAlert?.Show(TextCompress, TextCanceled);
+                    return;
+                }
+                {
+                    md5.TransformFinalBlock(buffer, 0, 0);
+                    sha1.TransformFinalBlock(buffer, 0, 0);
+                    sha256.TransformFinalBlock(buffer, 0, 0);
+                    var sb = new StringBuilder();
+                    sb.AppendLine(fileInfo.Name);
+                    sb.AppendLine("----------------");
+                    sb.AppendLine("MD5: " + Convert.ToHexString(md5.Hash).ToLower());
+                    sb.AppendLine("SHA1: " + Convert.ToHexString(sha1.Hash).ToLower());
+                    sb.AppendLine("SHA256: " + Convert.ToHexString(sha256.Hash).ToLower());
+                    modalAlert?.Show(TextVerify, sb.ToString(), usePreTag: true);
+                }
+                await InvokeAsync(StateHasChanged);
+            }
+            catch (TaskCanceledException)
+            {
+                modalAlert?.Show(TextCompress, TextCanceled);
+            }
+            catch (Exception ex)
+            {
+                modalAlert?.Show(TextCompress, TextFailed + Environment.NewLine + ExceptionUtils.GetExceptionMessage(ex));
+            }
+            finally
+            {
                 stopwatch.Stop();
                 modalLoading?.Close();
             }
