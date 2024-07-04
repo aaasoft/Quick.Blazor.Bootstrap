@@ -26,16 +26,12 @@ public class ProcessInfo
     [UnsupportedOSPlatform("browser")]
     public ProcessInfo(Process process, bool includeDetail = false)
     {
-        PID = process.Id;
-        var ProcessHasExited = process.HasExited;
         try
         {
-            if (!ProcessHasExited)
-            {
-                Name = process.ProcessName;
-                ThreadsCount = process.Threads.Count;
-                Memory = process.WorkingSet64;
-            }
+            PID = process.Id;
+            Name = process.ProcessName;
+            ThreadsCount = process.Threads.Count;
+            Memory = process.WorkingSet64;
             if (includeDetail)
             {
                 try { StartTime = process.StartTime; }
@@ -71,10 +67,6 @@ public class ProcessInfo
         }
         catch
         {
-            process.Refresh();
-            ProcessHasExited = process.HasExited;
-            if (!ProcessHasExited)
-                throw;
         }
     }
 }
