@@ -21,7 +21,7 @@ public class ProcessInfo
 
     [UnsupportedOSPlatform("browser")]
     public ProcessInfo(int pid, bool includeDetail = false)
-    : this(Process.GetProcessById(pid)) { }
+    : this(Process.GetProcessById(pid), includeDetail) { }
 
     [UnsupportedOSPlatform("browser")]
     public ProcessInfo(Process process, bool includeDetail = false)
