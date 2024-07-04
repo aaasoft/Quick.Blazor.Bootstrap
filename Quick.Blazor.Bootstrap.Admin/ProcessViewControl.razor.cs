@@ -101,7 +101,7 @@ namespace Quick.Blazor.Bootstrap.Admin
             try
             {
                 if (!ProcessHasExited)
-                    ProcessInfo = new ProcessInfo(PID);
+                    ProcessInfo = new ProcessInfo(PID, true);
             }
             catch (Exception ex)
             {

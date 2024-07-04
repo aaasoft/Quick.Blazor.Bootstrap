@@ -70,24 +70,34 @@ namespace Quick.Blazor.Bootstrap.Admin
             modalLoading.Show(null, null, true, null);
             Task.Run(() =>
             {
-                var processInfos = Process.GetProcesses()
-                .Where(t => string.IsNullOrEmpty(searchKeywords) || t.Id.ToString() == searchKeywords || t.ProcessName.Contains(searchKeywords))
-                .Select(t => new ProcessInfo(t));
-                switch (orderByField)
+                try
                 {
-                    case "pid":
-                        processInfos = processInfos.OrderBy(t => t.PID);
-                        break;
-                    case "name":
-                        processInfos = processInfos.OrderBy(t => t.Name);
-                        break;
-                    case "memory":
-                        processInfos = processInfos.OrderByDescending(t => t.Memory);
-                        break;
+                    var processInfos = Process.GetProcesses()
+                    .Where(t => string.IsNullOrEmpty(searchKeywords) || t.Id.ToString() == searchKeywords || t.ProcessName.Contains(searchKeywords))
+                    .Select(t => new ProcessInfo(t));
+                    switch (orderByField)
+                    {
+                        case "pid":
+                            processInfos = processInfos.OrderBy(t => t.PID);
+                            break;
+                        case "name":
+                            processInfos = processInfos.OrderBy(t => t.Name);
+                            break;
+                        case "memory":
+                            processInfos = processInfos.OrderByDescending(t => t.Memory);
+                            break;
+                    }
+                    Processes = processInfos.ToArray();
                 }
-                Processes = processInfos.ToArray();
-                modalLoading.Close();
-                InvokeAsync(StateHasChanged);
+                catch(Exception ex)
+                {
+                    modalAlert.Show("错误",ExceptionUtils.GetExceptionString(ex));
+                }
+                finally
+                {
+                    modalLoading.Close();
+                    InvokeAsync(StateHasChanged);
+                }
             });
         }
 
