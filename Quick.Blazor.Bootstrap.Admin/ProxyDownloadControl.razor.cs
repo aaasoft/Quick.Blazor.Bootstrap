@@ -92,7 +92,11 @@ public partial class ProxyDownloadControl : ComponentBase_WithGettextSupport
                 }
             }
             if (string.IsNullOrEmpty(fileName))
+            {
                 fileName = getFileNameFromUrl(downloadUrl);
+                if (!fileName.Contains('.'))
+                    fileName = getFileNameFromUrl(url);
+            }
             var loadingContent = fileName;
             if (fileSize > 0)
                 loadingContent += $" ({storageUSC.GetString(fileSize, 1, true)}B)";
