@@ -98,6 +98,11 @@ namespace Quick.Blazor.Bootstrap.Terminal
             ptyWriteStream?.Flush();
         }
 
+        public void ExecuteCommand(string line)
+        {
+            OnData(line + Environment.NewLine);
+        }
+
         private void killShell()
         {
             if (pty != null)
