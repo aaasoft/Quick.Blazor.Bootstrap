@@ -65,6 +65,8 @@ namespace Quick.Blazor.Bootstrap.Terminal
         public string WorkingDir { get; set; }
         [Parameter]
         public IDictionary<string, string> PtyEnvironment { get; set; }
+        [Parameter]
+        public Dictionary<string, Action> OtherButtons { get; set; }
 
         public TerminalControl()
         {
