@@ -2,6 +2,7 @@
 using Pty.Net;
 using Quick.Localize;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -62,6 +63,8 @@ namespace Quick.Blazor.Bootstrap.Terminal
         public string WelcomeText { get; set; }
         [Parameter]
         public string WorkingDir { get; set; }
+        [Parameter]
+        public IDictionary<string, string> PtyEnvironment { get; set; }
 
         public TerminalControl()
         {
@@ -131,6 +134,8 @@ namespace Quick.Blazor.Bootstrap.Terminal
                 App = app,
                 ForceWinPty = true
             };
+            if (PtyEnvironment != null)
+                options.Environment = PtyEnvironment;
             cts = new CancellationTokenSource();
             var cancallationToken = cts.Token;
             pty = await PtyProvider.SpawnAsync(options, cancallationToken);
