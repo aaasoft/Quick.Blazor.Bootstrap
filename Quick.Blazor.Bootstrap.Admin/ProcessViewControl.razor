@@ -73,9 +73,8 @@
                             <td>
                                 @foreach (var childProcess in ChildProcesses)
                                 {
-                                    <a href="javascript:;" @onclick="@(e=>ViewProcess(childProcess))">
-                                        <span class="badge badge-pill">@childProcess.Name
-                                            [@childProcess.PID]</span>
+                                    <a class="badge badge-secondary mr-1" href="javascript:;" @onclick="@(e=>ViewProcess(childProcess))">
+                                        @childProcess.Name [@childProcess.PID]
                                     </a>
                                 }
                             </td>
