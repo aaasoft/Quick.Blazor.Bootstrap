@@ -31,6 +31,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         private string TextColumnCmdLine => Locale.GetString("Cmd Line");
         private string TextColumnWorkDirectory => Locale.GetString("Work Directory");
         private string TextColumnStartTime => Locale.GetString("Start Time");
+        private string TextChildProcesses => Locale.GetString("Child Processes");
         private string TextColumnError => Locale.GetString("Error");
         private string TextProcessHasExited => Locale.GetString("Process has exited");
 
@@ -41,6 +42,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         [Parameter]
         public Dictionary<string, Action<ProcessInfo>> OtherButtons { get; set; }
         private ProcessInfo ProcessInfo;
+        private ProcessInfo[] ChildProcesses;
 
         private string ExceptionString;
 
@@ -50,6 +52,7 @@ namespace Quick.Blazor.Bootstrap.Admin
 
         private ModalAlert modalAlert;
         private ModalLoading modalLoading;
+        private ModalWindow modalWindow;
 
         public static Dictionary<string, object> PrepareParameters(int pid, Dictionary<string, Action<ProcessInfo>> otherButtons)
         {
@@ -98,16 +101,35 @@ namespace Quick.Blazor.Bootstrap.Admin
 
         private void RefreshProcess()
         {
+            ChildProcesses = null;
             try
             {
                 if (!ProcessHasExited)
+                {
                     ProcessInfo = new ProcessInfo(PID, true);
+                    ChildProcesses = ProcessInfo.GetChildProcesses();
+                }
             }
             catch (Exception ex)
             {
                 ExceptionString = ExceptionUtils.GetExceptionString(ex);
             }
             InvokeAsync(StateHasChanged);
+        }
+
+        private void ViewProcess(ProcessInfo info)
+        {
+            try
+            {
+                modalWindow.Show<ProcessViewControl>(string.Format(ProcessManageControl.TextViewProcessTitle, info.PID, info.Name), new Dictionary<string, object>()
+                {
+                    [nameof(PID)] = info.PID
+                });
+            }
+            catch (Exception ex)
+            {
+                modalAlert.Show(TextFailed, ExceptionUtils.GetExceptionMessage(ex));
+            }
         }
 
         private void btnKillProcess_Click()

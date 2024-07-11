@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Net;
 using System.Runtime.Versioning;
 using Quick.Shell.Utils;
 
@@ -67,6 +69,54 @@ public class ProcessInfo
         }
         catch
         {
+        }
+    }
+
+    public ProcessInfo[] GetChildProcesses()
+    {
+        if (OperatingSystem.IsWindows())
+        {
+            var ret = ProcessUtils.ExecuteShell($"wmic process where ParentProcessId={PID} get Name,ProcessId");
+            if (ret.ExitCode != 0)
+                return null;
+            return ret.Output.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries).Skip(1)
+            .Select(line =>
+            {
+                var segments = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                if (segments.Length < 2)
+                    return null;
+                var pid = int.Parse(segments.Last());
+                var name = string.Join(' ', segments.Take(segments.Length - 1));
+                return new ProcessInfo()
+                {
+                    PID = pid,
+                    Name = name
+                };
+            })
+            .Where(t => t != null)
+            .ToArray();
+        }
+        else
+        {
+            var ret = ProcessUtils.ExecuteShell($"ps --ppid {PID}");
+            if (ret.ExitCode != 0)
+                return null;
+            return ret.Output.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries).Skip(1)
+            .Select(line =>
+            {
+                var segments = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                if (segments.Length < 4)
+                    return null;
+                var pid = int.Parse(segments[0]);
+                var name = string.Join(' ', segments.Skip(3));
+                return new ProcessInfo()
+                {
+                    PID = pid,
+                    Name = name
+                };
+            })
+            .Where(t => t != null)
+            .ToArray();
         }
     }
 }

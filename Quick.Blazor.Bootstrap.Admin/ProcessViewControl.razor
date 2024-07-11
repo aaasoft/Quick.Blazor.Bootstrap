@@ -66,6 +66,21 @@
                     <th>@TextColumnStartTime</th>
                     <td>@ProcessInfo.StartTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
                 </tr>
+                    @if (ChildProcesses != null && ChildProcesses.Length > 0)
+                    {
+                        <tr>
+                            <th>@TextChildProcesses</th>
+                            <td>
+                                @foreach (var childProcess in ChildProcesses)
+                                {
+                                    <a href="javascript:;" @onclick="@(e=>ViewProcess(childProcess))">
+                                        <span class="badge badge-pill">@childProcess.Name
+                                            [@childProcess.PID]</span>
+                                    </a>
+                                }
+                            </td>
+                        </tr>
+                    }
                 }
                 @if (!string.IsNullOrEmpty(ExceptionString))
                 {
@@ -80,3 +95,4 @@
 </div>
 <ModalAlert @ref="modalAlert" DialogSizeExtraLarge />
 <ModalLoading @ref="modalLoading" />
+<ModalWindow @ref="modalWindow" DialogSizeExtraLarge />
