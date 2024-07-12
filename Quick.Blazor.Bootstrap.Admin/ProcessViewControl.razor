@@ -36,18 +36,10 @@
         </div>
         <table class="table table-sm table-striped table-borderless table-hover mb-0" style="overflow-wrap: anywhere;">
             <tbody>
-                <tr>
-                    <th style="min-width: 5rem;">@TextColumnPID</th>
-                    <td>@ProcessInfo.PID</td>
-                </tr>
                 @if (!ProcessHasExited)
                 {
-                    <tr>
-                        <th>@TextColumnName</th>
-                        <td>@ProcessInfo.Name</td>
-                    </tr>
-                    <tr>
-                    <th>@TextColumnMemory</th>
+                <tr>
+                    <th style="min-width: 5rem;">@TextColumnMemory</th>
                     <td>@getProcessMemInfo(ProcessInfo)</td>
                 </tr>
                     <tr>

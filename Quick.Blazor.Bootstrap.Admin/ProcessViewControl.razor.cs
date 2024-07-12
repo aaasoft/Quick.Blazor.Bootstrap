@@ -18,7 +18,7 @@ namespace Quick.Blazor.Bootstrap.Admin
     [UnsupportedOSPlatform("browser")]
     public partial class ProcessViewControl : ComponentBase_WithGettextSupport
     {
-        private string TextProcessTitle => Locale.GetString("Process[Id:{0}, Name:{1}]");
+        private string TextProcessTitle => Locale.GetString("Process [{0}] {1}");
         private string TextRefresh => Locale.GetString("Refresh");
         private string TextSuccess => Locale.GetString("Success");
         private string TextFailed => Locale.GetString("Failed");
@@ -104,6 +104,7 @@ namespace Quick.Blazor.Bootstrap.Admin
 
         private void RefreshProcess()
         {
+            CurrentChildProcess = null;
             ChildProcesses = null;
             try
             {

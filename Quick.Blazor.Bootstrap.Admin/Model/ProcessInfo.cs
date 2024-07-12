@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Runtime.Versioning;
+using System.Text;
 using Quick.Shell.Utils;
 
 namespace Quick.Blazor.Bootstrap.Admin;
@@ -44,9 +45,35 @@ public class ProcessInfo
                 Name = File.ReadAllText($"/proc/{PID}/comm").Trim();
                 if (includeDetail)
                 {
+                    if (StartTime == DateTime.MinValue)
+                        StartTime = Directory.GetCreationTime($"/proc/{PID}");
                     CmdLine = File.ReadAllText($"/proc/{PID}/cmdline").Trim().Replace('\0', ' ');
                     FileName = ProcessUtils.ExecuteShell($"readlink /proc/{PID}/exe").Output.Trim();
                     WorkingDirectory = ProcessUtils.ExecuteShell($"readlink /proc/{PID}/cwd").Output.Trim();
+                }
+            }
+            else if (OperatingSystem.IsWindows())
+            {
+                if (includeDetail)
+                {
+                    try
+                    {
+                        if (StartTime == DateTime.MinValue)
+                        {
+                            var line = GetWmicResult($"wmic process where ProcessId={PID} get CreationDate");
+                            var sb = new StringBuilder(line.Split('+')[0]);
+                            sb.Insert(12, ':');
+                            sb.Insert(10, ':');
+                            sb.Insert(8, ' ');
+                            sb.Insert(6, '-');
+                            sb.Insert(4, '-');
+                            StartTime = DateTime.Parse(sb.ToString());
+                        }
+                        CmdLine = GetWmicResult($"wmic process where ProcessId={PID} get CommandLine");
+                        FileName = GetWmicResult($"wmic process where ProcessId={PID} get ExecutablePath");
+                        WorkingDirectory = process.StartInfo?.WorkingDirectory;
+                    }
+                    catch { }
                 }
             }
             else
@@ -55,13 +82,10 @@ public class ProcessInfo
                 {
                     try
                     {
-                        var processStartInfo = process.StartInfo;
-                        FileName = processStartInfo?.FileName;
-                        CmdLine = processStartInfo?.FileName;
-                        var argumentList = processStartInfo?.ArgumentList;
-                        if (argumentList != null && argumentList.Count > 0)
-                            CmdLine += " " + string.Join(" ", argumentList);
-                        WorkingDirectory = processStartInfo?.WorkingDirectory;
+                        var psi = process.StartInfo;
+                        FileName = psi.FileName;
+                        CmdLine = string.Join(' ', psi.ArgumentList);
+                        WorkingDirectory = process.StartInfo?.WorkingDirectory;
                     }
                     catch { }
                 }
@@ -70,6 +94,14 @@ public class ProcessInfo
         catch
         {
         }
+    }
+
+    private string GetWmicResult(string commandLine)
+    {
+        var ret = ProcessUtils.ExecuteShell(commandLine);
+        if (ret.ExitCode != 0)
+            return null;
+        return string.Join(' ', ret.Output.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries).Skip(1)).Trim();
     }
 
     public ProcessInfo[] GetChildProcesses()
