@@ -18,6 +18,7 @@ namespace Quick.Blazor.Bootstrap.Admin
     [UnsupportedOSPlatform("browser")]
     public partial class ProcessViewControl : ComponentBase_WithGettextSupport
     {
+        private string TextProcessTitle => Locale.GetString("Process[Id:{0}, Name:{1}]");
         private string TextRefresh => Locale.GetString("Refresh");
         private string TextSuccess => Locale.GetString("Success");
         private string TextFailed => Locale.GetString("Failed");
@@ -41,7 +42,9 @@ namespace Quick.Blazor.Bootstrap.Admin
         public int PID { get; set; }
         [Parameter]
         public Dictionary<string, Action<ProcessInfo>> OtherButtons { get; set; }
+        private string Title;
         private ProcessInfo ProcessInfo;
+        private ProcessInfo CurrentChildProcess;
         private ProcessInfo[] ChildProcesses;
 
         private string ExceptionString;
@@ -107,29 +110,16 @@ namespace Quick.Blazor.Bootstrap.Admin
                 if (!ProcessHasExited)
                 {
                     ProcessInfo = new ProcessInfo(PID, true);
+                    Title = string.Format(TextProcessTitle, ProcessInfo.PID, ProcessInfo.Name);
                     ChildProcesses = ProcessInfo.GetChildProcesses();
                 }
             }
             catch (Exception ex)
             {
+                Title = string.Format(TextProcessTitle, PID, null);
                 ExceptionString = ExceptionUtils.GetExceptionString(ex);
             }
             InvokeAsync(StateHasChanged);
-        }
-
-        private void ViewProcess(ProcessInfo info)
-        {
-            try
-            {
-                modalWindow.Show<ProcessViewControl>(string.Format(ProcessManageControl.TextViewProcessTitle, info.PID, info.Name), new Dictionary<string, object>()
-                {
-                    [nameof(PID)] = info.PID
-                });
-            }
-            catch (Exception ex)
-            {
-                modalAlert.Show(TextFailed, ExceptionUtils.GetExceptionMessage(ex));
-            }
         }
 
         private void btnKillProcess_Click()
