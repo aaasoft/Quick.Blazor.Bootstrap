@@ -82,7 +82,7 @@ public class ProcessInfo
             return ret.Output.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries).Skip(1)
             .Select(line =>
             {
-                var segments = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                var segments = line.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
                 if (segments.Length < 2)
                     return null;
                 var pid = int.Parse(segments.Last());
@@ -104,7 +104,7 @@ public class ProcessInfo
             return ret.Output.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries).Skip(1)
             .Select(line =>
             {
-                var segments = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                var segments = line.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
                 if (segments.Length < 4)
                     return null;
                 var pid = int.Parse(segments[0]);
