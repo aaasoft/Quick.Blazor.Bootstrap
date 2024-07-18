@@ -86,10 +86,10 @@ public class CrontabManager
             var lines = crontab.Split('\r', '\n');
             foreach (var line in lines)
             {
+                var str = line.Trim();
                 var segmentList = new List<string>();
                 while (true)
                 {
-                    var str = line.Trim();
                     var index = str.IndexOf(' ');
                     if (index < 0)
                         break;
@@ -166,7 +166,7 @@ public class CrontabManager
         {
             while (!cancellationToken.IsCancellationRequested)
             {
-                await Task.Delay(TimeSpan.FromMinutes(1), cancellationToken);
+                await Task.Delay(1000, cancellationToken);
                 var nowTime = DateTime.Now;
                 foreach (var context in contextList)
                 {

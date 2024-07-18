@@ -18,6 +18,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         public IJSRuntime JSRuntime { get; set; }
 
         private string TextSuccess => Locale.GetString("Success");
+        private string TextSaveSuccess => Locale.GetString("Save success!");
         private string TextFailed => Locale.GetString("Failed");
         private string TextRows => Locale.GetString("Rows");
         private string TextEncoding => Locale.GetString("Encoding");
