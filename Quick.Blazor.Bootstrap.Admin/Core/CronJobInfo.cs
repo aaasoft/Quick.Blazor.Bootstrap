@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Quick.Blazor.Bootstrap.Admin;
+namespace Quick.Blazor.Bootstrap.Admin.Core;
 
 public class CronJobInfo
 {

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Threading;
+using Microsoft.AspNetCore.Components;
 
 namespace TestWebApplication.Pages
 {
-    public partial class LogViewTest : IDisposable
+    public partial class LogViewTest : ComponentBase, IDisposable
     {
         private Quick.Blazor.Bootstrap.Admin.LogViewControl control;
         private Timer refreshTimer;

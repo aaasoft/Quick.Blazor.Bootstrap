@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Quick.Blazor.Bootstrap.ReverseProxy;
 using Quick.EntityFrameworkCore.Plus;
 using Quick.EntityFrameworkCore.Plus.SQLite;
 using System;
@@ -27,11 +26,14 @@ namespace TestWebApplication
 #endif
             ConfigDbContext.Init(new SQLiteDbContextConfigHandler(dbFile), modelBuilder =>
             {
-                Global.Instance.OnModelCreating(modelBuilder);
+                Quick.Blazor.Bootstrap.Admin.Global.Instance.OnModelCreating(modelBuilder);
+                Quick.Blazor.Bootstrap.ReverseProxy.Global.Instance.OnModelCreating(modelBuilder);
             });
             using (var dbContext = new ConfigDbContext())
                 dbContext.DatabaseEnsureCreatedAndUpdated(t => Debug.Print(t));
             ConfigDbContext.CacheContext.LoadCache();
+
+            Quick.Blazor.Bootstrap.Admin.Core.CrontabManager.Instance.Start();
 
             CreateHostBuilder(args).Build().Run();
         }

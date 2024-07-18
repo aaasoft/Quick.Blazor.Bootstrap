@@ -18,7 +18,7 @@ namespace Quick.Blazor.Bootstrap
 
         public static string TextOk => Locale.GetString("OK");
         public static string TextCancel => Locale.GetString("Cancel");
-        public string[] ContentLines => Content.Split('\n');
+        public string[] ContentLines => Content?.Split('\n') ?? new string[0];
         private string Title { get; set; }
         private string Content { get; set; }
         private Action OkCallback { get; set; }
