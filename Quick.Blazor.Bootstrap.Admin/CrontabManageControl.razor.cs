@@ -16,12 +16,11 @@ namespace Quick.Blazor.Bootstrap.Admin
         public int Rows { get; set; } = 20;
         [Inject]
         public IJSRuntime JSRuntime { get; set; }
+        private LogViewControl logViewControl;
 
         private string TextSuccess => Locale.GetString("Success");
-        private string TextSaveSuccess => Locale.GetString("Save success!");
+        private string TextSave => Locale.GetString("Save");
         private string TextFailed => Locale.GetString("Failed");
-        private string TextRows => Locale.GetString("Rows");
-        private string TextEncoding => Locale.GetString("Encoding");
 
         [Parameter]
         public string IconSave { get; set; } = "fa fa-save";
@@ -35,7 +34,16 @@ namespace Quick.Blazor.Bootstrap.Admin
         protected override void OnParametersSet()
         {
             Content = Core.CrontabManager.Instance.Load();
-            Core.CrontabManager.Instance.ConsoleHistoryChanged += OnCurrentContainerConsoleHistoryChanged;
+        }
+
+        protected override void OnAfterRender(bool firstRender)
+        {
+            if (firstRender)
+            {
+                Core.CrontabManager.Instance.NewConsoleHistory += OnCurrentContainerNewConsoleHistory;
+                foreach (var line in Core.CrontabManager.Instance.ConsoleHistoryLines)
+                    logViewControl.AddLine(line);
+            }
         }
 
         private void Save()
@@ -43,7 +51,7 @@ namespace Quick.Blazor.Bootstrap.Admin
             try
             {
                 Core.CrontabManager.Instance.Save(Content);
-                modalAlert.Show(TextSuccess, "保存成功！");
+                modalAlert.Show(TextSave, TextSuccess);
             }
             catch (Exception ex)
             {
@@ -61,30 +69,15 @@ namespace Quick.Blazor.Bootstrap.Admin
             Core.CrontabManager.Instance.Stop();
         }
 
-        private void scrollToBottom()
+        private void OnCurrentContainerNewConsoleHistory(object sender, string e)
         {
-            JSRuntime.InvokeVoidAsync("eval",
-    @"this.setTimeout(function () {
-var els = document.getElementsByName('console');
-for(var i=0;i<els.length;i++)
-els[i].scrollTop = els[i].scrollHeight;
-},100);"
-                );
-        }
-
-        private void OnCurrentContainerConsoleHistoryChanged(object sender, EventArgs e)
-        {
-            InvokeAsync(() =>
-            {
-                StateHasChanged();
-                scrollToBottom();
-            });
+            logViewControl.AddLine(e);
         }
 
         public override void Dispose()
         {
             base.Dispose();
-            Core.CrontabManager.Instance.ConsoleHistoryChanged -= OnCurrentContainerConsoleHistoryChanged;
+            Core.CrontabManager.Instance.NewConsoleHistory -= OnCurrentContainerNewConsoleHistory;
         }
 
     }
