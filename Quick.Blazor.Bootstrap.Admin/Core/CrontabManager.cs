@@ -146,6 +146,11 @@ public class CrontabManager
     {
         try
         {
+            if (jobs == null || jobs.Length == 0)
+            {
+                pushLog(LogLevel.Information, $"当前没有任务，已取消启动。");
+                return;
+            }
             IsStarted = true;
             contextList = jobs.Select(t => new CronJobContext(t)).ToArray();
             cts?.Cancel();
