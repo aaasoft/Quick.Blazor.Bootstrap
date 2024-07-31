@@ -21,6 +21,7 @@
 		<PackageReference Include="BlazorDownloadFile" Version="2.4.0.2" />
 		<PackageReference Include="NCrontab" Version="3.3.3" />
 		<PackageReference Include="Quick.Shell" Version="1.0.3" />
+		<PackageReference Include="SharpCompress" Version="0.37.2" />
 	</ItemGroup>
 	<Choose>
 		<When Condition=" '$(TargetFramework)'=='net6.0' ">

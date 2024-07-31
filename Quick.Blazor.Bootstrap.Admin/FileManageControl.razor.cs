@@ -215,9 +215,14 @@ namespace Quick.Blazor.Bootstrap.Admin
             return isSelectedZipFile(SelectedItem as FileInfo);
         }
 
+        private string[] compressFileExtensions = new[] { ".zip", ".7z", ".rar", ".tar", ".gz", ".tgz" };
+
         private bool isSelectedZipFile(FileInfo fileInfo)
         {
-            return fileInfo != null && fileInfo.Name.EndsWith(".zip");
+            if (fileInfo == null)
+                return false;
+            var fileExtension = Path.GetExtension(fileInfo.Name);
+            return compressFileExtensions.Contains(fileExtension);
         }
 
         private string getFileLengthString(FileInfo fileInfo)
@@ -686,17 +691,21 @@ namespace Quick.Blazor.Bootstrap.Admin
             try
             {
                 using (var zipFileStream = zipFileInfo.OpenRead())
-                using (var zipArchive = new ZipArchive(zipFileStream, ZipArchiveMode.Read))
+                using (var zipArchive = SharpCompress.Archives.ArchiveFactory.Open(zipFileStream))
                 {
                     foreach (var zipEntry in zipArchive.Entries)
                     {
-                        totalFileSize += zipEntry.Length;
+                        totalFileSize += zipEntry.Size;
                     }
                     foreach (var zipEntry in zipArchive.Entries)
                     {
-                        var fileName = Path.Combine(baseFolder, zipEntry.FullName);
+                        var zipEntryKey = zipEntry.Key;
+                        if (zipEntry is SharpCompress.Archives.GZip.GZipArchiveEntry)
+                            zipEntryKey = Path.GetFileNameWithoutExtension(zipFileInfo.Name);
+
+                        var fileName = Path.Combine(baseFolder, zipEntryKey);
                         //如果是文件夹
-                        if (string.IsNullOrEmpty(zipEntry.Name))
+                        if (zipEntry.IsDirectory)
                         {
                             if (!Directory.Exists(fileName))
                                 Directory.CreateDirectory(fileName);
@@ -705,7 +714,7 @@ namespace Quick.Blazor.Bootstrap.Admin
                         var fileFolder = Path.GetDirectoryName(fileName);
                         if (!Directory.Exists(fileFolder))
                             Directory.CreateDirectory(fileFolder);
-                        using (var zipEntryStream = zipEntry.Open())
+                        using (var zipEntryStream = zipEntry.OpenEntryStream())
                         using (var fileStream = File.OpenWrite(fileName))
                         {
                             while (!cancellationToken.IsCancellationRequested)
@@ -722,7 +731,7 @@ namespace Quick.Blazor.Bootstrap.Admin
                                     sb.Append(TextSpeed + ": " + storageUSC.GetString(Convert.ToDecimal(speed * 1000), 1, true) + "B/s");
                                     var remainingTime = TimeSpan.FromMilliseconds((totalFileSize - readTotalCount) / speed);
                                     sb.Append("," + TextRemainingTime + ": " + remainingTime.ToString(@"hh\:mm\:ss"));
-                                    modalLoading.UpdateContent(zipEntry.FullName);
+                                    modalLoading.UpdateContent(zipEntryKey);
                                     modalLoading.UpdateProgress(Convert.ToInt32(readTotalCount * 100 / totalFileSize), sb.ToString());
                                     await InvokeAsync(StateHasChanged);
                                     lastDisplayTime = DateTime.Now;
