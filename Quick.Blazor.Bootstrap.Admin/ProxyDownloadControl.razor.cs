@@ -18,8 +18,6 @@ public partial class ProxyDownloadControl : ComponentBase_WithGettextSupport
     private static string TextDownload => Locale.GetString("Download");
     private static string TextCanceled => Locale.GetString("Canceled");
     private static string TextFailed => Locale.GetString("Failed");
-    private static string TextSpeed => Locale.GetString("Speed");
-    private static string TextRemainingTime => Locale.GetString("Remaining Time");
 
     private ModalLoading modalLoading;
     private ModalAlert modalAlert;
@@ -43,10 +41,6 @@ public partial class ProxyDownloadControl : ComponentBase_WithGettextSupport
         var downloadUrl = url;
 
         modalLoading?.Show(TextDownload, downloadUrl, false, cts.Cancel);
-        var stopwatch = new System.Diagnostics.Stopwatch();
-        stopwatch.Start();
-        DateTime lastDisplayTime = DateTime.MinValue;
-        byte[] buffer = new byte[24 * 1024];
         long readTotalCount = 0;
 
         try
@@ -101,35 +95,16 @@ public partial class ProxyDownloadControl : ComponentBase_WithGettextSupport
             if (fileSize > 0)
                 loadingContent += $" ({storageUSC.GetString(fileSize, 1, true)}B)";
             modalLoading.UpdateContent(loadingContent);
+            using (var commonTransferContext = new CommonTransferContext(progressInfo =>
+            {
+                modalLoading.UpdateProgress(progressInfo.Percent, progressInfo.Message);
+            }, fileSize))
             using (var repStream = await rep.Content.ReadAsStreamAsync())
             {
-                while (!cts.IsCancellationRequested)
+                await commonTransferContext.TransferAsync(repStream, async m =>
                 {
-                    var ret = await repStream.ReadAsync(buffer, 0, buffer.Length, cancellationToken);
-                    if (ret <= 0)
-                        break;
-                    readTotalCount += ret;
-
-                    if ((DateTime.Now - lastDisplayTime).TotalSeconds > 0.5 && stopwatch.ElapsedMilliseconds > 0)
-                    {
-                        StringBuilder sb = new StringBuilder();
-                        var speed = Convert.ToDouble(readTotalCount / stopwatch.ElapsedMilliseconds);
-                        sb.Append(TextSpeed + ": " + storageUSC.GetString(Convert.ToDecimal(speed * 1000), 1, true) + "B/s");
-                        if (fileSize > 0)
-                        {
-                            var remainingTime = TimeSpan.FromMilliseconds((fileSize - readTotalCount) / speed);
-                            sb.Append("," + TextRemainingTime + ": " + remainingTime.ToString(@"hh\:mm\:ss"));
-                            modalLoading.UpdateProgress(Convert.ToInt32(readTotalCount * 100 / fileSize), sb.ToString());
-                        }
-                        else
-                        {
-                            modalLoading.UpdateProgress(0, sb.ToString());
-                        }
-                        await InvokeAsync(StateHasChanged);
-                        lastDisplayTime = DateTime.Now;
-                    }
-                    await BlazorDownloadFileService.AddBuffer(new ArraySegment<byte>(buffer, 0, ret), cancellationToken);
-                }
+                    await BlazorDownloadFileService.AddBuffer(m, cancellationToken);
+                }, cancellationToken);
             }
             var result = await BlazorDownloadFileService.DownloadBinaryBuffers(fileName, cancellationToken);
             if (!result.Succeeded)
@@ -149,7 +124,6 @@ public partial class ProxyDownloadControl : ComponentBase_WithGettextSupport
         {
             if (readTotalCount > 0)
                 await BlazorDownloadFileService.ClearBuffers();
-            stopwatch.Stop();
             modalLoading?.Close();
         }
     }
