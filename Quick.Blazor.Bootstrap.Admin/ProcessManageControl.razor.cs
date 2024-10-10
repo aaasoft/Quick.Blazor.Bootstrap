@@ -53,7 +53,7 @@ namespace Quick.Blazor.Bootstrap.Admin
 
         private ProcessInfo[] Processes;
 
-        public static Dictionary<string, object> PrepareParameters(int pid, ProcessInfoButton[] processViewOtherButtons)
+        public static Dictionary<string, object> PrepareParameters(ProcessInfoButton[] processViewOtherButtons)
         {
             return new Dictionary<string, object>()
             {
