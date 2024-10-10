@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Quick.Blazor.Bootstrap;
+using Quick.Blazor.Bootstrap.Admin.Model;
 using Quick.Blazor.Bootstrap.Admin.Utils;
 using Quick.Localize;
 using Quick.Shell.Utils;
@@ -41,7 +42,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         [Parameter]
         public int PID { get; set; }
         [Parameter]
-        public Dictionary<string, Action<ProcessInfo>> OtherButtons { get; set; }
+        public ProcessInfoButton[] OtherButtons { get; set; }
         private string Title;
         private ProcessInfo ProcessInfo;
         private ProcessInfo CurrentChildProcess;
@@ -54,10 +55,8 @@ namespace Quick.Blazor.Bootstrap.Admin
 
 
         private ModalAlert modalAlert;
-        private ModalLoading modalLoading;
-        private ModalWindow modalWindow;
 
-        public static Dictionary<string, object> PrepareParameters(int pid, Dictionary<string, Action<ProcessInfo>> otherButtons)
+        public static Dictionary<string, object> PrepareParameters(int pid, ProcessInfoButton[] otherButtons)
         {
             return new Dictionary<string, object>()
             {

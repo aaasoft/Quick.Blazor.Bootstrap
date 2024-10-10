@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Quick.Blazor.Bootstrap.Admin.Model;
 using Quick.Blazor.Bootstrap.Admin.Utils;
 using Quick.Localize;
 using System;
@@ -39,6 +40,8 @@ namespace Quick.Blazor.Bootstrap.Admin
         public string IconKillProcess { get; set; } = "fa fa-stop";
         [Parameter]
         public string IconKillProcessTree { get; set; } = "fa fa-tree";
+        [Parameter]
+        public ProcessInfoButton[] ProcessViewOtherButtons { get; set; }
 
         private ModalLoading modalLoading;
         private ModalAlert modalAlert;
@@ -49,6 +52,14 @@ namespace Quick.Blazor.Bootstrap.Admin
         private string orderByField = "pid";
 
         private ProcessInfo[] Processes;
+
+        public static Dictionary<string, object> PrepareParameters(int pid, ProcessInfoButton[] processViewOtherButtons)
+        {
+            return new Dictionary<string, object>()
+            {
+                [nameof(ProcessViewOtherButtons)] = processViewOtherButtons,
+            };
+        }
 
 
         private string getFieldButtonClass(string field)
@@ -87,9 +98,9 @@ namespace Quick.Blazor.Bootstrap.Admin
                     }
                     Processes = processInfos.ToArray();
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    modalAlert.Show("错误",ExceptionUtils.GetExceptionString(ex));
+                    modalAlert.Show("错误", ExceptionUtils.GetExceptionString(ex));
                 }
                 finally
                 {
@@ -115,10 +126,9 @@ namespace Quick.Blazor.Bootstrap.Admin
         {
             try
             {
-                modalWindow.Show<ProcessViewControl>(string.Format(TextViewProcess, info.PID, info.Name), new Dictionary<string, object>()
-                {
-                    [nameof(ProcessViewControl.PID)] = info.PID
-                });
+                modalWindow.Show<ProcessViewControl>(
+                    string.Format(TextViewProcess, info.PID, info.Name),
+                    ProcessViewControl.PrepareParameters(info.PID, ProcessViewOtherButtons));
             }
             catch (Exception ex)
             {

@@ -26,9 +26,13 @@
                     <div class="btn-group" role="group" aria-label="BasicButtons">
                         @foreach (var button in OtherButtons)
                         {
-                            <button type="button" class="btn btn-sm btn-secondary mr-1" @onclick="@(()=>button.Value(ProcessInfo))">
-                                @button.Key
-                            </button>
+                            @if (button.IsVisiableFunc(ProcessInfo))
+                            {
+                                <button type="button" class="btn btn-sm btn-secondary mr-1"
+                                    @onclick="@(()=>button.OnClickAction(ProcessInfo))">
+                                    @button.Name
+                                </button>
+                            }
                         }
                     </div>
                 }
@@ -104,5 +108,3 @@
     <ProcessViewControl PID="@CurrentChildProcess.PID" OtherButtons="@OtherButtons"></ProcessViewControl>
 }
 <ModalAlert @ref="modalAlert" DialogSizeExtraLarge />
-<ModalLoading @ref="modalLoading" />
-<ModalWindow @ref="modalWindow" DialogSizeExtraLarge />
