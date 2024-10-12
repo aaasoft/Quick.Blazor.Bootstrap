@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Quick.EntityFrameworkCore.Plus;
+using Quick.LiteDB.Plus;
 
 namespace Quick.Blazor.Bootstrap.Admin.Model;
 

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Quick.Blazor.Bootstrap.ReverseProxy.Model;
-using Quick.EntityFrameworkCore.Plus;
+using Quick.LiteDB.Plus;
 using Quick.Localize;
 using System;
 using System.Threading.Tasks;

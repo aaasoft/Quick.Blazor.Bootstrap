@@ -2,8 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Quick.EntityFrameworkCore.Plus;
-using Quick.EntityFrameworkCore.Plus.SQLite;
+using Quick.LiteDB.Plus;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -20,19 +19,16 @@ namespace TestWebApplication
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-            var dbFile = SQLiteDbContextConfigHandler.CONFIG_DB_FILE;
+            var dbFile = "Config.litedb";
 #if DEBUG
             dbFile = Path.Combine(Path.GetDirectoryName(typeof(Program).Assembly.Location), dbFile);
 #endif
-            ConfigDbContext.Init(new SQLiteDbContextConfigHandler(dbFile), modelBuilder =>
+            ConfigDbContext.Init(dbFile, modelBuilder =>
             {
                 Quick.Blazor.Bootstrap.Admin.Global.Instance.OnModelCreating(modelBuilder);
                 Quick.Blazor.Bootstrap.ReverseProxy.Global.Instance.OnModelCreating(modelBuilder);
             });
-            using (var dbContext = new ConfigDbContext())
-                dbContext.DatabaseEnsureCreatedAndUpdated(t => Debug.Print(t));
             ConfigDbContext.CacheContext.LoadCache();
-
             Quick.Blazor.Bootstrap.Admin.Core.CrontabManager.Instance.Start();
 
             CreateHostBuilder(args).Build().Run();

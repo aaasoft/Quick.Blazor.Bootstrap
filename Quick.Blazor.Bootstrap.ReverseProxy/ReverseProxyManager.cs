@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
 using Quick.Blazor.Bootstrap.ReverseProxy.Model;
-using Quick.EntityFrameworkCore.Plus;
+using Quick.LiteDB.Plus;
 using Quick.Localize;
 using System;
 using System.Collections.Generic;

@@ -20,21 +20,10 @@
 	<ItemGroup>
 		<PackageReference Include="BlazorDownloadFile" Version="2.4.0.2" />
 		<PackageReference Include="NCrontab" Version="3.3.3" />
+		<PackageReference Include="Quick.LiteDB.Plus" Version="1.0.2" />
 		<PackageReference Include="Quick.Shell" Version="1.0.3" />
-		<PackageReference Include="SharpCompress" Version="0.37.2" />
+		<PackageReference Include="SharpCompress" Version="0.38.0" />
 	</ItemGroup>
-	<Choose>
-		<When Condition=" '$(TargetFramework)'=='net6.0' ">
-			<ItemGroup>
-				<PackageReference Include="Quick.EntityFrameworkCore.Plus" Version="6.0.3" />
-			</ItemGroup>
-		</When>
-		<Otherwise>
-			<ItemGroup>
-				<PackageReference Include="Quick.EntityFrameworkCore.Plus" Version="8.0.0" />
-			</ItemGroup>
-		</Otherwise>
-	</Choose>
 	<ItemGroup>
 		<ProjectReference Include="..\Quick.Blazor.Bootstrap\Quick.Blazor.Bootstrap.csproj" />
 	</ItemGroup>

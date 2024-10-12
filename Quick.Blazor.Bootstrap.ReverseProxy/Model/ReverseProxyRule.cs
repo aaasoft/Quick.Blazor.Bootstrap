@@ -1,6 +1,6 @@
-﻿using Quick.EntityFrameworkCore.Plus;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Quick.LiteDB.Plus;
 
 namespace Quick.Blazor.Bootstrap.ReverseProxy.Model
 {

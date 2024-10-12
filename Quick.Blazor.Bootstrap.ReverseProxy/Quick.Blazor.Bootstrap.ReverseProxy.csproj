@@ -19,21 +19,9 @@
 	<ItemGroup>
 		<SupportedPlatform Include="browser" />
 	</ItemGroup>
-
-	<Choose>
-		<When Condition=" '$(TargetFramework)'=='net6.0' ">
-			<ItemGroup>
-				<PackageReference Include="Quick.EntityFrameworkCore.Plus" Version="6.0.3" />
-			</ItemGroup>
-		</When>
-		<Otherwise>
-			<ItemGroup>
-				<PackageReference Include="Quick.EntityFrameworkCore.Plus" Version="8.0.0" />
-			</ItemGroup>
-		</Otherwise>
-	</Choose>
 	
 	<ItemGroup>
+		<PackageReference Include="Quick.LiteDB.Plus" Version="1.0.2" />
 		<PackageReference Include="Yarp.ReverseProxy" Version="2.1.0" />
 	</ItemGroup>
 

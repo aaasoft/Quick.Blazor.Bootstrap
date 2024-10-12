@@ -1,5 +1,5 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore;
+using Quick.LiteDB.Plus;
 
 namespace Quick.Blazor.Bootstrap.Admin;
 
@@ -9,6 +9,6 @@ public class Global
 
     public void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Model.CommonConfig>();
+        modelBuilder.Entity<Model.CommonConfig>(c => c.EnsureIndex(t => t.Id, true));
     }
 }

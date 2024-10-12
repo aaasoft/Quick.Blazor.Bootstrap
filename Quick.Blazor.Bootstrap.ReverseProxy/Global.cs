@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Quick.LiteDB.Plus;
 
 namespace Quick.Blazor.Bootstrap.ReverseProxy
 {
@@ -13,7 +13,7 @@ namespace Quick.Blazor.Bootstrap.ReverseProxy
 
         public void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Model.ReverseProxyRule>();
+            modelBuilder.Entity<Model.ReverseProxyRule>(c => c.EnsureIndex(t => t.Id, true));
         }
     }
 }
