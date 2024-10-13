@@ -1,0 +1,56 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Quick.Blazor.Bootstrap.CrontabManager\n"
+"POT-Creation-Date: 2024-10-13 08:54:01+0800\n"
+"PO-Revision-Date: 2024-10-13 08:54:01+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: GetText.NET Extractor\n"
+
+#: ..\..\Core\CrontabManager.cs:24
+msgid "{0} executing..."
+msgstr ""
+
+#: ..\..\CrontabManageControl.razor.cs:24
+msgid "Failed"
+msgstr ""
+
+#: ..\..\CrontabManageControl.razor.cs:23
+msgid "Save"
+msgstr ""
+
+#: ..\..\Core\CrontabManager.cs:27
+msgid "Started"
+msgstr ""
+
+#: ..\..\CrontabManageControl.razor.cs:22
+msgid "Success"
+msgstr ""
+
+#: ..\..\Core\CrontabManager.cs:28
+msgid "Stoped"
+msgstr ""
+
+#: ..\..\Core\CrontabManager.cs:22
+msgid "Current has no jobs,start cancelled."
+msgstr ""
+
+#: ..\..\Core\CrontabManager.cs:23
+msgid "{0} loaded,first execute time: {1}"
+msgstr ""
+
+#: ..\..\Core\CrontabManager.cs:21
+msgid "Job[{0} {1}]"
+msgstr ""
+
+#: ..\..\Core\CrontabManager.cs:26
+msgid "Job next execute time: {0}"
+msgstr ""
+
+#: ..\..\Core\CrontabManager.cs:25
+msgid "Job done,exit code: {0}"
+msgstr ""
+

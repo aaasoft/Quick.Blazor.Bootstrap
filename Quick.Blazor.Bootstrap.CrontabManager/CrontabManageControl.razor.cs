@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using Quick.Blazor.Bootstrap.Admin;
 using Quick.Localize;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Quick.Blazor.Bootstrap.Admin
+namespace Quick.Blazor.Bootstrap.CrontabManager
 {
     public partial class CrontabManageControl : ComponentBase_WithGettextSupport
     {

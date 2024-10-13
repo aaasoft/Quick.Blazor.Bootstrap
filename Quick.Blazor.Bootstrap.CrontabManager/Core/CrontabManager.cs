@@ -9,7 +9,7 @@ using Quick.LiteDB.Plus;
 using Quick.Localize;
 using Quick.Shell.Utils;
 
-namespace Quick.Blazor.Bootstrap.Admin.Core;
+namespace Quick.Blazor.Bootstrap.CrontabManager.Core;
 
 public class CrontabManager
 {
@@ -17,12 +17,6 @@ public class CrontabManager
     public static CrontabManager Instance { get; } = new CrontabManager();
     private CancellationTokenSource cts;
     private CronJobContext[] contextList;
-
-    private static string TextTrace => Locale.GetString("Trace");
-    private static string TextDebug => Locale.GetString("Debug");
-    private static string TextInformation => Locale.GetString("Information");
-    private static string TextWarning => Locale.GetString("Warning");
-    private static string TextError => Locale.GetString("Error");
 
     private static string TextJobString => Locale.GetString("Job[{0} {1}]");
     private static string TextNoJobStartCancelled => Locale.GetString("Current has no jobs,start cancelled.");

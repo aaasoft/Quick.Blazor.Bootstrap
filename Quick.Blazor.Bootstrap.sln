@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Blazor.Bootstrap.Quic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quick.Blazor.Bootstrap.Terminal", "Quick.Blazor.Bootstrap.Terminal\Quick.Blazor.Bootstrap.Terminal.csproj", "{2D7BF503-9C6F-483E-9312-4FD4E97496CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quick.Blazor.Bootstrap.CrontabManager", "Quick.Blazor.Bootstrap.CrontabManager\Quick.Blazor.Bootstrap.CrontabManager.csproj", "{3561F4B8-B65D-4402-8405-8183E5A0F703}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{2D7BF503-9C6F-483E-9312-4FD4E97496CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D7BF503-9C6F-483E-9312-4FD4E97496CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D7BF503-9C6F-483E-9312-4FD4E97496CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3561F4B8-B65D-4402-8405-8183E5A0F703}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3561F4B8-B65D-4402-8405-8183E5A0F703}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3561F4B8-B65D-4402-8405-8183E5A0F703}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3561F4B8-B65D-4402-8405-8183E5A0F703}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

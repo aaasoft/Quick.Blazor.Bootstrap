@@ -1,7 +1,7 @@
 ﻿using System;
 using Quick.LiteDB.Plus;
 
-namespace Quick.Blazor.Bootstrap.Admin;
+namespace Quick.Blazor.Bootstrap.CrontabManager;
 
 public class Global
 {

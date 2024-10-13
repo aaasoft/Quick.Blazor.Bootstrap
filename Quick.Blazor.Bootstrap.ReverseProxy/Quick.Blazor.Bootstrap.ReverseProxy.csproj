@@ -21,7 +21,7 @@
 	</ItemGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="Quick.LiteDB.Plus" Version="1.0.2" />
+		<PackageReference Include="Quick.LiteDB.Plus" Version="1.0.3" />
 		<PackageReference Include="Yarp.ReverseProxy" Version="2.1.0" />
 	</ItemGroup>
 

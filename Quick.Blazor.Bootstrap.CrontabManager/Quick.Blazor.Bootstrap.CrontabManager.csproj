@@ -7,7 +7,7 @@
 		<PackageProjectUrl>https://github.com/aaasoft/Quick.Blazor.Bootstrap</PackageProjectUrl>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<Version>4.1.20</Version>
-		<Description>Quick.Blazor.Bootstrap.Admin is a component library for admin built on top of Blazor and CSS frameworks Bootstrap.</Description>
+		<Description>Quick.Blazor.Bootstrap.CrontabManager is a component library for cron manage built on top of Blazor and CSS frameworks Bootstrap.</Description>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 	
@@ -18,12 +18,14 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="BlazorDownloadFile" Version="2.4.0.2" />
+		<PackageReference Include="NCrontab" Version="3.3.3" />
+		<PackageReference Include="Quick.LiteDB.Plus" Version="1.0.3" />
 		<PackageReference Include="Quick.Shell" Version="1.0.3" />
 		<PackageReference Include="SharpCompress" Version="0.38.0" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Quick.Blazor.Bootstrap\Quick.Blazor.Bootstrap.csproj" />
+		<ProjectReference Include="..\Quick.Blazor.Bootstrap.Admin\Quick.Blazor.Bootstrap.Admin.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
