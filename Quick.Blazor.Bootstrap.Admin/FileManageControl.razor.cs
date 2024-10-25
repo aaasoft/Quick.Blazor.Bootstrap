@@ -6,13 +6,10 @@ using Microsoft.JSInterop;
 using Quick.Blazor.Bootstrap.Admin.Utils;
 using Quick.Localize;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -126,6 +123,10 @@ namespace Quick.Blazor.Bootstrap.Admin
         
         [Parameter]
         public string FileFilter { get; set; }
+        [Parameter]
+        public string OrderBy { get; set; } = nameof(FileInfo.Name);
+        [Parameter]
+        public bool OrderByAsc { get; set; } = true;
 
         private static string TextConfirm => Locale.GetString("Confirm");
         private static string TextConfirmDeleteFolder => Locale.GetString("Do you want to delete folder[{0}]?");
@@ -160,6 +161,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         private static string TextLastWriteTime => Locale.GetString("Last Write Time");
         private static string TextSize => Locale.GetString("Size");
         private static string TextName => Locale.GetString("Name");
+        private static string TextOrderBy => Locale.GetString("OrderBy");
 
         [Parameter]
         public RenderFragment ToolbarAddonButtons { get; set; }
@@ -202,7 +204,11 @@ namespace Quick.Blazor.Bootstrap.Admin
         public string IconGoto { get; set; } = "fa fa-arrow-right";
         [Parameter]
         public string IconSearch { get; set; } = "fa fa-search";
-
+        [Parameter]
+        public string IconOrderByAsc { get; set; } = "fa fa-sort-asc mr-1";
+        [Parameter]
+        public string IconOrderByDesc { get; set; } = "fa fa-sort-desc mr-1";
+        
         private bool isSelectedFile()
         {
             return SelectedItem != null && SelectedItem is FileInfo;
@@ -243,6 +249,33 @@ namespace Quick.Blazor.Bootstrap.Admin
             }
             catch { }
             return string.Empty;
+        }
+
+        private string getOrderByButtonClass(string field)
+        {
+            if (field == OrderBy)
+                return "active";
+            return "disabled";
+        }
+
+
+        private string getOrderByLabelClass()
+        {
+            if (OrderByAsc)
+                return IconOrderByAsc;
+            return IconOrderByDesc;
+        }
+
+        private void changeOrderField(string orderBy)
+        {
+            this.OrderBy = orderBy;
+            refresh();
+        }
+
+        private void changeOrderByAscOrDesc()
+        {
+            OrderByAsc = !OrderByAsc;
+            refresh();
         }
 
         protected override void OnParametersSet()
@@ -808,6 +841,32 @@ namespace Quick.Blazor.Bootstrap.Admin
             }
         }
 
+        private IEnumerable<DirectoryInfo> orderDirs(IEnumerable<DirectoryInfo> query)
+        {
+            switch (OrderBy)
+            {
+                case nameof(DirectoryInfo.LastWriteTime):
+                    return OrderByAsc ? query.OrderBy(t => t.LastWriteTime) : query.OrderByDescending(t => t.LastWriteTime);
+                case nameof(DirectoryInfo.Name):
+                default:
+                    return OrderByAsc ? query.OrderBy(t => t.Name) : query.OrderByDescending(t => t.Name);
+            }
+        }
+
+        private IEnumerable<FileInfo> orderFiles(IEnumerable<FileInfo> query)
+        {
+            switch (OrderBy)
+            {
+                case nameof(FileInfo.LastWriteTime):
+                    return OrderByAsc ? query.OrderBy(t => t.LastWriteTime) : query.OrderByDescending(t => t.LastWriteTime);
+                case nameof(FileInfo.Length):
+                    return OrderByAsc ? query.OrderBy(t => t.Length) : query.OrderByDescending(t => t.Length);
+                case nameof(FileInfo.Name):
+                default:
+                    return OrderByAsc ? query.OrderBy(t => t.Name) : query.OrderByDescending(t => t.Name);
+            }
+        }
+
         private void refresh()
         {
             SelectedItem = null;
@@ -817,11 +876,13 @@ namespace Quick.Blazor.Bootstrap.Admin
             if (CurrentDir == null)
             {
                 if (DisplayFolder)
-                    Dirs = DriveInfo.GetDrives()
-                        .Where(t => t.IsReady)
+                {
+                    var query = DriveInfo.GetDrives().Where(t => t.IsReady)
                         .Select(t => t.RootDirectory)
-                        .Where(t => string.IsNullOrEmpty(Search) || t.Name.Contains(Search))
-                        .ToArray();
+                        .Where(t => string.IsNullOrEmpty(Search) || t.Name.Contains(Search));
+                    query = orderDirs(query);
+                    Dirs = query.ToArray();
+                }
             }
             else
             {
@@ -830,18 +891,24 @@ namespace Quick.Blazor.Bootstrap.Admin
                     try
                     {
                         if (DisplayFolder)
-                            Dirs = CurrentDir.GetDirectories()
-                                .Where(t => string.IsNullOrEmpty(Search) || t.Name.Contains(Search))
-                                .ToArray();
+                        {
+                            var query = CurrentDir.GetDirectories()
+                                .Where(t => string.IsNullOrEmpty(Search) || t.Name.Contains(Search));
+                            query = orderDirs(query);
+                            Dirs = query.ToArray();
+                        }
                         if (DisplayFile)
+                        {
+                            IEnumerable<FileInfo> query = null;
                             if (string.IsNullOrEmpty(FileFilter))
-                                Files = CurrentDir.GetFiles()
-                                    .Where(t => string.IsNullOrEmpty(Search) || t.Name.Contains(Search))
-                                    .ToArray();
+                                query = CurrentDir.GetFiles()
+                                    .Where(t => string.IsNullOrEmpty(Search) || t.Name.Contains(Search));
                             else
-                                Files = CurrentDir.GetFiles("*" + FileFilter)
-                                    .Where(t => string.IsNullOrEmpty(Search) || t.Name.Contains(Search))
-                                    .ToArray();
+                                query = CurrentDir.GetFiles("*" + FileFilter)
+                                    .Where(t => string.IsNullOrEmpty(Search) || t.Name.Contains(Search));
+                            query = orderFiles(query);
+                            Files = query.ToArray();
+                        }
                     }
                     catch (Exception ex)
                     {

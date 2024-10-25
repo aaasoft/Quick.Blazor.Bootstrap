@@ -62,7 +62,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         }
 
 
-        private string getFieldButtonClass(string field)
+        private string getOrderByButtonClass(string field)
         {
             if (field == orderByField)
                 return "";

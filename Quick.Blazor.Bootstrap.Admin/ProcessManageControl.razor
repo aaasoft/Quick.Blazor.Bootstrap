@@ -21,9 +21,9 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">@TextOrderBy</div>
                     </div>
-                    <button type="button" class="btn btn-secondary @getFieldButtonClass("pid")" @onclick="@(()=>changeOrderField("pid"))">@TextOrderByPID</button>
-                    <button type="button" class="btn btn-secondary @getFieldButtonClass("name")" @onclick="@(()=>changeOrderField("name"))">@TextOrderByName</button>
-                    <button type="button" class="btn btn-secondary @getFieldButtonClass("memory")" @onclick="@(()=>changeOrderField("memory"))">@TextOrderByMemory</button>
+                    <button type="button" class="btn btn-secondary @getOrderByButtonClass("pid")" @onclick="@(()=>changeOrderField("pid"))">@TextOrderByPID</button>
+                    <button type="button" class="btn btn-secondary @getOrderByButtonClass("name")" @onclick="@(()=>changeOrderField("name"))">@TextOrderByName</button>
+                    <button type="button" class="btn btn-secondary @getOrderByButtonClass("memory")" @onclick="@(()=>changeOrderField("memory"))">@TextOrderByMemory</button>
                 </div>
             </div>
         </div>
