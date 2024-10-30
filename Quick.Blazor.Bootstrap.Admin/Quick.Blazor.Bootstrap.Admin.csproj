@@ -6,7 +6,7 @@
 		<RepositoryUrl>https://github.com/aaasoft/Quick.Blazor.Bootstrap</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/aaasoft/Quick.Blazor.Bootstrap</PackageProjectUrl>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-		<Version>4.1.22</Version>
+		<Version>4.1.23</Version>
 		<Description>Quick.Blazor.Bootstrap.Admin is a component library for admin built on top of Blazor and CSS frameworks Bootstrap.</Description>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
@@ -19,7 +19,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="BlazorDownloadFile" Version="2.4.0.2" />
-		<PackageReference Include="Quick.Shell" Version="1.0.3" />
+		<PackageReference Include="Quick.Shell" Version="1.0.4" />
 		<PackageReference Include="SharpCompress" Version="0.38.0" />
 	</ItemGroup>
 	<ItemGroup>
