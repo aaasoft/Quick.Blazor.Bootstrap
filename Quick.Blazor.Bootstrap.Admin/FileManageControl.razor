@@ -103,15 +103,15 @@
                             }
                         </div>
                     }
-                    <div class="btn-group mb-1 mr-2">
-                        @ToolbarAddonButtons
-                    </div>
-                    <div class="btn-group mb-1 mr-2" role="group" aria-label="Basic example">                            
+                    <div class="btn-group mb-1 mr-2" role="group" aria-label="Basic example">
                         <button type="button" class="btn btn-sm btn-secondary" @onclick="@(()=>changeOrderByAscOrDesc())"><i class="@getOrderByLabelClass()" aria-hidden="true"></i>@TextOrderBy</button>
                         <button type="button" class="btn btn-sm btn-secondary @getOrderByButtonClass("Name")" @onclick="@(()=>changeOrderField("Name"))">@TextName</button>
                         <button type="button" class="btn btn-sm btn-secondary @getOrderByButtonClass("Length")" @onclick="@(()=>changeOrderField("Length"))">@TextSize</button>
                         <button type="button" class="btn btn-sm btn-secondary @getOrderByButtonClass("LastWriteTime")" @onclick="@(()=>changeOrderField("LastWriteTime"))">@TextLastWriteTime</button>
                     </div>
+                    <div class="btn-group mb-1 mr-2">
+                        @ToolbarAddonButtons
+                    </div>                    
                 </div>
                 <div class="btn-toolbar" role="toolbar">
                     <div class="input-group input-group-sm">
