@@ -105,6 +105,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         {
             CurrentChildProcess = null;
             ChildProcesses = null;
+            Title = string.Format(TextProcessTitle, PID, null);
             try
             {
                 if (!ProcessHasExited)
@@ -116,7 +117,6 @@ namespace Quick.Blazor.Bootstrap.Admin
             }
             catch (Exception ex)
             {
-                Title = string.Format(TextProcessTitle, PID, null);
                 ExceptionString = ExceptionUtils.GetExceptionString(ex);
             }
             InvokeAsync(StateHasChanged);
