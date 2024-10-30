@@ -71,7 +71,6 @@ public class ProcessInfo
                         }
                         CmdLine = GetWmicResult($"wmic process where ProcessId={PID} get CommandLine");
                         FileName = GetWmicResult($"wmic process where ProcessId={PID} get ExecutablePath");
-                        WorkingDirectory = process.StartInfo?.WorkingDirectory;
                     }
                     catch { }
                 }
@@ -85,7 +84,6 @@ public class ProcessInfo
                         var psi = process.StartInfo;
                         FileName = psi.FileName;
                         CmdLine = string.Join(' ', psi.ArgumentList);
-                        WorkingDirectory = process.StartInfo?.WorkingDirectory;
                     }
                     catch { }
                 }

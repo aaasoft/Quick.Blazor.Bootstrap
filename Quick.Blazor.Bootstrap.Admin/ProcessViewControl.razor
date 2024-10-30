@@ -46,23 +46,26 @@
                     <th style="min-width: 5rem;">@TextColumnMemory</th>
                     <td>@getProcessMemInfo(ProcessInfo)</td>
                 </tr>
-                    <tr>
+                <tr>
                     <th>@TextColumnThreads</th>
                     <td>@ProcessInfo.ThreadsCount</td>
                 </tr>
-                    <tr>
+                <tr>
                     <th>@TextColumnFileName</th>
                     <td>@ProcessInfo.FileName</td>
                 </tr>
-                    <tr>
+                <tr>
                     <th>@TextColumnCmdLine</th>
                     <td>@ProcessInfo.CmdLine</td>
                 </tr>
-                    <tr>
+                @if (!string.IsNullOrEmpty(ProcessInfo.WorkingDirectory))
+                {
+                <tr>
                     <th>@TextColumnWorkDirectory</th>
                     <td>@ProcessInfo.WorkingDirectory</td>
                 </tr>
-                    <tr>
+                }
+                <tr>
                     <th>@TextColumnStartTime</th>
                     <td>@ProcessInfo.StartTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
                 </tr>
