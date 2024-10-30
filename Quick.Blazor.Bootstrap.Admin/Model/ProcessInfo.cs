@@ -125,7 +125,7 @@ public class ProcessInfo
                     Name = name
                 };
             })
-            .Where(t => t != null)
+            .Where(t => t != null && t.PID != ret.ProcessId)
             .ToArray();
         }
         else
