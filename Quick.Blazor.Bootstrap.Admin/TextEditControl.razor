@@ -14,7 +14,7 @@
                 <div class="input-group-prepend">
                     <div class="input-group-text">@TextEncoding</div>
                 </div>
-                <InputSelect @bind-Value="FileEncoding" class="form-control">
+                <InputSelect @bind-Value="FileEncodingForBinding" class="form-control">
                     @foreach (var t in EncodingDict.Keys)
                     {
                         <option value="@t">@t</option>

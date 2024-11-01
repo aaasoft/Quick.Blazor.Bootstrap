@@ -18,15 +18,16 @@ namespace Quick.Blazor.Bootstrap.Admin
         public int Rows { get; set; } = 30;
         [Parameter]
         public string File { get; set; }
-        private string _FileEncoding = "UTF-8";
         [Parameter]
-        public string FileEncoding
+        public string FileEncoding { get; set; } = "UTF-8";
+
+        public string FileEncodingForBinding
         {
-            get { return _FileEncoding; }
+            get { return FileEncoding; }
             set
             {
                 if (!string.IsNullOrEmpty(value))
-                    _FileEncoding = value;
+                    FileEncoding = value;
                 _ = loadFileContent();
             }
         }
