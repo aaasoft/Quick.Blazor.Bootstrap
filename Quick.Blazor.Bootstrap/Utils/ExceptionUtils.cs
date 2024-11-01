@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace Quick.Blazor.Bootstrap.Admin.Utils
+namespace Quick.Blazor.Bootstrap.Utils
 {
     public class ExceptionUtils
     {

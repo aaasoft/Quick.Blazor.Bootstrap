@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Quick.Blazor.Bootstrap;
 using Quick.Blazor.Bootstrap.Admin.Model;
 using Quick.Blazor.Bootstrap.Admin.Utils;
+using Quick.Blazor.Bootstrap.Utils;
 using Quick.Localize;
 using Quick.Shell.Utils;
 using System;

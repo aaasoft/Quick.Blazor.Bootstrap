@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using Quick.Blazor.Bootstrap.Admin;
 using Quick.Localize;
 using System;
 using System.Collections.Generic;
@@ -14,7 +13,7 @@ namespace Quick.Blazor.Bootstrap.CrontabManager
     {
         private ModalAlert modalAlert;
         [Parameter]
-        public int Rows { get; set; } = 20;
+        public int Rows { get; set; } = 10;
         [Inject]
         public IJSRuntime JSRuntime { get; set; }
         private LogViewControl logViewControl;

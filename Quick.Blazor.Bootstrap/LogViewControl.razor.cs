@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Quick.Blazor.Bootstrap.Admin
+namespace Quick.Blazor.Bootstrap
 {
     public partial class LogViewControl : ComponentBase
     {

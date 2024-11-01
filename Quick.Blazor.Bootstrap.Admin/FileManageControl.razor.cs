@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using Quick.Blazor.Bootstrap.Admin.Utils;
+using Quick.Blazor.Bootstrap.Utils;
 using Quick.Localize;
 using System;
 using System.Collections.Generic;

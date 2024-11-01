@@ -6,7 +6,7 @@ namespace TestWebApplication.Pages
 {
     public partial class LogViewTest : ComponentBase, IDisposable
     {
-        private Quick.Blazor.Bootstrap.Admin.LogViewControl control;
+        private Quick.Blazor.Bootstrap.LogViewControl control;
         private Timer refreshTimer;
 
         protected override void OnAfterRender(bool firstRender)

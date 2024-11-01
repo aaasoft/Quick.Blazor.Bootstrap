@@ -9,6 +9,7 @@ using System.Text;
 using System.Net.Http.Headers;
 using Quick.Blazor.Bootstrap.Admin.Utils;
 using Quick.Localize;
+using Quick.Blazor.Bootstrap.Utils;
 
 namespace Quick.Blazor.Bootstrap.Admin;
 

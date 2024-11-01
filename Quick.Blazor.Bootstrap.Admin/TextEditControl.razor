@@ -37,7 +37,7 @@
                     <div class="input-group-text">@TextLanguage</div>
                 </div>
                 <InputSelect @bind-Value="Language" class="form-control">
-                    @foreach (var t in Enum.GetNames<CodeMirrorLanguage>())
+                    @foreach (var t in Enum.GetNames<CodeMirrorLanguage>().OrderBy(t=>t))
                     {
                         <option value="@t">@t</option>
                     }
@@ -47,13 +47,13 @@
                 <button type="button" class="btn btn-secondary" @onclick="Save"><i class="@IconSave" aria-hidden="true"></i></button>
             </div>
         </div>
-        <div class="form-group">
+        <div class="border">
             <CodeMirror6Wrapper Theme="@Theme" Language="@Language" @bind-Doc="Content" MaxHeight="@($"{Rows}em")" />
         </div>
     }
     else
     {
-        <div class="form-group">
+        <div class="border">
             <CodeMirror6Wrapper Theme="@Theme" Language="@Language" @bind-Doc="Content" MaxHeight="@($"{Rows}em")" ReadOnly="true" />
         </div>
     }

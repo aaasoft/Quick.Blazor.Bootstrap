@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using Quick.Blazor.Bootstrap.Admin.Utils;
+using Quick.Blazor.Bootstrap.Utils;
 using Quick.LiteDB.Plus;
 using Quick.Localize;
 using Quick.Shell.Utils;
