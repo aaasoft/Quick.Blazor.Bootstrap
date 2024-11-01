@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using GaelJ.BlazorCodeMirror6.Models;
+using Microsoft.AspNetCore.Components;
 using Quick.Localize;
 using System;
 using System.Collections.Generic;
@@ -33,10 +34,16 @@ namespace Quick.Blazor.Bootstrap.Admin
 
         private string TextSuccess => Locale.GetString("Success");
         private string TextFailed => Locale.GetString("Failed");
-        private string TextRows => Locale.GetString("Rows");
+        private string TextHeidht => Locale.GetString("Height");
         private string TextEncoding => Locale.GetString("Encoding");
+        private string TextTheme => Locale.GetString("Theme");
+        private string TextLanguage => Locale.GetString("Language");
+
         [Parameter]
         public string IconSave { get; set; } = "fa fa-save";
+
+        private CodeMirrorLanguage Language = CodeMirrorLanguage.PlainText;
+        private ThemeMirrorTheme Theme = ThemeMirrorTheme.OneDark;
 
         private Exception OpenException;
         private string Content { get; set; }

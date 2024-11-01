@@ -19,6 +19,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="BlazorDownloadFile" Version="2.4.0.2" />
+		<PackageReference Include="GaelJ.BlazorCodeMirror6" Version="0.8.11" />
 		<PackageReference Include="Quick.Shell" Version="1.0.4" />
 		<PackageReference Include="SharpCompress" Version="0.38.0" />
 	</ItemGroup>
