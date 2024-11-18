@@ -103,12 +103,6 @@
                             }
                         </div>
                     }
-                    <div class="btn-group mb-1 mr-2" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-sm btn-secondary" @onclick="@(()=>changeOrderByAscOrDesc())"><i class="@getOrderByLabelClass()" aria-hidden="true"></i>@TextOrderBy</button>
-                        <button type="button" class="btn btn-sm btn-secondary @getOrderByButtonClass("Name")" @onclick="@(()=>changeOrderField("Name"))">@TextName</button>
-                        <button type="button" class="btn btn-sm btn-secondary @getOrderByButtonClass("Length")" @onclick="@(()=>changeOrderField("Length"))">@TextSize</button>
-                        <button type="button" class="btn btn-sm btn-secondary @getOrderByButtonClass("LastWriteTime")" @onclick="@(()=>changeOrderField("LastWriteTime"))">@TextLastWriteTime</button>
-                    </div>
                     <div class="btn-group mb-1 mr-2">
                         @ToolbarAddonButtons
                     </div>                    
@@ -150,9 +144,24 @@
                     <table class="table table-hover table-sm m-0">
                         <thead>
                             <tr>
-                                <th scope="col">@TextName</th>
-                                <th scope="col">@TextLastWriteTime</th>
-                                <th scope="col">@TextSize</th>
+                                <th scope="col" class="p-0 m-0">
+                                    <button type="button" class="btn btn-light btn-block m-0 rounded-0 text-left" @onclick="@(()=>changeOrderByAscOrDesc("Name"))">
+                                        <i class="@getOrderByButtonIconClass("Name")" aria-hidden="true"></i>
+                                        @TextName
+                                    </button>
+                                </th>
+                                <th scope="col" class="p-0 m-0 border-left border-right">
+                                    <button type="button" class="btn btn-light btn-block m-0 rounded-0 text-left" @onclick="@(()=>changeOrderByAscOrDesc("LastWriteTime"))">
+                                        <i class="@getOrderByButtonIconClass("LastWriteTime")" aria-hidden="true"></i>
+                                        @TextLastWriteTime
+                                    </button>
+                                </th>
+                                <th scope="col" class="p-0 m-0">
+                                    <button type="button" class="btn btn-light btn-block m-0 rounded-0 text-left" @onclick="@(()=>changeOrderByAscOrDesc("Length"))">
+                                        <i class="@getOrderByButtonIconClass("Length")" aria-hidden="true"></i>
+                                        @TextSize
+                                    </button>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>

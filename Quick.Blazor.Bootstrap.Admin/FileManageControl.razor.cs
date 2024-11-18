@@ -205,11 +205,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         public string IconGoto { get; set; } = "fa fa-arrow-right";
         [Parameter]
         public string IconSearch { get; set; } = "fa fa-search";
-        [Parameter]
-        public string IconOrderByAsc { get; set; } = "fa fa-sort-asc mr-1";
-        [Parameter]
-        public string IconOrderByDesc { get; set; } = "fa fa-sort-desc mr-1";
-        
+                
         private bool isSelectedFile()
         {
             return SelectedItem != null && SelectedItem is FileInfo;
@@ -252,29 +248,18 @@ namespace Quick.Blazor.Bootstrap.Admin
             return string.Empty;
         }
 
-        private string getOrderByButtonClass(string field)
+        private string getOrderByButtonIconClass(string field)
         {
-            if (field == OrderBy)
-                return "active";
-            return "disabled";
-        }
-
-
-        private string getOrderByLabelClass()
-        {
+            if (field != OrderBy)
+                return null;
             if (OrderByAsc)
-                return IconOrderByAsc;
-            return IconOrderByDesc;
+                return "fa fa-caret-up";
+            return "fa fa-caret-down";
         }
 
-        private void changeOrderField(string orderBy)
+        private void changeOrderByAscOrDesc(string orderBy)
         {
             this.OrderBy = orderBy;
-            refresh();
-        }
-
-        private void changeOrderByAscOrDesc()
-        {
             OrderByAsc = !OrderByAsc;
             refresh();
         }
