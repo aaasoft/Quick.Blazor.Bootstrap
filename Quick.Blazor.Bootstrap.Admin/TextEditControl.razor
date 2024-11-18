@@ -6,7 +6,7 @@
         <div class="btn-toolbar mb-1">
             <div class="input-group mb-1">
                 <div class="input-group-prepend">
-                    <div class="input-group-text">@TextHeidht</div>
+                    <div class="input-group-text">@TextRows</div>
                 </div>
                 <InputNumber class="form-control" @bind-Value="Rows" style="width:8rem;" />
             </div>
@@ -26,18 +26,7 @@
                     <div class="input-group-text">@TextTheme</div>
                 </div>
                 <InputSelect @bind-Value="Theme" class="form-control">
-                    @foreach (var t in Enum.GetNames<ThemeMirrorTheme>())
-                    {
-                        <option value="@t">@t</option>
-                    }
-                </InputSelect>
-            </div>
-            <div class="input-group mb-1 ml-2">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">@TextLanguage</div>
-                </div>
-                <InputSelect @bind-Value="Language" class="form-control">
-                    @foreach (var t in Enum.GetNames<CodeMirrorLanguage>().OrderBy(t=>t))
+                    @foreach (var t in Enum.GetNames<TextEditControlTheme>())
                     {
                         <option value="@t">@t</option>
                     }
@@ -47,14 +36,14 @@
                 <button type="button" class="btn btn-secondary" @onclick="Save"><i class="@IconSave" aria-hidden="true"></i></button>
             </div>
         </div>
-        <div class="border">
-            <CodeMirror6Wrapper Theme="@Theme" Language="@Language" @bind-Doc="Content" MaxHeight="@($"{Rows}em")" />
+        <div class="form-group">
+            <InputTextArea class="@GetThemeClass(Theme)" rows="@Rows" @bind-Value="Content" />
         </div>
     }
     else
     {
-        <div class="border">
-            <CodeMirror6Wrapper Theme="@Theme" Language="@Language" @bind-Doc="Content" MaxHeight="@($"{Rows}em")" ReadOnly="true" />
+        <div class="form-group">
+            <InputTextArea class="@GetThemeClass(Theme)" rows="20" @bind-Value="Content" readonly />
         </div>
     }
 </EditForm>

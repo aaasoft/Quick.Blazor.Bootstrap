@@ -1,10 +1,7 @@
-﻿using GaelJ.BlazorCodeMirror6.Models;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Quick.Localize;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,24 +34,29 @@ namespace Quick.Blazor.Bootstrap.Admin
 
         private static string TextSuccess => Locale.GetString("Success");
         private static string TextFailed => Locale.GetString("Failed");
-        private static string TextHeidht => Locale.GetString("Height");
+        private string TextRows => Locale.GetString("Rows");
         private static string TextEncoding => Locale.GetString("Encoding");
         private static string TextTheme => Locale.GetString("Theme");
-        private static string TextLanguage => Locale.GetString("Language");
 
         [Parameter]
         public string IconSave { get; set; } = "fa fa-save";
-
-        private CodeMirrorLanguage _Language = CodeMirrorLanguage.PlainText;
-        public CodeMirrorLanguage Language
-        {
-            get { return _Language; }
-            set { _Language = value; }
-        }
-        private ThemeMirrorTheme Theme = ThemeMirrorTheme.OneDark;
-
+        private TextEditControlTheme Theme { get; set; } = TextEditControlTheme.Dark;
         private Exception OpenException;
         private string Content { get; set; }
+        
+        private string GetThemeClass(TextEditControlTheme theme)
+        {
+            switch (theme)
+            {
+                case TextEditControlTheme.Light:
+                    return "form-control bg-light text-dark";
+                case TextEditControlTheme.Dark:
+                    return "form-control bg-dark text-light";
+                case TextEditControlTheme.Default:
+                default:
+                    return "form-control";
+            }
+        }
 
         private async Task loadFileContent()
         {
@@ -68,46 +70,6 @@ namespace Quick.Blazor.Bootstrap.Admin
                 Content = ex.Message;
                 OpenException = ex;
             }
-        }
-        private CodeMirrorLanguage detectLanguage()
-        {
-            var fileName = Path.GetFileName(File);
-            switch (fileName)
-            {
-                case "CMakeLists.txt":
-                    return CodeMirrorLanguage.CMake;
-                case "Dockerfile":
-                    return CodeMirrorLanguage.Dockerfile;
-            }
-            return Path.GetExtension(fileName).ToLower() switch
-            {
-                ".cs" => CodeMirrorLanguage.Csharp,
-                ".c" => CodeMirrorLanguage.C,
-                ".cpp" => CodeMirrorLanguage.Cpp,
-                ".java" => CodeMirrorLanguage.Java,
-                ".php" => CodeMirrorLanguage.Php,
-                ".js" => CodeMirrorLanguage.Javascript,
-                ".css" => CodeMirrorLanguage.Css,
-                ".ts" => CodeMirrorLanguage.TypeScript,
-                ".sql" => CodeMirrorLanguage.Sql,
-                ".rs" => CodeMirrorLanguage.Rust,
-                ".lua" => CodeMirrorLanguage.Lua,
-                ".csv" => CodeMirrorLanguage.Csv,
-                ".fs" => CodeMirrorLanguage.Fsharp,
-                ".go" => CodeMirrorLanguage.Go,
-                ".html" => CodeMirrorLanguage.Html,
-                ".yaml" => CodeMirrorLanguage.Yaml,
-                ".vue" => CodeMirrorLanguage.Vue,
-                ".vbs" => CodeMirrorLanguage.VbScript,
-                ".json" => CodeMirrorLanguage.Json,
-                ".md" => CodeMirrorLanguage.Markdown,
-                ".ps1" => CodeMirrorLanguage.PowerShell,
-                ".py" => CodeMirrorLanguage.Python,
-                ".sass" => CodeMirrorLanguage.Sass,
-                ".sh" => CodeMirrorLanguage.Shell,
-                ".xml" => CodeMirrorLanguage.Xml,
-                _ => CodeMirrorLanguage.PlainText
-            };
         }
 
         protected override async Task OnParametersSetAsync()
@@ -123,7 +85,6 @@ namespace Quick.Blazor.Bootstrap.Admin
                     ["Unicode"] = Encoding.Unicode
                 };
             }
-            Language = detectLanguage();
             await loadFileContent();
         }
 
