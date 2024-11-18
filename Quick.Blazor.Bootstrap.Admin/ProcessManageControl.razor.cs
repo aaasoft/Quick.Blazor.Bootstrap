@@ -5,6 +5,7 @@ using Quick.Localize;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.Versioning;
 using System.Text;
@@ -49,7 +50,10 @@ namespace Quick.Blazor.Bootstrap.Admin
 
         private string searchKeywords;
         private readonly Utils.UnitStringConverting storageUSC = Utils.UnitStringConverting.StorageUnitStringConverting;
-        private string orderByField = "pid";
+        [Parameter]
+        public string OrderBy { get; set; } = nameof(FileInfo.Name);
+        [Parameter]
+        public bool OrderByAsc { get; set; } = true;
 
         private ProcessInfo[] Processes;
 
@@ -62,15 +66,27 @@ namespace Quick.Blazor.Bootstrap.Admin
         }
 
 
-        private string getOrderByButtonClass(string field)
+        private string getOrderByButtonIconClass(string field)
         {
-            if (field == orderByField)
-                return "";
-            return "disabled";
+            if (field != OrderBy)
+                return null;
+            if (OrderByAsc)
+                return "fa fa-caret-up";
+            return "fa fa-caret-down";
         }
-        private void changeOrderField(string orderByField)
+
+        private void changeOrderByAscOrDesc(string orderBy)
         {
-            this.orderByField = orderByField;
+            var isOrderByChanged = OrderBy != orderBy;
+            if (isOrderByChanged)
+            {
+                OrderBy = orderBy;
+                OrderByAsc = true;
+            }
+            else
+            {
+                OrderByAsc = !OrderByAsc;
+            }
             search();
         }
 
@@ -84,16 +100,31 @@ namespace Quick.Blazor.Bootstrap.Admin
                     var processInfos = Process.GetProcesses()
                     .Where(t => string.IsNullOrEmpty(searchKeywords) || t.Id.ToString() == searchKeywords || t.ProcessName.Contains(searchKeywords))
                     .Select(t => new ProcessInfo(t));
-                    switch (orderByField)
+                    switch (OrderBy)
                     {
                         case "pid":
-                            processInfos = processInfos.OrderBy(t => t.PID);
+                            if (OrderByAsc)
+                                processInfos = processInfos.OrderBy(t => t.PID);
+                            else
+                                processInfos = processInfos.OrderByDescending(t => t.PID);
                             break;
                         case "name":
-                            processInfos = processInfos.OrderBy(t => t.Name);
+                            if (OrderByAsc)
+                                processInfos = processInfos.OrderBy(t => t.Name);
+                            else
+                                processInfos = processInfos.OrderByDescending(t => t.Name);
+                            break;
+                        case "threads":
+                            if (OrderByAsc)
+                                processInfos = processInfos.OrderBy(t => t.ThreadsCount);
+                            else
+                                processInfos = processInfos.OrderByDescending(t => t.ThreadsCount);
                             break;
                         case "memory":
-                            processInfos = processInfos.OrderByDescending(t => t.Memory);
+                            if (OrderByAsc)
+                                processInfos = processInfos.OrderBy(t => t.Memory);
+                            else
+                                processInfos = processInfos.OrderByDescending(t => t.Memory);
                             break;
                     }
                     Processes = processInfos.ToArray();

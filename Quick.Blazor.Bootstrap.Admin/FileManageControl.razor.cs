@@ -158,11 +158,9 @@ namespace Quick.Blazor.Bootstrap.Admin
         private static string TextDelete => Locale.GetString("Delete");
         private static string TextPath => Locale.GetString("Path");
         private static string TextGoto => Locale.GetString("Goto");
-        private static string TextCreationTime => Locale.GetString("Creation Time");
         private static string TextLastWriteTime => Locale.GetString("Last Write Time");
         private static string TextSize => Locale.GetString("Size");
         private static string TextName => Locale.GetString("Name");
-        private static string TextOrderBy => Locale.GetString("OrderBy");
 
         [Parameter]
         public RenderFragment ToolbarAddonButtons { get; set; }
