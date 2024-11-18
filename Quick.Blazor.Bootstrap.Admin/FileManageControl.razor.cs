@@ -259,8 +259,16 @@ namespace Quick.Blazor.Bootstrap.Admin
 
         private void changeOrderByAscOrDesc(string orderBy)
         {
-            this.OrderBy = orderBy;
-            OrderByAsc = !OrderByAsc;
+            var isOrderByChanged = OrderBy != orderBy;
+            if (isOrderByChanged)
+            {
+                OrderBy = orderBy;
+                OrderByAsc = true;                
+            }
+            else
+            {
+                OrderByAsc = !OrderByAsc;
+            }
             refresh();
         }
 
