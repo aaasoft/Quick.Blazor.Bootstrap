@@ -121,7 +121,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         public bool DisplayCompressButton { get; set; } = true;
         [Parameter]
         public bool DisplayDecompressButton { get; set; } = true;
-        
+
         [Parameter]
         public string FileFilter { get; set; }
         [Parameter]
@@ -894,11 +894,20 @@ namespace Quick.Blazor.Bootstrap.Admin
                         {
                             IEnumerable<FileInfo> query = null;
                             if (string.IsNullOrEmpty(FileFilter))
-                                query = CurrentDir.GetFiles()
-                                    .Where(t => string.IsNullOrEmpty(Search) || t.Name.Contains(Search));
+                            {
+                                query = CurrentDir.GetFiles();
+                            }
                             else
-                                query = CurrentDir.GetFiles("*" + FileFilter)
-                                    .Where(t => string.IsNullOrEmpty(Search) || t.Name.Contains(Search));
+                            {
+                                var fileFilters = FileFilter.Split(new char[] { '|', ',', ';' }, StringSplitOptions.RemoveEmptyEntries);
+                                List<FileInfo> fileList = new List<FileInfo>();
+                                foreach (var fileFilter in fileFilters)
+                                {
+                                    fileList.AddRange(CurrentDir.GetFiles(fileFilter));
+                                }
+                                query = fileList;
+                            }
+                            query = query.Where(t => string.IsNullOrEmpty(Search) || t.Name.Contains(Search));
                             query = orderFiles(query);
                             Files = query.ToArray();
                         }
