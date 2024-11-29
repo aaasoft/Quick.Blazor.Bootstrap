@@ -2,36 +2,36 @@
 {
     @if (DialogBackdropVisiable)
     {
-        <div class="modal-backdrop fade show"></div>
+                <div class="modal-backdrop fade show"></div>
     }
-    <div class="modal fade show" tabindex="-1" role="dialog" style="display: block;" aria-modal="true">
-        <div class="modal-dialog @(DialogCentered ? "modal-dialog-centered" : "") @(DialogScrollable ? "modal-dialog-scrollable" : "") @(DialogSizeSmall?"modal-sm":"") @(DialogSizeLarge?"modal-lg":"") @(DialogSizeExtraLarge?"modal-xl":"")" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
+            <div class="modal fade show" tabindex="-1" role="dialog" style="display: block;" aria-modal="true">
+                <div class="modal-dialog @(DialogCentered ? "modal-dialog-centered" : "") @(DialogScrollable ? "modal-dialog-scrollable" : "") @(DialogSizeSmall?"modal-sm":"") @(DialogSizeLarge?"modal-lg":"") @(DialogSizeExtraLarge?"modal-xl":"")" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header @ModalHeaderCls">
                     @if (TitleContent != null)
                     {
-                        <h5 class="modal-title">
+                                <h5 class="modal-title">
                             @TitleContent
-                        </h5>
+                                </h5>
                     }
                     @if (HeaderContent != null)
                     {
                         @HeaderContent
                     }
-                </div>
+                        </div>
                 @if (BodyContent != null)
                 {
-                    <div class="modal-body">
+                            <div class="modal-body @ModalBodyCls">
                         @BodyContent
-                    </div>
+                            </div>
                 }
                 @if (FooterContent != null)
                 {
-                    <div class="modal-footer">
+                            <div class="modal-footer @ModalFooterCls">
                         @FooterContent
-                    </div>
+                            </div>
                 }
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
 }
