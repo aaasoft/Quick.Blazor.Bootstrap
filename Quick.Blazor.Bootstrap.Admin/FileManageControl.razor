@@ -2,9 +2,6 @@
 @using Microsoft.JSInterop
 @inherits ComponentBase_WithGettextSupport;
 
-<div class="sticky-top" style="top: -16px;">
-    <div class="row bg-white pt-2 pb-2"></div>
-</div>
 <div class="sticky-top">
     <div class="row shadow bg-light pt-2 pb-2">
         <div class="col-12">
@@ -18,90 +15,90 @@
                     </div>
                     @if (CurrentDir != null)
                     {
-                        <div class="btn-group mb-1 mr-2">
-                            <button title="@TextRefresh" type="button" class="btn btn-sm btn-secondary" @onclick="refresh">                                
-                                <i class="@IconRefresh" aria-hidden="true"></i>
-                            </button>
+                            <div class="btn-group mb-1 mr-2">
+                                <button title="@TextRefresh" type="button" class="btn btn-sm btn-secondary" @onclick="refresh">                                
+                                    <i class="@IconRefresh" aria-hidden="true"></i>
+                                </button>
                             @if (DisplayAddress)
                             {
-                                <button title="@TextUp" type="button" class="btn btn-sm btn-secondary"
-                                    @onclick="btnGotoUpper_Click">
-                                    <i class="@IconUp" aria-hidden="true"></i>                                    
-                                </button>
+                                        <button title="@TextUp" type="button" class="btn btn-sm btn-secondary"
+                                            @onclick="btnGotoUpper_Click">
+                                            <i class="@IconUp" aria-hidden="true"></i>                                    
+                                        </button>
                             }
-                        </div>
+                            </div>
 
-                        <div class="btn-group mb-1 mr-2">
+                            <div class="btn-group mb-1 mr-2">
                         @if (DisplayCreateFolderButton)
                             {
-                                <button title="@TextNewFolder" type="button" class="btn btn-sm btn-secondary"
-                                    @onclick="btnCreateFolder_Click">
-                                    <i class="@IconNewFolder" aria-hidden="true"></i>                                    
-                                </button>
+                                        <button title="@TextNewFolder" type="button" class="btn btn-sm btn-secondary"
+                                            @onclick="btnCreateFolder_Click">
+                                            <i class="@IconNewFolder" aria-hidden="true"></i>                                    
+                                        </button>
                             }
                             @if (DisplayUploadButton)
                             {
-                                <div class="btn btn-sm btn-secondary">
-                                    <i class="@IconUpload" aria-hidden="true"></i>                                    
-                                    <label title="@TextUpload"
-                                        style="position: absolute;top: 0;left: 0;right:0;margin:0;height:100%;cursor:pointer"
-                                        for="inputFile">
-                                    </label>
-                                </div>
+                                        <div class="btn btn-sm btn-secondary">
+                                            <i class="@IconUpload" aria-hidden="true"></i>                                    
+                                            <label title="@TextUpload"
+                                                style="position: absolute;top: 0;left: 0;right:0;margin:0;height:100%;cursor:pointer"
+                                                for="inputFile">
+                                            </label>
+                                        </div>
                             }
                             @if (DisplayDownloadButton && SelectedItem != null && SelectedItem is FileInfo)
                             {
-                                <button title="@TextDownload" type="button" class="btn btn-sm btn-secondary"
-                                    @onclick="btnDownload_Click">
-                                    <i class="@IconDownload" aria-hidden="true"></i>
-                                </button>
+                                        <button title="@TextDownload" type="button" class="btn btn-sm btn-secondary"
+                                            @onclick="btnDownload_Click">
+                                            <i class="@IconDownload" aria-hidden="true"></i>
+                                        </button>
                             }
                             @if (DisplayVerifyButton && SelectedItem != null && isSelectedFile())
                             {
-                                <button title="@TextVerify" type="button" class="btn btn-sm btn-secondary"
-                                    @onclick="btnVerify_Click">
-                                    <i class="@IconVerify" aria-hidden="true"></i>
-                                </button>
+                                        <button title="@TextVerify" type="button" class="btn btn-sm btn-secondary"
+                                            @onclick="btnVerify_Click">
+                                            <i class="@IconVerify" aria-hidden="true"></i>
+                                        </button>
                             }
                             @if (DisplayCompressButton && SelectedItem != null && !isSelectedZipFile())
                             {
-                                <button title="@TextCompress" type="button" class="btn btn-sm btn-secondary"
-                                    @onclick="btnCompress_Click">
-                                    <i class="@IconCompress" aria-hidden="true"></i>
-                                </button>
+                                        <button title="@TextCompress" type="button" class="btn btn-sm btn-secondary"
+                                            @onclick="btnCompress_Click">
+                                            <i class="@IconCompress" aria-hidden="true"></i>
+                                        </button>
                             }
                             @if (DisplayDecompressButton && isSelectedZipFile())
                             {
-                                <button title="@TextDecompress" type="button" class="btn btn-sm btn-secondary"
-                                    @onclick="btnDecompress_Click">
-                                    <i class="@IconDecompress" aria-hidden="true"></i>
-                                </button>
+                                        <button title="@TextDecompress" type="button" class="btn btn-sm btn-secondary"
+                                            @onclick="btnDecompress_Click">
+                                            <i class="@IconDecompress" aria-hidden="true"></i>
+                                        </button>
                             }
                             @if (SelectedItem != null)
                             {
                                 @if (DisplayRenameButton)
                                 {
-                                    <button title="@TextRename" type="button" class="btn btn-sm btn-secondary"
-                                        @onclick="btnRename_Click">
-                                        <i class="@IconRename" aria-hidden="true"></i>                                        
-                                    </button>
+                                                <button title="@TextRename" type="button" class="btn btn-sm btn-secondary"
+                                                    @onclick="btnRename_Click">
+                                                    <i class="@IconRename" aria-hidden="true"></i>                                        
+                                                </button>
                                 }
                                 @if (DisplayEditButton && SelectedItem is FileInfo)
                                 {
-                                    <button title="@TextEdit" type="button" class="btn btn-sm btn-secondary"
-                                        @onclick="btnEdit_Click">
-                                        <i class="@IconEdit" aria-hidden="true"></i>                                        
-                                    </button>
+                                                <button title="@TextEdit" type="button" class="btn btn-sm btn-secondary"
+                                                    @onclick="btnEdit_Click">
+                                                    <i class="@IconEdit" aria-hidden="true"></i>                                        
+                                                </button>
                                 }
                                 @if (DisplayDeleteButton)
                                 {
-                                    <button title="@TextDelete" type="button" class="btn btn-sm btn-secondary"
-                                        @onclick="btnDelete_Click">
-                                        <i class="@IconDelete" aria-hidden="true"></i>
-                                    </button>
+                                                <button title="@TextDelete" type="button" class="btn btn-sm btn-secondary"
+                                                    @onclick="btnDelete_Click">
+                                                    <i class="@IconDelete" aria-hidden="true"></i>
+                                                </button>
                                 }
                             }
-                        </div>
+                            </div>
                     }
                     <div class="btn-group mb-1 mr-2">
                         @ToolbarAddonButtons
@@ -121,136 +118,136 @@
         </div>
         @if (DisplayAddress)
         {
-            <div class="input-group col-12">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">@TextPath</span>
+                <div class="input-group col-12">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">@TextPath</span>
+                    </div>
+                    <input type="text" title="@TextPath" class="form-control col-auto" @bind-value="CurrentPath" @onkeypress="txtCurrentPath_KeyPress" />
+                    <div class="input-group-append">
+                        <button title="@TextGoto" type="button" class="btn btn-secondary" @onclick="btnGoto_Click">
+                            <i class="@IconGoto" aria-hidden="true"></i>                        
+                        </button>
+                    </div>
                 </div>
-                <input type="text" title="@TextPath" class="form-control col-auto" @bind-value="CurrentPath" @onkeypress="txtCurrentPath_KeyPress" />
-                <div class="input-group-append">
-                    <button title="@TextGoto" type="button" class="btn btn-secondary" @onclick="btnGoto_Click">
-                        <i class="@IconGoto" aria-hidden="true"></i>                        
-                    </button>
-                </div>
-            </div>
         }
     </div>
 </div>
 <div class="row">
-    <div class="card col-12 p-0 mt-2">
-        <div class="card-body pt-0 pb-0">
-            <div class="row">
-                @if (ListViewMode)
+@if (ListViewMode)
+{
+    <table class="table table-hover table-sm m-0">
+        <thead>
+            <tr>
+                <th scope="col" class="border p-0 m-0">
+                    <button type="button" class="btn btn-light btn-block m-0 rounded-0 text-left" @onclick="@(()=>changeOrderByAscOrDesc("Name"))">
+                        @TextName
+                        <div class="float-right">
+                            <i class="@getOrderByButtonIconClass("Name")" aria-hidden="true"></i>
+                        </div>
+                    </button>
+                </th>
+                <th scope="col" class="border p-0 m-0">
+                    <button type="button" class="btn btn-light btn-block m-0 rounded-0 text-left" @onclick="@(()=>changeOrderByAscOrDesc("LastWriteTime"))">
+                        @TextLastWriteTime
+                        <div class="float-right">
+                            <i class="@getOrderByButtonIconClass("LastWriteTime")" aria-hidden="true"></i>
+                        </div>
+                    </button>
+                </th>
+                <th scope="col" class="border p-0 m-0">
+                    <button type="button" class="btn btn-light btn-block m-0 rounded-0 text-left" @onclick="@(()=>changeOrderByAscOrDesc("Length"))">
+                        @TextSize
+                        <div class="float-right">
+                            <i class="@getOrderByButtonIconClass("Length")" aria-hidden="true"></i>
+                        </div>
+                    </button>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        @if (Dirs != null)
+        {
+            @foreach (var dir in Dirs)
+            {
+            <tr class="@(SelectedItem == dir ? "table-active" : "")" @onclick="@(e => SelectedItem = dir)"
+                @ondblclick="@(e =>
                 {
-                    <table class="table table-hover table-sm m-0">
-                        <thead>
-                            <tr>
-                                <th scope="col" class="p-0 m-0">
-                                    <button type="button" class="btn btn-light btn-block m-0 rounded-0 text-left" @onclick="@(()=>changeOrderByAscOrDesc("Name"))">
-                                        <i class="@getOrderByButtonIconClass("Name")" aria-hidden="true"></i>
-                                        @TextName
-                                    </button>
-                                </th>
-                                <th scope="col" class="p-0 m-0">
-                                    <button type="button" class="btn btn-light btn-block m-0 rounded-0 text-left" @onclick="@(()=>changeOrderByAscOrDesc("LastWriteTime"))">
-                                        <i class="@getOrderByButtonIconClass("LastWriteTime")" aria-hidden="true"></i>
-                                        @TextLastWriteTime
-                                    </button>
-                                </th>
-                                <th scope="col" class="p-0 m-0">
-                                    <button type="button" class="btn btn-light btn-block m-0 rounded-0 text-left" @onclick="@(()=>changeOrderByAscOrDesc("Length"))">
-                                        <i class="@getOrderByButtonIconClass("Length")" aria-hidden="true"></i>
-                                        @TextSize
-                                    </button>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (Dirs != null)
-                            {
-                                @foreach (var dir in Dirs)
-                                {
-                                    <tr class="@(SelectedItem == dir ? "table-active" : "")" @onclick="@(e => SelectedItem = dir)"
-                                        @ondblclick="@(e =>
-                                       {
-                                           if(DisplayAddress)
-                                                gotoDir(dir);
-                                       })">
-                                        <td>
-                                            <i class="@IconFolder" aria-hidden="true"></i>
-                                            @dir.Name</td>
-                                        <td>@getLastWriteString(dir)</td>
-                                        <td></td>
-                                    </tr>
-                                }
-                            }
-                            @if (Files != null)
-                            {
-                                @foreach (var file in Files)
-                                {
-                                    <tr class="@(SelectedItem == file ? "table-active" : "")" @onclick="@(e => SelectedItem = file)"
-                                        @ondblclick="onFileDoubleClick">
-                                        @if(isSelectedZipFile(file))
-                                        {
-                                            <td><i class="@IconZipFile" aria-hidden="true"></i>@file.Name</td>
-                                        }
-                                        else
-                                        {
-                                            <td><i class="@IconFile" aria-hidden="true"></i>@file.Name</td>
-                                        }
-                                        <td>@getLastWriteString(file)</td>
-                                        <td>@getFileLengthString(file)B</td>
-                                    </tr>
-                                }
-                            }
-                        </tbody>
-                    </table>
-                }
-                else
-                {
-                    @if (Dirs != null)
+                    if(DisplayAddress)
+                        gotoDir(dir);
+                })">
+                <td>
+                    <i class="@IconFolder" aria-hidden="true"></i>
+                    @dir.Name</td>
+                <td>@getLastWriteString(dir)</td>
+                <td></td>
+            </tr>
+            }
+        }
+        @if (Files != null)
+        {
+            @foreach (var file in Files)
+            {
+                <tr class="@(SelectedItem == file ? "table-active" : "")" @onclick="@(e => SelectedItem = file)"
+                    @ondblclick="onFileDoubleClick">
+                    @if (isSelectedZipFile(file))
                     {
-                        @foreach (var dir in Dirs)
-                        {
-                            <div class="col-4 col-sm-3 col-md-2 col-xl-1 m-1 p-0" style="min-width:6.5rem;">
-                                <a href="javascript:;" title="@TextLastWriteTime: @getLastWriteString(dir)"
-                                    class="text-center list-group-item list-group-item-action border-0 p-0 @(SelectedItem == dir ? "active" : "")"
-                                    @onclick="@(e => SelectedItem = dir)" @ondblclick="@(e =>
-                       {
-                           if(DisplayAddress)
-                                gotoDir(dir);
-                       })">
-                                    <p class="h1 m-0 pt-1"><i class="@IconFolder" aria-hidden="true"></i></p>
-                                    <span class="text-center">@dir.Name</span>
-                                </a>
-                            </div>
-                        }
+                        <td><i class="@IconZipFile" aria-hidden="true"></i>@file.Name</td>
                     }
-                    @if (Files != null)
+                    else
                     {
-                        @foreach (var file in Files)
-                        {
-                            <div class="col-4 col-sm-3 col-md-2 col-xl-1 m-1 p-0" style="min-width:6.5rem;">
-                                <a href="javascript:;" title="@TextSize: @getFileLengthString(file)B
-@TextLastWriteTime: @getLastWriteString(file)"
-                                    class="text-center list-group-item list-group-item-action border-0 p-1 @(SelectedItem == file ? "active" : "")"
-                                    @onclick="@(e => SelectedItem = file)" @ondblclick="onFileDoubleClick">                                    
-                                    @if(isSelectedZipFile(file))
-                                    {
-                                        <p class="h1 m-0 pt-1"><i class="@IconZipFile" aria-hidden="true"></i></p>
-                                    }
-                                    else
-                                    {
-                                        <p class="h1 m-0 pt-1"><i class="@IconFile" aria-hidden="true"></i></p>
-                                    }
-                                    <span class="text-center">@file.Name</span>
-                                </a>
-                            </div>
-                        }
+                        <td><i class="@IconFile" aria-hidden="true"></i>@file.Name</td>
                     }
-                }
+                    <td>@getLastWriteString(file)</td>
+                    <td>@getFileLengthString(file)B</td>
+                </tr>
+            }
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    @if (Dirs != null)
+    {
+        @foreach (var dir in Dirs)
+        {
+            <div class="col-4 col-sm-3 col-md-2 col-xl-1 m-1 p-0" style="min-width:6.5rem;">
+                <a href="javascript:;" title="@TextLastWriteTime: @getLastWriteString(dir)"
+                    class="text-center list-group-item list-group-item-action border-0 p-0 @(SelectedItem == dir ? "active" : "")"
+                    @onclick="@(e => SelectedItem = dir)" @ondblclick="@(e =>
+                    {
+                        if(DisplayAddress)
+                            gotoDir(dir);
+                    })">
+                    <p class="h1 m-0 pt-1"><i class="@IconFolder" aria-hidden="true"></i></p>
+                    <span class="text-center">@dir.Name</span>
+                </a>
             </div>
-        </div>
-    </div>
+        }
+    }
+    @if (Files != null)
+    {
+        @foreach (var file in Files)
+        {
+            <div class="col-4 col-sm-3 col-md-2 col-xl-1 m-1 p-0" style="min-width:6.5rem;">
+                <a href="javascript:;" title="@TextSize: @getFileLengthString(file)B
+                    @TextLastWriteTime: @getLastWriteString(file)"
+                    class="text-center list-group-item list-group-item-action border-0 p-1 @(SelectedItem == file ? "active" : "")"
+                    @onclick="@(e => SelectedItem = file)" @ondblclick="onFileDoubleClick">                                    
+                    @if (isSelectedZipFile(file))
+                    {
+                        <p class="h1 m-0 pt-1"><i class="@IconZipFile" aria-hidden="true"></i></p>
+                    }
+                    else
+                    {
+                        <p class="h1 m-0 pt-1"><i class="@IconFile" aria-hidden="true"></i></p>
+                    }
+                    <span class="text-center">@file.Name</span>
+                </a>
+            </div>
+        }
+    }
+}
 </div>
 
 <InputFile id="inputFile" accept="@FileFilter" style="width: 0px; height: 0px; visibility: collapse;"

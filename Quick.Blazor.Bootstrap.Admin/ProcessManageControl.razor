@@ -28,31 +28,37 @@
                 <table class="table table-hover" style="overflow-wrap: anywhere;">
                     <thead>
                         <tr>
-                            <th scope="col" class="p-0 m-0">
+                            <th scope="col" class="border p-0 m-0">
                                 <button type="button" class="btn btn-light btn-block m-0 rounded-0 text-left" @onclick="@(()=>changeOrderByAscOrDesc("pid"))">
-                                    <i class="@getOrderByButtonIconClass("pid")" aria-hidden="true"></i>
                                     @TextColumnPID
+                                    <div class="float-right">
+                                        <i class="@getOrderByButtonIconClass("pid")" aria-hidden="true"></i>
+                                    </div>
                                 </button>
                             </th>
-                            <th scope="col" class="p-0 m-0">
+                            <th scope="col" class="border p-0 m-0">
                                 <button type="button" class="btn btn-light btn-block m-0 rounded-0 text-left" @onclick="@(()=>changeOrderByAscOrDesc("name"))">
-                                    <i class="@getOrderByButtonIconClass("name")" aria-hidden="true"></i>
                                     @TextColumnName
+                                    <div class="float-right">
+                                        <i class="@getOrderByButtonIconClass("name")" aria-hidden="true"></i>
+                                    </div>
                                 </button>
                             </th>
-                            <th scope="col" class="p-0 m-0">
+                            <th scope="col" class="border p-0 m-0">
                                 <button type="button" class="btn btn-light btn-block m-0 rounded-0 text-left" @onclick="@(()=>changeOrderByAscOrDesc("threads"))">
-                                    <i class="@getOrderByButtonIconClass("threads")" aria-hidden="true"></i>
                                     @TextColumnThreads
+                                    <div class="float-right">
+                                        <i class="@getOrderByButtonIconClass("threads")" aria-hidden="true"></i>
+                                    </div>
                                 </button>
                             </th>
-                            <th scope="col" class="p-0 m-0">
+                            <th scope="col" class="border p-0 m-0">
                                 <button type="button" class="btn btn-light btn-block m-0 rounded-0 text-left" @onclick="@(()=>changeOrderByAscOrDesc("memory"))">
                                     <i class="@getOrderByButtonIconClass("memory")" aria-hidden="true"></i>
                                     @TextColumnMemory
                                 </button>
                             </th>
-                            <th scope="col" class="p-0 m-0">
+                            <th scope="col" class="border p-0 m-0">
                                 <button type="button" class="btn btn-light btn-block m-0 rounded-0 text-left">
                                     @TextColumnOperate
                                 </button>
