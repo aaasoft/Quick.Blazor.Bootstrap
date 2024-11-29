@@ -15,7 +15,13 @@ namespace Quick.Blazor.Bootstrap
         public bool DialogSizeExtraLarge { get; set; }
         [Parameter]
         public bool DialogScrollable { get; set; } = true;
-
+        [Parameter]
+        public string ModalHeaderCls { get; set; }
+        [Parameter]
+        public string ModalBodyCls { get; set; }
+        [Parameter]
+        public string ModalFooterCls { get; set; }
+        
         public static string TextOk => Locale.GetString("OK");
         public static string TextCancel => Locale.GetString("Cancel");
         public string[] ContentLines => Content?.Split('\n') ?? new string[0];

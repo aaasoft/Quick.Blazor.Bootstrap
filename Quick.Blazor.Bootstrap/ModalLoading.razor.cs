@@ -19,6 +19,12 @@ namespace Quick.Blazor.Bootstrap
         public bool DialogSizeLarge { get; set; }
         [Parameter]
         public bool DialogSizeExtraLarge { get; set; }
+        [Parameter]
+        public string ModalHeaderCls { get; set; }
+        [Parameter]
+        public string ModalBodyCls { get; set; }
+        [Parameter]
+        public string ModalFooterCls { get; set; }
         public static string TextCancel => Locale.GetString("Cancel");
 
         private string Title { get; set; }
