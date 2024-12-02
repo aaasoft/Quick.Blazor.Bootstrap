@@ -114,12 +114,18 @@
                         }
                         </div>
                     }
+                    @if(ToolbarAddonButtons!=null)
+                    {
+                    <div class="btn-group float-right ml-2 mr-2">
+                        @ToolbarAddonButtons
+                    </div>
+                    }
                     <div class="btn-group float-right">
                         <button type="button" class="btn btn-sm btn-secondary @(ListViewMode?"active":"")"
                             @onclick="e=>ListViewMode=true"><i class="@IconDisplayList" aria-hidden="true"></i></button>
                         <button type="button" class="btn btn-sm btn-secondary @(!ListViewMode?"active":"")"
                             @onclick="e=>ListViewMode=false"><i class="@IconDisplayIcon" aria-hidden="true"></i></button>
-                    </div>
+                    </div>                    
             </td>
         </tr>
         @if (ListViewMode)
@@ -243,20 +249,6 @@ else
     </tr>
 }
 </tbody>
-@if(ToolbarAddonButtons!=null)
-{
-<tfoot class="sticky-bottom alert-light">
-    <tr>
-        <td class="border-0" colspan="3">
-            <div class="btn-toolbar justify-content-between pb-1" role="toolbar">
-                <div class="btn-group mb-1 mr-2">
-                    @ToolbarAddonButtons
-                </div>
-            </div>
-        </td>
-    </tr>
-</tfoot>
-}
 </table>
 
 <InputFile id="inputFile" accept="@FileFilter" style="width: 0px; height: 0px; visibility: collapse;"
