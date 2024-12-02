@@ -6,106 +6,26 @@
     <thead class="sticky-top alert-light">
         <tr>
             <td class="border-0" colspan="3">
-                <nav class="navbar p-0 pb-1">
-                    <div class="btn-toolbar" role="toolbar">
-                        <div class="btn-group mb-1 mr-2">
-                            <button type="button" class="btn btn-sm btn-secondary @(ListViewMode?"active":"")"
-                                @onclick="e=>ListViewMode=true"><i class="@IconDisplayList" aria-hidden="true"></i></button>
-                            <button type="button" class="btn btn-sm btn-secondary @(!ListViewMode?"active":"")"
-                                @onclick="e=>ListViewMode=false"><i class="@IconDisplayIcon" aria-hidden="true"></i></button>
+                <div class="btn-toolbar justify-content-between pb-1" role="toolbar">
+                    @if (DisplayAddress)
+                    {
+                    <div class="button-group col p-0 pr-2">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <button title="@TextUp" type="button" class="btn btn-sm btn-secondary" @onclick="btnGotoUpper_Click">
+                                    <i class="@IconUp" aria-hidden="true"></i>                                    
+                                </button>
+                            </div>
+                            <input type="text" title="@TextPath" class="form-control col-auto" @bind-value="CurrentPath" @onkeypress="txtCurrentPath_KeyPress" />
+                            <div class="input-group-append">
+                                <button title="@TextRefresh" type="button" class="btn btn-sm btn-secondary" @onclick="btnGoto_Click">                                
+                                    <i class="@IconRefresh" aria-hidden="true"></i>
+                                </button>
+                            </div>
                         </div>
-                        @if (CurrentDir != null)
-                        {
-                                <div class="btn-group mb-1 mr-2">
-                                    <button title="@TextRefresh" type="button" class="btn btn-sm btn-secondary" @onclick="refresh">                                
-                                        <i class="@IconRefresh" aria-hidden="true"></i>
-                                    </button>
-                                @if (DisplayAddress)
-                                {
-                                            <button title="@TextUp" type="button" class="btn btn-sm btn-secondary"
-                                                @onclick="btnGotoUpper_Click">
-                                                <i class="@IconUp" aria-hidden="true"></i>                                    
-                                            </button>
-                                }
-                                </div>
-
-                                <div class="btn-group mb-1 mr-2">
-                            @if (DisplayCreateFolderButton)
-                                {
-                                            <button title="@TextNewFolder" type="button" class="btn btn-sm btn-secondary"
-                                                @onclick="btnCreateFolder_Click">
-                                                <i class="@IconNewFolder" aria-hidden="true"></i>                                    
-                                            </button>
-                                }
-                                @if (DisplayUploadButton)
-                                {
-                                            <div class="btn btn-sm btn-secondary">
-                                                <i class="@IconUpload" aria-hidden="true"></i>                                    
-                                                <label title="@TextUpload"
-                                                    style="position: absolute;top: 0;left: 0;right:0;margin:0;height:100%;cursor:pointer"
-                                                    for="inputFile">
-                                                </label>
-                                            </div>
-                                }
-                                @if (DisplayDownloadButton && SelectedItem != null && SelectedItem is FileInfo)
-                                {
-                                            <button title="@TextDownload" type="button" class="btn btn-sm btn-secondary"
-                                                @onclick="btnDownload_Click">
-                                                <i class="@IconDownload" aria-hidden="true"></i>
-                                            </button>
-                                }
-                                @if (DisplayVerifyButton && SelectedItem != null && isSelectedFile())
-                                {
-                                            <button title="@TextVerify" type="button" class="btn btn-sm btn-secondary"
-                                                @onclick="btnVerify_Click">
-                                                <i class="@IconVerify" aria-hidden="true"></i>
-                                            </button>
-                                }
-                                @if (DisplayCompressButton && SelectedItem != null && !isSelectedZipFile())
-                                {
-                                            <button title="@TextCompress" type="button" class="btn btn-sm btn-secondary"
-                                                @onclick="btnCompress_Click">
-                                                <i class="@IconCompress" aria-hidden="true"></i>
-                                            </button>
-                                }
-                                @if (DisplayDecompressButton && isSelectedZipFile())
-                                {
-                                            <button title="@TextDecompress" type="button" class="btn btn-sm btn-secondary"
-                                                @onclick="btnDecompress_Click">
-                                                <i class="@IconDecompress" aria-hidden="true"></i>
-                                            </button>
-                                }
-                                @if (SelectedItem != null)
-                                {
-                                    @if (DisplayRenameButton)
-                                    {
-                                                    <button title="@TextRename" type="button" class="btn btn-sm btn-secondary"
-                                                        @onclick="btnRename_Click">
-                                                        <i class="@IconRename" aria-hidden="true"></i>                                        
-                                                    </button>
-                                    }
-                                    @if (DisplayEditButton && SelectedItem is FileInfo)
-                                    {
-                                                    <button title="@TextEdit" type="button" class="btn btn-sm btn-secondary"
-                                                        @onclick="btnEdit_Click">
-                                                        <i class="@IconEdit" aria-hidden="true"></i>                                        
-                                                    </button>
-                                    }
-                                    @if (DisplayDeleteButton)
-                                    {
-                                                    <button title="@TextDelete" type="button" class="btn btn-sm btn-secondary"
-                                                        @onclick="btnDelete_Click">
-                                                        <i class="@IconDelete" aria-hidden="true"></i>
-                                                    </button>
-                                    }
-                                }
-                                </div>
-                        }
-                        <div class="btn-group mb-1 mr-2">
-                            @ToolbarAddonButtons
-                        </div>                    
                     </div>
-                    <div class="btn-toolbar" role="toolbar">
+                    }
+                    <div class="button-group">
                         <div class="input-group input-group-sm">
                             <input type="text" class="form-control col-auto" @bind-value="Search" />
                             <div class="input-group-append">
@@ -115,21 +35,89 @@
                             </div>
                         </div>
                     </div>
-                </nav>
-                @if (DisplayAddress)
-                {
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">@TextPath</span>
+                </div>
+                <div class="btn-toolbar justify-content-between" role="toolbar">
+                    <div class="btn-group mr-2">
+                    @if (CurrentDir != null)
+                    {                        
+                        @if (DisplayCreateFolderButton)
+                        {
+                            <button title="@TextNewFolder" type="button" class="btn btn-sm btn-secondary"
+                                @onclick="btnCreateFolder_Click">
+                                <i class="@IconNewFolder" aria-hidden="true"></i>                                    
+                            </button>
+                        }
+                        @if (DisplayUploadButton)
+                        {
+                            <div class="btn btn-sm btn-secondary">
+                                <i class="@IconUpload" aria-hidden="true"></i>                                    
+                                <label title="@TextUpload"
+                                    style="position: absolute;top: 0;left: 0;right:0;margin:0;height:100%;cursor:pointer"
+                                    for="inputFile">
+                                </label>
+                            </div>
+                        }
+                        @if (DisplayDownloadButton && SelectedItem != null && SelectedItem is FileInfo)
+                        {
+                            <button title="@TextDownload" type="button" class="btn btn-sm btn-secondary"
+                                @onclick="btnDownload_Click">
+                                <i class="@IconDownload" aria-hidden="true"></i>
+                            </button>
+                        }
+                        @if (DisplayVerifyButton && SelectedItem != null && isSelectedFile())
+                        {
+                            <button title="@TextVerify" type="button" class="btn btn-sm btn-secondary"
+                                @onclick="btnVerify_Click">
+                                <i class="@IconVerify" aria-hidden="true"></i>
+                            </button>
+                        }
+                        @if (DisplayCompressButton && SelectedItem != null && !isSelectedZipFile())
+                        {
+                            <button title="@TextCompress" type="button" class="btn btn-sm btn-secondary"
+                                @onclick="btnCompress_Click">
+                                <i class="@IconCompress" aria-hidden="true"></i>
+                            </button>
+                        }
+                        @if (DisplayDecompressButton && isSelectedZipFile())
+                        {
+                            <button title="@TextDecompress" type="button" class="btn btn-sm btn-secondary"
+                                @onclick="btnDecompress_Click">
+                                <i class="@IconDecompress" aria-hidden="true"></i>
+                            </button>
+                        }
+                        @if (SelectedItem != null)
+                        {
+                            @if (DisplayRenameButton)
+                            {
+                                <button title="@TextRename" type="button" class="btn btn-sm btn-secondary"
+                                    @onclick="btnRename_Click">
+                                    <i class="@IconRename" aria-hidden="true"></i>                                        
+                                </button>
+                            }
+                            @if (DisplayEditButton && SelectedItem is FileInfo)
+                            {
+                                <button title="@TextEdit" type="button" class="btn btn-sm btn-secondary"
+                                    @onclick="btnEdit_Click">
+                                    <i class="@IconEdit" aria-hidden="true"></i>                                        
+                                </button>
+                            }
+                            @if (DisplayDeleteButton)
+                            {
+                                <button title="@TextDelete" type="button" class="btn btn-sm btn-secondary"
+                                    @onclick="btnDelete_Click">
+                                    <i class="@IconDelete" aria-hidden="true"></i>
+                                </button>
+                            }
+                        }
+                    }
                     </div>
-                    <input type="text" title="@TextPath" class="form-control col-auto" @bind-value="CurrentPath" @onkeypress="txtCurrentPath_KeyPress" />
-                    <div class="input-group-append">
-                        <button title="@TextGoto" type="button" class="btn btn-secondary" @onclick="btnGoto_Click">
-                            <i class="@IconGoto" aria-hidden="true"></i>                        
-                        </button>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-secondary @(ListViewMode?"active":"")"
+                            @onclick="e=>ListViewMode=true"><i class="@IconDisplayList" aria-hidden="true"></i></button>
+                        <button type="button" class="btn btn-sm btn-secondary @(!ListViewMode?"active":"")"
+                            @onclick="e=>ListViewMode=false"><i class="@IconDisplayIcon" aria-hidden="true"></i></button>
                     </div>
                 </div>
-                }
             </td>
         </tr>
         @if (ListViewMode)
@@ -253,6 +241,20 @@ else
     </tr>
 }
 </tbody>
+@if(ToolbarAddonButtons!=null)
+{
+<tfoot class="sticky-bottom alert-light">
+    <tr>
+        <td class="border-0" colspan="3">
+            <div class="btn-toolbar justify-content-between pb-1" role="toolbar">
+                <div class="btn-group mb-1 mr-2">
+                    @ToolbarAddonButtons
+                </div>
+            </div>
+        </td>
+    </tr>
+</tfoot>
+}
 </table>
 
 <InputFile id="inputFile" accept="@FileFilter" style="width: 0px; height: 0px; visibility: collapse;"
