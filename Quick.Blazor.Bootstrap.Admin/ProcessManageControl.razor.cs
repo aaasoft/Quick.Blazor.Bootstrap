@@ -18,7 +18,6 @@ namespace Quick.Blazor.Bootstrap.Admin
     {
         private static string TextAskToKillProcess => Locale.GetString("Are you sure to kill process[Id: {0},Name: {1}]?");
         private static string TextFailed => Locale.GetString("Failed");
-        private static string TextPressSearchButtonTip => Locale.GetString("Press 'Search' button to load process list.");
         private static string TextViewProcess => Locale.GetString("View Process");
         private static string TextKillProcess => Locale.GetString("Kill Process");
         private static string TextKillProcessTree => Locale.GetString("Kill Process Tree");
@@ -56,6 +55,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         public bool OrderByAsc { get; set; } = true;
 
         private ProcessInfo[] Processes;
+        private ProcessInfo CurrentProcess;
 
         public static Dictionary<string, object> PrepareParameters(ProcessInfoButton[] processViewOtherButtons)
         {
@@ -65,6 +65,11 @@ namespace Quick.Blazor.Bootstrap.Admin
             };
         }
 
+        protected override void OnAfterRender(bool firstRender)
+        {
+            if(firstRender)
+                search();
+        }
 
         private string getOrderByButtonIconClass(string field)
         {
@@ -92,6 +97,7 @@ namespace Quick.Blazor.Bootstrap.Admin
 
         private void search()
         {
+            CurrentProcess = null;
             modalLoading.Show(null, null, true, null);
             Task.Run(() =>
             {

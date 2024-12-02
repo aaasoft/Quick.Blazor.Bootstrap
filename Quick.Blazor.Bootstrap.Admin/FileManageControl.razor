@@ -6,33 +6,29 @@
     <thead class="sticky-top alert-light">
         <tr>
             <td class="border-0" colspan="3">
-                <div class="btn-toolbar justify-content-between pb-1" role="toolbar">
+                <div class="btn-toolbar pb-1" role="toolbar">
                     @if (DisplayAddress)
                     {
-                    <div class="button-group col p-0 pr-2">
-                        <div class="input-group input-group-sm">
-                            <div class="input-group-prepend">
-                                <button title="@TextUp" type="button" class="btn btn-sm btn-secondary" @onclick="btnGotoUpper_Click">
-                                    <i class="@IconUp" aria-hidden="true"></i>                                    
-                                </button>
-                            </div>
-                            <input type="text" title="@TextPath" class="form-control col-auto" @bind-value="CurrentPath" @onkeypress="txtCurrentPath_KeyPress" />
-                            <div class="input-group-append">
-                                <button title="@TextRefresh" type="button" class="btn btn-sm btn-secondary" @onclick="btnGoto_Click">                                
-                                    <i class="@IconRefresh" aria-hidden="true"></i>
-                                </button>
-                            </div>
+                    <div class="input-group input-group-sm col p-0 pr-2">
+                        <div class="input-group-prepend">
+                            <button title="@TextUp" type="button" class="btn btn-sm btn-secondary" @onclick="btnGotoUpper_Click">
+                                <i class="@IconUp" aria-hidden="true"></i>                                    
+                            </button>
+                        </div>
+                        <input type="text" title="@TextPath" class="form-control col-auto" @bind-value="CurrentPath" @onkeypress="txtCurrentPath_KeyPress" />
+                        <div class="input-group-append">
+                            <button title="@TextRefresh" type="button" class="btn btn-sm btn-secondary" @onclick="btnGoto_Click">                                
+                                <i class="@IconRefresh" aria-hidden="true"></i>
+                            </button>
                         </div>
                     </div>
                     }
-                    <div class="button-group">
-                        <div class="input-group input-group-sm">
-                            <input type="text" class="form-control col-auto" @bind-value="Search" />
-                            <div class="input-group-append">
-                                <button type="button" class="btn btn-secondary" @onclick="btnGoto_Click">
-                                    <i class="@IconSearch" aria-hidden="true"></i>
-                                </button>
-                            </div>
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control col-auto" @bind-value="Search" />
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-secondary" @onclick="btnGoto_Click">
+                                <i class="@IconSearch" aria-hidden="true"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
