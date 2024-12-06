@@ -104,6 +104,8 @@ namespace Quick.Blazor.Bootstrap.Admin
         [Parameter]
         public bool DisplayAddress { get; set; } = true;
         [Parameter]
+        public bool DisplaySerachBox { get; set; } = true;
+        [Parameter]
         public bool DisplayCreateFolderButton { get; set; } = true;
         [Parameter]
         public bool DisplayRenameButton { get; set; } = true;
