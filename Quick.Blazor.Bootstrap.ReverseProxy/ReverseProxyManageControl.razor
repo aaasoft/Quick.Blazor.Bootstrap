@@ -1,8 +1,7 @@
 ﻿@inherits ComponentBase_WithGettextSupport;
 
-<div class="row">
-    <div class="col-12">
-        <div class="btn-toolbar">
+<div class="sticky-top">
+        <div class="btn-toolbar m-2">
             <div class="btn-group mr-2 mb-1">
                 <button type="button" class="btn btn-sm btn-secondary" @onclick="Create">
                     <i class="@IconNew" aria-hidden="true"></i>                    
@@ -21,15 +20,14 @@
                 </div>
             </div>
         </div>
-    </div>
 </div>
 
-<div class="row">
+<div class="row ml-0 mr-0 mb-2">
     @if (!ReverseProxyManager.Instance.IsEmpty())
     {
         @foreach (var t in ReverseProxyManager.Instance.GetRules(searchKeywords))
         {
-            <div class="col-xl-4 col-lg-6 col-sm-12 mt-2">
+            <div class="col-xl-4 col-lg-6 col-sm-12 p-2">
                 <div class="card">
                     <div class="card-header">
                         <i class="@IconRule" aria-hidden="true"></i>@t.Name

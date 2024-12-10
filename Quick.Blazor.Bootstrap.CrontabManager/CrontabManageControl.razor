@@ -1,35 +1,36 @@
 ﻿@inherits ComponentBase_WithGettextSupport
 @using Quick.Blazor.Bootstrap
 
-<EditForm Model="@this">
-    @if (Core.CrontabManager.Instance.IsStarted)
-    {
-        <div class="btn-toolbar mb-1">
-            <div class="input-group mb-1 ml-2">
-                <button type="button" class="btn btn-secondary" @onclick="Stop"><i class="@IconStop"
-                        aria-hidden="true"></i></button>
+<div class="modal-body">
+    <EditForm Model="@this">
+        @if (Core.CrontabManager.Instance.IsStarted)
+        {
+            <div class="btn-toolbar mb-1">
+                <div class="input-group mb-1 ml-2">
+                    <button type="button" class="btn btn-secondary" @onclick="Stop"><i class="@IconStop"
+                            aria-hidden="true"></i></button>
+                </div>
             </div>
-        </div>
-    }
-    else
-    {
-        <div class="btn-toolbar mb-1">
-            <div class="input-group mb-1 ml-2">
-                <button type="button" class="btn btn-secondary" @onclick="Start"><i class="@IconStart"
-                        aria-hidden="true"></i></button>
+        }
+        else
+        {
+            <div class="btn-toolbar mb-1">
+                <div class="input-group mb-1 ml-2">
+                    <button type="button" class="btn btn-secondary" @onclick="Start"><i class="@IconStart"
+                            aria-hidden="true"></i></button>
+                </div>
+                <div class="input-group mb-1 ml-2">
+                    <button type="button" class="btn btn-secondary" @onclick="Save"><i class="@IconSave"
+                            aria-hidden="true"></i></button>
+                </div>
             </div>
-            <div class="input-group mb-1 ml-2">
-                <button type="button" class="btn btn-secondary" @onclick="Save"><i class="@IconSave"
-                        aria-hidden="true"></i></button>
+            <div class="form-group">
+                <InputTextArea class="form-control" rows="@Rows" @bind-Value="Content" />
             </div>
-        </div>
+        }
         <div class="form-group">
-            <InputTextArea class="form-control" rows="@Rows" @bind-Value="Content" />
+            <LogViewControl @ref="logViewControl" Rows="@Rows"></LogViewControl>
         </div>
-    }
-    <div class="form-group">
-        <LogViewControl @ref="logViewControl" Rows="@Rows"></LogViewControl>
-    </div>
-</EditForm>
-
+    </EditForm>
+</div>
 <ModalAlert @ref="modalAlert" />
