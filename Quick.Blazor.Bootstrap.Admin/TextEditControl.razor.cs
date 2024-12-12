@@ -45,18 +45,18 @@ namespace Quick.Blazor.Bootstrap.Admin
         private TextEditControlTheme Theme { get; set; } = TextEditControlTheme.Dark;
         private Exception OpenException;
         private string Content { get; set; }
-        
+
         private string GetThemeClass(TextEditControlTheme theme)
         {
             switch (theme)
             {
                 case TextEditControlTheme.Light:
-                    return "form-control bg-light text-dark";
+                    return "bg-light text-dark";
                 case TextEditControlTheme.Dark:
-                    return "form-control bg-dark text-light";
+                    return "bg-dark text-light";
                 case TextEditControlTheme.Default:
                 default:
-                    return "form-control";
+                    return null;
             }
         }
 
