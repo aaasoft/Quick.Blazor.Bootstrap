@@ -44,6 +44,11 @@
                         <i class="fa fa-plus" aria-hidden="true"></i> @TextFileManage
                     </Tab>
                 </NavMenuItem>
+                <NavMenuItem Key="FileSelect" OnClick="@(()=>Show<Pages.FileSelect>())">
+                    <Tab>
+                        <i class="fa fa-plus" aria-hidden="true"></i> @TextFileSelect
+                    </Tab>
+                </NavMenuItem>
                 <NavMenuItem Key="ProcessManage" OnClick="@(()=>Show<Quick.Blazor.Bootstrap.Admin.ProcessManageControl>())">
                     <Tab>
                         <i class="fa fa-plus" aria-hidden="true"></i> @TextProcessManage

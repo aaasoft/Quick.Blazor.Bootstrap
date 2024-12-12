@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TestWebApplication\n"
-"POT-Creation-Date: 2024-05-22 20:07:27+0800\n"
-"PO-Revision-Date: 2024-05-22 20:07:28+0800\n"
+"POT-Creation-Date: 2024-12-12 14:24:52+0800\n"
+"PO-Revision-Date: 2024-12-12 14:24:52+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -10,76 +10,100 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: GetText.NET Extractor\n"
 
-#: ../../Shared/MainLayout.razor.cs:9
-msgid "Home"
-msgstr ""
-
-#: ../../Shared/MainLayout.razor.cs:18
-msgid "ReverseProxy"
-msgstr ""
-
 #: ../../Shared/MainLayout.razor.cs:15
-msgid "ProcessManage"
-msgstr ""
-
-#: ../../Shared/SurveyPrompt.razor.cs:11
-msgid "and tell us what you think."
-msgstr ""
-
-#: ../../Pages/TreeTest.razor.cs:12
-msgid "Expand All"
-msgstr ""
-
-#: ../../Shared/MainLayout.razor.cs:10
-msgid "Tabs"
-msgstr ""
-
-#: ../../Shared/MainLayout.razor.cs:11
-msgid "Pagination"
-msgstr ""
-
-#: ../../Pages/PaginationTest.razor.cs:13
-msgid "Last Name"
+msgid "FileSelect"
 msgstr ""
 
 #: ../../Shared/MainLayout.razor.cs:12
 msgid "Tree"
 msgstr ""
 
-#: ../../Shared/SurveyPrompt.razor.cs:9
-msgid "Please take our"
+#: ../../Pages/Index.razor.cs:10
+msgid "How is Blazor working for you?"
 msgstr ""
 
-#: ../../Pages/PaginationTest.razor.cs:12
-msgid "First Name"
+#: ../../Pages/TreeTest.razor.cs:14
+msgid "Log: "
+msgstr ""
+
+#: ../../Shared/MainLayout.razor.cs:17
+msgid "Terminal"
 msgstr ""
 
 #: ../../Pages/AccordionTest.razor.cs:13
 msgid "Allow Multiple Pane Actived"
 msgstr ""
 
-#: ../../Pages/Index.razor.cs:9
-msgid "Welcome to use Quick.Blazor.Bootstrap."
+#: ../../Pages/FileSelect.razor.cs:16
+msgid "Select file"
 msgstr ""
 
-#: ../../Shared/MainLayout.razor.cs:13
-msgid "Accordion"
+#: ../../Shared/SurveyPrompt.razor.cs:11
+msgid "and tell us what you think."
 msgstr ""
 
-#: ../../Pages/Index.razor.cs:10
-msgid "How is Blazor working for you?"
+#: ../../Shared/MainLayout.razor.cs:18
+msgid "LogView"
 msgstr ""
 
-#: ../../Shared/MainLayout.razor.cs:16
-msgid "Terminal"
+#: ../../Pages/TreeTest.razor.cs:13
+msgid "Collapse All"
+msgstr ""
+
+#: ../../Shared/MainLayout.razor.cs:9
+msgid "Home"
+msgstr ""
+
+#: ../../Pages/PaginationTest.razor.cs:13
+msgid "Last Name"
 msgstr ""
 
 #: ../../Shared/SurveyPrompt.razor.cs:10
 msgid "brief survey"
 msgstr ""
 
-#: ../../Pages/TreeTest.razor.cs:13
-msgid "Collapse All"
+#: ../../Shared/MainLayout.razor.cs:19
+msgid "ReverseProxy"
+msgstr ""
+
+#: ../../Shared/MainLayout.razor.cs:10
+msgid "Tabs"
+msgstr ""
+
+#: ../../Pages/TreeTest.razor.cs:12
+msgid "Expand All"
+msgstr ""
+
+#: ../../Pages/FileSelect.razor.cs:15
+msgid "Zip File"
+msgstr ""
+
+#: ../../Shared/MainLayout.razor.cs:11
+msgid "Pagination"
+msgstr ""
+
+#: ../../Shared/MainLayout.razor.cs:13
+msgid "Accordion"
+msgstr ""
+
+#: ../../Pages/PaginationTest.razor.cs:12
+msgid "First Name"
+msgstr ""
+
+#: ../../Shared/SurveyPrompt.razor.cs:9
+msgid "Please take our"
+msgstr ""
+
+#: ../../Shared/MainLayout.razor.cs:14
+msgid "FileManage"
+msgstr ""
+
+#: ../../Pages/Index.razor.cs:9
+msgid "Welcome to use Quick.Blazor.Bootstrap."
+msgstr ""
+
+#: ../../Shared/MainLayout.razor.cs:16
+msgid "ProcessManage"
 msgstr ""
 
 #: ../../Pages/AccordionTest.razor.cs:16
@@ -96,17 +120,5 @@ msgid ""
 "of the English countryside, the story ranges across Middle-earth, following "
 "the quest to destroy the One Ring mainly through the eyes of the hobbits "
 "Frodo, Sam, Merry, and Pippin."
-msgstr ""
-
-#: ../../Shared/MainLayout.razor.cs:14
-msgid "FileManage"
-msgstr ""
-
-#: ../../Shared/MainLayout.razor.cs:17
-msgid "LogView"
-msgstr ""
-
-#: ../../Pages/TreeTest.razor.cs:14
-msgid "Log: "
 msgstr ""
 

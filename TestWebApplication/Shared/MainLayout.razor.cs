@@ -12,6 +12,7 @@ public partial class MainLayout : LayoutComponentBase_WithGettextSupport
     public static string TextTree => Locale.GetString("Tree");
     public static string TextAccordion => Locale.GetString("Accordion");
     public static string TextFileManage => Locale.GetString("FileManage");
+    public static string TextFileSelect => Locale.GetString("FileSelect");
     public static string TextProcessManage => Locale.GetString("ProcessManage");
     public static string TextTerminal => Locale.GetString("Terminal");
     public static string TextLogView => Locale.GetString("LogView");

@@ -1,0 +1,14 @@
+﻿@inherits ComponentBase_WithGettextSupport
+@using Quick.Blazor.Bootstrap.Admin
+
+<div class="form-group">
+    <label>@TextZipFile</label>
+    <div class="input-group">
+        <input type="text" class="form-control" @bind="@filePath">
+        <div class="input-group-append">
+            <button type="button" class="btn btn-secondary" @onclick="selectFile">..</button>
+        </div>
+    </div>
+</div>
+
+<ModalWindow @ref="modalWindow" DialogSizeExtraLarge="true" DialogCentered="false" ModalBodyCls="p-0" />

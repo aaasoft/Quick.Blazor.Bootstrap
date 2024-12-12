@@ -1,87 +1,111 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TestWebApplication\n"
-"POT-Creation-Date: 2024-05-22 20:07:27+0800\n"
-"PO-Revision-Date: 2024-05-22 20:08+0800\n"
+"POT-Creation-Date: 2024-12-12 14:24:52+0800\n"
+"PO-Revision-Date: 2024-12-12 14:28+0800\n"
 "Last-Translator: 张鹏 <scbeta@qq.com>\n"
 "Language-Team: \n"
 "Language: zh\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.4\n"
-
-#: ../../Shared/MainLayout.razor.cs:9
-msgid "Home"
-msgstr "主页"
-
-#: ../../Shared/MainLayout.razor.cs:18
-msgid "ReverseProxy"
-msgstr "反向代理"
+"X-Generator: Poedit 3.4.2\n"
 
 #: ../../Shared/MainLayout.razor.cs:15
-msgid "ProcessManage"
-msgstr "进程管理"
-
-#: ../../Shared/SurveyPrompt.razor.cs:11
-msgid "and tell us what you think."
-msgstr "并告诉我们您的想法。"
-
-#: ../../Pages/TreeTest.razor.cs:12
-msgid "Expand All"
-msgstr "全部展开"
-
-#: ../../Shared/MainLayout.razor.cs:10
-msgid "Tabs"
-msgstr "选项卡"
-
-#: ../../Shared/MainLayout.razor.cs:11
-msgid "Pagination"
-msgstr "分页器"
-
-#: ../../Pages/PaginationTest.razor.cs:13
-msgid "Last Name"
-msgstr "姓"
+msgid "FileSelect"
+msgstr "文件选择"
 
 #: ../../Shared/MainLayout.razor.cs:12
 msgid "Tree"
 msgstr "树形"
 
-#: ../../Shared/SurveyPrompt.razor.cs:9
-msgid "Please take our"
-msgstr "请查看我们的"
+#: ../../Pages/Index.razor.cs:10
+msgid "How is Blazor working for you?"
+msgstr "Blazor 如何为你工作？"
 
-#: ../../Pages/PaginationTest.razor.cs:12
-msgid "First Name"
-msgstr "名"
+#: ../../Pages/TreeTest.razor.cs:14
+msgid "Log: "
+msgstr "日志："
+
+#: ../../Shared/MainLayout.razor.cs:17
+msgid "Terminal"
+msgstr "终端"
 
 #: ../../Pages/AccordionTest.razor.cs:13
 msgid "Allow Multiple Pane Actived"
 msgstr "允许多个面板激活"
 
-#: ../../Pages/Index.razor.cs:9
-msgid "Welcome to use Quick.Blazor.Bootstrap."
-msgstr "欢迎使用Quick.Blazor.Bootstrap。"
+#: ../../Pages/FileSelect.razor.cs:16
+msgid "Select file"
+msgstr "选择文件"
 
-#: ../../Shared/MainLayout.razor.cs:13
-msgid "Accordion"
-msgstr "手风琴"
+#: ../../Shared/SurveyPrompt.razor.cs:11
+msgid "and tell us what you think."
+msgstr "并告诉我们您的想法。"
 
-#: ../../Pages/Index.razor.cs:10
-msgid "How is Blazor working for you?"
-msgstr "Blazor 如何为你工作？"
+#: ../../Shared/MainLayout.razor.cs:18
+msgid "LogView"
+msgstr "日志查看"
 
-#: ../../Shared/MainLayout.razor.cs:16
-msgid "Terminal"
-msgstr "终端"
+#: ../../Pages/TreeTest.razor.cs:13
+msgid "Collapse All"
+msgstr "全部收缩"
+
+#: ../../Shared/MainLayout.razor.cs:9
+msgid "Home"
+msgstr "主页"
+
+#: ../../Pages/PaginationTest.razor.cs:13
+msgid "Last Name"
+msgstr "姓"
 
 #: ../../Shared/SurveyPrompt.razor.cs:10
 msgid "brief survey"
 msgstr "简单介绍"
 
-#: ../../Pages/TreeTest.razor.cs:13
-msgid "Collapse All"
-msgstr "全部收缩"
+#: ../../Shared/MainLayout.razor.cs:19
+msgid "ReverseProxy"
+msgstr "反向代理"
+
+#: ../../Shared/MainLayout.razor.cs:10
+msgid "Tabs"
+msgstr "选项卡"
+
+#: ../../Pages/TreeTest.razor.cs:12
+msgid "Expand All"
+msgstr "全部展开"
+
+#: ../../Pages/FileSelect.razor.cs:15
+msgid "Zip File"
+msgstr "ZIP文件"
+
+#: ../../Shared/MainLayout.razor.cs:11
+msgid "Pagination"
+msgstr "分页器"
+
+#: ../../Shared/MainLayout.razor.cs:13
+msgid "Accordion"
+msgstr "手风琴"
+
+#: ../../Pages/PaginationTest.razor.cs:12
+msgid "First Name"
+msgstr "名"
+
+#: ../../Shared/SurveyPrompt.razor.cs:9
+msgid "Please take our"
+msgstr "请查看我们的"
+
+#: ../../Shared/MainLayout.razor.cs:14
+msgid "FileManage"
+msgstr "文件管理器"
+
+#: ../../Pages/Index.razor.cs:9
+msgid "Welcome to use Quick.Blazor.Bootstrap."
+msgstr "欢迎使用Quick.Blazor.Bootstrap。"
+
+#: ../../Shared/MainLayout.razor.cs:16
+msgid "ProcessManage"
+msgstr "进程管理"
 
 #: ../../Pages/AccordionTest.razor.cs:16
 msgid ""
@@ -106,15 +130,3 @@ msgstr ""
 "类、矮人和精灵的其他力量之戒，以征服整个中土世界。故事从夏尔（Shire）的家常开"
 "始，这是一个让人想起英国乡村的霍比特人土地，故事横跨中土世界，主要通过霍比特"
 "人佛罗多、山姆、梅里和皮平的眼睛来摧毁至尊魔戒。"
-
-#: ../../Shared/MainLayout.razor.cs:14
-msgid "FileManage"
-msgstr "文件管理器"
-
-#: ../../Shared/MainLayout.razor.cs:17
-msgid "LogView"
-msgstr "日志查看"
-
-#: ../../Pages/TreeTest.razor.cs:14
-msgid "Log: "
-msgstr "日志："

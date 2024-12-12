@@ -4,7 +4,6 @@
     Dir="@Dir"
     FileFilter="@FileFilter"
     SelectedPath="@SelectedPath"
-    FileDoubleClickToDownload="@FileDoubleClickToDownload"
     FileDoubleClickCustomAction="@onFileDoubleClick">
     <ToolbarAddonButtons>
         @if (string.IsNullOrEmpty(fileManageControl.SelectedPath) || !System.IO.File.Exists(fileManageControl.SelectedPath))

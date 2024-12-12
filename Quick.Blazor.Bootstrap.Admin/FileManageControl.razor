@@ -55,7 +55,7 @@
                             <i class="@IconUpload" aria-hidden="true"></i>                                    
                             <label title="@TextUpload"
                                 style="position: absolute;top: 0;left: 0;right:0;margin:0;height:100%;cursor:pointer"
-                                for="inputFile">
+                                for="Quick_Blazor_Bootstrap_Admin_FileManageControl_InputFile">
                             </label>
                         </div>
                     }
@@ -254,7 +254,7 @@ else
 </tbody>
 </table>
 
-<InputFile id="inputFile" accept="@FileFilter" style="width: 0px; height: 0px; visibility: collapse;"
+<InputFile id="Quick_Blazor_Bootstrap_Admin_FileManageControl_InputFile" accept="@FileFilterForInputFile" style="width: 0px; height: 0px; visibility: collapse;"
     OnChange="@onInputFileChanged" multiple />
 <ModalLoading @ref="modalLoading" />
 <ModalAlert @ref="modalAlert" />

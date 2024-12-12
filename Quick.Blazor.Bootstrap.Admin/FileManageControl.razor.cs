@@ -63,24 +63,41 @@ namespace Quick.Blazor.Bootstrap.Admin
             }
             set
             {
+                if(string.IsNullOrEmpty(value))
+                    return;
+                    
                 if (File.Exists(value))
                 {
-                    SelectedItem = Files.FirstOrDefault(t => t.FullName == value);
-                    if (SelectedItem == null)
+                    if (Files == null)
                     {
-                        var fileInfo = new FileInfo(value);
-                        Files = new[] { fileInfo }.Concat(Files).ToArray();
-                        SelectedItem = fileInfo;
+                        SelectedItem = new FileInfo(value);
+                    }
+                    else
+                    {
+                        SelectedItem = Files.FirstOrDefault(t => t.FullName == value);
+                        if (SelectedItem == null)
+                        {
+                            var fileInfo = new FileInfo(value);
+                            Files = new[] { fileInfo }.Concat(Files).ToArray();
+                            SelectedItem = fileInfo;
+                        }
                     }
                 }
                 if (Directory.Exists(value))
                 {
-                    SelectedItem = Dirs.FirstOrDefault(t => t.FullName == value);
-                    if (SelectedItem == null)
+                    if (Dirs == null)
                     {
-                        var dirInfo = new DirectoryInfo(value);
-                        Dirs = new[] { dirInfo }.Concat(Dirs).ToArray();
-                        SelectedItem = dirInfo;
+                        SelectedItem = new DirectoryInfo(value);
+                    }
+                    else
+                    {
+                        SelectedItem = Dirs.FirstOrDefault(t => t.FullName == value);
+                        if (SelectedItem == null)
+                        {
+                            var dirInfo = new DirectoryInfo(value);
+                            Dirs = new[] { dirInfo }.Concat(Dirs).ToArray();
+                            SelectedItem = dirInfo;
+                        }
                     }
                 }
             }
@@ -126,6 +143,23 @@ namespace Quick.Blazor.Bootstrap.Admin
 
         [Parameter]
         public string FileFilter { get; set; }
+        private string FileFilterForInputFile
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(FileFilter))
+                    return FileFilter;
+                var array = FileFilter.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                for (var i = 0; i < array.Length; i++)
+                {
+                    var v = array[i];
+                    if (v.StartsWith("*."))
+                        array[i] = v.Substring(1);
+                }
+                return string.Join(',', array);
+            }
+        }
+
         [Parameter]
         public string OrderBy { get; set; } = nameof(FileInfo.Name);
         [Parameter]

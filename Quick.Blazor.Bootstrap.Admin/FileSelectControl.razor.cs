@@ -16,8 +16,6 @@ namespace Quick.Blazor.Bootstrap.Admin
         [Parameter]
         public string SelectedPath { get; set; }
         [Parameter]
-        public bool FileDoubleClickToDownload { get; set; } = false;
-        [Parameter]
         public Action<string> SelectAction { get; set; }
         [Parameter]
         public Action<string> FileDoubleClickCustomAction { get; set; }
@@ -32,7 +30,10 @@ namespace Quick.Blazor.Bootstrap.Admin
 
         private void onFileDoubleClick(IJSRuntime jsRuntime)
         {
-            FileDoubleClickCustomAction?.Invoke(fileManageControl.SelectedPath);
+            if (FileDoubleClickCustomAction == null)
+                Select();
+            else
+                FileDoubleClickCustomAction?.Invoke(fileManageControl.SelectedPath);
         }
     }
 }
