@@ -1,15 +1,21 @@
 ﻿@using Quick.Fields
+@using Quick.Blazor.Bootstrap.Admin
 
 <div class="form-group">
     <label>@Field.Name</label>
-    @if (Field.Input_ReadOnly.HasValue && Field.Input_ReadOnly.Value)
-    {
-        <input type="text" class="form-control @(string.IsNullOrEmpty(Field.Input_ValidationMessage) ? "" : "invalid")" @bind="@Field.Value" readonly>
-    }
-    else
-    {
-        <input type="text" class="form-control @(string.IsNullOrEmpty(Field.Input_ValidationMessage) ? "" : "invalid")" @bind="@Field.Value">
-    }
+    <div class="input-group">
+        @if (Field.Input_ReadOnly.HasValue && Field.Input_ReadOnly.Value)
+        {
+            <input type="text" class="form-control @(string.IsNullOrEmpty(Field.Input_ValidationMessage) ? "" : "invalid")" @bind="@Field.Value" readonly>
+        }
+        else
+        {
+            <input type="text" class="form-control @(string.IsNullOrEmpty(Field.Input_ValidationMessage) ? "" : "invalid")" @bind="@Field.Value">
+            <div class="input-group-append">
+                <button type="button" class="btn btn-secondary" @onclick="selectFile">..</button>
+            </div>
+        }        
+    </div>
 
     @if (!string.IsNullOrEmpty(Field.Description))
     {
@@ -21,8 +27,4 @@
     }
 </div>
 
-@code
-{
-    [Parameter]
-    public FieldForGet Field { get; set; }
-}
+<ModalWindow @ref="modalWindow" DialogSizeExtraLarge="true" DialogCentered="false" ModalBodyCls="p-0" />
