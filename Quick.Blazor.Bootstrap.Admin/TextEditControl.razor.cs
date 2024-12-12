@@ -51,12 +51,12 @@ namespace Quick.Blazor.Bootstrap.Admin
             switch (theme)
             {
                 case TextEditControlTheme.Light:
-                    return "bg-light text-dark";
+                    return "form-control border-0 rounded-0 bg-light text-dark";
                 case TextEditControlTheme.Dark:
-                    return "bg-dark text-light";
+                    return "form-control border-0 rounded-0 bg-dark text-light";
                 case TextEditControlTheme.Default:
                 default:
-                    return null;
+                    return "form-control border-0 rounded-0";
             }
         }
 

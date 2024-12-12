@@ -40,11 +40,11 @@
     </div>
     @if (OpenException == null)
     {
-        <InputTextArea class="border-0 rounded-0 @GetThemeClass(Theme)" rows="@Rows" @bind-Value="Content" />
+        <InputTextArea class="@GetThemeClass(Theme)" rows="@Rows" @bind-Value="Content" />
     }
     else
     {
-        <InputTextArea class="form-control border-0 rounded-0 @GetThemeClass(Theme)" rows="20" @bind-Value="Content" readonly />
+        <InputTextArea class="@GetThemeClass(Theme)" rows="20" @bind-Value="Content" readonly />
     }
 </EditForm>
 
