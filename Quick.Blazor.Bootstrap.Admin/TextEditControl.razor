@@ -1,51 +1,53 @@
 ﻿@inherits ComponentBase_WithGettextSupport
 
 <EditForm Model="@this">
-    @if (OpenException == null)
-    {
-        <div class="btn-toolbar mb-1">
-            <div class="input-group mb-1">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">@TextRows</div>
-                </div>
-                <InputNumber class="form-control" @bind-Value="Rows" style="width:8rem;" />
+    <div class="btn-toolbar p-1 bg-light">
+        @ToolbarAddonControls
+        <div class="input-group input-group-sm mb-1">
+            <div class="input-group-prepend">
+                <div class="input-group-text">@TextRows</div>
             </div>
-            <div class="input-group mb-1 ml-2">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">@TextEncoding</div>
-                </div>
-                <InputSelect @bind-Value="FileEncodingForBinding" class="form-control">
-                    @foreach (var t in EncodingDict.Keys)
-                    {
-                        <option value="@t">@t</option>
-                    }
-                </InputSelect>
+            <InputNumber class="form-control" @bind-Value="Rows" style="width:8rem;" />
+        </div>
+        <div class="input-group input-group-sm mb-1 ml-2">
+            <div class="input-group-prepend">
+                <div class="input-group-text">@TextEncoding</div>
             </div>
-            <div class="input-group mb-1 ml-2">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">@TextTheme</div>
-                </div>
-                <InputSelect @bind-Value="Theme" class="form-control">
-                    @foreach (var t in Enum.GetNames<TextEditControlTheme>())
-                    {
-                        <option value="@t">@t</option>
-                    }
-                </InputSelect>
+            <InputSelect @bind-Value="FileEncodingForBinding" class="form-control">
+            @foreach (var t in EncodingDict.Keys)
+            {
+                <option value="@t">@t</option>
+            }
+            </InputSelect>
+        </div>
+        <div class="input-group input-group-sm mb-1 ml-2">
+            <div class="input-group-prepend">
+                <div class="input-group-text">@TextTheme</div>
             </div>
-            <div class="input-group mb-1 ml-2">
+            <InputSelect @bind-Value="Theme" class="form-control">
+            @foreach (var t in Enum.GetNames<TextEditControlTheme>())
+            {
+                <option value="@t">@t</option>
+            }
+            </InputSelect>
+        </div>
+        @if (OpenException == null)
+        {
+            <div class="input-group input-group-sm mb-1 ml-2">
                 <button type="button" class="btn btn-secondary" @onclick="Save"><i class="@IconSave" aria-hidden="true"></i></button>
             </div>
-        </div>
-        <div class="form-group">
-            <InputTextArea class="@GetThemeClass(Theme)" rows="@Rows" @bind-Value="Content" />
-        </div>
+        }
+    </div>
+    <div class="form-group">
+    @if (OpenException == null)
+    {
+        <InputTextArea class="@GetThemeClass(Theme)" rows="@Rows" @bind-Value="Content" />
     }
     else
     {
-        <div class="form-group">
-            <InputTextArea class="@GetThemeClass(Theme)" rows="20" @bind-Value="Content" readonly />
-        </div>
+        <InputTextArea class="@GetThemeClass(Theme)" rows="20" @bind-Value="Content" readonly />
     }
+    </div>
 </EditForm>
 
 <ModalAlert @ref="modalAlert" />

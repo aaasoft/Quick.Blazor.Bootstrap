@@ -12,6 +12,8 @@ namespace Quick.Blazor.Bootstrap.Admin
     {
         private ModalAlert modalAlert;
         [Parameter]
+        public RenderFragment ToolbarAddonControls { get; set; }
+        [Parameter]
         public int Rows { get; set; } = 30;
         [Parameter]
         public string File { get; set; }
