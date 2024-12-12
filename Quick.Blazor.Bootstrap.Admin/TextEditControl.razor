@@ -3,13 +3,13 @@
 <EditForm Model="@this">
     <div class="btn-toolbar p-1 bg-light">
         @ToolbarAddonControls
-        <div class="input-group input-group-sm mb-1">
+        <div class="input-group input-group-sm mb-1 mr-1">
             <div class="input-group-prepend">
                 <div class="input-group-text">@TextRows</div>
             </div>
             <InputNumber class="form-control" @bind-Value="Rows" style="width:8rem;" />
         </div>
-        <div class="input-group input-group-sm mb-1 ml-1">
+        <div class="input-group input-group-sm mb-1 mr-1">
             <div class="input-group-prepend">
                 <div class="input-group-text">@TextEncoding</div>
             </div>
@@ -20,7 +20,7 @@
             }
             </InputSelect>
         </div>
-        <div class="input-group input-group-sm mb-1 ml-1">
+        <div class="input-group input-group-sm mb-1 mr-1">
             <div class="input-group-prepend">
                 <div class="input-group-text">@TextTheme</div>
             </div>
@@ -33,12 +33,11 @@
         </div>
         @if (OpenException == null)
         {
-            <div class="input-group input-group-sm mb-1 ml-1">
+            <div class="input-group input-group-sm mb-1 mr-1">
                 <button type="button" class="btn btn-sm btn-secondary" @onclick="Save"><i class="@IconSave" aria-hidden="true"></i></button>
             </div>
         }
     </div>
-    <div class="form-group">
     @if (OpenException == null)
     {
         <InputTextArea class="@GetThemeClass(Theme)" rows="@Rows" @bind-Value="Content" />
@@ -47,7 +46,6 @@
     {
         <InputTextArea class="@GetThemeClass(Theme)" rows="20" @bind-Value="Content" readonly />
     }
-    </div>
 </EditForm>
 
 <ModalAlert @ref="modalAlert" />
