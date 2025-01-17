@@ -24,7 +24,7 @@ public partial class Controls : ComponentBase
         };
     }
 
-    private void setFields(FieldForGet[] fields)
+    public void SetFields(FieldForGet[] fields)
     {
         travelFields(fields, field =>
         {
