@@ -275,7 +275,7 @@ namespace Quick.Blazor.Bootstrap.Admin
             try
             {
                 if (fileInfo.Exists)
-                    return fileInfo.LastWriteTime.ToString();
+                    return fileInfo.LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss");
             }
             catch { }
             return string.Empty;
