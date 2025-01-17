@@ -1,12 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
 	<PropertyGroup>
-		<TargetFrameworks>net6.0;net8.0</TargetFrameworks>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<TargetFramework>net8.0</TargetFramework>
 		<RepositoryUrl>https://github.com/aaasoft/Quick.Blazor.Bootstrap</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/aaasoft/Quick.Blazor.Bootstrap</PackageProjectUrl>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-		<Version>4.2.14</Version>
+		<Version>4.2.15</Version>
 		<Description>Quick.Blazor.Bootstrap.Admin is a component library for admin built on top of Blazor and CSS frameworks Bootstrap.</Description>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
@@ -20,7 +19,7 @@
 	<ItemGroup>
 		<PackageReference Include="BlazorDownloadFile" Version="2.4.0.2" />
 		<PackageReference Include="Quick.Shell" Version="1.0.4" />
-		<PackageReference Include="SharpCompress" Version="0.38.0" />
+		<PackageReference Include="SharpCompress" Version="0.39.0" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Quick.Blazor.Bootstrap\Quick.Blazor.Bootstrap.csproj" />
