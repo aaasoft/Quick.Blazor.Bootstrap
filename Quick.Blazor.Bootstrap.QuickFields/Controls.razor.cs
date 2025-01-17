@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using Microsoft.AspNetCore.Components;
 using Quick.Fields;
@@ -11,18 +10,10 @@ public partial class Controls : ComponentBase
     private ModalAlert modalAlert;
     private ToastStack toastStack;
 
-    private FieldForGet[] Fields;
+    public FieldForGet[] Fields { get; private set; }
 
     [Parameter]
     public Action<FieldForGet, FieldForGet[]> OnFieldChangedAction { get; set; }
-
-    public Dictionary<string, object> PrepareParameters(Action<FieldForGet, FieldForGet[]> onFieldChangedAction)
-    {
-        return new Dictionary<string, object>()
-        {
-            [nameof(OnFieldChangedAction)] = onFieldChangedAction
-        };
-    }
 
     public void SetFields(FieldForGet[] fields)
     {
@@ -49,6 +40,7 @@ public partial class Controls : ComponentBase
             if (field.PostOnChanged.HasValue && field.PostOnChanged.Value)
                 field.PropertyChanged += OnFieldValueChanged;
         });
+        InvokeAsync(StateHasChanged);
     }
 
     private void OnFieldValueChanged(object sender, PropertyChangedEventArgs e)

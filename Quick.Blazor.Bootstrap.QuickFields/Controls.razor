@@ -2,9 +2,12 @@
     <ToastStack @ref="toastStack" AutoClose="true" />
 </div>
 <div>
-    @foreach (var field in Fields)
+    @if(Fields!=null)
     {
-        <Control Field="field"></Control>
+        @foreach (var field in Fields)
+        {
+            <Control Field="field"></Control>
+        }
     }
 </div>
 <div>
