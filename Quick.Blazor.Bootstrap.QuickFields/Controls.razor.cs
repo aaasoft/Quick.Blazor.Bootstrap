@@ -28,8 +28,13 @@ public partial class Controls : ComponentBase
             switch (field.Type)
             {
                 case FieldType.MessageBox:
-                    modalAlert.Show(field.Name, field.Description, null, null);
-                    return;
+                    Action onMessageBoxClosed = () =>
+                    {
+                        if (field.PostOnChanged.HasValue && field.PostOnChanged.Value)
+                            field.Value = Guid.NewGuid().ToString();
+                    };
+                    modalAlert.Show(field.Name, field.Description, onMessageBoxClosed, onMessageBoxClosed);
+                    break;
                 case FieldType.Toast:
                     toastStack.AddToast(field.Name, field.Description, BackgroundTheme.info);
                     return;
