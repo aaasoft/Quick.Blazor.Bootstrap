@@ -1,6 +1,6 @@
 ﻿@using Quick.Fields
 
-<img src="@Field.Value" class="@Field.Html_Class" style="@Field.Html_Style" />
+<img src="@Field.Value" class="@ControlUtils.GetCommonClass(Field)" style="@Field.Html_Style" />
 
 @code
 {

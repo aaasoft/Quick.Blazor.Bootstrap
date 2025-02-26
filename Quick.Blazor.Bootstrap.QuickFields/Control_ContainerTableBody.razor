@@ -1,7 +1,6 @@
 ﻿@using Quick.Fields
 
-<div class="@ControlUtils.GetCommonClass(Field)" style="@Field.Html_Style">
-    @Field.Value
+<tbody class="@Field.Html_Class" style="@Field.Html_Style">
     @if (Field.Children != null)
     {
         @foreach (var child in Field.Children)
@@ -9,7 +8,7 @@
             <Control Field="@child" />
         }
     }
-</div>
+</tbody>
 
 @code
 {

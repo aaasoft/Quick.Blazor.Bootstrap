@@ -1,9 +1,10 @@
 ﻿@using Quick.Fields
 
-<Quick.Blazor.Bootstrap.Pagination @bind-Offset="Offset"
-                                   PageSize="@PageSize"
-                                   RecordCount="@RecordCount"
-                                   FirstPageText="First" PreviousPageText="Prev" NextPageText="Next" LastPageText="Last" RecordCountText="Records:" PageText="Page:" />
+<div class="@ControlUtils.GetCommonClass(Field)" style="@Field.Html_Style">
+    <Quick.Blazor.Bootstrap.Pagination @bind-Offset="Offset" PageSize="@PageSize" RecordCount="@RecordCount"
+        FirstPageText="First" PreviousPageText="Prev" NextPageText="Next" LastPageText="Last" RecordCountText="Records:"
+        PageText="Page:" />
+</div>
 
 @code
 {

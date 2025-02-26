@@ -1,6 +1,6 @@
 ﻿@using Quick.Fields
 
-<th class="@Field.Html_Class" style="@Field.Html_Style" rowspan="@Field.ContainerTableTd_RowSpan" colspan="@Field.ContainerTableTd_ColSpan">
+<th class="@ControlUtils.GetCommonClass(Field)" style="@Field.Html_Style" rowspan="@Field.ContainerTableTd_RowSpan" colspan="@Field.ContainerTableTd_ColSpan">
     @Field.Value
     @if (Field.Children != null)
     {

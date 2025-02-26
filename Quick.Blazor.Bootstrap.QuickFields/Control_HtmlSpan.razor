@@ -1,6 +1,6 @@
 ﻿@using Quick.Fields
 
-<span class="@Field.Html_Class" style="@Field.Html_Style">
+<span class="@ControlUtils.GetCommonClass(Field)" style="@Field.Html_Style">
     @Field.Value
     @if (Field.Children != null)
     {
