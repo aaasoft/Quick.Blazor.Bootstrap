@@ -28,10 +28,17 @@ public partial class Controls : ComponentBase
             switch (field.Type)
             {
                 case FieldType.MessageBox:
+                    Action okAction = null;
+                    Action cancelAction = null;
+                    var usePreTag = field.MessageBox_UsePreTag.HasValue && field.MessageBox_UsePreTag.Value;
                     if (field.PostOnChanged.HasValue && field.PostOnChanged.Value)
-                        modalAlert.Show(field.Name, field.Description, () => field.Value = "OK", () => field.Value = "CANCEL");
-                    else
-                        modalAlert.Show(field.Name, field.Description, null, null);
+                    {
+                        var canCancel = field.MessageBox_CanCancel.HasValue && field.MessageBox_CanCancel.Value;
+                        okAction = () => field.Value = "OK";
+                        if (canCancel)
+                            cancelAction = () => field.Value = "CANCEL";
+                    }
+                    modalAlert.Show(field.Name, field.Description, okAction, cancelAction, usePreTag);
                     break;
                 case FieldType.Toast:
                     toastStack.AddToast(field.Name, field.Description, BackgroundTheme.info);

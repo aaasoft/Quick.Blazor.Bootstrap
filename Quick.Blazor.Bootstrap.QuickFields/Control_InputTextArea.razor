@@ -4,11 +4,11 @@
     <label>@Field.Name</label>
     @if (Field.Input_ReadOnly.HasValue && Field.Input_ReadOnly.Value)
     {
-        <textarea rows="@(Field.InputTextArea_Rows==null?10:Field.InputTextArea_Rows.Value)" class="form-control @(string.IsNullOrEmpty(Field.Input_ValidationMessage)?"":"invalid")" @bind="@Field.Value" readonly></textarea>
+        <textarea rows="@(Field.InputTextArea_Rows==null?10:Field.InputTextArea_Rows.Value)" class="@ControlUtils.GetInputClass(Field)" @bind="@Field.Value" readonly></textarea>
     }
     else
     {
-        <textarea rows="@(Field.InputTextArea_Rows==null?10:Field.InputTextArea_Rows.Value)" class="form-control @(string.IsNullOrEmpty(Field.Input_ValidationMessage)?"":"invalid")" @bind="@Field.Value"></textarea>
+        <textarea rows="@(Field.InputTextArea_Rows==null?10:Field.InputTextArea_Rows.Value)" class="@ControlUtils.GetInputClass(Field)" @bind="@Field.Value"></textarea>
     }
     @if (!string.IsNullOrEmpty(Field.Description))
     {

@@ -4,11 +4,11 @@
     <label>@Field.Name</label>
     @if (Field.Input_ReadOnly.HasValue && Field.Input_ReadOnly.Value)
     {
-        <input type="number" class="form-control @(string.IsNullOrEmpty(Field.Input_ValidationMessage)?"":"invalid")" @bind="@Field.Value" readonly>
+        <input type="number" class="@ControlUtils.GetInputClass(Field)" @bind="@Field.Value" readonly>
     }
     else
     {
-        <input type="number" class="form-control @(string.IsNullOrEmpty(Field.Input_ValidationMessage)?"":"invalid")" @bind="@Field.Value">
+        <input type="number" class="@ControlUtils.GetInputClass(Field)" @bind="@Field.Value">
     }
     @if (!string.IsNullOrEmpty(Field.Description))
     {

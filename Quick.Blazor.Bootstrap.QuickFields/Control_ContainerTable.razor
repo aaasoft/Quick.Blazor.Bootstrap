@@ -1,14 +1,16 @@
 ﻿@using Quick.Fields
 
-<table class="table @Field.Html_Class" style="@Field.Html_Style">
-    @if (Field.Children != null)
-    {
-        @foreach (var child in Field.Children)
+<div class="table-responsive">
+    <table class="@ControlUtils.GetTableClass(Field)" style="@Field.Html_Style">
+        @if (Field.Children != null)
         {
-            <Control Field="@child" />
+            @foreach (var child in Field.Children)
+            {
+                <Control Field="@child" />
+            }
         }
-    }
-</table>
+    </table>
+</div>
 
 @code
 {

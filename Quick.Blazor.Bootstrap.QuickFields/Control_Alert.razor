@@ -1,10 +1,21 @@
 ﻿@using Quick.Fields
 
 <div class="form-group">
-    <div class="alert @Field.Html_Class" style="@Field.Html_Style" role="alert">
+    <div class="@ControlUtils.GetAlertClass(Field)" style="@Field.Html_Style" role="alert">
         @if (!string.IsNullOrEmpty(Field.Name))
         {
-            <h4 class="alert-heading">@Field.Name</h4>
+            @if (Field.Input_IsLarge.HasValue && Field.Input_IsLarge.Value)
+            {
+                <h2 class="alert-heading">@Field.Name</h2>
+            }
+            else if (Field.Input_IsSmall.HasValue && Field.Input_IsSmall.Value)
+            {
+                <h5 class="alert-heading">@Field.Name</h5>
+            }
+            else
+            {
+                <h4 class="alert-heading">@Field.Name</h4>
+            }
         }
         @if (!string.IsNullOrEmpty(Field.Description))
         {
