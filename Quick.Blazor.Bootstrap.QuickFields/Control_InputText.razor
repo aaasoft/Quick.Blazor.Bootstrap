@@ -1,19 +1,59 @@
 ﻿@using Quick.Fields
 
 <div class="form-group">
-    <label>@Field.Name</label>
+    @if (Field.Input_ShowNameLabel == null || Field.Input_ShowNameLabel.Value)
+    {
+        <label for="@Field.Id">@Field.Name</label>
+    }
+    @if (Field.Input_PrependText != null || Field.Input_PrependChildren != null)
+    {
+        <div class="input-group-prepend">
+            @if (Field.Input_PrependText != null)
+            {
+                <div class="input-group-text">@Field.Input_PrependText</div>
+            }
+            @if(Field.Input_PrependChildren != null)
+            {
+                @foreach (var field in Field.Input_PrependChildren)
+                {
+                    <Control Field="field" />
+                }
+            }
+        </div>
+    }
     @if (Field.Input_ReadOnly.HasValue && Field.Input_ReadOnly.Value)
     {
-        <input type="text" class="@ControlUtils.GetInputClass(Field)" @bind="@Field.Value" readonly>
+        <input id="@Field.Id" type="text" class="@ControlUtils.GetInputClass(Field)" @bind="@Field.Value"
+            placeholder="@Field.Input_Placeholder" readonly>
     }
     else
     {
-        <input type="text" class="@ControlUtils.GetInputClass(Field)" @bind="@Field.Value">
+        <input id="@Field.Id" type="text" class="@ControlUtils.GetInputClass(Field)" @bind="@Field.Value"
+            placeholder="@Field.Input_Placeholder">
     }
-
+    @if (Field.Input_AppendText != null || Field.Input_AppendChildren != null)
+    {
+        <div class="input-group-append">
+            @if (Field.Input_AppendText != null)
+            {
+                <div class="input-group-text">@Field.Input_AppendText</div>
+            }
+            @if(Field.Input_AppendChildren != null)
+            {
+                @foreach (var field in Field.Input_AppendChildren)
+                {
+                    <Control Field="field" />
+                }
+            }
+        </div>
+    }
     @if (!string.IsNullOrEmpty(Field.Description))
     {
         <small class="form-text text-muted">@Field.Description</small>
+    }
+    @if (!string.IsNullOrEmpty(Field.Input_HelpText))
+    {
+        <small class="form-text text-muted">@Field.Input_HelpText</small>
     }
     @if (!string.IsNullOrEmpty(Field.Input_ValidationMessage))
     {

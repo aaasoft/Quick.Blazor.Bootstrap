@@ -1,0 +1,17 @@
+﻿@using Quick.Fields
+
+<div class="@ControlUtils.GetCommonClass(Field, "btn-group")" role="group">
+    @if (Field.Children != null)
+    {
+        @foreach (var field in Field.Children)
+        {
+            <Control Field="field" />
+        }
+    }
+</div>
+
+@code
+{
+    [Parameter]
+    public FieldForGet Field { get; set; }
+}

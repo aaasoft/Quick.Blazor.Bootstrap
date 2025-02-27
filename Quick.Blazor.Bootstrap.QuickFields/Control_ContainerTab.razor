@@ -10,7 +10,6 @@
                 <TabPane Key="@field.Id">
                     <Tab>@field.Name</Tab>
                     <ChildContent>
-                        <div class="form-group"></div>
                         @foreach (var child in field.Children)
                         {
                             <Control Field="child"></Control>

@@ -1,13 +1,11 @@
 ﻿@using Quick.Fields
 
-<div class="row @ControlUtils.GetCommonClass(Field)">
+<div class="@ControlUtils.GetCommonClass(Field, "row")">
     @if (Field.Children != null)
     {
         @foreach (var field in Field.Children)
         {
-            <div class="@(field.Width == null ? "col" : "col-" + field.Width.Value)">
-                <Control Field="field" />
-            </div>
+            <Control Field="field" />
         }
     }
 </div>

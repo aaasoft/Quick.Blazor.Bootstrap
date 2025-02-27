@@ -5,7 +5,7 @@ namespace Quick.Blazor.Bootstrap.QuickFields;
 
 internal static class ControlUtils
 {
-    private static void appendMargin(StringBuilder sb, FieldForGet field)
+    private static void appendCommonClass(StringBuilder sb, FieldForGet field)
     {
         if (field.Margin.HasValue)
             sb.Append(" m-" + field.Margin.Value);
@@ -17,10 +17,7 @@ internal static class ControlUtils
             sb.Append(" mr-" + field.MarginRight.Value);
         if (field.MarginBottom.HasValue)
             sb.Append(" mb-" + field.MarginBottom.Value);
-    }
 
-    private static void appendPadding(StringBuilder sb, FieldForGet field)
-    {
         if (field.Padding.HasValue)
             sb.Append(" p-" + field.Padding.Value);
         if (field.PaddingLeft.HasValue)
@@ -31,15 +28,21 @@ internal static class ControlUtils
             sb.Append(" pr-" + field.PaddingRight.Value);
         if (field.PaddingBottom.HasValue)
             sb.Append(" pb-" + field.PaddingBottom.Value);
+
+        if (field.ColumnWidth.HasValue)
+            sb.Append(" col-" + field.ColumnWidth.Value);
+        else if (field.Parent != null && field.Parent.Type == FieldType.ContainerRow)
+            sb.Append(" col");
     }
 
-    public static string GetCommonClass(FieldForGet field)
+    public static string GetCommonClass(FieldForGet field, string baseClass = null)
     {
         if (!string.IsNullOrEmpty(field.Html_Class))
             return field.Html_Class;
         var sb = new StringBuilder();
-        appendMargin(sb, field);
-        appendPadding(sb, field);
+        if (!string.IsNullOrEmpty(baseClass))
+            sb.Append(baseClass);
+        appendCommonClass(sb, field);
         return sb.ToString();
     }
 
@@ -62,8 +65,7 @@ internal static class ControlUtils
             sb.Append(" btn-sm");
         if (field.Input_IsLarge.HasValue && field.Input_IsLarge.Value)
             sb.Append(" btn-lg");
-        appendMargin(sb, field);
-        appendPadding(sb, field);
+        appendCommonClass(sb, field);
         return sb.ToString();
     }
 
@@ -72,15 +74,19 @@ internal static class ControlUtils
         if (!string.IsNullOrEmpty(field.Html_Class))
             return field.Html_Class;
         var sb = new StringBuilder();
-        sb.Append("form-control");
+        if(field.Input_IsPlainText.HasValue && field.Input_IsPlainText.Value)
+            sb.Append("form-control-plaintext");
+        else
+            sb.Append("form-control");
+            
         if (field.Input_IsSmall.HasValue && field.Input_IsSmall.Value)
             sb.Append(" form-control-sm");
         if (field.Input_IsLarge.HasValue && field.Input_IsLarge.Value)
             sb.Append(" form-control-lg");
+        
         if (!string.IsNullOrEmpty(field.Input_ValidationMessage))
             sb.Append(" invalid");
-        appendMargin(sb, field);
-        appendPadding(sb, field);
+        appendCommonClass(sb, field);
         return sb.ToString();
     }
 
@@ -95,8 +101,7 @@ internal static class ControlUtils
             sb.Append(" alert-");
             sb.Append(field.Theme.Value.ToString().ToLower());
         }
-        appendMargin(sb, field);
-        appendPadding(sb, field);
+        appendCommonClass(sb, field);
         return sb.ToString();
     }
 
@@ -124,8 +129,7 @@ internal static class ControlUtils
                 sb.Append(" table-borderless");
         if (field.ContainerTable_Hoverable.HasValue && field.ContainerTable_Hoverable.Value)
             sb.Append(" table-hover");
-        appendMargin(sb, field);
-        appendPadding(sb, field);
+        appendCommonClass(sb, field);
         return sb.ToString();
     }
 
@@ -139,8 +143,7 @@ internal static class ControlUtils
             sb.Append("thead-");
             sb.Append(field.Theme.Value.ToString().ToLower());
         }
-        appendMargin(sb, field);
-        appendPadding(sb, field);
+        appendCommonClass(sb, field);
         return sb.ToString();
     }
 }

@@ -1,0 +1,36 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Quick.Blazor.Bootstrap.QuickFields\n"
+"POT-Creation-Date: 2025-02-27 10:45:27+0800\n"
+"PO-Revision-Date: 2025-02-27 10:45:27+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: GetText.NET Extractor\n"
+
+#: ../../Control_Pager.razor.cs:13
+msgid "Last"
+msgstr ""
+
+#: ../../Control_Pager.razor.cs:11
+msgid "Prev"
+msgstr ""
+
+#: ../../Control_Pager.razor.cs:14
+msgid "Records:"
+msgstr ""
+
+#: ../../Control_Pager.razor.cs:10
+msgid "First"
+msgstr ""
+
+#: ../../Control_Pager.razor.cs:12
+msgid "Next"
+msgstr ""
+
+#: ../../Control_Pager.razor.cs:15
+msgid "Pages:"
+msgstr ""
+

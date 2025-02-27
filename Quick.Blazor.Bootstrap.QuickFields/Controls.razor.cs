@@ -34,9 +34,9 @@ public partial class Controls : ComponentBase
                     if (field.PostOnChanged.HasValue && field.PostOnChanged.Value)
                     {
                         var canCancel = field.MessageBox_CanCancel.HasValue && field.MessageBox_CanCancel.Value;
-                        okAction = () => field.Value = "OK";
+                        okAction = () => field.Value = FieldForGet.MESSAGEBOX_VALUE_OK;
                         if (canCancel)
-                            cancelAction = () => field.Value = "CANCEL";
+                            cancelAction = () => field.Value = FieldForGet.MESSAGEBOX_VALUE_CANCEL;
                     }
                     modalAlert.Show(field.Name, field.Description, okAction, cancelAction, usePreTag);
                     break;
