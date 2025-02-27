@@ -12,7 +12,9 @@
                     <ChildContent>
                         @foreach (var child in field.Children)
                         {
-                            <Control Field="child"></Control>
+                            <div class="@ControlUtils.GetCommonClass(child)">
+                                <Control Field="child"></Control>
+                            </div>
                         }
                     </ChildContent>
                 </TabPane>

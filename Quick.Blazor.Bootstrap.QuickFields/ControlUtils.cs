@@ -30,9 +30,12 @@ internal static class ControlUtils
             sb.Append(" pb-" + field.PaddingBottom.Value);
 
         if (field.ColumnWidth.HasValue)
-            sb.Append(" col-" + field.ColumnWidth.Value);
-        else if (field.Parent != null && field.Parent.Type == FieldType.ContainerRow)
-            sb.Append(" col");
+        {
+            if (field.ColumnWidth.Value <= 0)
+                sb.Append(" col");
+            else
+                sb.Append(" col-" + field.ColumnWidth.Value);
+        }
     }
 
     public static string GetCommonClass(FieldForGet field, string baseClass = null)
@@ -74,16 +77,16 @@ internal static class ControlUtils
         if (!string.IsNullOrEmpty(field.Html_Class))
             return field.Html_Class;
         var sb = new StringBuilder();
-        if(field.Input_IsPlainText.HasValue && field.Input_IsPlainText.Value)
+        if (field.Input_IsPlainText.HasValue && field.Input_IsPlainText.Value)
             sb.Append("form-control-plaintext");
         else
             sb.Append("form-control");
-            
+
         if (field.Input_IsSmall.HasValue && field.Input_IsSmall.Value)
             sb.Append(" form-control-sm");
         if (field.Input_IsLarge.HasValue && field.Input_IsLarge.Value)
             sb.Append(" form-control-lg");
-        
+
         if (!string.IsNullOrEmpty(field.Input_ValidationMessage))
             sb.Append(" invalid");
         appendCommonClass(sb, field);

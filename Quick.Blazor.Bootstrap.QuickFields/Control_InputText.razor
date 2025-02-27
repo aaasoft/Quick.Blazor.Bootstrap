@@ -51,10 +51,6 @@
     {
         <small class="form-text text-muted">@Field.Description</small>
     }
-    @if (!string.IsNullOrEmpty(Field.Input_HelpText))
-    {
-        <small class="form-text text-muted">@Field.Input_HelpText</small>
-    }
     @if (!string.IsNullOrEmpty(Field.Input_ValidationMessage))
     {
         <div class="validation-message">@Field.Input_ValidationMessage</div>
