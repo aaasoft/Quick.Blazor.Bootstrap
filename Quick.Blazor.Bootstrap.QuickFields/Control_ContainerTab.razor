@@ -2,7 +2,7 @@
 @using Quick.Blazor.Bootstrap
 
 <div class="@ControlUtils.GetCommonClass(Field)" style="@Field.Html_Style">
-    <Tabs TabContentExtraClass="mb-2">
+    <Tabs NavTabsExtraClass="mb-2">
         @if (Field.Children != null)
         {
             @foreach (var field in Field.Children)
