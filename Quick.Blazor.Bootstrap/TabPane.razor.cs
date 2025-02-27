@@ -51,7 +51,13 @@ namespace Quick.Blazor.Bootstrap
             if (IsEmpty)
             {
                 Parent?.AddTabPane(this);
-            }            
+            }
+        }
+
+        protected override void OnParametersSet()
+        {
+            if (string.IsNullOrEmpty(Key))
+                Key = $"tabPanel_autokey_{GetHashCode()}";
         }
     }
 }

@@ -2,7 +2,7 @@
 @using Quick.Blazor.Bootstrap
 
 <div class="@ControlUtils.GetCommonClass(Field)" style="@Field.Html_Style">
-    <Tabs>
+    <Tabs TabContentExtraClass="mb-2">
         @if (Field.Children != null)
         {
             @foreach (var field in Field.Children)
@@ -10,12 +10,12 @@
                 <TabPane Key="@field.Id">
                     <Tab>@field.Name</Tab>
                     <ChildContent>
-                        @foreach (var child in field.Children)
-                        {
-                            <div class="@ControlUtils.GetCommonClass(child)">
+                        <div class="@ControlUtils.GetCommonClass(field)">
+                            @foreach (var child in field.Children)
+                            {
                                 <Control Field="child"></Control>
-                            </div>
-                        }
+                            }
+                        </div>
                     </ChildContent>
                 </TabPane>
             }
