@@ -1,36 +1,74 @@
 ﻿@using Quick.Fields
 
 <div class="form-group">
-    <label>@Field.Name</label>
-    @if (Field.Input_ReadOnly.HasValue && Field.Input_ReadOnly.Value)
+    @if (Field.Input_ShowNameLabel == null || Field.Input_ShowNameLabel.Value)
     {
-        <select class="@ControlUtils.GetInputClass(Field)" @bind="@Field.Value" disabled>
-            @if (string.IsNullOrEmpty(Field.Value) && !Field.InputSelect_Options.ContainsKey(""))
-            {
-                <option value=""></option>
-            }
-            @foreach (var t in Field.InputSelect_Options)
-            {
-                <option value="@t.Key">@t.Value</option>
-            }
-        </select>
+        <label for="@Field.Id">@Field.Name</label>
     }
-    else
-    {
-        <select class="@ControlUtils.GetInputClass(Field)" @bind="@Field.Value">
-            @if (string.IsNullOrEmpty(Field.Value) && !Field.InputSelect_Options.ContainsKey(""))
-            {
-                <option value=""></option>
-            }
-            @if (Field.InputSelect_Options != null)
-            {
+    <div
+        class="@((Field.Input_PrependText != null || Field.Input_PrependChildren != null || Field.Input_AppendText != null || Field.Input_AppendChildren != null) ? "input-group" : null)">
+        @if (Field.Input_PrependText != null || Field.Input_PrependChildren != null)
+        {
+            <div class="input-group-prepend">
+                @if (Field.Input_PrependText != null)
+                {
+                    <div class="input-group-text">@Field.Input_PrependText</div>
+                }
+                @if (Field.Input_PrependChildren != null)
+                {
+                    @foreach (var field in Field.Input_PrependChildren)
+                    {
+                        <Control Field="field" />
+                    }
+                }
+            </div>
+        }
+        @if (Field.Input_ReadOnly.HasValue && Field.Input_ReadOnly.Value)
+        {
+            <select class="@ControlUtils.GetInputClass(Field)" @bind="@Field.Value" disabled>
+                @if (string.IsNullOrEmpty(Field.Value) && !Field.InputSelect_Options.ContainsKey(""))
+                {
+                    <option value=""></option>
+                }
                 @foreach (var t in Field.InputSelect_Options)
                 {
                     <option value="@t.Key">@t.Value</option>
                 }
-            }
-        </select>
-    }
+            </select>
+        }
+        else
+        {
+            <select class="@ControlUtils.GetInputClass(Field)" @bind="@Field.Value">
+                @if (string.IsNullOrEmpty(Field.Value) && !Field.InputSelect_Options.ContainsKey(""))
+                {
+                    <option value=""></option>
+                }
+                @if (Field.InputSelect_Options != null)
+                {
+                    @foreach (var t in Field.InputSelect_Options)
+                    {
+                        <option value="@t.Key">@t.Value</option>
+                    }
+                }
+            </select>
+        }
+        @if (Field.Input_AppendText != null || Field.Input_AppendChildren != null)
+        {
+            <div class="input-group-append">
+                @if (Field.Input_AppendText != null)
+                {
+                    <div class="input-group-text">@Field.Input_AppendText</div>
+                }
+                @if (Field.Input_AppendChildren != null)
+                {
+                    @foreach (var field in Field.Input_AppendChildren)
+                    {
+                        <Control Field="field" />
+                    }
+                }
+            </div>
+        }
+    </div>
     @if (!string.IsNullOrEmpty(Field.Description))
     {
         <small class="form-text text-muted">@Field.Description</small>

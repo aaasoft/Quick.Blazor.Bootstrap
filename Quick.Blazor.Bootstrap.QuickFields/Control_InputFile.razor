@@ -3,8 +3,27 @@
 @using System.Text
 
 <div class="form-group">
-    <label>@Field.Name</label>
+    @if (Field.Input_ShowNameLabel == null || Field.Input_ShowNameLabel.Value)
+    {
+        <label for="@Field.Id">@Field.Name</label>
+    }
     <div class="input-group">
+        @if (Field.Input_PrependText != null || Field.Input_PrependChildren != null)
+        {
+            <div class="input-group-prepend">
+                @if (Field.Input_PrependText != null)
+                {
+                    <div class="input-group-text">@Field.Input_PrependText</div>
+                }
+                @if (Field.Input_PrependChildren != null)
+                {
+                    @foreach (var field in Field.Input_PrependChildren)
+                    {
+                        <Control Field="field" />
+                    }
+                }
+            </div>
+        }
         @if (Field.Input_ReadOnly.HasValue && Field.Input_ReadOnly.Value)
         {
             <input type="text" class="@ControlUtils.GetInputClass(Field)" @bind="@Field.Value" readonly>
@@ -14,6 +33,22 @@
             <input type="text" class="@ControlUtils.GetInputClass(Field)" @bind="@Field.Value">
             <div class="input-group-append">
                 <button type="button" class="@ControlUtils.GetButtonClass(Field)" @onclick="selectFile">..</button>
+            </div>
+        }
+        @if (Field.Input_AppendText != null || Field.Input_AppendChildren != null)
+        {
+            <div class="input-group-append">
+                @if (Field.Input_AppendText != null)
+                {
+                    <div class="input-group-text">@Field.Input_AppendText</div>
+                }
+                @if (Field.Input_AppendChildren != null)
+                {
+                    @foreach (var field in Field.Input_AppendChildren)
+                    {
+                        <Control Field="field" />
+                    }
+                }
             </div>
         }
     </div>
