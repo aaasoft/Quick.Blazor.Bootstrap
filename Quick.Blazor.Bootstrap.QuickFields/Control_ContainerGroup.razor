@@ -1,21 +1,23 @@
 ﻿@using Quick.Fields
 
-<div class="@ControlUtils.GetCommonClass(Field, "card")">
-    @if (!string.IsNullOrEmpty(Field.Name))
-    {
-        <div class="card-header">
-            @Field.Name
-        </div>
-    }
-    @if (Field.Children != null)
-    {
-        <div class="card-body">
-            @foreach (var child in Field.Children)
-            {
-                <Control Field="child"></Control>
-            }
-        </div>
-    }
+<div class="@ControlUtils.GetCommonClass(Field)">
+    <div class="card">
+        @if (!string.IsNullOrEmpty(Field.Name))
+        {
+            <div class="card-header">
+                @Field.Name
+            </div>
+        }
+        @if (Field.Children != null)
+        {
+            <div class="card-body">
+                @foreach (var child in Field.Children)
+                {
+                    <Control Field="child"></Control>
+                }
+            </div>
+        }
+    </div>
 </div>
 
 @code
