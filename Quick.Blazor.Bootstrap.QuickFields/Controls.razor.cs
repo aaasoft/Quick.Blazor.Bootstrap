@@ -79,7 +79,9 @@ public partial class Controls : ComponentBase
         foreach (var field in fields)
         {
             action.Invoke(field);
+            travelFields(field.Input_PrependChildren, action);
             travelFields(field.Children, action);
+            travelFields(field.Input_AppendChildren, action);
         }
     }
 }
