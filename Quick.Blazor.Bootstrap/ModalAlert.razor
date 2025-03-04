@@ -1,20 +1,16 @@
 ﻿@inherits ComponentBase_WithGettextSupport;
 
-<Modal Visiable="Visiable" DialogBackdropVisiable DialogCentered
-        DialogSizeSmall="@DialogSizeSmall"
-        DialogSizeLarge="@DialogSizeLarge"
-        DialogSizeExtraLarge="@DialogSizeExtraLarge"
-        DialogScrollable="@DialogScrollable"
-        ModalHeaderCls="@ModalHeaderCls"
-        ModalBodyCls="@ModalBodyCls"
-        ModalFooterCls="@ModalFooterCls">
-     <TitleContent>@Title</TitleContent>
+<Modal Visiable="Visiable" DialogBackdropVisiable DialogCentered DialogSizeSmall="@DialogSizeSmall"
+    DialogSizeLarge="@DialogSizeLarge" DialogSizeExtraLarge="@DialogSizeExtraLarge" DialogScrollable="@DialogScrollable"
+    ModalHeaderCls="@ModalHeaderCls" ModalBodyCls="@ModalBodyCls" ModalFooterCls="@ModalFooterCls">
+    <TitleContent>@Title</TitleContent>
     <HeaderContent>
         <div>
             <button type="button" class="close ml-3" data-dismiss="modal" aria-label="Close" @onclick="Close">
                 <span aria-hidden="true">×</span>
             </button>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Max" @onclick="SwitchDialogSizeExtraLarge">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Max"
+                @onclick="SwitchDialogSizeExtraLarge">
                 <span aria-hidden="true">◻</span>
             </button>
         </div>
@@ -34,7 +30,7 @@
     </BodyContent>
     <FooterContent>
         <button type="button" class="btn btn-primary" @onclick="Ok">@TextOk</button>
-        @if (OkCallback != null)
+        @if (CancelCallback != null)
         {
             <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="Cancel">@TextCancel</button>
         }
