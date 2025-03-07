@@ -72,6 +72,14 @@ internal static class ControlUtils
         return sb.ToString();
     }
 
+    public static string GetFormGroupClass(FieldForGet field)
+    {
+        var sb = new StringBuilder();
+        sb.Append("form-group");
+        appendCommonClass(sb, field);
+        return sb.ToString();
+    }
+
     public static string GetInputClass(FieldForGet field)
     {
         if (!string.IsNullOrEmpty(field.Html_Class))
@@ -89,7 +97,6 @@ internal static class ControlUtils
 
         if (!string.IsNullOrEmpty(field.Input_ValidationMessage))
             sb.Append(" invalid");
-        appendCommonClass(sb, field);
         return sb.ToString();
     }
 
