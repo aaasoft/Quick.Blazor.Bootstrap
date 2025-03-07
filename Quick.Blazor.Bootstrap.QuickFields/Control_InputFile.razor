@@ -3,7 +3,7 @@
 @using System.Text
 
 <div class="form-group">
-    @if (Field.Input_ShowNameLabel == null || Field.Input_ShowNameLabel.Value)
+    @if (!string.IsNullOrEmpty(Field.Name))
     {
         <label for="@Field.Id">@Field.Name</label>
     }
