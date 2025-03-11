@@ -37,7 +37,13 @@ public partial class Control_Pager : ComponentBase_WithGettextSupport
 
     private int Offset
     {
-        get { return int.Parse(Field.Value); }
+        get
+        {
+            if (!string.IsNullOrEmpty(Field.Value)
+                && int.TryParse(Field.Value, out var ret))
+                return ret;
+            return 0;
+        }
         set { Field.Value = value.ToString(); }
     }
 }
