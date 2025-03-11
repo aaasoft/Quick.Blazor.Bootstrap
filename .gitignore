@@ -350,3 +350,4 @@ MigrationBackup/
 .ionide/
 
 *.litedb
+.DS_Store
