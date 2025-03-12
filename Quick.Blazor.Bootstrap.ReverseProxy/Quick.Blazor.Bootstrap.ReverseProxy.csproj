@@ -2,6 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>true</ImplicitUsings>
 		<RepositoryUrl>https://github.com/aaasoft/Quick.Blazor.Bootstrap</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/aaasoft/Quick.Blazor.Bootstrap</PackageProjectUrl>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
