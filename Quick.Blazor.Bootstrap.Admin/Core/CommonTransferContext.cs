@@ -1,12 +1,8 @@
-﻿using System;
-using System.IO;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Text;
 using Quick.Blazor.Bootstrap.Admin.Utils;
 using Quick.Localize;
 
-namespace Quick.Blazor.Bootstrap.Admin;
+namespace Quick.Blazor.Bootstrap.Admin.Core;
 
 public class CommonTransferContext : IDisposable
 {
@@ -70,7 +66,7 @@ public class CommonTransferContext : IDisposable
             {
                 lastNotifyTime = DateTime.Now;
                 StringBuilder sb = new StringBuilder();
-                var speed = Convert.ToDouble(readCount / stopwatch.ElapsedMilliseconds);
+                var speed = readCount / stopwatch.Elapsed.TotalMilliseconds;
                 sb.Append(TextSpeed + ": " + storageUSC.GetString(Convert.ToDecimal(speed * 1000), 1, true) + "B/s");
                 var transferProgressInfo = new TransferProgressInfo();
                 if (totalCount > 0)

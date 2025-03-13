@@ -3,16 +3,12 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
+using Quick.Blazor.Bootstrap.Admin.Core;
 using Quick.Blazor.Bootstrap.Admin.Utils;
 using Quick.Blazor.Bootstrap.Utils;
 using Quick.Localize;
-using System;
-using System.Collections.Generic;
-using System.IO;
 using System.IO.Compression;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Quick.Blazor.Bootstrap.Admin
 {
