@@ -58,6 +58,6 @@ msgid "Last Page"
 msgstr ""
 
 #: ../../Tabs.razor.cs:43
-msgid "An TabPane with the same key already exists"
+msgid "An TabPane with the same key[{0}] already exists"
 msgstr ""
 

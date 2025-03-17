@@ -39,7 +39,7 @@ namespace Quick.Blazor.Bootstrap
 
             if (_panes.Select(p => p.Key).Contains(tabPane.Key))
             {
-                throw new ArgumentException(Locale.GetString("An TabPane with the same key already exists"));
+                throw new ArgumentException(Locale.GetString("An TabPane with the same key[{0}] already exists",tabPane.Key));
             }
             _panes.Add(tabPane);
         }
