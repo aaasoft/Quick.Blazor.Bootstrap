@@ -6,7 +6,7 @@
 		<RepositoryUrl>https://github.com/aaasoft/Quick.Blazor.Bootstrap</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/aaasoft/Quick.Blazor.Bootstrap</PackageProjectUrl>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-		<Version>4.3.8</Version>
+		<Version>4.3.9</Version>
 		<Description>Quick.Blazor.Bootstrap.ReverseProxy is a component library for ReverseProxy built on top of Blazor and CSS frameworks Bootstrap.</Description>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
