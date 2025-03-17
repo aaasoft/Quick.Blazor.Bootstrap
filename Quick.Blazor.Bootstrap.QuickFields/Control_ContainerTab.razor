@@ -7,7 +7,7 @@
         {
             @foreach (var field in Field.Children)
             {
-                <TabPane Key="@(field.Id ?? "ContainerTab_AutoKey_" + this.GetHashCode())">
+                <TabPane Key="@(field.Id ?? "ContainerTab_AutoKey_" + field.GetHashCode() + "_" + field.Name)">
                     <Tab>@field.Name</Tab>
                     <ChildContent>
                         <div class="@ControlUtils.GetCommonClass(field)">
