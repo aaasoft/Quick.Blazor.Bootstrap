@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Tewr.Blazor.FileReader;
 
 namespace TestWebApplication
 {
@@ -27,6 +28,7 @@ namespace TestWebApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddBlazorDownloadFile();
+            services.AddFileReaderService();
             services.AddRazorPages();
             services.AddServerSideBlazor();
             ReverseProxyManager.Instance.Load(services.AddReverseProxy());

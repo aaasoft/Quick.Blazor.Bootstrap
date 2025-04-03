@@ -9,6 +9,7 @@ using Quick.Blazor.Bootstrap.Utils;
 using Quick.Localize;
 using System.IO.Compression;
 using System.Text;
+using Tewr.Blazor.FileReader;
 
 namespace Quick.Blazor.Bootstrap.Admin
 {
@@ -24,6 +25,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         private ModalAlert modalAlert;
         private ModalPrompt modalPrompt;
         private ModalWindow modalWindow;
+        private ElementReference inputFile;
 
         private string CurrentPath;
         private string Search;
@@ -729,37 +731,51 @@ namespace Quick.Blazor.Bootstrap.Admin
 
         private System.Threading.CancellationTokenSource uploadCts;
 
-        private async Task onInputFileChanged(InputFileChangeEventArgs e)
+        private class UploadFileInfo
         {
-            IBrowserFile firstFile = null;
+            public IFileReference FileReference{get;set;}
+            public IFileInfo FileInfo { get; set; }
+        }
+
+        private async Task onInputFileChanged()
+        {
+            UploadFileInfo firstFile = null;
             try
             {
                 //1MB缓存
                 uploadCts = new CancellationTokenSource();
                 var cancellationToken = uploadCts.Token;
-                var files = e.GetMultipleFiles(int.MaxValue);
-                var totalFileSize = files.Sum(t => t.Size);                
-
+                var fileList = new List<UploadFileInfo>();
+                foreach (var fileReference in await fileReaderService.CreateReference(inputFile).EnumerateFilesAsync())
+                {
+                    var fileInfo = await fileReference.ReadFileInfoAsync();
+                    fileList.Add(new UploadFileInfo()
+                    {
+                        FileReference = fileReference,
+                        FileInfo = fileInfo
+                    });
+                }
+                var totalFileSize = fileList.Sum(t => t.FileInfo.Size);
                 using (var commonTransferContext = new CommonTransferContext(progressInfo =>
                 {
                     modalLoading.UpdateProgress(progressInfo.Percent, progressInfo.Message);
                 }, totalFileSize))
                 {
-                    foreach (var file in files)
+                    foreach (var file in fileList)
                     {
                         if (firstFile == null)
                             firstFile = file;
 
                         modalLoading?.Show(TextUpload, TextUploadReadFileInfo, false, uploadCts.Cancel);
-                        var tmpFile = Path.Combine(CurrentPath, file.Name);
+                        var tmpFile = Path.Combine(CurrentPath, file.FileInfo.Name);
                         if (File.Exists(tmpFile))
-                            throw new IOException(string.Format(TextUploadFileExist, file.Name));
-                        var fileSize = file.Size;
-                        var fileInfoStr = $"{file.Name} ({storageUSC.GetString(fileSize, 0, true)}B)";
+                            throw new IOException(string.Format(TextUploadFileExist, file.FileInfo.Name));
+                        var fileSize = file.FileInfo.Size;
+                        var fileInfoStr = $"{file.FileInfo.Name} ({storageUSC.GetString(fileSize, 0, true)}B)";
                         modalLoading?.Show(TextUpload, string.Format(TextUploadFileUploading, fileInfoStr), false, uploadCts.Cancel);
                         try
                         {
-                            using (Stream stream = file.OpenReadStream(fileSize, cancellationToken))
+                            using (Stream stream = await file.FileReference.OpenReadAsync())
                             using (var fileStream = File.OpenWrite(tmpFile))
                                 await commonTransferContext.TransferAsync(stream, fileStream, cancellationToken,fileSize);
                             
@@ -788,7 +804,7 @@ namespace Quick.Blazor.Bootstrap.Admin
             {
                 modalLoading?.Close();
                 refresh();
-                SelectedItem = Files?.FirstOrDefault(t => t.Name == firstFile?.Name);
+                SelectedItem = Files?.FirstOrDefault(t => t.Name == firstFile?.FileInfo?.Name);
             }
         }
 

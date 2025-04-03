@@ -1,5 +1,7 @@
 ﻿@using System.IO
 @using Microsoft.JSInterop
+@using Tewr.Blazor.FileReader
+@inject IFileReaderService fileReaderService;
 @inherits ComponentBase_WithGettextSupport;
 
 <table class="table @(ListViewMode?"table-hover":"") table-sm m-0">
@@ -254,8 +256,8 @@ else
 </tbody>
 </table>
 
-<InputFile id="Quick_Blazor_Bootstrap_Admin_FileManageControl_InputFile" accept="@FileFilterForInputFile" style="width: 0px; height: 0px; visibility: collapse;"
-    OnChange="@onInputFileChanged" multiple />
+<input @ref="inputFile" id="Quick_Blazor_Bootstrap_Admin_FileManageControl_InputFile" type="file" accept="@FileFilter" style="width: 0px; height: 0px; visibility: collapse;" @onchange="onInputFileChanged">
+
 <ModalLoading @ref="modalLoading" />
 <ModalAlert @ref="modalAlert" />
 <ModalPrompt @ref="modalPrompt" />

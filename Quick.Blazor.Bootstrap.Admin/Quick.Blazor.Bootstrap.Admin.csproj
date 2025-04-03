@@ -21,6 +21,7 @@
 		<PackageReference Include="BlazorDownloadFile" Version="2.4.0.2" />
 		<PackageReference Include="Quick.Shell" Version="1.0.4" />
 		<PackageReference Include="SharpCompress" Version="0.39.0" />
+		<PackageReference Include="Tewr.Blazor.FileReader" Version="3.3.1.21360" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Quick.Blazor.Bootstrap\Quick.Blazor.Bootstrap.csproj" />
