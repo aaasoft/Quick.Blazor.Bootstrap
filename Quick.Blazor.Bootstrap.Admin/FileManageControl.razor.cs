@@ -1,6 +1,5 @@
 ﻿using BlazorDownloadFile;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using Quick.Blazor.Bootstrap.Admin.Core;
@@ -20,6 +19,8 @@ namespace Quick.Blazor.Bootstrap.Admin
         private IJSRuntime JSRuntime { get; set; }
         [Inject]
         private IBlazorDownloadFileService BlazorDownloadFileService { get; set; }
+        [Inject]
+        private IFileReaderService fileReaderService { get; set; }
 
         private ModalLoading modalLoading;
         private ModalAlert modalAlert;
@@ -740,13 +741,14 @@ namespace Quick.Blazor.Bootstrap.Admin
         private async Task onInputFileChanged()
         {
             UploadFileInfo firstFile = null;
+            var fileReaderRef = fileReaderService.CreateReference(inputFile);
             try
-            {
+            {                
                 //1MB缓存
                 uploadCts = new CancellationTokenSource();
                 var cancellationToken = uploadCts.Token;
                 var fileList = new List<UploadFileInfo>();
-                foreach (var fileReference in await fileReaderService.CreateReference(inputFile).EnumerateFilesAsync())
+                foreach (var fileReference in await fileReaderRef.EnumerateFilesAsync())
                 {
                     var fileInfo = await fileReference.ReadFileInfoAsync();
                     fileList.Add(new UploadFileInfo()
@@ -802,6 +804,7 @@ namespace Quick.Blazor.Bootstrap.Admin
             }
             finally
             {
+                await fileReaderRef.ClearValue();
                 modalLoading?.Close();
                 refresh();
                 SelectedItem = Files?.FirstOrDefault(t => t.Name == firstFile?.FileInfo?.Name);
