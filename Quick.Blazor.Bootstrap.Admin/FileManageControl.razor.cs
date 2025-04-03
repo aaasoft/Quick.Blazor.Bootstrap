@@ -735,7 +735,7 @@ namespace Quick.Blazor.Bootstrap.Admin
             try
             {
                 //1MB缓存
-                uploadCts = new System.Threading.CancellationTokenSource();
+                uploadCts = new CancellationTokenSource();
                 var cancellationToken = uploadCts.Token;
                 var files = e.GetMultipleFiles(int.MaxValue);
                 var totalFileSize = files.Sum(t => t.Size);                
@@ -772,8 +772,8 @@ namespace Quick.Blazor.Bootstrap.Admin
                             File.Delete(tmpFile);
                             throw;
                         }
-                        modalAlert?.Show(TextUpload, TextSuccess);
                     }
+                    modalAlert?.Show(TextUpload, TextSuccess);
                 }
             }
             catch (OperationCanceledException)
