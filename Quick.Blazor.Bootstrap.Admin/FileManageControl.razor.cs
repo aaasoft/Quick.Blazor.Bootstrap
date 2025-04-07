@@ -730,69 +730,35 @@ namespace Quick.Blazor.Bootstrap.Admin
             }
         }
 
-        private System.Threading.CancellationTokenSource uploadCts;
-
-        private class UploadFileInfo
-        {
-            public IFileReference FileReference{get;set;}
-            public IFileInfo FileInfo { get; set; }
-        }
+        private CancellationTokenSource uploadCts;
 
         private async Task onInputFileChanged()
         {
-            UploadFileInfo firstFile = null;
             var fileReaderRef = fileReaderService.CreateReference(inputFile);
+            FileUploadHelper.UploadFileInfo currentFileInfo = default;
             try
-            {                
-                //1MB缓存
+            {
                 uploadCts = new CancellationTokenSource();
                 var cancellationToken = uploadCts.Token;
-                var fileList = new List<UploadFileInfo>();
-                foreach (var fileReference in await fileReaderRef.EnumerateFilesAsync())
-                {
-                    var fileInfo = await fileReference.ReadFileInfoAsync();
-                    fileList.Add(new UploadFileInfo()
-                    {
-                        FileReference = fileReference,
-                        FileInfo = fileInfo
-                    });
-                }
-                var totalFileSize = fileList.Sum(t => t.FileInfo.Size);
-                using (var commonTransferContext = new CommonTransferContext(progressInfo =>
-                {
-                    modalLoading.UpdateProgress(progressInfo.Percent, progressInfo.Message);
-                }, totalFileSize))
-                {
-                    foreach (var file in fileList)
-                    {
-                        if (firstFile == null)
-                            firstFile = file;
 
-                        modalLoading?.Show(TextUpload, TextUploadReadFileInfo, false, uploadCts.Cancel);
-                        var tmpFile = Path.Combine(CurrentPath, file.FileInfo.Name);
-                        if (File.Exists(tmpFile))
-                            throw new IOException(string.Format(TextUploadFileExist, file.FileInfo.Name));
-                        var fileSize = file.FileInfo.Size;
-                        var fileInfoStr = $"{file.FileInfo.Name} ({storageUSC.GetString(fileSize, 0, true)}B)";
-                        modalLoading?.Show(TextUpload, string.Format(TextUploadFileUploading, fileInfoStr), false, uploadCts.Cancel);
-                        try
-                        {
-                            using (Stream stream = await file.FileReference.OpenReadAsync())
-                            using (var fileStream = File.OpenWrite(tmpFile))
-                                await commonTransferContext.TransferAsync(stream, fileStream, cancellationToken,fileSize);
-                            
-                            if (cancellationToken.IsCancellationRequested)
-                                throw new OperationCanceledException();
-                        }
-                        catch (OperationCanceledException)
-                        {
-                            modalAlert?.Show(TextUpload, TextCanceled);
-                            File.Delete(tmpFile);
-                            throw;
-                        }
-                    }
-                    modalAlert?.Show(TextUpload, TextSuccess);
-                }
+                modalLoading?.Show(TextUpload, TextUploadReadFileInfo, false, uploadCts.Cancel);
+                var fileReferences = (await fileReaderRef.EnumerateFilesAsync()).ToArray();
+                var currentFileIndex = 0;
+                await FileUploadHelper.UploadFilesAsync(
+                    fileReferences,
+                    fileInfo =>
+                    {
+                        currentFileInfo = fileInfo;
+                        currentFileIndex++;
+                        var message = $"{fileInfo.Name} ({fileInfo.SizeString})";
+                        if (fileReferences.Length > 1)
+                            message = $"{currentFileIndex}/{fileReferences.Length} {message}";
+                        modalLoading?.Show(TextUpload, string.Format(TextUploadFileUploading, message), false, uploadCts.Cancel);
+                        return Path.Combine(CurrentPath, fileInfo.Name);
+                    },
+                    progressInfo => modalLoading.UpdateProgress(progressInfo.Percent, progressInfo.Message),
+                    uploadCts.Token);
+                modalAlert?.Show(TextUpload, TextSuccess);
             }
             catch (OperationCanceledException)
             {
@@ -807,7 +773,7 @@ namespace Quick.Blazor.Bootstrap.Admin
                 await fileReaderRef.ClearValue();
                 modalLoading?.Close();
                 refresh();
-                SelectedItem = Files?.FirstOrDefault(t => t.Name == firstFile?.FileInfo?.Name);
+                SelectedItem = Files?.FirstOrDefault(t => t.Name == currentFileInfo.Name);
             }
         }
 

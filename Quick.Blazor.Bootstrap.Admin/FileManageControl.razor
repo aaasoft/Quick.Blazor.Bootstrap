@@ -256,7 +256,7 @@ else
 </tbody>
 </table>
 
-<input @ref="inputFile" id="Quick_Blazor_Bootstrap_Admin_FileManageControl_InputFile" type="file" accept="@FileFilter" style="width: 0px; height: 0px; visibility: collapse;" @onchange="onInputFileChanged">
+<input @ref="inputFile" id="Quick_Blazor_Bootstrap_Admin_FileManageControl_InputFile" type="file" accept="@FileFilter" style="width: 0px; height: 0px; visibility: collapse;" multiple @onchange="onInputFileChanged">
 
 <ModalLoading @ref="modalLoading" />
 <ModalAlert @ref="modalAlert" />

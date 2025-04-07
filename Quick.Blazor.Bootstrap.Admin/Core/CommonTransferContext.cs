@@ -27,10 +27,16 @@ public class CommonTransferContext : IDisposable
         stopwatch.Start();
     }
 
-    public class TransferProgressInfo
+    public struct TransferProgressInfo
     {
         public int Percent { get; set; }
         public string Message { get; set; }
+
+        public TransferProgressInfo(int percent, string message)
+        {
+            Percent = percent;
+            Message = message;
+        }
     }
 
     public async Task TransferAsync(Stream srcStream, Func<ArraySegment<byte>, Task> desHandler, CancellationToken cancellationToken = default, long transferSize = 0)
