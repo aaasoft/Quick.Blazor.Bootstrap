@@ -17,7 +17,7 @@ public class CommonTransferContext : IDisposable
     private long readCount;
     private byte[] buffer;
     private Action<TransferProgressInfo> progressUpdateHandler;
-    public CommonTransferContext(Action<TransferProgressInfo> progressUpdateHandler, long totalCount, int bufferSize = 4 * 1024, int minNotifyInterval = 500)
+    public CommonTransferContext(Action<TransferProgressInfo> progressUpdateHandler, long totalCount, int bufferSize = 128 * 1024, int minNotifyInterval = 500)
     {
         this.progressUpdateHandler = progressUpdateHandler;
         this.totalCount = totalCount;
