@@ -43,65 +43,21 @@ namespace Quick.Blazor.Bootstrap.Admin
             set
             {
                 _SelectedItem = value;
+                if (value == null)
+                    SelectedPath = null;
+                else if (value is FileInfo)
+                    SelectedPath= ((FileInfo)value).FullName;
+                else if (value is DirectoryInfo)
+                    SelectedPath= ((DirectoryInfo)value).FullName;
+                else
+                    SelectedPath = null;
+
                 SelectedPathChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
         [Parameter]
-        public string SelectedPath
-        {
-            get
-            {
-                if (SelectedItem == null)
-                    return null;
-                if (SelectedItem is FileInfo)
-                    return ((FileInfo)SelectedItem).FullName;
-                if (SelectedItem is DirectoryInfo)
-                    return ((DirectoryInfo)SelectedItem).FullName;
-                return null;
-            }
-            set
-            {
-                if(string.IsNullOrEmpty(value))
-                    return;
-                    
-                if (File.Exists(value))
-                {
-                    if (Files == null)
-                    {
-                        SelectedItem = new FileInfo(value);
-                    }
-                    else
-                    {
-                        SelectedItem = Files.FirstOrDefault(t => t.FullName == value);
-                        if (SelectedItem == null)
-                        {
-                            var fileInfo = new FileInfo(value);
-                            Files = new[] { fileInfo }.Concat(Files).ToArray();
-                            SelectedItem = fileInfo;
-                        }
-                    }
-                }
-                if (Directory.Exists(value))
-                {
-                    if (Dirs == null)
-                    {
-                        SelectedItem = new DirectoryInfo(value);
-                    }
-                    else
-                    {
-                        SelectedItem = Dirs.FirstOrDefault(t => t.FullName == value);
-                        if (SelectedItem == null)
-                        {
-                            var dirInfo = new DirectoryInfo(value);
-                            Dirs = new[] { dirInfo }.Concat(Dirs).ToArray();
-                            SelectedItem = dirInfo;
-                        }
-                    }
-                }
-            }
-        }
-
+        public string SelectedPath { get; set; }
         [Parameter]
         public string Dir { get; set; }
         [Parameter]
@@ -639,8 +595,9 @@ namespace Quick.Blazor.Bootstrap.Admin
                     modalAlert?.Show(TextCompress, TextCanceled);
                     return;
                 }
-                Files = new[] { new FileInfo(zipFileName) }.Concat(Files).ToArray();
-                SelectedPath = zipFileName;
+                var fileInfo = new FileInfo(zipFileName);
+                Files = new[] { fileInfo }.Concat(Files).ToArray();
+                SelectedItem = fileInfo;
                 await InvokeAsync(StateHasChanged);
             }
             catch (TaskCanceledException)
