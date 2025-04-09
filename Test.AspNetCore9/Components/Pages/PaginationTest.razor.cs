@@ -1,11 +1,7 @@
 ﻿using Quick.Blazor.Bootstrap;
 using Quick.Localize;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace TestWebApplication.Pages
+namespace Test.AspNetCore9.Components.Pages
 {
     public partial class PaginationTest : ComponentBase_WithGettextSupport
     {

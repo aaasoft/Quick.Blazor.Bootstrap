@@ -1,11 +1,8 @@
-using System;
-using System.IO;
-using Microsoft.AspNetCore.Components;
 using Quick.Blazor.Bootstrap;
 using Quick.Blazor.Bootstrap.Admin;
 using Quick.Localize;
 
-namespace TestWebApplication.Pages;
+namespace Test.AspNetCore9.Components.Pages;
 
 public partial class FileSelect : ComponentBase_WithGettextSupport
 {

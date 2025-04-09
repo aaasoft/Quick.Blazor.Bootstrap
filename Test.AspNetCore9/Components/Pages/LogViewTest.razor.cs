@@ -1,8 +1,6 @@
-﻿using System;
-using System.Threading;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 
-namespace TestWebApplication.Pages
+namespace Test.AspNetCore9.Components.Pages
 {
     public partial class LogViewTest : ComponentBase, IDisposable
     {

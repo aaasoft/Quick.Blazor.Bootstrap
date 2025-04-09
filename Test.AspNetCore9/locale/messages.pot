@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: TestWebApplication\n"
+"Project-Id-Version: Test.AspNetCore9\n"
 "POT-Creation-Date: 2024-12-12 14:24:52+0800\n"
 "PO-Revision-Date: 2024-12-12 14:24:52+0800\n"
 "Last-Translator: \n"
