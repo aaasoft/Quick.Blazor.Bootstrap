@@ -9,7 +9,7 @@ Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
 var dbFile = "Config.litedb";
 #if DEBUG
-dbFile = Path.Combine(Path.GetDirectoryName(typeof(Program).Assembly.Location), dbFile);
+dbFile = Path.Combine(AppContext.BaseDirectory, dbFile);
 #endif
 ConfigDbContext.Init(dbFile, modelBuilder =>
 {
