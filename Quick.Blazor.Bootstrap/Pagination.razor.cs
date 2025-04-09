@@ -11,8 +11,8 @@ namespace Quick.Blazor.Bootstrap
         private string LastPageText => Locale.GetString("Last Page");
         private string PreviousPageText => Locale.GetString("Previous Page");
         private string NextPageText => Locale.GetString("Next Page");
-        private string PageText =>Locale.GetString("Page");
-        private string RecordCountText =>Locale.GetString("Record Count:");
+        private string PageText => Locale.GetString("Page");
+        private string RecordCountText => Locale.GetString("Record Count:");
         [Parameter]
         public bool DisplayRecordCount { get; set; } = true;
         [Parameter]
@@ -26,45 +26,28 @@ namespace Quick.Blazor.Bootstrap
         [Parameter]
         public EventCallback<int> PageSizeChanged { get; set; }
 
-        private int _Offset = 0;
-
         /// <summary>
         /// 偏移量
         /// </summary>
         [Parameter]
-        public int Offset
+        public int Offset { get; set; }
+
+        public void ChangeOffset(int value)
         {
-            get { return _Offset; }
-            set
-            {
-                if (_Offset == value)
-                    return;
-                _Offset = value;
-                OffsetChanged.InvokeAsync(value);
-                InvokeAsync(StateHasChanged);
-            }
+            if (Offset == value)
+                return;
+            Offset = value;
+            OffsetChanged.InvokeAsync(value);
         }
+
         [Parameter]
         public EventCallback<int> OffsetChanged { get; set; }
-
-        private int _RecordCount = 0;
 
         /// <summary>
         /// 记录数量
         /// </summary>
         [Parameter]
-        public int RecordCount
-        {
-            get { return _RecordCount; }
-            set
-            {
-                _RecordCount = value;
-                RecordCountChanged.InvokeAsync(value);
-                InvokeAsync(StateHasChanged);
-            }
-        }
-        [Parameter]
-        public EventCallback<int> RecordCountChanged { get; set; }
+        public int RecordCount { get; set; }
 
         [Parameter]
         public bool PageIndexEditable { get; set; } = true;

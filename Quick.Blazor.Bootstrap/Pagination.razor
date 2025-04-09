@@ -3,11 +3,12 @@
 @ChildContent
 <nav>
     <ul class="pagination">
-        <li class="page-item @(FirstPageEnable?"":"disabled")">
-            <a href="javascript:;" class="page-link" @onclick="@(e=> { Offset = 0;})">@FirstPageText</a>
+        <li class="page-item @(FirstPageEnable ? "" : "disabled")">
+            <a href="javascript:;" class="page-link" @onclick="@(e => { ChangeOffset(0); })">@FirstPageText</a>
         </li>
-        <li class="page-item @(FirstPageEnable?"":"disabled")">
-            <a href="javascript:;" class="page-link" @onclick="@(e=> { Offset -= PageSize;; })">@PreviousPageText</a>
+        <li class="page-item @(FirstPageEnable ? "" : "disabled")">
+            <a href="javascript:;" class="page-link"
+                @onclick="@(e => { ChangeOffset(Offset - PageSize); })">@PreviousPageText</a>
         </li>
         <li class="page-item">
             <div class="input-group">
@@ -49,11 +50,13 @@
                 </div>
             </li>
         }
-        <li class="page-item @(LastPageEnable?"":"disabled")">
-            <a href="javascript:;" class="page-link" @onclick="@(e=> { Offset += PageSize;})">@NextPageText</a>
+        <li class="page-item @(LastPageEnable ? "" : "disabled")">
+            <a href="javascript:;" class="page-link"
+                @onclick="@(e => { ChangeOffset(Offset + PageSize); })">@NextPageText</a>
         </li>
-        <li class="page-item @(LastPageEnable?"":"disabled")">
-            <a href="javascript:;" class="page-link" @onclick="@(e=> { Offset = (PageCount-1)*PageSize;})">@LastPageText</a>
+        <li class="page-item @(LastPageEnable ? "" : "disabled")">
+            <a href="javascript:;" class="page-link"
+                @onclick="@(e => { ChangeOffset((PageCount - 1) * PageSize); })">@LastPageText</a>
         </li>
     </ul>
 </nav>
