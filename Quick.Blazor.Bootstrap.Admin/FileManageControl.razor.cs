@@ -27,6 +27,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         private ModalPrompt modalPrompt;
         private ModalWindow modalWindow;
         private ElementReference inputFile;
+        private ElementReference inputFolder;
 
         private string CurrentPath;
         private string Search;
@@ -131,7 +132,8 @@ namespace Quick.Blazor.Bootstrap.Admin
         private static string TextUp => Locale.GetString("Up");
         private static string TextNewFolder => Locale.GetString("New Folder");
         private static string TextNewFolderPrompt => Locale.GetString("Please input new folder name");
-        private static string TextUpload => Locale.GetString("Upload");
+        private static string TextUpload => Locale.GetString("Upload File");
+        private static string TextUploadFolder => Locale.GetString("Upload Folder");        
         private static string TextUploadReadFileInfo => Locale.GetString("Reading upload file info...");
         private static string TextUploadFileExist => Locale.GetString("File [{0}] was exist.");
         private static string TextUploadFileUploading => Locale.GetString("Uploading file [{0}]...");
@@ -167,6 +169,8 @@ namespace Quick.Blazor.Bootstrap.Admin
         public string IconNewFolder { get; set; } = "fa fa-plus-square";
         [Parameter]
         public string IconUpload { get; set; } = "fa fa-upload";
+        [Parameter]
+        public string IconUploadFolder { get; set; } = "fa fa-cloud-upload";
         [Parameter]
         public string IconRefresh { get; set; } = "fa fa-refresh";
         [Parameter]
@@ -689,7 +693,7 @@ namespace Quick.Blazor.Bootstrap.Admin
 
         private CancellationTokenSource uploadCts;
 
-        private async Task onInputFileChanged()
+        private async Task onInputFileChanged(ElementReference inputFile)
         {
             var fileReaderRef = fileReaderService.CreateReference(inputFile);
             FileUploadHelper.UploadFileInfo currentFileInfo = default;

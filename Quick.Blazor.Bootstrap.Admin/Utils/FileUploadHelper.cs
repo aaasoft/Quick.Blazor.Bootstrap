@@ -34,7 +34,8 @@ public static class FileUploadHelper
             var fileInfo = await fileReference.ReadFileInfoAsync();
             using (var commonTransferContext = new CommonTransferContext(progressUpdated, fileInfo.Size))
             {
-                tmpFile = fileInfoHandler?.Invoke(new UploadFileInfo(fileInfo.Name, fileInfo.Size, storageUSC.GetString(fileInfo.Size, 0, true) + "B"));
+                var fileName = fileInfo.Name;
+                tmpFile = fileInfoHandler?.Invoke(new UploadFileInfo(fileName, fileInfo.Size, storageUSC.GetString(fileInfo.Size, 0, true) + "B"));
                 if (string.IsNullOrEmpty(tmpFile))
                     tmpFile = Path.GetTempFileName();
                 using (Stream stream = await fileReference.OpenReadAsync())
@@ -77,13 +78,23 @@ public static class FileUploadHelper
                 {
                     var fileReference = fileReferences[i];
                     var fileInfo = fileInfos[i];
-                    tmpFile = fileInfoHandler?.Invoke(new UploadFileInfo(fileInfo.Name, fileInfo.Size, storageUSC.GetString(fileInfo.Size, 0, true) + "B"));
+                    var fileName = fileInfo.Name;
+                    if (fileInfo.NonStandardProperties != null && fileInfo.NonStandardProperties.TryGetValue("webkitRelativePath", out var v))
+                    {
+                        var webkitRelativePath = v.ToString();
+                        if (!string.IsNullOrEmpty(webkitRelativePath))
+                            fileName = webkitRelativePath;
+                    }
+                    tmpFile = fileInfoHandler?.Invoke(new UploadFileInfo(fileName, fileInfo.Size, storageUSC.GetString(fileInfo.Size, 0, true) + "B"));
                     if (string.IsNullOrEmpty(tmpFile))
                         tmpFile = Path.GetTempFileName();
+                    var tmpFileFolder = Path.GetDirectoryName(tmpFile);
+                    if (!Directory.Exists(tmpFileFolder))
+                        Directory.CreateDirectory(tmpFileFolder);
 
                     using (Stream stream = await fileReference.OpenReadAsync())
-                    using (var fileStream = File.OpenWrite(tmpFile))
-                        await commonTransferContext.TransferAsync(stream, fileStream, cancellationToken, fileInfo.Size);
+                        using (var fileStream = File.OpenWrite(tmpFile))
+                            await commonTransferContext.TransferAsync(stream, fileStream, cancellationToken, fileInfo.Size);
 
                     tmpFiles[i] = tmpFile;
                 }
