@@ -28,15 +28,22 @@ public partial class ModalWindow : ComponentBase
 
     public void Show<T>(string title, Dictionary<string, object> parameterDict = null, Action onCloseAction = null)
     {
-        Show(title, typeof(T), parameterDict, onCloseAction);
+        Show<T>(title, parameterDict, onCloseAction);
     }
 
-    public void Show(string title, Type componentType, Dictionary<string, object> parameterDict = null, Action onCloseAction = null)
+    public void Show<T>(string title, DialogParameters parameters = null, Action onCloseAction = null)
     {
-        if (parameterDict == null)
-            parameterDict = new();
-        parameterDict[nameof(ModalWindow)] = this;
-        Show(title, BlazorUtils.GetRenderFragment(componentType, parameterDict));
+        Show<T>(title, parameters, onCloseAction);
+    }
+
+    public void Show<T>(string title, IEnumerable<KeyValuePair<string, object>> parameters = null, Action onCloseAction = null)
+    {
+        Show(title, typeof(T), parameters, onCloseAction);
+    }
+
+    public void Show(string title, Type componentType, IEnumerable<KeyValuePair<string, object>> parameters = null, Action onCloseAction = null)
+    {
+        Show(title, BlazorUtils.GetRenderFragment(componentType, parameters));
         InvokeAsync(StateHasChanged);
     }
 

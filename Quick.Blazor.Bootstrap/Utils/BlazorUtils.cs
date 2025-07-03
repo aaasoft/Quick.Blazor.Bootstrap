@@ -1,9 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Quick.Blazor.Bootstrap.Utils
 {
@@ -14,19 +9,21 @@ namespace Quick.Blazor.Bootstrap.Utils
             return GetRenderFragment(typeof(T), parameterDict);
         }
 
-        public static RenderFragment GetRenderFragment(Type componentType, Dictionary<string, object> parameterDict = null)
+        public static RenderFragment GetRenderFragment(Type componentType, IEnumerable<KeyValuePair<string, object>> parameters = null)
         {
             return builder =>
             {
                 builder.OpenComponent(0, componentType);
-                if (parameterDict != null)
+                if (parameters != null)
                 {
-                    foreach (var key in parameterDict.Keys)
+                    foreach (var item in parameters)
                     {
+                        var key = item.Key;
+                        var value = item.Value;
                         var pi = componentType.GetProperty(key);
                         if (pi == null)
                             continue;
-                        builder.AddAttribute(0, key, parameterDict[key]);
+                        builder.AddAttribute(0, key, value);
                     }
                 }
                 builder.CloseComponent();
