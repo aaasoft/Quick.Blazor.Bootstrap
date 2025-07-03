@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Quick.Blazor.Bootstrap.Utils;
-using System;
-using System.Collections.Generic;
 
 namespace Quick.Blazor.Bootstrap;
 
@@ -26,13 +24,14 @@ public partial class ModalWindow : ComponentBase
     private string Title { get; set; }
     private RenderFragment Content { get; set; }
     private bool Visiable { get; set; }
+    private Action OnCloseAction { get; set; }
 
-    public void Show<T>(string title, Dictionary<string, object> parameterDict = null)
+    public void Show<T>(string title, Dictionary<string, object> parameterDict = null, Action onCloseAction = null)
     {
-        Show(title, typeof(T), parameterDict);
+        Show(title, typeof(T), parameterDict, onCloseAction);
     }
 
-    public void Show(string title, Type componentType, Dictionary<string, object> parameterDict = null)
+    public void Show(string title, Type componentType, Dictionary<string, object> parameterDict = null, Action onCloseAction = null)
     {
         if (parameterDict == null)
             parameterDict = new();
@@ -41,11 +40,12 @@ public partial class ModalWindow : ComponentBase
         InvokeAsync(StateHasChanged);
     }
 
-    public void Show(string title, RenderFragment content)
+    public void Show(string title, RenderFragment content, Action onCloseAction = null)
     {
         Title = title;
         Content = content;
         Visiable = true;
+        OnCloseAction = onCloseAction;
         InvokeAsync(StateHasChanged);
     }
 
@@ -67,6 +67,7 @@ public partial class ModalWindow : ComponentBase
         Content = null;
         Visiable = false;
         InvokeAsync(StateHasChanged);
+        OnCloseAction?.Invoke();
     }
 
     public void SwitchDialogSizeExtraLarge()
