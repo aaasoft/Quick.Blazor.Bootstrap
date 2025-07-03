@@ -6,7 +6,7 @@
     @if (Tree.IsLeafExpression == null || !Tree.IsLeafExpression.Invoke(this))
     {
         <span @onclick="@(()=>Expand(!IsExpanded))">
-            <i class="@(IsExpanded?Tree.ArrowDownIconClass:Tree.ArrowRightIconClass)" style="min-width:1rem;"></i>
+            @(IsExpanded?Tree.ArrowDownText:Tree.ArrowRightText)
         </span>
     }
     else

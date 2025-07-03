@@ -37,9 +37,9 @@ namespace Quick.Blazor.Bootstrap
         [Parameter]
         public string TreeLiClass { get; set; } = "list-group-item list-group-item-action";
         [Parameter]
-        public string ArrowRightIconClass { get; set; } = "fa fa-arrow-right";
+        public string ArrowRightText { get; set; } = "►";
         [Parameter]
-        public string ArrowDownIconClass { get; set; } = "fa fa-arrow-down";
+        public string ArrowDownText { get; set; } = "▼";
         [Parameter]
         public List<TreeNode> ChildNodes { get; set; } = new List<TreeNode>();
 
