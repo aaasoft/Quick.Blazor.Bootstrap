@@ -37,24 +37,5 @@ namespace Quick.Blazor.Bootstrap.ReverseProxy.Controls
                 createModel.Url = Model.Url;
             }
         }
-
-        public static Dictionary<string, object> PrepareParameter(
-            ReverseProxyRule model,
-            Action<CreateReverseProxyRuleModel> okAction,
-            string textName,
-            string textPath,
-            string textUrl,
-            string textOK)
-        {
-            return new Dictionary<string, object>()
-            {
-                [nameof(Model)] = model,
-                [nameof(OkAction)] = okAction,
-                [nameof(TextName)] = textName,
-                [nameof(TextPath)] = textPath,
-                [nameof(TextUrl)] = textUrl,
-                [nameof(TextOK)] = textOK
-            };
-        }
     }
 }

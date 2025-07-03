@@ -26,17 +26,7 @@ public partial class ModalWindow : ComponentBase
     private bool Visiable { get; set; }
     private Action OnCloseAction { get; set; }
 
-    public void Show<T>(string title, Dictionary<string, object> parameterDict = null, Action onCloseAction = null)
-    {
-        Show<T>(title, parameterDict, onCloseAction);
-    }
-
-    public void Show<T>(string title, DialogParameters parameters = null, Action onCloseAction = null)
-    {
-        Show<T>(title, parameters, onCloseAction);
-    }
-
-    public void Show<T>(string title, IEnumerable<KeyValuePair<string, object>> parameters = null, Action onCloseAction = null)
+    public void Show<T>(string title, DialogParameters<T> parameters = null, Action onCloseAction = null)
     {
         Show(title, typeof(T), parameters, onCloseAction);
     }

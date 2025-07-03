@@ -56,15 +56,6 @@ namespace Quick.Blazor.Bootstrap.Admin
 
         private ModalAlert modalAlert;
 
-        public static Dictionary<string, object> PrepareParameters(int pid, ProcessInfoButton[] otherButtons)
-        {
-            return new Dictionary<string, object>()
-            {
-                [nameof(PID)] = pid,
-                [nameof(OtherButtons)] = otherButtons,
-            };
-        }
-
         protected override void OnParametersSet()
         {
             try

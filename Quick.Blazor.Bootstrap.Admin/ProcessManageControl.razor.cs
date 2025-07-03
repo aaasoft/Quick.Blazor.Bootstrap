@@ -67,7 +67,7 @@ namespace Quick.Blazor.Bootstrap.Admin
 
         protected override void OnAfterRender(bool firstRender)
         {
-            if(firstRender)
+            if (firstRender)
                 search();
         }
 
@@ -163,9 +163,13 @@ namespace Quick.Blazor.Bootstrap.Admin
         {
             try
             {
-                modalWindow.Show<ProcessViewControl>(
+                modalWindow.Show(
                     string.Format(TextViewProcess, info.PID, info.Name),
-                    ProcessViewControl.PrepareParameters(info.PID, ProcessViewOtherButtons));
+                    new DialogParameters<ProcessViewControl>
+                    {
+                        { x=>x.PID,info.PID},
+                        { x=>x.OtherButtons,ProcessViewOtherButtons},
+                    });
             }
             catch (Exception ex)
             {

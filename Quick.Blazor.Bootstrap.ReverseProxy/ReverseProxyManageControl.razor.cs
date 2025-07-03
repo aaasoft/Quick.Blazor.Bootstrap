@@ -2,8 +2,6 @@
 using Quick.Blazor.Bootstrap.ReverseProxy.Model;
 using Quick.LiteDB.Plus;
 using Quick.Localize;
-using System;
-using System.Threading.Tasks;
 
 namespace Quick.Blazor.Bootstrap.ReverseProxy
 {
@@ -14,7 +12,7 @@ namespace Quick.Blazor.Bootstrap.ReverseProxy
         private string searchKeywords;
 
         private static string TextNew => Locale.GetString("New");
-        private static string TextKeywords =>Locale.GetString("Keywords");
+        private static string TextKeywords => Locale.GetString("Keywords");
         private static string TextName => Locale.GetString("Name");
         private static string TextPath => Locale.GetString("Path");
         private static string TextUrl => Locale.GetString("URL");
@@ -24,19 +22,19 @@ namespace Quick.Blazor.Bootstrap.ReverseProxy
         private static string TextDelete => Locale.GetString("Delete");
         private static string TextError => Locale.GetString("Error");
         private static string TextConfirmDelete => Locale.GetString("Do you want to delete Rule[{0}]?");
-        
+
         [Parameter]
-        public string IconNew { get; set; }="fa fa-plus";
+        public string IconNew { get; set; } = "fa fa-plus";
         [Parameter]
-        public string IconSearch { get; set; }="fa fa-search";
+        public string IconSearch { get; set; } = "fa fa-search";
         [Parameter]
-        public string IconRule { get; set; }="fa fa-paper-plane mr-1";
+        public string IconRule { get; set; } = "fa fa-paper-plane mr-1";
         [Parameter]
-        public string IconVisit { get; set; }="fa fa-globe";
+        public string IconVisit { get; set; } = "fa fa-globe";
         [Parameter]
-        public string IconEdit { get; set; }="fa fa-pencil";
+        public string IconEdit { get; set; } = "fa fa-pencil";
         [Parameter]
-        public string IconDelete { get; set; }="fa fa-trash";
+        public string IconDelete { get; set; } = "fa fa-trash";
 
         private void validateModel(ReverseProxyRule oldModel, ReverseProxyRule newModel)
         {
@@ -48,10 +46,9 @@ namespace Quick.Blazor.Bootstrap.ReverseProxy
 
         private void Create()
         {
-            modalWindow.Show<Controls.ReverseProxyRuleCreateControl>(TextNew,
-                Controls.ReverseProxyRuleCreateControl.PrepareParameter(
-                    null,
-                    t =>
+            modalWindow.Show(TextNew, new DialogParameters<Controls.ReverseProxyRuleCreateControl>
+            {
+                {x=>x.OkAction, t =>
                     {
                         var model = new ReverseProxyRule()
                         {
@@ -73,16 +70,21 @@ namespace Quick.Blazor.Bootstrap.ReverseProxy
                         ReverseProxyManager.Instance.AddRule(model);
                         InvokeAsync(StateHasChanged);
                         modalWindow.Close();
-                    }, TextName, TextPath, TextUrl, TextOK)
-                );
+                    }
+                },
+                {x=>x.TextName,TextName},
+                {x=>x.TextPath,TextPath},
+                {x=>x.TextUrl,TextUrl},
+                {x=>x.TextOK,TextOK}
+            });
         }
 
         private void Edit(ReverseProxyRule model)
         {
-            modalWindow.Show<Controls.ReverseProxyRuleCreateControl>(TextEdit,
-                Controls.ReverseProxyRuleCreateControl.PrepareParameter(
-                    model,
-                    t =>
+            modalWindow.Show(TextEdit, new DialogParameters<Controls.ReverseProxyRuleCreateControl>
+            {
+                {x=>x.Model,model},
+                { x=>x.OkAction, t =>
                     {
                         var newModel = new ReverseProxyRule()
                         {
@@ -105,8 +107,13 @@ namespace Quick.Blazor.Bootstrap.ReverseProxy
                         ReverseProxyManager.Instance.AddRule(newModel);
                         InvokeAsync(StateHasChanged);
                         modalWindow.Close();
-                    }, TextName, TextPath, TextUrl, TextOK)
-                );
+                    }
+                },
+                {x=>x.TextName,TextName},
+                {x=>x.TextPath,TextPath},
+                {x=>x.TextUrl,TextUrl},
+                {x=>x.TextOK,TextOK}
+            });
         }
 
         private void Delete(ReverseProxyRule model)

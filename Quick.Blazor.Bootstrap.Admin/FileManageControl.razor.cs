@@ -746,11 +746,11 @@ namespace Quick.Blazor.Bootstrap.Admin
 
             Action openTextEditWindowAction = () =>
             {
-                modalWindow.Show<TextEditControl>($"{file.Name} - {TextEdit}", new Dictionary<string, object>()
+                modalWindow.Show($"{file.Name} - {TextEdit}", new DialogParameters<TextEditControl>()
                 {
-                    [nameof(TextEditControl.File)] = file.FullName,
-                    [nameof(TextEditControl.IconSave)] = IconSave,
-                    [nameof(TextEditControl.EncodingDict)] = EncodingDict
+                    { x => x.File, file.FullName },
+                    { x => x.IconSave, IconSave },
+                    { x => x.EncodingDict, EncodingDict }
                 });
             };
             //如果文件大小大于1MB，则弹出提示是否打开

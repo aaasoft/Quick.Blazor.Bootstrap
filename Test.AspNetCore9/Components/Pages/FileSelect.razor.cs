@@ -17,17 +17,18 @@ public partial class FileSelect : ComponentBase_WithGettextSupport
         string dir= null;
         if(!string.IsNullOrEmpty(filePath))
             dir = Path.GetDirectoryName(filePath);
-        modalWindow.Show<FileSelectControl>(TextSelectFile, new System.Collections.Generic.Dictionary<string, object>()
+        modalWindow.Show(TextSelectFile, new DialogParameters<FileSelectControl>()
         {
-            [nameof(FileSelectControl.FileFilter)] = "*.zip",
-            [nameof(FileSelectControl.Dir)] = dir,
-            [nameof(FileSelectControl.SelectedPath)] = filePath,
-            [nameof(FileSelectControl.SelectAction)] = new Action<string>(e =>
-            {
-                filePath = e;
-                modalWindow.Close();
-                InvokeAsync(StateHasChanged);
-            })
+            {x=>x.FileFilter,"*.zip"},
+            {x=>x.Dir,dir},
+            {x=>x.SelectedPath,filePath},
+            {x=>x.SelectAction,e =>
+                {
+                    filePath = e;
+                    modalWindow.Close();
+                    InvokeAsync(StateHasChanged);
+                }
+            },
         });
     }
 }
