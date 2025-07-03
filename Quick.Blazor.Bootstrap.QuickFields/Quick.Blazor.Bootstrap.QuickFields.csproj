@@ -6,7 +6,7 @@
 		<RepositoryUrl>https://cnb.cool/scbeta/Quick.Blazor.Bootstrap</RepositoryUrl>
 		<PackageProjectUrl>https://cnb.cool/scbeta/Quick.Blazor.Bootstrap</PackageProjectUrl>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-		<Version>4.4.0</Version>
+		<Version>4.4.1</Version>
 		<Description>Quick.Blazor.Bootstrap.QuickFields is a component library for Quick.Fields built on top of Blazor and CSS frameworks Bootstrap.</Description>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
