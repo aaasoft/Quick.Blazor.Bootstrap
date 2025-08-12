@@ -30,6 +30,10 @@ namespace Quick.Blazor.Bootstrap.Admin
                 _ = loadFileContent();
             }
         }
+        [Parameter]
+        public Func<string> GetTextFunc { get; set; }
+        [Parameter]
+        public Action<string> SetTextAction { get; set; }
 
         [Parameter]
         public Dictionary<string, Encoding> EncodingDict { get; set; }
@@ -64,7 +68,10 @@ namespace Quick.Blazor.Bootstrap.Admin
         {
             try
             {
-                Content = await System.IO.File.ReadAllTextAsync(File, EncodingDict[FileEncoding]);
+                if (string.IsNullOrEmpty(File))
+                    Content = GetTextFunc();
+                else
+                    Content = await System.IO.File.ReadAllTextAsync(File, EncodingDict[FileEncoding]);
                 await InvokeAsync(StateHasChanged);
             }
             catch (Exception ex)
@@ -94,8 +101,15 @@ namespace Quick.Blazor.Bootstrap.Admin
         {
             try
             {
-                System.IO.File.WriteAllText(File, Content, EncodingDict[FileEncoding]);
-                modalAlert.Show(TextSuccess, File);
+                if (string.IsNullOrEmpty(File))
+                {
+                    SetTextAction(Content);
+                }
+                else
+                {
+                    System.IO.File.WriteAllText(File, Content, EncodingDict[FileEncoding]);
+                    modalAlert.Show(TextSuccess, File);
+                }
             }
             catch (Exception ex)
             {

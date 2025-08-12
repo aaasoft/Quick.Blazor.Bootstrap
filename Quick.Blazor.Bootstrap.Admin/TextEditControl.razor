@@ -9,6 +9,8 @@
             </div>
             <InputNumber class="form-control" @bind-Value="Rows" style="width:8rem;" />
         </div>
+        @if(!string.IsNullOrEmpty(File))
+        {
         <div class="input-group input-group-sm mb-1 mr-1">
             <div class="input-group-prepend">
                 <div class="input-group-text">@TextEncoding</div>
@@ -20,6 +22,7 @@
             }
             </InputSelect>
         </div>
+        }
         <div class="input-group input-group-sm mb-1 mr-1">
             <div class="input-group-prepend">
                 <div class="input-group-text">@TextTheme</div>
