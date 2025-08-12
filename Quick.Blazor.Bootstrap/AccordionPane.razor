@@ -3,18 +3,33 @@
     return;
 }
 
-<div class="card-header">
-    <h2 class="mb-0">
-        <button class="btn btn-link btn-block text-left" type="button" @onclick="@(e => Parent.HandleTabClick(Pane))">
-            @Pane.Tab
-        </button>
-    </h2>
-</div>
+<button class="btn btn-block btn-light text-left" type="button" @onclick="@(e => Parent.HandleTabClick(Pane))">
+    @if(Pane.IsActive)
+    {
+        @if(TabExpand==null)
+        {
+            <span>▼</span>
+        }
+        else
+        {
+            @TabExpand
+        }
+    }
+    else
+    {
+        @if(TabCollpsed==null)
+        {
+            <span>►</span>
+        }
+        else
+        {
+            @TabCollpsed
+        }
+    }
+    <span class="ml-1">@Pane.Tab</span> 
+</button>
+
 @if (Pane.IsActive)
 {
-    <div class="collapse show">
-        <div class="card-body">
-            @Pane.ChildContent
-        </div>
-    </div>
+    @Pane.ChildContent
 }

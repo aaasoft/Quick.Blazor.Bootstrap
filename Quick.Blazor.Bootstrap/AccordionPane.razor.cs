@@ -14,6 +14,10 @@ namespace Quick.Blazor.Bootstrap
         [Parameter]
         public RenderFragment Tab { get; set; }
         [Parameter]
+        public RenderFragment TabExpand { get; set; }
+        [Parameter]
+        public RenderFragment TabCollpsed { get; set; }
+        [Parameter]
         public RenderFragment ChildContent { get; set; }
         [Parameter]
         public bool Disabled { get; set; }
