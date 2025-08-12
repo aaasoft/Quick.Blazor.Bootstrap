@@ -58,6 +58,8 @@ namespace Quick.Blazor.Bootstrap.Admin
         }
 
         [Parameter]
+        public string BaseDir { get; set; }
+        [Parameter]
         public string SelectedPath { get; set; }
         [Parameter]
         public string Dir { get; set; }
@@ -132,6 +134,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         private static string TextUp => Locale.GetString("Up");
         private static string TextNewFolder => Locale.GetString("New Folder");
         private static string TextNewFolderPrompt => Locale.GetString("Please input new folder name");
+        private static string TextCouldNotCreateFolderOutOfBaseDir => Locale.GetString("Could not create folder out of BaseDir");
         private static string TextUpload => Locale.GetString("Upload File");
         private static string TextUploadFolder => Locale.GetString("Upload Folder");        
         private static string TextUploadReadFileInfo => Locale.GetString("Reading upload file info...");
@@ -266,6 +269,13 @@ namespace Quick.Blazor.Bootstrap.Admin
 
         protected override void OnParametersSet()
         {
+            if (!string.IsNullOrEmpty(BaseDir))
+            {
+                BaseDir = BaseDir.Replace(Path.DirectorySeparatorChar, '/');
+                while (BaseDir != "/" && BaseDir.EndsWith("/"))
+                    BaseDir = BaseDir.Substring(0, BaseDir.Length - 1);
+                gotoPath(BaseDir);
+            }
             if (string.IsNullOrEmpty(Dir))
             {
                 refresh();
@@ -309,8 +319,26 @@ namespace Quick.Blazor.Bootstrap.Admin
 
         private void gotoDir(DirectoryInfo dir)
         {
+            CurrentPath = dir?.FullName;
+            if (!string.IsNullOrEmpty(BaseDir))
+            {
+                if (CurrentPath != null)
+                {
+                    CurrentPath = CurrentPath.Replace(Path.DirectorySeparatorChar, '/');
+                    if (!isPathUnderBaseDir(CurrentPath))
+                    {
+                        gotoPath(BaseDir);
+                        return;
+                    }
+                    CurrentPath = CurrentPath.Substring(BaseDir.Length).Replace(Path.DirectorySeparatorChar, '/');
+                }
+                if (string.IsNullOrEmpty(CurrentPath))
+                    CurrentPath = "/";
+                if (dir == null)
+                    dir = new DirectoryInfo(BaseDir);
+            }
             CurrentDir = dir;
-            Dir = CurrentPath = dir?.FullName;
+            Dir = dir?.FullName;
             refresh();
         }
 
@@ -324,12 +352,33 @@ namespace Quick.Blazor.Bootstrap.Admin
             }
         }
 
+        private string getFullPathFromBaseDir(string path)
+        {
+            path = path.Replace(Path.DirectorySeparatorChar, '/');
+            if (!path.StartsWith("/"))
+                path = "/" + path;
+            return BaseDir + path;
+        }
+
+        private bool isPathUnderBaseDir(string path)
+        {
+            path = path.Replace(Path.DirectorySeparatorChar, '/');
+            return path.StartsWith(BaseDir);
+        }
+
         private void btnGoto_Click()
         {
             if (string.IsNullOrEmpty(CurrentPath))
+            {
                 gotoDir(null);
+            }
             else
-                gotoDir(new DirectoryInfo(CurrentPath));
+            {
+                var fullCurrentPath = CurrentPath;
+                if (!string.IsNullOrEmpty(BaseDir))
+                    fullCurrentPath = getFullPathFromBaseDir(fullCurrentPath);
+                gotoDir(new DirectoryInfo(fullCurrentPath));
+            }
         }
 
         private void btnGotoUpper_Click()
@@ -346,7 +395,10 @@ namespace Quick.Blazor.Bootstrap.Admin
             {
                 try
                 {
-                    var newDirPath = Path.Combine(CurrentPath, dir_name);
+                    var newDirPath = Path.Combine(Dir, dir_name);
+                    if (!string.IsNullOrEmpty(BaseDir))
+                        if (!isPathUnderBaseDir(newDirPath))
+                            throw new IOException(TextCouldNotCreateFolderOutOfBaseDir);
                     Directory.CreateDirectory(newDirPath);
                     modalAlert?.Show(TextNewFolder, TextSuccess);
                     refresh();
@@ -370,7 +422,7 @@ namespace Quick.Blazor.Bootstrap.Admin
                  {
                      try
                      {
-                         var newPath = Path.Combine(CurrentPath, name);
+                         var newPath = Path.Combine(Dir, name);
                          dir.MoveTo(newPath);
                          modalAlert?.Show(TextRename, TextSuccess);
                          refresh();
@@ -389,7 +441,7 @@ namespace Quick.Blazor.Bootstrap.Admin
                 {
                     try
                     {
-                        var newPath = Path.Combine(CurrentPath, name);
+                        var newPath = Path.Combine(Dir, name);
                         file.MoveTo(newPath);
                         modalAlert?.Show(TextRename, TextSuccess);
                         refresh();
@@ -715,7 +767,7 @@ namespace Quick.Blazor.Bootstrap.Admin
                         if (fileReferences.Length > 1)
                             message = $"{currentFileIndex}/{fileReferences.Length} {message}";
                         modalLoading?.Show(TextUpload, string.Format(TextUploadFileUploading, message), false, uploadCts.Cancel);
-                        return Path.Combine(CurrentPath, fileInfo.Name);
+                        return Path.Combine(CurrentDir.FullName, fileInfo.Name);
                     },
                     progressInfo => modalLoading.UpdateProgress(progressInfo.Percent, progressInfo.Message),
                     uploadCts.Token);
@@ -896,7 +948,7 @@ namespace Quick.Blazor.Bootstrap.Admin
                 }
                 else
                 {
-                    modalAlert?.Show(TextFailed, string.Format(TextFolderNotExist, CurrentDir.FullName));
+                    modalAlert?.Show(TextFailed, string.Format(TextFolderNotExist, CurrentPath));
                 }
             }
         }
