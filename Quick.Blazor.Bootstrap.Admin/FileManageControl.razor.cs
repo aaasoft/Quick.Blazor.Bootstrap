@@ -47,11 +47,14 @@ namespace Quick.Blazor.Bootstrap.Admin
                 if (value == null)
                     SelectedPath = null;
                 else if (value is FileInfo)
-                    SelectedPath= ((FileInfo)value).FullName;
+                    SelectedPath = ((FileInfo)value).FullName;
                 else if (value is DirectoryInfo)
-                    SelectedPath= ((DirectoryInfo)value).FullName;
+                    SelectedPath = ((DirectoryInfo)value).FullName;
                 else
                     SelectedPath = null;
+
+                if (!string.IsNullOrEmpty(BaseDir) && !string.IsNullOrEmpty(SelectedPath) && SelectedPath.StartsWith(BaseDir))
+                    SelectedPath = SelectedPath.Substring(BaseDir.Length + 1).Replace(Path.DirectorySeparatorChar, '/');
 
                 SelectedPathChanged?.Invoke(this, EventArgs.Empty);
             }
@@ -136,7 +139,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         private static string TextNewFolderPrompt => Locale.GetString("Please input new folder name");
         private static string TextCouldNotCreateFolderOutOfBaseDir => Locale.GetString("Could not create folder out of BaseDir");
         private static string TextUpload => Locale.GetString("Upload File");
-        private static string TextUploadFolder => Locale.GetString("Upload Folder");        
+        private static string TextUploadFolder => Locale.GetString("Upload Folder");
         private static string TextUploadReadFileInfo => Locale.GetString("Reading upload file info...");
         private static string TextUploadFileExist => Locale.GetString("File [{0}] was exist.");
         private static string TextUploadFileUploading => Locale.GetString("Uploading file [{0}]...");
@@ -200,8 +203,8 @@ namespace Quick.Blazor.Bootstrap.Admin
         public string IconGoto { get; set; } = "fa fa-arrow-right";
         [Parameter]
         public string IconSearch { get; set; } = "fa fa-search";
-                
-        private bool isSelectedFile()
+
+        public bool IsSelectedFile()
         {
             return SelectedItem != null && SelectedItem is FileInfo;
         }
@@ -258,7 +261,7 @@ namespace Quick.Blazor.Bootstrap.Admin
             if (isOrderByChanged)
             {
                 OrderBy = orderBy;
-                OrderByAsc = true;                
+                OrderByAsc = true;
             }
             else
             {
@@ -481,7 +484,7 @@ namespace Quick.Blazor.Bootstrap.Admin
             }
 
             var cts = new System.Threading.CancellationTokenSource();
-            var cancellationToken= cts.Token;
+            var cancellationToken = cts.Token;
             modalLoading?.Show(TextDownload, file.Name, false, cts.Cancel);
             try
             {
@@ -491,10 +494,10 @@ namespace Quick.Blazor.Bootstrap.Admin
                 }, file.Length))
                 using (var fs = file.OpenRead())
                 {
-                    await commonTransferContext.TransferAsync(fs,async m=>
+                    await commonTransferContext.TransferAsync(fs, async m =>
                     {
                         await BlazorDownloadFileService.AddBuffer(m, cancellationToken);
-                    },cancellationToken);
+                    }, cancellationToken);
                 }
                 if (cancellationToken.IsCancellationRequested)
                 {
@@ -604,12 +607,12 @@ namespace Quick.Blazor.Bootstrap.Admin
             }
             //文件名
             string zipFileName = $"{fsInfo.Name}.zip";
-            if(File.Exists(Path.Combine(baseFolder,zipFileName)))
+            if (File.Exists(Path.Combine(baseFolder, zipFileName)))
             {
-                for(var i=1;i<int.MaxValue;i++)
+                for (var i = 1; i < int.MaxValue; i++)
                 {
                     zipFileName = $"{fsInfo.Name}({i}).zip";
-                    if(!File.Exists(Path.Combine(baseFolder,zipFileName)))
+                    if (!File.Exists(Path.Combine(baseFolder, zipFileName)))
                         break;
                 }
             }

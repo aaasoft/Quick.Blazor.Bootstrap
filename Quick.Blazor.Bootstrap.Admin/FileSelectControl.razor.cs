@@ -10,6 +10,8 @@ namespace Quick.Blazor.Bootstrap.Admin
         private static string TextSelect => Locale.GetString("Select");
 
         [Parameter]
+        public string BaseDir { get; set; }
+        [Parameter]
         public string Dir { get; set; }
         [Parameter]
         public string FileFilter { get; set; }

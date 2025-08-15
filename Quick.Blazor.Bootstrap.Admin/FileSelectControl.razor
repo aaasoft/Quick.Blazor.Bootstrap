@@ -1,21 +1,22 @@
 ﻿@inherits ComponentBase_WithGettextSupport;
 
 <Quick.Blazor.Bootstrap.Admin.FileManageControl @ref="fileManageControl"
+    BaseDir="@BaseDir"
     Dir="@Dir"
     FileFilter="@FileFilter"
     SelectedPath="@SelectedPath"
     FileDoubleClickCustomAction="@onFileDoubleClick">
     <ToolbarAddonButtons>
-        @if (string.IsNullOrEmpty(fileManageControl.SelectedPath) || !System.IO.File.Exists(fileManageControl.SelectedPath))
+        @if (fileManageControl.IsSelectedFile())
         {
-            <button type="button" class="btn btn-sm btn-secondary" disabled>
+            <button type="button" class="btn btn-sm btn-secondary" @onclick="Select">
                 <i class="fa fa-check" aria-hidden="true"></i>
                 @TextSelect
             </button>
         }
         else
         {
-            <button type="button" class="btn btn-sm btn-secondary" @onclick="Select">
+            <button type="button" class="btn btn-sm btn-secondary" disabled>
                 <i class="fa fa-check" aria-hidden="true"></i>
                 @TextSelect
             </button>
