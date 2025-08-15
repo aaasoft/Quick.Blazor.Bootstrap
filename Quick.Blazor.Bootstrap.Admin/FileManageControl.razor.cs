@@ -272,6 +272,7 @@ namespace Quick.Blazor.Bootstrap.Admin
 
         protected override void OnParametersSet()
         {
+            var preSelectedPath = SelectedPath;
             if (!string.IsNullOrEmpty(BaseDir))
             {
                 BaseDir = BaseDir.Replace(Path.DirectorySeparatorChar, '/');
@@ -285,10 +286,13 @@ namespace Quick.Blazor.Bootstrap.Admin
             }
             else
             {
-                var preSelectedPath = SelectedPath;
                 gotoPath(Dir);
                 if (!string.IsNullOrEmpty(preSelectedPath))
                 {
+                    if (!string.IsNullOrEmpty(BaseDir))
+                        preSelectedPath = getFullPathFromBaseDir(preSelectedPath);
+                    preSelectedPath.Replace('/', Path.DirectorySeparatorChar);
+
                     if (Dirs != null)
                     {
                         foreach (var item in Dirs)
