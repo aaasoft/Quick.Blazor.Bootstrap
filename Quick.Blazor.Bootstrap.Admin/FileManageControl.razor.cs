@@ -278,7 +278,10 @@ namespace Quick.Blazor.Bootstrap.Admin
                 BaseDir = BaseDir.Replace(Path.DirectorySeparatorChar, '/');
                 while (BaseDir != "/" && BaseDir.EndsWith("/"))
                     BaseDir = BaseDir.Substring(0, BaseDir.Length - 1);
-                gotoPath(BaseDir);
+                if (string.IsNullOrEmpty(Dir))
+                    gotoPath(BaseDir);
+                else
+                    Dir = getFullPathFromBaseDir(Dir);
             }
             if (string.IsNullOrEmpty(Dir))
             {
