@@ -20,7 +20,8 @@ public partial class FileSelect : ComponentBase_WithGettextSupport
         modalWindow.Show(TextSelectFile, new DialogParameters<FileSelectControl>()
         {
             {x=>x.FileFilter,"*.zip"},
-            {x=>x.Dir,dir},
+            { x=>x.BaseDir,"C:\\Code"},
+            { x=>x.Dir,dir},
             {x=>x.SelectedPath,filePath},
             {x=>x.SelectAction,e =>
                 {

@@ -275,8 +275,8 @@ namespace Quick.Blazor.Bootstrap.Admin
             var preSelectedPath = SelectedPath;
             if (!string.IsNullOrEmpty(BaseDir))
             {
-                BaseDir = BaseDir.Replace(Path.DirectorySeparatorChar, '/');
-                while (BaseDir != "/" && BaseDir.EndsWith("/"))
+                BaseDir = BaseDir.Replace('/', Path.DirectorySeparatorChar);
+                while (BaseDir != Path.DirectorySeparatorChar.ToString() && BaseDir.EndsWith(Path.DirectorySeparatorChar))
                     BaseDir = BaseDir.Substring(0, BaseDir.Length - 1);
                 if (string.IsNullOrEmpty(Dir))
                     gotoPath(BaseDir);
@@ -294,7 +294,6 @@ namespace Quick.Blazor.Bootstrap.Admin
                 {
                     if (!string.IsNullOrEmpty(BaseDir))
                         preSelectedPath = getFullPathFromBaseDir(preSelectedPath);
-                    preSelectedPath.Replace('/', Path.DirectorySeparatorChar);
 
                     if (Dirs != null)
                     {
@@ -364,15 +363,16 @@ namespace Quick.Blazor.Bootstrap.Admin
 
         private string getFullPathFromBaseDir(string path)
         {
-            path = path.Replace(Path.DirectorySeparatorChar, '/');
-            if (!path.StartsWith("/"))
-                path = "/" + path;
+            path = path.Replace('/', Path.DirectorySeparatorChar);
+            if (!path.StartsWith(Path.DirectorySeparatorChar))
+                path = Path.DirectorySeparatorChar + path;
+            
             return BaseDir + path;
         }
 
         private bool isPathUnderBaseDir(string path)
         {
-            path = path.Replace(Path.DirectorySeparatorChar, '/');
+            path = path.Replace('/', Path.DirectorySeparatorChar);
             return path.StartsWith(BaseDir);
         }
 
