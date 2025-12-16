@@ -6,7 +6,7 @@
 		<RepositoryUrl>https://cnb.cool/scbeta/Quick.Blazor.Bootstrap</RepositoryUrl>
 		<PackageProjectUrl>https://cnb.cool/scbeta/Quick.Blazor.Bootstrap</PackageProjectUrl>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-		<Version>4.4.5</Version>
+		<Version>2025.5.1216</Version>
 		<Description>Quick.Blazor.Bootstrap is a component library built on top of Blazor and CSS frameworks Bootstrap.</Description>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
