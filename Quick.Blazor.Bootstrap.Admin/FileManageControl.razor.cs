@@ -68,6 +68,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         public string Dir { get; set; }
         [Parameter]
         public bool ListViewMode { get; set; } = true;
+        public static Action<IJSRuntime, string> GlobalDownloadFileAction { get; set; }
         [Parameter]
         public Action<IJSRuntime, string> DownloadFileAction { get; set; }
         [Parameter]
@@ -126,27 +127,27 @@ namespace Quick.Blazor.Bootstrap.Admin
         [Parameter]
         public bool OrderByAsc { get; set; } = true;
 
-        private static string TextConfirm => Locale.GetString("Confirm");
-        private static string TextConfirmDeleteFolder => Locale.GetString("Do you want to delete folder[{0}]?");
-        private static string TextConfirmDeleteFile => Locale.GetString("Do you want to delete file[{0}]?");
-        private static string TextInputNewName => Locale.GetString("Please input new name of [{0}]");
-        private static string TextSuccess => Locale.GetString("Success");
-        private static string TextCanceled => Locale.GetString("Canceled");
-        private static string TextFailed => Locale.GetString("Failed");
-        private static string TextFolderNotExist => Locale.GetString("Folder [{0}] not exist");
-        private static string TextUp => Locale.GetString("Up");
-        private static string TextNewFolder => Locale.GetString("New Folder");
-        private static string TextNewFolderPrompt => Locale.GetString("Please input new folder name");
-        private static string TextCouldNotCreateFolderOutOfBaseDir => Locale.GetString("Could not create folder out of BaseDir");
-        private static string TextUpload => Locale.GetString("Upload File");
-        private static string TextUploadFolder => Locale.GetString("Upload Folder");
-        private static string TextUploadReadFileInfo => Locale.GetString("Reading upload file info...");
-        private static string TextUploadFileExist => Locale.GetString("File [{0}] was exist.");
-        private static string TextUploadFileUploading => Locale.GetString("Uploading file [{0}]...");
-        private static string TextRefresh => Locale.GetString("Refresh");
-        private static string TextDownload => Locale.GetString("Download");
-        private static string TextVerify => Locale.GetString("Verify");
-        private static string TextCompress => Locale.GetString("Compress");
+        public static string TextConfirm => Locale.GetString("Confirm");
+        public static string TextConfirmDeleteFolder => Locale.GetString("Do you want to delete folder[{0}]?");
+        public static string TextConfirmDeleteFile => Locale.GetString("Do you want to delete file[{0}]?");
+        public static string TextInputNewName => Locale.GetString("Please input new name of [{0}]");
+        public static string TextSuccess => Locale.GetString("Success");
+        public static string TextCanceled => Locale.GetString("Canceled");
+        public static string TextFailed => Locale.GetString("Failed");
+        public static string TextFolderNotExist => Locale.GetString("Folder [{0}] not exist");
+        public static string TextUp => Locale.GetString("Up");
+        public static string TextNewFolder => Locale.GetString("New Folder");
+        public static string TextNewFolderPrompt => Locale.GetString("Please input new folder name");
+        public static string TextCouldNotCreateFolderOutOfBaseDir => Locale.GetString("Could not create folder out of BaseDir");
+        public static string TextUpload => Locale.GetString("Upload File");
+        public static string TextUploadFolder => Locale.GetString("Upload Folder");
+        public static string TextUploadReadFileInfo => Locale.GetString("Reading upload file info...");
+        public static string TextUploadFileExist => Locale.GetString("File [{0}] was exist.");
+        public static string TextUploadFileUploading => Locale.GetString("Uploading file [{0}]...");
+        public static string TextRefresh => Locale.GetString("Refresh");
+        public static string TextDownload => Locale.GetString("Download");
+        public static string TextVerify => Locale.GetString("Verify");
+        public static string TextCompress => Locale.GetString("Compress");
         private static string TextDecompress => Locale.GetString("Decompress");
 
         private static string TextRename => Locale.GetString("Rename");
@@ -154,11 +155,11 @@ namespace Quick.Blazor.Bootstrap.Admin
         [Parameter]
         public Dictionary<string, Encoding> EncodingDict { get; set; }
 
-        private static string TextDelete => Locale.GetString("Delete");
-        private static string TextPath => Locale.GetString("Path");
-        private static string TextLastWriteTime => Locale.GetString("Last Write Time");
-        private static string TextSize => Locale.GetString("Size");
-        private static string TextName => Locale.GetString("Name");
+        public static string TextDelete => Locale.GetString("Delete");
+        public static string TextPath => Locale.GetString("Path");
+        public static string TextLastWriteTime => Locale.GetString("Last Write Time");
+        public static string TextSize => Locale.GetString("Size");
+        public static string TextName => Locale.GetString("Name");
 
         [Parameter]
         public RenderFragment ToolbarAddonButtons { get; set; }

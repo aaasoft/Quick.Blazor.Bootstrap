@@ -1,0 +1,76 @@
+﻿@using Quick.Blazor.Bootstrap.Admin
+@using Quick.Blazor.Bootstrap.Admin.Utils
+@using Quick.Blazor.Bootstrap.Utils
+@using Quick.Fields
+@using Tewr.Blazor.FileReader
+
+<div class="@ControlUtils.GetButtonClass(Field)">
+    @Field.Name
+    <label title="@Field.Name" style="position: absolute;top: 0;left: 0;right:0;margin:0;height:100%;cursor:pointer"
+        for="Quick_Blazor_Bootstrap_QuickFields_ControlUpload_InputFile_@Field.Id">
+    </label>
+    <input @ref="inputFile" id="Quick_Blazor_Bootstrap_QuickFields_ControlUpload_InputFile_@Field.Id" type="file"
+        accept="@Field.Upload_FileFilter" style="width: 0px; height: 0px; visibility: collapse;" multiple
+        @onchange="@(() => onInputFileChanged(inputFile))">
+</div>
+
+<ModalLoading @ref="modalLoading" />
+<ModalAlert @ref="modalAlert" />
+@code
+{
+    [Parameter]
+    public FieldForGet Field { get; set; }
+    [Inject]
+    private IFileReaderService fileReaderService { get; set; }
+    private CancellationTokenSource uploadCts;
+    private ElementReference inputFile;
+    private ModalLoading modalLoading;
+    private ModalAlert modalAlert;
+
+    private async Task onInputFileChanged(ElementReference inputFile)
+    {
+        var dir = string.IsNullOrEmpty(Field.Upload_Dir) ? Path.GetTempPath() : Field.Upload_Dir;
+        var fileReaderRef = fileReaderService.CreateReference(inputFile);
+        FileUploadHelper.UploadFileInfo currentFileInfo = default;
+        try
+        {
+            uploadCts = new CancellationTokenSource();
+            var cancellationToken = uploadCts.Token;
+
+            modalLoading?.Show(FileManageControl.TextUpload, FileManageControl.TextUploadReadFileInfo, false, uploadCts.Cancel);
+            var fileReferences = (await fileReaderRef.EnumerateFilesAsync()).ToArray();
+            var currentFileIndex = 0;
+            var fileNames = await FileUploadHelper.UploadFilesAsync(
+            fileReferences,
+            fileInfo =>
+            {
+                currentFileInfo = fileInfo;
+                currentFileIndex++;
+                var message = $"{fileInfo.Name} ({fileInfo.SizeString})";
+                if (fileReferences.Length > 1)
+                    message = $"{currentFileIndex}/{fileReferences.Length} {message}";
+                modalLoading?.Show(FileManageControl.TextUpload, string.Format(FileManageControl.TextUploadFileUploading, message),
+    false, uploadCts.Cancel);
+                return Path.Combine(dir, fileInfo.Name);
+            },
+            progressInfo => modalLoading.UpdateProgress(progressInfo.Percent, progressInfo.Message),
+            uploadCts.Token);
+            Field.Value = string.Join(Path.PathSeparator, fileNames);
+            modalAlert?.Show(FileManageControl.TextUpload, FileManageControl.TextSuccess);
+        }
+        catch (OperationCanceledException)
+        {
+            modalAlert?.Show(FileManageControl.TextUpload, FileManageControl.TextCanceled);
+        }
+        catch (Exception ex)
+        {
+            modalAlert?.Show(FileManageControl.TextUpload, FileManageControl.TextFailed + Environment.NewLine +
+            ExceptionUtils.GetExceptionMessage(ex));
+        }
+        finally
+        {
+            await fileReaderRef.ClearValue();
+            modalLoading?.Close();
+        }
+    }
+}

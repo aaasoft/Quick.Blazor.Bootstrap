@@ -77,10 +77,19 @@
     case FieldType.Pager:
         <Control_Pager Field="Field" />
         break;
+    case FieldType.Progress:
+        <Control_Progress Field="Field" />
+        break;
+    case FieldType.Upload:
+        <Control_Upload Field="Field" />
+        break;
+    case FieldType.Download:
+        <Control_Download Field="Field" />
+        break;
     case FieldType.InputHidden:
     case FieldType.MessageBox:
     case FieldType.Toast:
-        break;
+        break;    
     default:
         <p>Unknown control type[@Field.Type]</p>
         break;

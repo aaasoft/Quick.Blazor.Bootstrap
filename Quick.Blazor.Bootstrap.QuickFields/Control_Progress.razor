@@ -1,0 +1,13 @@
+﻿@using Quick.Fields
+
+<div class="progress">
+    <div class="@ControlUtils.GetProgressClass(Field)"
+        role="progressbar" aria-valuenow="@(Field.Value ?? "100")" aria-valuemin="@(Field.MinValue ?? "0")"
+        aria-valuemax="@(Field.MaxValue ?? "100")"></div>
+</div>
+
+@code
+{
+    [Parameter]
+    public FieldForGet Field { get; set; }
+}

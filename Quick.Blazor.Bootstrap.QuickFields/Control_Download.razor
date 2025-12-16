@@ -1,0 +1,28 @@
+﻿@using Microsoft.JSInterop
+@using Quick.Blazor.Bootstrap.Admin
+@using Quick.Fields
+
+<button title="@Field.Name" type="button" class="@ControlUtils.GetButtonClass(Field)" @onclick="btnDownload_Click">
+    @Field.Name
+</button>
+<ModalAlert @ref="modalAlert" />
+
+@code
+{
+    [Parameter]
+    public FieldForGet Field { get; set; }
+
+    [Inject]
+    private IJSRuntime JSRuntime { get; set; }
+    private ModalAlert modalAlert;
+
+    private async void btnDownload_Click()
+    {
+        if (FileManageControl.GlobalDownloadFileAction == null)
+        {
+            modalAlert.Show(FileManageControl.TextFailed, "[FileManageControl]控件未设置[GlobalDownloadFileAction]属性！");
+            return;
+        }
+        FileManageControl.GlobalDownloadFileAction.Invoke(JSRuntime, Field.Value);
+    }
+}

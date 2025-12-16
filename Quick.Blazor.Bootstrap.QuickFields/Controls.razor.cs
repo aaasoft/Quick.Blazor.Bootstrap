@@ -44,6 +44,7 @@ public partial class Controls : ComponentBase
                     toastStack.AddToast(field.Name, field.Description, BackgroundTheme.info);
                     return;
                 case FieldType.Button:
+                case FieldType.Upload:
                     field.PostOnChanged = true;
                     break;
             }
