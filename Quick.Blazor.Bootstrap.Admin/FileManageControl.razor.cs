@@ -68,9 +68,10 @@ namespace Quick.Blazor.Bootstrap.Admin
         public string Dir { get; set; }
         [Parameter]
         public bool ListViewMode { get; set; } = true;
-        public static Action<IJSRuntime, string> GlobalDownloadFileAction { get; set; }
-        [Parameter]
-        public Action<IJSRuntime, string> DownloadFileAction { get; set; }
+        /// <summary>
+        /// 下载文件动作
+        /// </summary>
+        public static Action<IJSRuntime, string> DownloadFileAction { get; set; }
         [Parameter]
         public Action<IJSRuntime> FileDoubleClickCustomAction { get; set; }
         [Parameter]

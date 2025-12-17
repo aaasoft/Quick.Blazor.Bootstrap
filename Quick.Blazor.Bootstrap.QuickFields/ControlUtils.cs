@@ -49,20 +49,22 @@ internal static class ControlUtils
         return sb.ToString();
     }
 
-    
     public static string GetProgressClass(FieldForGet field)
     {
         if (!string.IsNullOrEmpty(field.Html_Class))
             return field.Html_Class;
         var sb = new StringBuilder();
         sb.Append("progress-bar");
-        sb.Append("progress-bar-striped progress-bar-animated");
+        if (field.Progress_Striped.HasValue && field.Progress_Striped.Value)
+            sb.Append(" progress-bar-animated");
+        if (field.Progress_Animated.HasValue && field.Progress_Animated.Value)
+            sb.Append(" progress-bar-animated");
         //显示主题
-        var fieldTheme = FieldTheme.Secondary;
         if (field.Theme.HasValue)
-            fieldTheme = field.Theme.Value;
-        sb.Append(" bg-");
-        sb.Append(fieldTheme.ToString().ToLower());
+        {
+            sb.Append(" bg-");
+            sb.Append(field.Theme.Value.ToString().ToLower());
+        }
         appendCommonClass(sb, field);
         return sb.ToString();
     }

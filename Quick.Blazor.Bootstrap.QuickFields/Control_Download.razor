@@ -1,10 +1,15 @@
-﻿@using Microsoft.JSInterop
+﻿@using BlazorDownloadFile
+@using Microsoft.JSInterop
 @using Quick.Blazor.Bootstrap.Admin
+@using Quick.Blazor.Bootstrap.Admin.Core
+@using Quick.Blazor.Bootstrap.Utils
 @using Quick.Fields
 
 <button title="@Field.Name" type="button" class="@ControlUtils.GetButtonClass(Field)" @onclick="btnDownload_Click">
     @Field.Name
 </button>
+
+<ModalLoading @ref="modalLoading" />
 <ModalAlert @ref="modalAlert" />
 
 @code
@@ -14,15 +19,61 @@
 
     [Inject]
     private IJSRuntime JSRuntime { get; set; }
+    [Inject]
+    private IBlazorDownloadFileService BlazorDownloadFileService { get; set; }
+
+    private ModalLoading modalLoading;
     private ModalAlert modalAlert;
 
     private async void btnDownload_Click()
     {
-        if (FileManageControl.GlobalDownloadFileAction == null)
+        var file = new FileInfo(Field.Value);
+        if (FileManageControl.DownloadFileAction != null)
         {
-            modalAlert.Show(FileManageControl.TextFailed, "[FileManageControl]控件未设置[GlobalDownloadFileAction]属性！");
+            FileManageControl.DownloadFileAction.Invoke(JSRuntime, file.FullName);
             return;
         }
-        FileManageControl.GlobalDownloadFileAction.Invoke(JSRuntime, Field.Value);
+        var cts = new System.Threading.CancellationTokenSource();
+        var cancellationToken = cts.Token;
+        modalLoading?.Show(FileManageControl.TextDownload, file.Name, false, cts.Cancel);
+        try
+        {
+            using (var commonTransferContext = new CommonTransferContext(progressInfo =>
+            {
+                modalLoading.UpdateProgress(progressInfo.Percent, progressInfo.Message);
+            }, file.Length))
+            using (var fs = file.OpenRead())
+            {
+                await commonTransferContext.TransferAsync(fs, async m =>
+                {
+                    await BlazorDownloadFileService.AddBuffer(m, cancellationToken);
+                }, cancellationToken);
+            }
+            if (cancellationToken.IsCancellationRequested)
+            {
+                modalAlert?.Show(FileManageControl.TextDownload, FileManageControl.TextCanceled);
+                return;
+            }
+            var result = await BlazorDownloadFileService.DownloadBinaryBuffers(file.Name, cancellationToken);
+            if (!result.Succeeded)
+            {
+                modalAlert?.Show(FileManageControl.TextDownload, FileManageControl.TextFailed + Environment.NewLine + result.ErrorName +
+                Environment.NewLine + result.ErrorMessage);
+            }
+        }
+        catch (TaskCanceledException)
+        {
+            modalAlert?.Show(FileManageControl.TextDownload, FileManageControl.TextCanceled);
+        }
+        catch (Exception ex)
+        {
+            modalAlert?.Show(FileManageControl.TextDownload, FileManageControl.TextFailed + Environment.NewLine +
+            ExceptionUtils.GetExceptionMessage(ex));
+        }
+        finally
+        {
+            await BlazorDownloadFileService.ClearBuffers();
+            modalLoading?.Close();
+        }
     }
 }

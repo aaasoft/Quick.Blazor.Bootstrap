@@ -56,7 +56,6 @@
             progressInfo => modalLoading.UpdateProgress(progressInfo.Percent, progressInfo.Message),
             uploadCts.Token);
             Field.Value = string.Join(Path.PathSeparator, fileNames);
-            modalAlert?.Show(FileManageControl.TextUpload, FileManageControl.TextSuccess);
         }
         catch (OperationCanceledException)
         {
