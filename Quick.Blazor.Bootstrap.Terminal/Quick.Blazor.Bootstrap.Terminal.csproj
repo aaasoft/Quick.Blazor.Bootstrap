@@ -6,7 +6,7 @@
 		<RepositoryUrl>https://cnb.cool/scbeta/Quick.Blazor.Bootstrap</RepositoryUrl>
 		<PackageProjectUrl>https://cnb.cool/scbeta/Quick.Blazor.Bootstrap</PackageProjectUrl>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-		<Version>2025.6.1216</Version>
+		<Version>2025.7.1217</Version>
 		<Description>Quick.Blazor.Bootstrap.Terminal is a component library for Terminal built on top of Blazor and CSS frameworks Bootstrap.</Description>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
