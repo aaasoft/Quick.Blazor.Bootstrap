@@ -74,10 +74,11 @@ namespace Quick.Blazor.Bootstrap.Terminal
             {
                 CursorBlink = true,
                 CursorStyle = CursorStyle.Bar,
-                WindowsMode = OperatingSystem.IsWindows(),
                 Columns = Columns,
                 Rows = Rows
             };
+            if(OperatingSystem.IsWindows())
+                terminalOptions.WindowsPty = new WindowsPty();
         }
 
         private async Task OnFirstRender()
