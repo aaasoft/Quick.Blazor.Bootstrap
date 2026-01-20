@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Quick.Localize;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Quick.Blazor.Bootstrap
 {
@@ -42,6 +39,12 @@ namespace Quick.Blazor.Bootstrap
                 throw new ArgumentException(Locale.GetString("An TabPane with the same key[{0}] already exists",tabPane.Key));
             }
             _panes.Add(tabPane);
+        }
+
+        internal void RemoveTabPane(TabPane tabPane)
+        {
+            if (_panes.Contains(tabPane))
+                _panes.Remove(tabPane);
         }
 
         protected override void OnAfterRender(bool firstRender)

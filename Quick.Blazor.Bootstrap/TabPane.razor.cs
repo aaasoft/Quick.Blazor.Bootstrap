@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Quick.Blazor.Bootstrap
 {
-    public partial class TabPane : ComponentBase
+    public partial class TabPane : ComponentBase, IDisposable
     {
         [Parameter]
         public string Key { get; set; }
@@ -44,6 +44,13 @@ namespace Quick.Blazor.Bootstrap
         [CascadingParameter]
         private Tabs Parent { get; set; }
 
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+            if (string.IsNullOrEmpty(Key))
+                Key = Guid.NewGuid().ToString();
+        }
+
         protected override void OnInitialized()
         {
             base.OnInitialized();
@@ -52,6 +59,11 @@ namespace Quick.Blazor.Bootstrap
             {
                 Parent?.AddTabPane(this);
             }
+        }
+
+        public void Dispose()
+        {
+            Parent?.RemoveTabPane(this);
         }
     }
 }
