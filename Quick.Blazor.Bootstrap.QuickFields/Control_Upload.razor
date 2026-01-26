@@ -51,7 +51,7 @@
                     message = $"{currentFileIndex}/{fileReferences.Length} {message}";
                 modalLoading?.Show(FileManageControl.TextUpload, string.Format(FileManageControl.TextUploadFileUploading, message),
     false, uploadCts.Cancel);
-                return Path.Combine(dir, fileInfo.Name);
+                return Task.FromResult(Path.Combine(dir, fileInfo.Name));
             },
             progressInfo => modalLoading.UpdateProgress(progressInfo.Percent, progressInfo.Message),
             uploadCts.Token);
