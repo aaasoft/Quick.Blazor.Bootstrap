@@ -56,7 +56,7 @@ public static class FileUploadHelper
 
     public static async Task<string[]> UploadFilesAsync(
         IFileReference[] fileReferences,
-        Func<UploadFileInfo, string> fileInfoHandler,
+        Func<UploadFileInfo, Task<string>> fileInfoHandler,
         Action<TransferProgressInfo> progressUpdated,
         CancellationToken cancellationToken)
     {
@@ -85,7 +85,10 @@ public static class FileUploadHelper
                         if (!string.IsNullOrEmpty(webkitRelativePath))
                             fileName = webkitRelativePath;
                     }
-                    tmpFile = fileInfoHandler?.Invoke(new UploadFileInfo(fileName, fileInfo.Size, storageUSC.GetString(fileInfo.Size, 0, true) + "B"));
+                    tmpFile = await fileInfoHandler?.Invoke(new UploadFileInfo(fileName, fileInfo.Size, storageUSC.GetString(fileInfo.Size, 0, true) + "B"));
+                    if (cancellationToken.IsCancellationRequested)
+                        return tmpFiles.Take(i).ToArray();
+
                     if (string.IsNullOrEmpty(tmpFile))
                         tmpFile = Path.GetTempFileName();
                     var tmpFileFolder = Path.GetDirectoryName(tmpFile);
@@ -93,8 +96,12 @@ public static class FileUploadHelper
                         Directory.CreateDirectory(tmpFileFolder);
 
                     using (Stream stream = await fileReference.OpenReadAsync())
+                    {
+                        if (File.Exists(tmpFile))
+                            File.Delete(tmpFile);
                         using (var fileStream = File.OpenWrite(tmpFile))
                             await commonTransferContext.TransferAsync(stream, fileStream, cancellationToken, fileInfo.Size);
+                    }
 
                     tmpFiles[i] = tmpFile;
                 }

@@ -143,7 +143,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         public static string TextUpload => Locale.GetString("Upload File");
         public static string TextUploadFolder => Locale.GetString("Upload Folder");
         public static string TextUploadReadFileInfo => Locale.GetString("Reading upload file info...");
-        public static string TextUploadFileExist => Locale.GetString("File [{0}] was exist.");
+        public static string TextUploadFileExistReplace => Locale.GetString("File [{0}] was exist,do you want to replace it?");
         public static string TextUploadFileUploading => Locale.GetString("Uploading file [{0}]...");
         public static string TextRefresh => Locale.GetString("Refresh");
         public static string TextDownload => Locale.GetString("Download");
@@ -771,7 +771,7 @@ namespace Quick.Blazor.Bootstrap.Admin
                 var currentFileIndex = 0;
                 await FileUploadHelper.UploadFilesAsync(
                     fileReferences,
-                    fileInfo =>
+                    async fileInfo =>
                     {
                         currentFileInfo = fileInfo;
                         currentFileIndex++;
@@ -779,10 +779,37 @@ namespace Quick.Blazor.Bootstrap.Admin
                         if (fileReferences.Length > 1)
                             message = $"{currentFileIndex}/{fileReferences.Length} {message}";
                         modalLoading?.Show(TextUpload, string.Format(TextUploadFileUploading, message), false, uploadCts.Cancel);
-                        return Path.Combine(CurrentDir.FullName, fileInfo.Name);
+                        var file = Path.Combine(CurrentDir.FullName, fileInfo.Name);
+                        if (File.Exists(file))
+                        {
+                            bool? isConfirm = null;
+                            var confirmCts = new CancellationTokenSource();
+                            modalAlert.Show(TextConfirm, string.Format(TextUploadFileExistReplace, file), () =>
+                            {
+                                isConfirm = true;
+                                confirmCts.Cancel();
+                            }, () =>
+                            {
+                                isConfirm = false;
+                                confirmCts.Cancel();
+                            });
+                            try { await Task.Delay(-1, confirmCts.Token); }
+                            catch { }
+                            if (isConfirm.Value)
+                            {
+                                File.Delete(file);
+                            }
+                            else
+                            {
+                                uploadCts.Cancel();
+                                throw new OperationCanceledException();
+                            }
+                            return file;
+                        }
+                        return file;
                     },
                     progressInfo => modalLoading.UpdateProgress(progressInfo.Percent, progressInfo.Message),
-                    uploadCts.Token);
+                    cancellationToken);
                 modalAlert?.Show(TextUpload, TextSuccess);
             }
             catch (OperationCanceledException)
