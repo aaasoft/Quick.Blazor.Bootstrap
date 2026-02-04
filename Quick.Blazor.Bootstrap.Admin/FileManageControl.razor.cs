@@ -283,7 +283,8 @@ namespace Quick.Blazor.Bootstrap.Admin
                 if (string.IsNullOrEmpty(Dir))
                     gotoPath(BaseDir);
                 else
-                    Dir = getFullPathFromBaseDir(Dir);
+                    if (!Path.IsPathFullyQualified(Dir))
+                        Dir = getFullPathFromBaseDir(Dir);
             }
             if (string.IsNullOrEmpty(Dir))
             {
