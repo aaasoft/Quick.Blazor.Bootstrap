@@ -231,7 +231,7 @@ namespace Quick.Blazor.Bootstrap.Admin
             try
             {
                 if (fileInfo.Exists)
-                    return storageUSC.GetString(fileInfo.Length, 0, true);
+                    return storageUSC.GetString(fileInfo.Length, 2, true);
             }
             catch { }
             return string.Empty;
@@ -848,7 +848,7 @@ namespace Quick.Blazor.Bootstrap.Admin
             //如果文件大小大于1MB，则弹出提示是否打开
             if (file.Length > 1 * 1024 * 1024)
             {
-                var fileInfoStr = $"{file.Name} ({storageUSC.GetString(file.Length, 0, true)}B)";
+                var fileInfoStr = $"{file.Name} ({storageUSC.GetString(file.Length, 2, true)}B)";
                 modalAlert.Show(TextConfirm, Locale.GetString("File [{0}] is too large,are you sure to edit it with text editor?", fileInfoStr), openTextEditWindowAction);
             }
             else

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace Quick.Blazor.Bootstrap.Admin.Utils
 {
@@ -11,11 +7,11 @@ namespace Quick.Blazor.Bootstrap.Admin.Utils
         /// <summary>
         /// 单位字符串列表
         /// </summary>
-        List<String> UnitList;
+        List<string> UnitList;
         /// <summary>
         /// 单位之间的换算比例列表
         /// </summary>
-        List<Decimal> UnitsScaleList;
+        List<decimal> UnitsScaleList;
 
         /// <summary>
         /// 时间单位字符串转换
@@ -24,11 +20,11 @@ namespace Quick.Blazor.Bootstrap.Admin.Utils
         {
             get
             {
-                String[] TimeUnitArray = new String[]
+                var TimeUnitArray = new string[]
                 {
                     "毫秒", "秒", "分钟", "小时", "天"
                 };
-                Decimal[] TimeUnitConversionArray = new Decimal[]
+                var TimeUnitConversionArray = new decimal[]
                 {
                     1000, 60, 60, 24
                 };
@@ -43,11 +39,11 @@ namespace Quick.Blazor.Bootstrap.Admin.Utils
         {
             get
             {
-                String[] StorageUnitArray = new String[]
+                var StorageUnitArray = new string[]
                 {
                     "", "K", "M", "G", "T", "P", "E", "Z", "Y"
                 };
-                Decimal StorageUnitConvert = 1024;
+                decimal StorageUnitConvert = 1024;
                 return new UnitStringConverting(StorageUnitArray, StorageUnitConvert);
             }
         }
@@ -59,7 +55,7 @@ namespace Quick.Blazor.Bootstrap.Admin.Utils
         {
             get
             {
-                String[] StorageUnitArray = new String[]
+                var StorageUnitArray = new string[]
                 {
                     "", "K", "M", "G", "T", "P", "E", "Z", "Y"
                 };
@@ -68,12 +64,12 @@ namespace Quick.Blazor.Bootstrap.Admin.Utils
             }
         }
 
-        public UnitStringConverting(String[] UnitArray, Decimal UnitConversion)
+        public UnitStringConverting(string[] UnitArray, decimal UnitConversion)
         {
-            Decimal[] UnitConversionArray = null;
+            decimal[] UnitConversionArray = null;
             if (UnitArray != null && UnitArray.Length >= 2)
             {
-                UnitConversionArray = new Decimal[UnitArray.Length - 1];
+                UnitConversionArray = new decimal[UnitArray.Length - 1];
                 for (int i = 0; i <= UnitConversionArray.Length - 1; i++)
                 {
                     UnitConversionArray[i] = UnitConversion;
@@ -82,12 +78,12 @@ namespace Quick.Blazor.Bootstrap.Admin.Utils
             Init(UnitArray, UnitConversionArray);
         }
 
-        public UnitStringConverting(String[] UnitArray, Decimal[] UnitsScaleArray)
+        public UnitStringConverting(string[] UnitArray, decimal[] UnitsScaleArray)
         {
             Init(UnitArray, UnitsScaleArray);
         }
 
-        private void Init(String[] UnitArray, Decimal[] UnitsScaleArray)
+        private void Init(string[] UnitArray, decimal[] UnitsScaleArray)
         {
             if (UnitArray == null || UnitArray.Length == 0 || UnitsScaleArray == null || UnitArray.Length != UnitsScaleArray.Length + 1)
                 throw new FormatException("转换单位数组参数不正确");
@@ -102,7 +98,7 @@ namespace Quick.Blazor.Bootstrap.Admin.Utils
         /// </summary>
         /// <param name="MinUnitNumber">最小单位数量</param>
         /// <returns></returns>
-        public Int32 GetFitUnitIndex(Decimal MinUnitNumber)
+        public int GetFitUnitIndex(decimal MinUnitNumber)
         {
             var TmpNumber = MinUnitNumber;
             for (int i = 0; i <= UnitsScaleList.Count - 1; i++)
@@ -122,7 +118,7 @@ namespace Quick.Blazor.Bootstrap.Admin.Utils
         /// </summary>
         /// <param name="MinUnitNumber">最小单位数量</param>
         /// <returns></returns>
-        public String GetFitUnitString(Decimal MinUnitNumber)
+        public String GetFitUnitString(decimal MinUnitNumber)
         {
             return UnitList[GetFitUnitIndex(MinUnitNumber)];
         }
@@ -136,7 +132,7 @@ namespace Quick.Blazor.Bootstrap.Admin.Utils
         /// <param name="UnitNumber">数量</param>
         /// <param name="UnitIndex">单位序号</param>
         /// <returns></returns>
-        public Decimal GetMinUnitUnits(Decimal UnitNumber, Int32 UnitIndex)
+        public decimal GetMinUnitUnits(decimal UnitNumber, int UnitIndex)
         {
             var TmpValue = UnitNumber;
             for (int i = UnitIndex - 1; i >= 0; i--)
@@ -152,7 +148,7 @@ namespace Quick.Blazor.Bootstrap.Admin.Utils
         /// <param name="UnitNumber">数量</param>
         /// <param name="Unit">单位字符串</param>
         /// <returns></returns>
-        public Decimal GetMinUnitUnits(Decimal UnitNumber, String Unit)
+        public decimal GetMinUnitUnits(decimal UnitNumber, string Unit)
         {
             var UnitIndex = UnitList.IndexOf(Unit);
             if (UnitIndex < 0)
@@ -169,7 +165,7 @@ namespace Quick.Blazor.Bootstrap.Admin.Utils
         /// <param name="MinUnitNumber">最小单位数量</param>
         /// <param name="UnitIndex">单位序号</param>
         /// <returns></returns>
-        public Decimal GetUnits(Decimal MinUnitNumber, Int32 UnitIndex)
+        public decimal GetUnits(decimal MinUnitNumber, int UnitIndex)
         {
             var tmpValue = MinUnitNumber;
             for (int i = 0; i <= UnitIndex - 1; i++)
@@ -185,7 +181,7 @@ namespace Quick.Blazor.Bootstrap.Admin.Utils
         /// <param name="MinUnitNumber">最小单位数量</param>
         /// <param name="Unit">单位字符串</param>
         /// <returns></returns>
-        public Decimal GetUnits(Decimal MinUnitNumber, String Unit)
+        public decimal GetUnits(decimal MinUnitNumber, string Unit)
         {
             var UnitIndex = UnitList.IndexOf(Unit);
             if (UnitIndex < 0)
@@ -201,7 +197,7 @@ namespace Quick.Blazor.Bootstrap.Admin.Utils
         /// </summary>
         /// <param name="MinUnitNumber">最小单位数量</param>
         /// <returns></returns>
-        public String GetString(Decimal MinUnitNumber)
+        public string GetString(decimal MinUnitNumber)
         {
             return GetString(MinUnitNumber, 0, false);
         }
@@ -213,7 +209,7 @@ namespace Quick.Blazor.Bootstrap.Admin.Utils
         /// <param name="NumberOfDecimalPlaces">小数点位数</param>
         /// <param name="SpaceBetweenNumberAndUnit">数字与单位之间是否加空格</param>
         /// <returns></returns>
-        public String GetString(Decimal MinUnitNumber, Int32 NumberOfDecimalPlaces, Boolean SpaceBetweenNumberAndUnit)
+        public string GetString(decimal MinUnitNumber, int NumberOfDecimalPlaces, bool SpaceBetweenNumberAndUnit)
         {
             var UnitIndex = GetFitUnitIndex(MinUnitNumber);
             return GetString(MinUnitNumber, UnitIndex, NumberOfDecimalPlaces, SpaceBetweenNumberAndUnit);
@@ -227,7 +223,7 @@ namespace Quick.Blazor.Bootstrap.Admin.Utils
         /// <param name="NumberOfDecimalPlaces">小数点位数</param>
         /// <param name="SpaceBetweenNumberAndUnit">数字与单位之间是否加空格</param>
         /// <returns></returns>
-        public String GetString(Decimal MinUnitNumber, String Unit, Int32 NumberOfDecimalPlaces, Boolean SpaceBetweenNumberAndUnit)
+        public string GetString(decimal MinUnitNumber, string Unit, int NumberOfDecimalPlaces, bool SpaceBetweenNumberAndUnit)
         {
             var UnitIndex = UnitList.IndexOf(Unit);
             if (UnitIndex < 0)
@@ -243,12 +239,15 @@ namespace Quick.Blazor.Bootstrap.Admin.Utils
         /// <param name="NumberOfDecimalPlaces">小数点位数</param>
         /// <param name="SpaceBetweenNumberAndUnit">数字与单位之间是否加空格</param>
         /// <returns></returns>
-        public String GetString(Decimal MinUnitNumber, Int32 UnitIndex, Int32 NumberOfDecimalPlaces, Boolean SpaceBetweenNumberAndUnit)
+        public string GetString(decimal MinUnitNumber, int UnitIndex, int NumberOfDecimalPlaces, bool SpaceBetweenNumberAndUnit)
         {
             StringBuilder sb = new StringBuilder();
 
             var unitUnits = GetUnits(MinUnitNumber, UnitIndex);
-            var unitUnitsString = unitUnits.ToString("F" + NumberOfDecimalPlaces);
+            var numberOfDecimalPlaces = 0;
+            if (UnitIndex > 0)
+                numberOfDecimalPlaces = NumberOfDecimalPlaces;
+            var unitUnitsString = unitUnits.ToString("F" + numberOfDecimalPlaces);
             var UnitString = UnitList[UnitIndex];
 
             sb.Append(unitUnitsString);
@@ -267,7 +266,7 @@ namespace Quick.Blazor.Bootstrap.Admin.Utils
         /// </summary>
         /// <param name="MinUnitNumber">最小单位数量</param>
         /// <returns></returns>
-        public String GetString2(Decimal MinUnitNumber)
+        public String GetString2(decimal MinUnitNumber)
         {
             return GetString2(MinUnitNumber, false);
         }
@@ -278,7 +277,7 @@ namespace Quick.Blazor.Bootstrap.Admin.Utils
         /// <param name="MinUnitNumber">最小单位数量</param>
         /// <param name="SpaceBetweenNumberAndUnit">数字与单位之间是否加空格</param>
         /// <returns></returns>
-        public String GetString2(Decimal MinUnitNumber, Boolean SpaceBetweenNumberAndUnit)
+        public string GetString2(decimal MinUnitNumber, bool SpaceBetweenNumberAndUnit)
         {
             return GetString2(MinUnitNumber, UnitList.Count - 1, 0, SpaceBetweenNumberAndUnit);
         }
@@ -290,7 +289,7 @@ namespace Quick.Blazor.Bootstrap.Admin.Utils
         /// <param name="MinUnitIndex">小单位序号</param>
         /// <param name="SpaceBetweenNumberAndUnit">数字与单位之间是否加空格</param>
         /// <returns></returns>
-        public String GetString2(Decimal MinUnitNumber, Int32 MinUnitIndex, Boolean SpaceBetweenNumberAndUnit)
+        public string GetString2(decimal MinUnitNumber, int MinUnitIndex, bool SpaceBetweenNumberAndUnit)
         {
             return GetString2(MinUnitNumber, UnitList.Count - 1, MinUnitIndex, SpaceBetweenNumberAndUnit);
         }
@@ -302,7 +301,7 @@ namespace Quick.Blazor.Bootstrap.Admin.Utils
         /// <param name="MinUnit">小单位字符串</param>
         /// <param name="SpaceBetweenNumberAndUnit">数字与单位之间是否加空格</param>
         /// <returns></returns>
-        public String GetString2(Decimal MinUnitNumber, String MinUnit, Boolean SpaceBetweenNumberAndUnit)
+        public string GetString2(decimal MinUnitNumber, string MinUnit, bool SpaceBetweenNumberAndUnit)
         {
             return GetString2(MinUnitNumber, null, MinUnit, SpaceBetweenNumberAndUnit);
         }
@@ -315,10 +314,10 @@ namespace Quick.Blazor.Bootstrap.Admin.Utils
         /// <param name="MinUnit">小单位字符串</param>
         /// <param name="SpaceBetweenNumberAndUnit">数字与单位之间是否加空格</param>
         /// <returns></returns>
-        public String GetString2(Decimal MinUnitNumber, String MaxUnit, String MinUnit, Boolean SpaceBetweenNumberAndUnit)
+        public string GetString2(decimal MinUnitNumber, string MaxUnit, string MinUnit, bool SpaceBetweenNumberAndUnit)
         {
             var MaxUnitIndex = UnitList.Count - 1;
-            if (!String.IsNullOrEmpty(MaxUnit))
+            if (!string.IsNullOrEmpty(MaxUnit))
             {
                 MaxUnitIndex = UnitList.IndexOf(MaxUnit);
                 if (MaxUnitIndex < 0)
@@ -339,14 +338,14 @@ namespace Quick.Blazor.Bootstrap.Admin.Utils
         /// <param name="MinUnitIndex">小单位序号</param>
         /// <param name="SpaceBetweenNumberAndUnit">数字与单位之间是否加空格</param>
         /// <returns></returns>
-        public String GetString2(Decimal MinUnitNumber, Int32 MaxUnitIndex, Int32 MinUnitIndex, Boolean SpaceBetweenNumberAndUnit)
+        public string GetString2(decimal MinUnitNumber, int MaxUnitIndex, int MinUnitIndex, bool SpaceBetweenNumberAndUnit)
         {
             StringBuilder sb = new StringBuilder();
 
             var TmpValue = MinUnitNumber;
             for (int i = MaxUnitIndex; i >= MinUnitIndex; i--)
             {
-                var CurrentUnitUnits = Decimal.ToInt32(GetUnits(TmpValue, i));
+                var CurrentUnitUnits = decimal.ToInt32(GetUnits(TmpValue, i));
                 var CurrentUnitUnitsString = CurrentUnitUnits.ToString();
                 var UnitString = UnitList[i];
 
