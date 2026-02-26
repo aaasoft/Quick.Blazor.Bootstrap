@@ -700,7 +700,7 @@ namespace Quick.Blazor.Bootstrap.Admin
             try
             {
                 using (var zipFileStream = zipFileInfo.OpenRead())
-                using (var zipArchive = SharpCompress.Archives.ArchiveFactory.Open(zipFileStream))
+                using (var zipArchive = SharpCompress.Archives.ArchiveFactory.OpenArchive(zipFileStream))
                 {
                     foreach (var zipEntry in zipArchive.Entries)
                     {
