@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Quick.Blazor.Bootstrap.Utils;
 using Quick.Localize;
-using System;
 
 namespace Quick.Blazor.Bootstrap
 {

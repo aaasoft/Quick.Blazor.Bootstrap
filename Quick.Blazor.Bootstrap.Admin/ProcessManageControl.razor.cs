@@ -1,15 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Quick.Blazor.Bootstrap.Admin.Model;
-using Quick.Blazor.Bootstrap.Utils;
 using Quick.Localize;
-using System;
-using System.Collections.Generic;
+using Quick.Utils;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Runtime.Versioning;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Quick.Blazor.Bootstrap.Admin
 {
@@ -48,7 +42,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         private ModalWindow modalWindow;
 
         private string searchKeywords;
-        private readonly Utils.UnitStringConverting storageUSC = Utils.UnitStringConverting.StorageUnitStringConverting;
+        private readonly UnitStringConverting storageUSC = UnitStringConverting.StorageUnitStringConverting;
         [Parameter]
         public string OrderBy { get; set; } = nameof(FileInfo.Name);
         [Parameter]

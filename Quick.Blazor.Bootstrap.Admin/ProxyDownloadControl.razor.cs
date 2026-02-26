@@ -1,16 +1,9 @@
-﻿using System;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using BlazorDownloadFile;
-using System.Net.Http;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Text;
 using System.Net.Http.Headers;
-using Quick.Blazor.Bootstrap.Admin.Utils;
 using Quick.Localize;
-using Quick.Blazor.Bootstrap.Utils;
 using Quick.Blazor.Bootstrap.Admin.Core;
+using Quick.Utils;
 
 namespace Quick.Blazor.Bootstrap.Admin;
 

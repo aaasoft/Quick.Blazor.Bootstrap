@@ -1,6 +1,6 @@
 ﻿using System.Text;
-using Quick.Blazor.Bootstrap.Admin.Utils;
 using Quick.Localize;
+using Quick.Utils;
 
 namespace Quick.Blazor.Bootstrap.Admin.Core;
 

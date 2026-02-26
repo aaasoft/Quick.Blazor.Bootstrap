@@ -4,6 +4,7 @@ using Quick.Blazor.Bootstrap.Admin.Utils;
 using Quick.Blazor.Bootstrap.Utils;
 using Quick.Localize;
 using Quick.Shell.Utils;
+using Quick.Utils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
