@@ -6,7 +6,7 @@
         <label for="@Field.Id">@Field.Name</label>
     }
     <div
-        class="@((Field.Input_PrependText != null || Field.Input_PrependChildren != null || Field.Input_AppendText != null || Field.Input_AppendChildren != null) ? "input-group" : null)">
+        class="@((Field.Input_PrependText != null || Field.Input_PrependChildren != null || Field.Input_AppendText != null || Field.Input_AppendChildren != null) ? $"input-group{(Field.Input_IsSmall.HasValue && Field.Input_IsSmall.Value ? " input-group-sm" : null)}" : null)">
         @if (Field.Input_PrependText != null || Field.Input_PrependChildren != null)
         {
             <div class="input-group-prepend">
