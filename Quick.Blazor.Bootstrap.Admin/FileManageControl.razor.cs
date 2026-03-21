@@ -571,7 +571,7 @@ namespace Quick.Blazor.Bootstrap.Admin
                 sb.AppendLine("MD5: " + Convert.ToHexString(md5.Hash).ToLower());
                 sb.AppendLine("SHA1: " + Convert.ToHexString(sha1.Hash).ToLower());
                 sb.AppendLine("SHA256: " + Convert.ToHexString(sha256.Hash).ToLower());
-                modalAlert?.Show(TextVerify, sb.ToString(), usePreTag: true);
+                modalAlert?.Show(TextVerify, sb.ToString(), new() { UsePreTag = true });
                 await InvokeAsync(StateHasChanged);
             }
             catch (TaskCanceledException)
@@ -785,14 +785,23 @@ namespace Quick.Blazor.Bootstrap.Admin
                         {
                             bool? isConfirm = null;
                             var confirmCts = new CancellationTokenSource();
-                            modalAlert.Show(TextConfirm, string.Format(TextUploadFileExistReplace, file), () =>
+                            modalAlert.Show(TextConfirm, string.Format(TextUploadFileExistReplace, file), new ()
                             {
-                                isConfirm = true;
-                                confirmCts.Cancel();
-                            }, () =>
-                            {
-                                isConfirm = false;
-                                confirmCts.Cancel();
+                                OkCallback = () =>
+                                {
+                                    isConfirm = true;
+                                    confirmCts.Cancel();
+                                },
+                                CancelCallback = () =>
+                                {
+                                    isConfirm = false;
+                                    confirmCts.Cancel();
+                                },
+                                CloseCallback = () =>
+                                {
+                                    isConfirm = false;
+                                    confirmCts.Cancel();
+                                }
                             });
                             try { await Task.Delay(-1, confirmCts.Token); }
                             catch { }
@@ -849,7 +858,7 @@ namespace Quick.Blazor.Bootstrap.Admin
             if (file.Length > 1 * 1024 * 1024)
             {
                 var fileInfoStr = $"{file.Name} ({storageUSC.GetString(file.Length, 2, true)}B)";
-                modalAlert.Show(TextConfirm, Locale.GetString("File [{0}] is too large,are you sure to edit it with text editor?", fileInfoStr), openTextEditWindowAction);
+                modalAlert.Show(TextConfirm, Locale.GetString("File [{0}] is too large,are you sure to edit it with text editor?", fileInfoStr), new() { OkCallback = openTextEditWindowAction });
             }
             else
             {
@@ -864,42 +873,50 @@ namespace Quick.Blazor.Bootstrap.Admin
             if (SelectedItem is FileInfo)
             {
                 var file = (FileInfo)SelectedItem;
-                modalAlert?.Show(TextConfirm, string.Format(TextConfirmDeleteFile, file.Name), () =>
+                modalAlert?.Show(TextConfirm, string.Format(TextConfirmDeleteFile, file.Name), new()
                 {
-                    modalLoading?.Show(TextConfirm, file.Name, true, null);
-                    try
+                    OkCallback = () =>
                     {
-                        file.Delete();
-                        modalAlert?.Show(TextDelete, TextSuccess);
-                    }
-                    catch (Exception ex)
-                    {
-                        modalAlert?.Show(TextDelete, TextFailed + Environment.NewLine + ExceptionUtils.GetExceptionMessage(ex));
-                    }
-                    refresh();
-                    modalLoading?.Close();
-                    InvokeAsync(StateHasChanged);
-                }, () => { });
+                        modalLoading?.Show(TextConfirm, file.Name, true, null);
+                        try
+                        {
+                            file.Delete();
+                            modalAlert?.Show(TextDelete, TextSuccess);
+                        }
+                        catch (Exception ex)
+                        {
+                            modalAlert?.Show(TextDelete, TextFailed + Environment.NewLine + ExceptionUtils.GetExceptionMessage(ex));
+                        }
+                        refresh();
+                        modalLoading?.Close();
+                        InvokeAsync(StateHasChanged);
+                    },
+                    ShowCancelButton = true
+                });
             }
             else if (SelectedItem is DirectoryInfo)
             {
                 var dir = (DirectoryInfo)SelectedItem;
-                modalAlert?.Show(TextConfirm, string.Format(TextConfirmDeleteFolder, dir.Name), () =>
-                 {
-                     modalLoading.Show(TextDelete, dir.Name, true, null);
-                     try
-                     {
-                         dir.Delete(true);
-                         modalAlert?.Show(TextDelete, TextSuccess);
-                     }
-                     catch (Exception ex)
-                     {
-                         modalAlert?.Show(TextDelete, TextFailed + Environment.NewLine + ExceptionUtils.GetExceptionMessage(ex));
-                     }
-                     refresh();
-                     modalLoading.Close();
-                     InvokeAsync(StateHasChanged);
-                 }, () => { });
+                modalAlert?.Show(TextConfirm, string.Format(TextConfirmDeleteFolder, dir.Name), new()
+                {
+                    OkCallback = () =>
+                    {
+                        modalLoading.Show(TextDelete, dir.Name, true, null);
+                        try
+                        {
+                            dir.Delete(true);
+                            modalAlert?.Show(TextDelete, TextSuccess);
+                        }
+                        catch (Exception ex)
+                        {
+                            modalAlert?.Show(TextDelete, TextFailed + Environment.NewLine + ExceptionUtils.GetExceptionMessage(ex));
+                        }
+                        refresh();
+                        modalLoading.Close();
+                        InvokeAsync(StateHasChanged);
+                    },
+                    ShowCancelButton = true
+                });
             }
         }
 

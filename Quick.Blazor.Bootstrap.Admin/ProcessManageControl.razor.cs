@@ -174,24 +174,28 @@ namespace Quick.Blazor.Bootstrap.Admin
         private void KillProcess(ProcessInfo info, bool entireProcessTree)
         {
             var title = entireProcessTree ? TextKillProcessTree : TextKillProcess;
-            modalAlert.Show(title, string.Format(TextAskToKillProcess, info.PID, info.Name), () =>
-              {
-                  Task.Run(() =>
-                  {
-                      try
-                      {
-                          var process = Process.GetProcessById(info.PID);
-                          if (process == null)
-                              throw new ApplicationException(Locale.GetString("Can't found process[Id:{0}].", info.PID));
-                          process.Kill(entireProcessTree);
-                          search();
-                      }
-                      catch (Exception ex)
-                      {
-                          Task.Delay(100).ContinueWith(task => modalAlert.Show(TextFailed, ex.Message, null, null));
-                      }
-                  });
-              }, null);
+            modalAlert.Show(title, string.Format(TextAskToKillProcess, info.PID, info.Name), new()
+            {
+                OkCallback = () =>
+                {
+                    Task.Run(() =>
+                    {
+                        try
+                        {
+                            var process = Process.GetProcessById(info.PID);
+                            if (process == null)
+                                throw new ApplicationException(Locale.GetString("Can't found process[Id:{0}].", info.PID));
+                            process.Kill(entireProcessTree);
+                            search();
+                        }
+                        catch (Exception ex)
+                        {
+                            Task.Delay(100).ContinueWith(task => modalAlert.Show(TextFailed, ex.Message));
+                        }
+                    });
+                },
+                ShowCancelButton = true
+            });
         }
     }
 }

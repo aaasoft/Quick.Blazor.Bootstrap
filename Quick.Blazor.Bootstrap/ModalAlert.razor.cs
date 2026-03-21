@@ -3,6 +3,27 @@ using Quick.Localize;
 
 namespace Quick.Blazor.Bootstrap
 {
+    public class ModalAlertOptions
+    {
+        public bool ShowOkButton { get; set; } = true;
+        public Action OkCallback { get; set; }
+        public bool ShowCancelButton { get; set; } = false;
+        private Action _CancelCallback;
+        public Action CancelCallback
+        {
+            get => _CancelCallback;
+            set
+            {
+                _CancelCallback = value;
+                if (value != null)
+                    ShowCancelButton = true;
+            }
+        }
+        public bool ShowCloseButton { get; set; } = true;
+        public Action CloseCallback { get; set; }
+        public bool UsePreTag { get; set; } = false;
+    }
+
     public partial class ModalAlert : ComponentBase_WithGettextSupport
     {
         [Parameter]
@@ -19,45 +40,53 @@ namespace Quick.Blazor.Bootstrap
         public string ModalBodyCls { get; set; }
         [Parameter]
         public string ModalFooterCls { get; set; }
-        
+
         public static string TextOk => Locale.GetString("OK");
         public static string TextCancel => Locale.GetString("Cancel");
         public string[] ContentLines => Content?.Split('\n') ?? new string[0];
         private string Title { get; set; }
         private string Content { get; set; }
-        private Action OkCallback { get; set; }
-        private Action CancelCallback { get; set; }
         private bool Visiable { get; set; }
-        private bool UsePreTag { get; set; } = false;
-        public void Show(string title, string content, Action okCallback = null, Action cancelCallback = null, bool usePreTag = false)
+        private ModalAlertOptions options = new();
+
+        public void Show(string title, string content, ModalAlertOptions options)
         {
             Title = title;
             Content = content;
-            OkCallback = okCallback;
-            CancelCallback = cancelCallback;
-            UsePreTag = usePreTag;
+            if (options == null)
+                options = new();
+            this.options = options;
             Visiable = true;
             InvokeAsync(StateHasChanged);
         }
 
+        public void Show(string title, string content, Action okCallback = null, Action cancelCallback = null, bool usePreTag = false)
+        {
+            Show(title, content, new()
+            {
+                OkCallback = okCallback,
+                CancelCallback = cancelCallback,
+                UsePreTag = usePreTag
+            });
+        }
+
         public void Ok()
         {
-            OkCallback?.Invoke();
+            options.OkCallback?.Invoke();
             Close();
         }
 
         public void Cancel()
         {
-            CancelCallback?.Invoke();
+            options.CancelCallback?.Invoke();
             Close();
         }
 
         public void Close()
         {
+            options.CloseCallback?.Invoke();
             Title = null;
             Content = null;
-            OkCallback = null;
-            CancelCallback = null;
             Visiable = false;
             InvokeAsync(StateHasChanged);
         }
