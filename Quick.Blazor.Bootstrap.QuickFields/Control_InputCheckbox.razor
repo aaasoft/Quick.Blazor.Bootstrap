@@ -1,23 +1,27 @@
 ﻿@using Quick.Fields
 
-<div class="custom-control custom-switch">
-    @if (Field.Input_ReadOnly.HasValue && Field.Input_ReadOnly.Value)
+<div class="@ControlUtils.GetFormGroupClass(Field)">
+    <label for="@Field.Id">@Field.Name</label>
+    <div class="custom-control custom-switch">
+        @if (Field.Input_ReadOnly.HasValue && Field.Input_ReadOnly.Value)
+        {
+            <input type="checkbox" class="custom-control-input" disabled>
+        }
+        else
+        {
+            <InputCheckbox class="custom-control-input" @bind-Value="Value" id="@id" />
+        }
+        <label class="custom-control-label" for="@id"></label>
+    </div>
+    @if (!string.IsNullOrEmpty(Field.Description))
     {
-        <input type="checkbox" class="custom-control-input" disabled>
+        <small class="form-text text-muted">@Field.Description</small>
     }
-    else
-    {
-        <InputCheckbox class="custom-control-input" @bind-Value="Value" />
-    }
-    <label class="custom-control-label">@Field.Name</label>
 </div>
-@if (!string.IsNullOrEmpty(Field.Description))
-{
-    <small class="form-text text-muted">@Field.Description</small>
-}
 
 @code
 {
+    private string id = "checkbox_" + Guid.NewGuid().ToString("N");
     [Parameter]
     public FieldForGet Field { get; set; }
 
