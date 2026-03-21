@@ -86,10 +86,13 @@
     case FieldType.Download:
         <Control_Download Field="Field" />
         break;
+    case FieldType.InputCheckbox:
+        <Control_InputCheckbox Field="Field" />
+        break;
     case FieldType.InputHidden:
     case FieldType.MessageBox:
     case FieldType.Toast:
-        break;    
+        break;
     default:
         <p>Unknown control type[@Field.Type]</p>
         break;

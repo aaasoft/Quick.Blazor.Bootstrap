@@ -1,0 +1,37 @@
+﻿@using Quick.Fields
+
+<div class="custom-control custom-switch">
+    @if (Field.Input_ReadOnly.HasValue && Field.Input_ReadOnly.Value)
+    {
+        <input type="checkbox" class="custom-control-input" disabled>
+    }
+    else
+    {
+        <InputCheckbox class="custom-control-input" @bind-Value="Value" />
+    }
+    <label class="custom-control-label">@Field.Name</label>
+</div>
+@if (!string.IsNullOrEmpty(Field.Description))
+{
+    <small class="form-text text-muted">@Field.Description</small>
+}
+
+@code
+{
+    [Parameter]
+    public FieldForGet Field { get; set; }
+
+    private bool Value
+    {
+        get
+        {
+            if (bool.TryParse(Field.Value, out var ret))
+                return ret;
+            return false;
+        }
+        set
+        {
+            Field.Value = value.ToString();
+        }
+    }
+}
