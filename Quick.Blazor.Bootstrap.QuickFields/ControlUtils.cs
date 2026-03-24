@@ -100,6 +100,21 @@ internal static class ControlUtils
         return sb.ToString();
     }
 
+    public static string GetInputGroupClass(FieldForGet field)
+    {
+        var sb = new StringBuilder();
+        if (field.Input_PrependText != null
+            || field.Input_PrependChildren != null
+            || field.Input_AppendText != null
+            || field.Input_AppendChildren != null)
+        {
+            sb.Append("input-group");
+            if (field.Input_IsSmall.HasValue && field.Input_IsSmall.Value)
+                sb.Append(" input-group-sm");
+        }
+        return sb.ToString();
+    }
+
     public static string GetInputClass(FieldForGet field)
     {
         if (!string.IsNullOrEmpty(field.Html_Class))
