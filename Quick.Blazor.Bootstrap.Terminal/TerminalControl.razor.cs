@@ -1,15 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Pty.Net;
 using Quick.Localize;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using XtermBlazor;
 
 namespace Quick.Blazor.Bootstrap.Terminal
@@ -95,29 +89,30 @@ namespace Quick.Blazor.Bootstrap.Terminal
             }
         }
 
-        private void OnData(string t)
+        private async Task OnData(string t)
         {
-            ptyWriteStream?.Write(Encoding.Default.GetBytes(t));
-            ptyWriteStream?.Flush();
+            ptyWriteStream?.WriteAsync(Encoding.Default.GetBytes(t));
+            ptyWriteStream?.FlushAsync();
         }
 
-        public void ExecuteCommand(string line)
+        public async Task ExecuteCommand(string line)
         {
-            OnData(line + Environment.NewLine);
+            await OnData(line + Environment.NewLine);
         }
 
         private void killShell()
         {
-            try
+            if (pty != null)
             {
-                if (pty != null)
+                if (OperatingSystem.IsMacOS())
                 {
-                    pty.Kill();
+                    var process = Process.GetProcessById(pty.Pid);
+                    if (process != null && !process.HasExited)
+                        process.Kill(true);
+                    return;
                 }
-            }
-            catch
-            {
-                ExecuteCommand("exit");
+                pty.Kill();
+                pty.Dispose();
             }
         }
 
@@ -178,9 +173,10 @@ namespace Quick.Blazor.Bootstrap.Terminal
 
         private void Pty_ProcessExited(object sender, PtyExitedEventArgs e)
         {
+            cts.Cancel();
             pty.ProcessExited -= Pty_ProcessExited;
-            var message = Locale.GetString("Terminal process has exited with exit code {0}",e.ExitCode);
-            terminal?.WriteLine(message);
+            var message = Locale.GetString("Terminal process has exited with exit code {0}", e.ExitCode);
+            terminal?.WriteLine(Environment.NewLine + message);
             if (OperatingSystem.IsWindows())
             {
                 pty.Kill();
@@ -192,8 +188,8 @@ namespace Quick.Blazor.Bootstrap.Terminal
 
         public override void Dispose()
         {
-            base.Dispose();
             killShell();
+            base.Dispose();
         }
     }
 }
