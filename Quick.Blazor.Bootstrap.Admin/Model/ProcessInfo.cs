@@ -44,8 +44,8 @@ public class ProcessInfo
             {
                 if (includeDetail)
                 {
-                    CmdLine = ProcessUtils.ExecuteShell($"ps -o command -p {PID}").Output.Trim();
-                    FileName = ProcessUtils.ExecuteShell($"ps -o comm -p {PID}").Output.Trim();
+                    CmdLine = ProcessUtils.ExecuteShell($"ps -o command -p {PID}").Output?.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries)?.LastOrDefault()?.Trim();
+                    FileName = ProcessUtils.ExecuteShell($"ps -o comm -p {PID}").Output?.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries)?.LastOrDefault()?.Trim();
                     WorkingDirectory = ProcessUtils.ExecuteShell($"lsof -d cwd | grep {PID}").Output?.Trim()?.Split(" ", StringSplitOptions.RemoveEmptyEntries)?.LastOrDefault();
                 }
             }
@@ -124,25 +124,53 @@ public class ProcessInfo
         }
         else
         {
-            var ret = ProcessUtils.ExecuteShell($"ps --ppid {PID}");
-            if (ret.ExitCode != 0)
-                return null;
-            return ret.Output.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries).Skip(1)
-            .Select(line =>
+            IEnumerable<ProcessInfo> processes = null;
+            if (OperatingSystem.IsMacOS())
             {
-                var segments = line.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
-                if (segments.Length < 4)
+                var ret = ProcessUtils.ExecuteShell($"ps -ax -o pid,ppid,ucomm | grep {PID}");
+                if (ret.ExitCode != 0)
                     return null;
-                var pid = int.Parse(segments[0]);
-                var name = string.Join(' ', segments.Skip(3));
-                return new ProcessInfo()
-                {
-                    PID = pid,
-                    Name = name
-                };
-            })
-            .Where(t => t != null && t.PID != ret.ProcessId)
-            .ToArray();
+                processes = ret.Output.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(line=>
+                    {
+                        var segments = line.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                        if (segments.Length < 3)
+                            return null;
+                        var pid = int.Parse(segments[0]);
+                        var ppid = int.Parse(segments[1]);
+                        if (ppid != PID)
+                            return null;
+                        var name = string.Join(' ', segments.Skip(2));
+                        return new ProcessInfo()
+                        {
+                            PID = pid,
+                            Name = name
+                        };
+                    })
+                    .Where(t => t != null && t.PID != ret.ProcessId);
+            }
+            else
+            {
+                var ret = ProcessUtils.ExecuteShell($"ps --ppid {PID}");
+                if (ret.ExitCode != 0)
+                    return null;
+                processes = ret.Output.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries).Skip(1)
+                    .Select(line =>
+                    {
+                        var segments = line.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                        if (segments.Length < 4)
+                            return null;
+                        var pid = int.Parse(segments[0]);
+                        var name = string.Join(' ', segments.Skip(3));
+                        return new ProcessInfo()
+                        {
+                            PID = pid,
+                            Name = name
+                        };
+                    })
+                    .Where(t => t != null && t.PID != ret.ProcessId);
+            }
+            return processes.ToArray();
         }
     }
 }

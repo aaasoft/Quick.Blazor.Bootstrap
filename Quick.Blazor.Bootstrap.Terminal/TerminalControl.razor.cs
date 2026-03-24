@@ -108,8 +108,17 @@ namespace Quick.Blazor.Bootstrap.Terminal
 
         private void killShell()
         {
-            if (pty != null)
-                pty.Kill();
+            try
+            {
+                if (pty != null)
+                {
+                    pty.Kill();
+                }
+            }
+            catch
+            {
+                ExecuteCommand("exit");
+            }
         }
 
         private async Task newShell()
