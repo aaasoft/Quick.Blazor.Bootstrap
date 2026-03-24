@@ -40,7 +40,16 @@ public class ProcessInfo
                 try { StartTime = process.StartTime; }
                 catch { }
             }
-            if (OperatingSystem.IsLinux())
+            if (OperatingSystem.IsMacOS())
+            {
+                if (includeDetail)
+                {
+                    CmdLine = ProcessUtils.ExecuteShell($"ps -o command -p {PID}").Output.Trim();
+                    FileName = ProcessUtils.ExecuteShell($"ps -o comm -p {PID}").Output.Trim();
+                    WorkingDirectory = ProcessUtils.ExecuteShell($"lsof -d cwd | grep {PID}").Output?.Trim()?.Split(" ", StringSplitOptions.RemoveEmptyEntries)?.LastOrDefault();
+                }
+            }
+            else if (OperatingSystem.IsLinux())
             {
                 Name = File.ReadAllText($"/proc/{PID}/comm").Trim();
                 if (includeDetail)
@@ -71,19 +80,6 @@ public class ProcessInfo
                         }
                         CmdLine = GetWmicResult($"wmic process where ProcessId={PID} get CommandLine");
                         FileName = GetWmicResult($"wmic process where ProcessId={PID} get ExecutablePath");
-                    }
-                    catch { }
-                }
-            }
-            else
-            {
-                if (includeDetail)
-                {
-                    try
-                    {
-                        var psi = process.StartInfo;
-                        FileName = psi.FileName;
-                        CmdLine = string.Join(' ', psi.ArgumentList);
                     }
                     catch { }
                 }
