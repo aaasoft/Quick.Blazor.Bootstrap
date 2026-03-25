@@ -126,15 +126,35 @@ namespace Quick.Blazor.Bootstrap.Terminal
             string app = App;
             if (string.IsNullOrEmpty(app))
             {
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                string[] shells = null;
+                if (OperatingSystem.IsWindows())
                 {
-                    app = "powershell";
+                    shells = ["powershell"];
+                }
+                else if (OperatingSystem.IsMacOS())
+                {
+                    shells =
+                    [
+                        "/bin/zsh",
+                        "/bin/bash",
+                        "sh"
+                    ];
                 }
                 else
                 {
-                    app = "/bin/bash";
-                    if (!File.Exists(app))
-                        app = "sh";
+                    shells =
+                    [
+                        "/bin/bash",
+                        "sh"
+                    ];
+                }
+                for (var i = 0; i < shells.Length; i++)
+                {
+                    app = shells[i];
+                    if (i == shells.Length - 1)
+                        break;
+                    if (File.Exists(app))
+                        break;
                 }
             }
             var options = new PtyOptions
