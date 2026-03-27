@@ -2,7 +2,6 @@
 using Pty.Net;
 using Quick.Localize;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 using System.Text;
 using XtermBlazor;
 
@@ -89,15 +88,15 @@ namespace Quick.Blazor.Bootstrap.Terminal
             }
         }
 
-        private async Task OnData(string t)
+        private void OnData(string t)
         {
-            ptyWriteStream?.WriteAsync(Encoding.Default.GetBytes(t));
-            ptyWriteStream?.FlushAsync();
+            ptyWriteStream?.Write(Encoding.Default.GetBytes(t));
+            ptyWriteStream?.Flush();
         }
 
-        public async Task ExecuteCommand(string line)
+        public void ExecuteCommand(string line)
         {
-            await OnData(line + Environment.NewLine);
+            OnData(line + Environment.NewLine);
         }
 
         private void killShell()
@@ -179,7 +178,7 @@ namespace Quick.Blazor.Bootstrap.Terminal
                 var buffer = new byte[1024];
                 try
                 {
-                    while (true)
+                    while (!cancallationToken.IsCancellationRequested)
                     {
                         var ret = await ptyReaderStream.ReadAsync(buffer, 0, buffer.Length, cancallationToken);
                         if (ret <= 0)
