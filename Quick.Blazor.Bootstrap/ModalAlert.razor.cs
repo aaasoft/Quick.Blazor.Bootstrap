@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System.ComponentModel;
+using Microsoft.AspNetCore.Components;
 using Quick.Localize;
 
 namespace Quick.Blazor.Bootstrap
@@ -60,6 +61,7 @@ namespace Quick.Blazor.Bootstrap
             InvokeAsync(StateHasChanged);
         }
 
+        [Obsolete("Please use method: Show(string title, string content, ModalAlertOptions options)")]
         public void Show(string title, string content, Action okCallback = null, Action cancelCallback = null, bool usePreTag = false)
         {
             Show(title, content, new()

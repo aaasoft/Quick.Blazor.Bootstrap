@@ -70,7 +70,7 @@ namespace Quick.Blazor.Bootstrap.Terminal
                 Columns = Columns,
                 Rows = Rows
             };
-            if(OperatingSystem.IsWindows())
+            if (OperatingSystem.IsWindows())
                 terminalOptions.WindowsPty = new WindowsPty();
         }
 
@@ -101,18 +101,22 @@ namespace Quick.Blazor.Bootstrap.Terminal
 
         private void killShell()
         {
-            if (pty != null)
+            try
             {
-                if (OperatingSystem.IsMacOS())
+                if (pty != null)
                 {
-                    var process = Process.GetProcessById(pty.Pid);
-                    if (process != null && !process.HasExited)
-                        process.Kill(true);
-                    return;
+                    if (OperatingSystem.IsMacOS())
+                    {
+                        var process = Process.GetProcessById(pty.Pid);
+                        if (process != null && !process.HasExited)
+                            process.Kill(true);
+                        return;
+                    }
+                    pty.Kill();
+                    pty.Dispose();
                 }
-                pty.Kill();
-                pty.Dispose();
             }
+            catch { }
         }
 
         private async Task newShell()
