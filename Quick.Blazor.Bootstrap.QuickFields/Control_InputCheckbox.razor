@@ -5,7 +5,7 @@
     <div class="custom-control custom-switch">
         @if (Field.Input_ReadOnly.HasValue && Field.Input_ReadOnly.Value)
         {
-            <input type="checkbox" class="custom-control-input" disabled>
+            <InputCheckbox class="custom-control-input" @bind-Value="Value" id="@id" disabled />
         }
         else
         {
