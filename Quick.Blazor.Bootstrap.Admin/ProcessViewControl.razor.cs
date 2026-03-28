@@ -116,23 +116,28 @@ namespace Quick.Blazor.Bootstrap.Admin
 
         private void btnKillProcess_Click()
         {
-            modalAlert.Show(TextKillProcessTree, string.Format(TextAskToKillProcess, PID, ProcessInfo.Name), () =>
-              {
-                  Task.Run(() =>
-                  {
-                      try
-                      {
-                          var process = Process.GetProcessById(PID);
-                          process.Kill(true);
-                          modalAlert.Show(TextKillProcessTree, TextSuccess);
-                      }
-                      catch (Exception ex)
-                      {
-                          modalAlert.Show(TextKillProcessTree, TextFailed + "." + ex.Message);
-                          RefreshProcess();
-                      }
-                  });
-              }, null);
+            modalAlert.Show(TextKillProcessTree, string.Format(TextAskToKillProcess, PID, ProcessInfo.Name),
+                new ()
+                {
+                    OkCallback = () =>
+                    {
+                        Task.Run(() =>
+                        {
+                            try
+                            {
+                                var process = Process.GetProcessById(PID);
+                                process.Kill(true);
+                                modalAlert.Show(TextKillProcessTree, TextSuccess);
+                            }
+                            catch (Exception ex)
+                            {
+                                modalAlert.Show(TextKillProcessTree, TextFailed + "." + ex.Message);
+                                RefreshProcess();
+                            }
+                        });
+                    },
+                    ShowCancelButton = true
+                });
         }
 
         public override void Dispose()

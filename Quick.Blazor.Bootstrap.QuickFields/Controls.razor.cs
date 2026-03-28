@@ -38,7 +38,12 @@ public partial class Controls : ComponentBase
                         if (canCancel)
                             cancelAction = () => field.Value = FieldForGet.MESSAGEBOX_VALUE_CANCEL;
                     }
-                    modalAlert.Show(field.Name, field.Description, okAction, cancelAction, usePreTag);
+                    modalAlert.Show(field.Name, field.Description, new()
+                    {
+                        OkCallback = okAction,
+                        CancelCallback = cancelAction,
+                        UsePreTag = usePreTag
+                    });
                     break;
                 case FieldType.Toast:
                     toastStack.AddToast(field.Name, field.Description, BackgroundTheme.info);

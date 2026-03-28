@@ -8,6 +8,10 @@ namespace Quick.Blazor.Bootstrap.Admin.Utils;
 public static class FileUploadHelper
 {
     private readonly static UnitStringConverting storageUSC = UnitStringConverting.StorageUnitStringConverting;
+    /// <summary>
+    /// 上传缓冲区大小
+    /// </summary>
+    public static int UploadBufferSize { get; set; } = 1 * 1024 * 1024;
 
     public struct UploadFileInfo
     {
@@ -33,7 +37,7 @@ public static class FileUploadHelper
         try
         {
             var fileInfo = await fileReference.ReadFileInfoAsync();
-            using (var commonTransferContext = new CommonTransferContext(progressUpdated, fileInfo.Size))
+            using (var commonTransferContext = new CommonTransferContext(progressUpdated, fileInfo.Size, UploadBufferSize))
             {
                 var fileName = fileInfo.Name;
                 tmpFile = fileInfoHandler?.Invoke(new UploadFileInfo(fileName, fileInfo.Size, storageUSC.GetString(fileInfo.Size, 0, true) + "B"));
@@ -72,7 +76,7 @@ public static class FileUploadHelper
                 fileInfos[i] = fileInfo;
             }
             var totalFileSize = fileInfos.Sum(t => t.Size);
-            using (var commonTransferContext = new CommonTransferContext(progressUpdated, totalFileSize))
+            using (var commonTransferContext = new CommonTransferContext(progressUpdated, totalFileSize, UploadBufferSize))
             {
                 var tmpFiles = new string[fileReferences.Length];
                 for (var i = 0; i < fileReferences.Length; i++)

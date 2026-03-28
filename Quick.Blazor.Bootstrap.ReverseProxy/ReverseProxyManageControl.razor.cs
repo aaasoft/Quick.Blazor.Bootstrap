@@ -118,22 +118,25 @@ namespace Quick.Blazor.Bootstrap.ReverseProxy
 
         private void Delete(ReverseProxyRule model)
         {
-            modalAlert.Show(TextDelete, string.Format(TextConfirmDelete, model.Name), () =>
-              {
-                  try
-                  {
-                      ConfigDbContext.CacheContext.Remove(model);
-                      ReverseProxyManager.Instance.RemoveRule(model);
-                      InvokeAsync(StateHasChanged);
-                  }
-                  catch (Exception ex)
-                  {
-                      Task.Delay(100).ContinueWith(t =>
-                      {
-                          modalAlert.Show(TextError, ex.Message);
-                      });
-                  }
-              });
+            modalAlert.Show(TextDelete, string.Format(TextConfirmDelete, model.Name), new()
+            {
+                OkCallback = () =>
+                {
+                    try
+                    {
+                        ConfigDbContext.CacheContext.Remove(model);
+                        ReverseProxyManager.Instance.RemoveRule(model);
+                        InvokeAsync(StateHasChanged);
+                    }
+                    catch (Exception ex)
+                    {
+                        Task.Delay(100).ContinueWith(t =>
+                        {
+                            modalAlert.Show(TextError, ex.Message);
+                        });
+                    }
+                }
+            });
         }
     }
 }

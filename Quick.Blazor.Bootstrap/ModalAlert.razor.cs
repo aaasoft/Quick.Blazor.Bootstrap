@@ -61,15 +61,9 @@ namespace Quick.Blazor.Bootstrap
             InvokeAsync(StateHasChanged);
         }
 
-        [Obsolete("Please use method: Show(string title, string content, ModalAlertOptions options)")]
-        public void Show(string title, string content, Action okCallback = null, Action cancelCallback = null, bool usePreTag = false)
+        public void Show(string title, string content)
         {
-            Show(title, content, new()
-            {
-                OkCallback = okCallback,
-                CancelCallback = cancelCallback,
-                UsePreTag = usePreTag
-            });
+            Show(title, content, null);
         }
 
         public void Ok()
