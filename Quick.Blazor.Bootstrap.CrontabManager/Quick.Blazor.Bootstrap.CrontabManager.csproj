@@ -6,7 +6,7 @@
 		<RepositoryUrl>https://cnb.cool/scbeta/Quick.Blazor.Bootstrap</RepositoryUrl>
 		<PackageProjectUrl>https://cnb.cool/scbeta/Quick.Blazor.Bootstrap</PackageProjectUrl>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-		<Version>2026.14.328</Version>
+		<Version>2026.15.409</Version>
 		<Description>Quick.Blazor.Bootstrap.CrontabManager is a component library for cron manage built on top of Blazor and CSS frameworks Bootstrap.</Description>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
