@@ -1,0 +1,15 @@
+﻿@using Quick.Fields
+
+@if (!string.IsNullOrEmpty(Description))
+{
+    @foreach (var line in Description.Split(Environment.NewLine))
+    {
+        <small class="form-text text-muted">@line</small>
+    }
+}
+
+@code
+{
+    [Parameter]
+    public string Description { get; set; }
+}
