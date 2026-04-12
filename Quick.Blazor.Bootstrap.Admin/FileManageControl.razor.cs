@@ -369,7 +369,7 @@ namespace Quick.Blazor.Bootstrap.Admin
             path = path.Replace('/', Path.DirectorySeparatorChar);
             if (!path.StartsWith(Path.DirectorySeparatorChar))
                 path = Path.DirectorySeparatorChar + path;
-            
+
             return BaseDir + path;
         }
 
@@ -691,7 +691,7 @@ namespace Quick.Blazor.Bootstrap.Admin
             var zipFileInfo = SelectedItem as FileInfo;
             if (zipFileInfo == null)
                 return;
-            var cts = new System.Threading.CancellationTokenSource();
+            var cts = new CancellationTokenSource();
             var cancellationToken = cts.Token;
             modalLoading?.Show($"{TextDecompress} - {zipFileInfo.Name}", null, false, cts.Cancel);
             long totalFileSize = 0;
@@ -702,35 +702,42 @@ namespace Quick.Blazor.Bootstrap.Admin
                 using (var zipFileStream = zipFileInfo.OpenRead())
                 using (var zipArchive = SharpCompress.Archives.ArchiveFactory.OpenArchive(zipFileStream))
                 {
-                    foreach (var zipEntry in zipArchive.Entries)
+                    using (var reader = zipArchive.ExtractAllEntries())
                     {
-                        totalFileSize += zipEntry.Size;
+                        while (reader.MoveToNextEntry())
+                        {
+                            totalFileSize += reader.Entry.Size;
+                        }
                     }
                     using (var commonTransferContext = new CommonTransferContext(progressInfo =>
                     {
                         modalLoading.UpdateProgress(progressInfo.Percent, progressInfo.Message);
                     }, totalFileSize))
                     {
-                        foreach (var zipEntry in zipArchive.Entries)
+                        using (var reader = zipArchive.ExtractAllEntries())
                         {
-                            var zipEntryKey = zipEntry.Key;
-                            if (zipEntry is SharpCompress.Archives.GZip.GZipArchiveEntry)
-                                zipEntryKey = Path.GetFileNameWithoutExtension(zipFileInfo.Name);
-                            modalLoading.UpdateContent(zipEntryKey);
-                            var fileName = Path.Combine(baseFolder, zipEntryKey);
-                            //如果是文件夹
-                            if (zipEntry.IsDirectory)
+                            while (reader.MoveToNextEntry())
                             {
-                                if (!Directory.Exists(fileName))
-                                    Directory.CreateDirectory(fileName);
-                                continue;
+                                var zipEntry = reader.Entry;
+                                var zipEntryKey = zipEntry.Key;
+                                if (zipEntry is SharpCompress.Archives.GZip.GZipArchiveEntry)
+                                    zipEntryKey = Path.GetFileNameWithoutExtension(zipFileInfo.Name);
+                                modalLoading.UpdateContent(zipEntryKey);
+                                var fileName = Path.Combine(baseFolder, zipEntryKey);
+                                //如果是文件夹
+                                if (zipEntry.IsDirectory)
+                                {
+                                    if (!Directory.Exists(fileName))
+                                        Directory.CreateDirectory(fileName);
+                                    continue;
+                                }
+                                var fileFolder = Path.GetDirectoryName(fileName);
+                                if (!Directory.Exists(fileFolder))
+                                    Directory.CreateDirectory(fileFolder);
+                                using (var zipEntryStream = reader.OpenEntryStream())
+                                using (var fileStream = File.OpenWrite(fileName))
+                                    await commonTransferContext.TransferAsync(zipEntryStream, fileStream);
                             }
-                            var fileFolder = Path.GetDirectoryName(fileName);
-                            if (!Directory.Exists(fileFolder))
-                                Directory.CreateDirectory(fileFolder);
-                            using (var zipEntryStream = zipEntry.OpenEntryStream())
-                            using (var fileStream = File.OpenWrite(fileName))
-                                await commonTransferContext.TransferAsync(zipEntryStream, fileStream);
                         }
                     }
                 }
@@ -785,7 +792,7 @@ namespace Quick.Blazor.Bootstrap.Admin
                         {
                             bool? isConfirm = null;
                             var confirmCts = new CancellationTokenSource();
-                            modalAlert.Show(TextConfirm, string.Format(TextUploadFileExistReplace, file), new ()
+                            modalAlert.Show(TextConfirm, string.Format(TextUploadFileExistReplace, file), new()
                             {
                                 OkCallback = () =>
                                 {
