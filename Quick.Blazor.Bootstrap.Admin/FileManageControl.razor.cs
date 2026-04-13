@@ -6,6 +6,7 @@ using Quick.Blazor.Bootstrap.Admin.Core;
 using Quick.Blazor.Bootstrap.Admin.Utils;
 using Quick.Localize;
 using Quick.Utils;
+using SharpCompress.Archives;
 using System.IO.Compression;
 using System.Text;
 using Tewr.Blazor.FileReader;
@@ -128,6 +129,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         [Parameter]
         public bool OrderByAsc { get; set; } = true;
 
+        public static string TextLoading => Locale.GetString("Loading");
         public static string TextConfirm => Locale.GetString("Confirm");
         public static string TextConfirmDeleteFolder => Locale.GetString("Do you want to delete folder[{0}]?");
         public static string TextConfirmDeleteFile => Locale.GetString("Do you want to delete file[{0}]?");
@@ -685,62 +687,55 @@ namespace Quick.Blazor.Bootstrap.Admin
             }
         }
 
-
         private async void btnDecompress_Click()
         {
-            var zipFileInfo = SelectedItem as FileInfo;
-            if (zipFileInfo == null)
+            var archiveFileInfo = SelectedItem as FileInfo;
+            if (archiveFileInfo == null)
                 return;
             var cts = new CancellationTokenSource();
             var cancellationToken = cts.Token;
-            modalLoading?.Show($"{TextDecompress} - {zipFileInfo.Name}", null, false, cts.Cancel);
+            modalLoading?.Show($"{TextDecompress} - {archiveFileInfo.Name}", TextLoading, false, cts.Cancel);
             long totalFileSize = 0;
-            var baseFolder = zipFileInfo.DirectoryName;
+            var baseFolder = archiveFileInfo.DirectoryName;
             //开始解压
             try
             {
-                using (var zipFileStream = zipFileInfo.OpenRead())
-                using (var zipArchive = SharpCompress.Archives.ArchiveFactory.OpenArchive(zipFileStream))
+                await Task.Run(()=>
                 {
-                    using (var reader = zipArchive.ExtractAllEntries())
+                    using (var archiveFileStream = archiveFileInfo.OpenRead())
+                    using (var archive = ArchiveFactory.OpenArchive(archiveFileStream))
                     {
-                        while (reader.MoveToNextEntry())
+                        totalFileSize = archive.GetEntriesTotalSize();
+                        using (var commonTransferContext = new CommonTransferContext(progressInfo =>
                         {
-                            totalFileSize += reader.Entry.Size;
-                        }
-                    }
-                    using (var commonTransferContext = new CommonTransferContext(progressInfo =>
-                    {
-                        modalLoading.UpdateProgress(progressInfo.Percent, progressInfo.Message);
-                    }, totalFileSize))
-                    {
-                        using (var reader = zipArchive.ExtractAllEntries())
+                            modalLoading.UpdateProgress(progressInfo.Percent, progressInfo.Message);
+                        }, totalFileSize))
                         {
-                            while (reader.MoveToNextEntry())
+                            archive.EntriesForEach(entry =>
                             {
-                                var zipEntry = reader.Entry;
-                                var zipEntryKey = zipEntry.Key;
-                                if (zipEntry is SharpCompress.Archives.GZip.GZipArchiveEntry)
-                                    zipEntryKey = Path.GetFileNameWithoutExtension(zipFileInfo.Name);
-                                modalLoading.UpdateContent(zipEntryKey);
-                                var fileName = Path.Combine(baseFolder, zipEntryKey);
+                                var metaEntry = entry.Entry;
+                                var entryKey = metaEntry.Key;
+                                if (string.IsNullOrEmpty(entryKey))
+                                    entryKey = Path.GetFileNameWithoutExtension(archiveFileInfo.Name);
+                                modalLoading.UpdateContent(entryKey);
+                                var fileName = Path.Combine(baseFolder, entryKey);
                                 //如果是文件夹
-                                if (zipEntry.IsDirectory)
+                                if (metaEntry.IsDirectory)
                                 {
                                     if (!Directory.Exists(fileName))
                                         Directory.CreateDirectory(fileName);
-                                    continue;
+                                    return;
                                 }
                                 var fileFolder = Path.GetDirectoryName(fileName);
                                 if (!Directory.Exists(fileFolder))
                                     Directory.CreateDirectory(fileFolder);
-                                using (var zipEntryStream = reader.OpenEntryStream())
+                                using (var zipEntryStream = entry.OpenEntryStream())
                                 using (var fileStream = File.OpenWrite(fileName))
-                                    await commonTransferContext.TransferAsync(zipEntryStream, fileStream);
-                            }
+                                    commonTransferContext.TransferAsync(zipEntryStream, fileStream).Wait();
+                            });
                         }
                     }
-                }
+                });
                 if (cancellationToken.IsCancellationRequested)
                 {
                     modalAlert?.Show(TextDecompress, TextCanceled);
