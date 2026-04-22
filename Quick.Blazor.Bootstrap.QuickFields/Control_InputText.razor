@@ -1,60 +1,15 @@
 ﻿@using Quick.Fields
 
-<div class="@ControlUtils.GetFormGroupClass(Field)">
-    @if (!string.IsNullOrEmpty(Field.Name))
+<InputBase Field="@Field">
+    @if (Field.Input_ReadOnly.HasValue && Field.Input_ReadOnly.Value)
     {
-        <label for="@Field.Id">@Field.Name</label>
+        <InputText class="@ControlUtils.GetInputClass(Field)" @bind-Value="@Field.Value" placeholder="@Field.Input_Placeholder" readonly />
     }
-    <div class="@ControlUtils.GetInputGroupClass(Field)">
-        @if (Field.Input_PrependText != null || Field.Input_PrependChildren != null)
-        {
-            <div class="input-group-prepend">
-                @if (Field.Input_PrependText != null)
-                {
-                    <div class="input-group-text">@Field.Input_PrependText</div>
-                }
-                @if (Field.Input_PrependChildren != null)
-                {
-                    @foreach (var field in Field.Input_PrependChildren)
-                    {
-                        <Control Field="field" />
-                    }
-                }
-            </div>
-        }
-        @if (Field.Input_ReadOnly.HasValue && Field.Input_ReadOnly.Value)
-        {
-            <input id="@Field.Id" type="text" class="@ControlUtils.GetInputClass(Field)" @bind="@Field.Value"
-                placeholder="@Field.Input_Placeholder" readonly>
-        }
-        else
-        {
-            <input id="@Field.Id" type="text" class="@ControlUtils.GetInputClass(Field)" @bind="@Field.Value"
-                placeholder="@Field.Input_Placeholder">
-        }
-        @if (Field.Input_AppendText != null || Field.Input_AppendChildren != null)
-        {
-            <div class="input-group-append">
-                @if (Field.Input_AppendText != null)
-                {
-                    <div class="input-group-text">@Field.Input_AppendText</div>
-                }
-                @if (Field.Input_AppendChildren != null)
-                {
-                    @foreach (var field in Field.Input_AppendChildren)
-                    {
-                        <Control Field="field" />
-                    }
-                }
-            </div>
-        }
-    </div>
-    <InputDescription Description="@Field.Description" />
-    @if (!string.IsNullOrEmpty(Field.Input_ValidationMessage))
+    else
     {
-        <div class="validation-message">@Field.Input_ValidationMessage</div>
+        <InputText class="@ControlUtils.GetInputClass(Field)" @bind-Value="@Field.Value" placeholder="@Field.Input_Placeholder" />
     }
-</div>
+</InputBase>
 
 @code
 {

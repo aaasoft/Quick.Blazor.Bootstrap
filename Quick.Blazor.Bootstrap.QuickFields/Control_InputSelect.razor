@@ -1,80 +1,33 @@
 ﻿@using Quick.Fields
 
-<div class="@ControlUtils.GetFormGroupClass(Field)">
-    @if (!string.IsNullOrEmpty(Field.Name))
-    {
-        <label for="@Field.Id">@Field.Name</label>
-    }
-    <div
-        class="@ControlUtils.GetInputGroupClass(Field)">
-        @if (Field.Input_PrependText != null || Field.Input_PrependChildren != null)
+<InputBase Field="@Field">
+@if (Field.Input_ReadOnly.HasValue && Field.Input_ReadOnly.Value)
+{
+    <InputSelect class="@ControlUtils.GetInputClass(Field)" @bind-Value="@Field.Value" disabled>
+        @if (string.IsNullOrEmpty(Field.Value) && !Field.InputSelect_Options.ContainsKey(""))
         {
-            <div class="input-group-prepend">
-                @if (Field.Input_PrependText != null)
-                {
-                    <div class="input-group-text">@Field.Input_PrependText</div>
-                }
-                @if (Field.Input_PrependChildren != null)
-                {
-                    @foreach (var field in Field.Input_PrependChildren)
-                    {
-                        <Control Field="field" />
-                    }
-                }
-            </div>
+            <option value=""></option>
         }
-        @if (Field.Input_ReadOnly.HasValue && Field.Input_ReadOnly.Value)
+        @foreach (var t in Field.InputSelect_Options)
         {
-            <select class="@ControlUtils.GetInputClass(Field)" @bind="@Field.Value" disabled>
-                @if (string.IsNullOrEmpty(Field.Value) && !Field.InputSelect_Options.ContainsKey(""))
-                {
-                    <option value=""></option>
-                }
-                @foreach (var t in Field.InputSelect_Options)
-                {
-                    <option value="@t.Key">@t.Value</option>
-                }
-            </select>
+            <option value="@t.Key">@t.Value</option>
         }
-        else
+    </InputSelect>
+}
+else
+{
+    <InputSelect class="@ControlUtils.GetInputClass(Field)" @bind-Value="@Field.Value">
+        @if (string.IsNullOrEmpty(Field.Value) && !Field.InputSelect_Options.ContainsKey(""))
         {
-            <select class="@ControlUtils.GetInputClass(Field)" @bind="@Field.Value">
-                @if (string.IsNullOrEmpty(Field.Value) && !Field.InputSelect_Options.ContainsKey(""))
-                {
-                    <option value=""></option>
-                }
-                @if (Field.InputSelect_Options != null)
-                {
-                    @foreach (var t in Field.InputSelect_Options)
-                    {
-                        <option value="@t.Key">@t.Value</option>
-                    }
-                }
-            </select>
+            <option value=""></option>
         }
-        @if (Field.Input_AppendText != null || Field.Input_AppendChildren != null)
+        @foreach (var t in Field.InputSelect_Options)
         {
-            <div class="input-group-append">
-                @if (Field.Input_AppendText != null)
-                {
-                    <div class="input-group-text">@Field.Input_AppendText</div>
-                }
-                @if (Field.Input_AppendChildren != null)
-                {
-                    @foreach (var field in Field.Input_AppendChildren)
-                    {
-                        <Control Field="field" />
-                    }
-                }
-            </div>
+            <option value="@t.Key">@t.Value</option>
         }
-    </div>
-    <InputDescription Description="@Field.Description" />
-    @if (!string.IsNullOrEmpty(Field.Input_ValidationMessage))
-    {
-        <div class="validation-message">@Field.Input_ValidationMessage</div>
-    }
-</div>
+    </InputSelect>
+}
+</InputBase>
 
 @code
 {

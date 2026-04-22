@@ -1,7 +1,6 @@
 ﻿@using Quick.Fields
 
-<div class="@ControlUtils.GetFormGroupClass(Field)">
-    <label for="@Field.Id">@Field.Name</label>
+<InputBase Field="@Field">
     <div class="custom-control custom-switch">
         @if (Field.Input_ReadOnly.HasValue && Field.Input_ReadOnly.Value)
         {
@@ -13,8 +12,7 @@
         }
         <label class="custom-control-label" for="@id"></label>
     </div>
-    <InputDescription Description="@Field.Description" />
-</div>
+</InputBase>
 
 @code
 {

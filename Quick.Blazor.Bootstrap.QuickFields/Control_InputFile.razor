@@ -2,62 +2,18 @@
 @using Quick.Blazor.Bootstrap.Admin
 @using System.Text
 
-<div class="@ControlUtils.GetFormGroupClass(Field)">
-    @if (!string.IsNullOrEmpty(Field.Name))
-    {
-        <label for="@Field.Id">@Field.Name</label>
-    }
-    <div class="input-group">
-        @if (Field.Input_PrependText != null || Field.Input_PrependChildren != null)
-        {
-            <div class="input-group-prepend">
-                @if (Field.Input_PrependText != null)
-                {
-                    <div class="input-group-text">@Field.Input_PrependText</div>
-                }
-                @if (Field.Input_PrependChildren != null)
-                {
-                    @foreach (var field in Field.Input_PrependChildren)
-                    {
-                        <Control Field="field" />
-                    }
-                }
-            </div>
-        }
-        @if (Field.Input_ReadOnly.HasValue && Field.Input_ReadOnly.Value)
-        {
-            <input type="text" class="@ControlUtils.GetInputClass(Field)" @bind="@Field.Value" readonly>
-        }
-        else
-        {
-            <input type="text" class="@ControlUtils.GetInputClass(Field)" @bind="@Field.Value">
-            <div class="input-group-append">
-                <button type="button" class="@ControlUtils.GetButtonClass(Field)" @onclick="selectFile">..</button>
-            </div>
-        }
-        @if (Field.Input_AppendText != null || Field.Input_AppendChildren != null)
-        {
-            <div class="input-group-append">
-                @if (Field.Input_AppendText != null)
-                {
-                    <div class="input-group-text">@Field.Input_AppendText</div>
-                }
-                @if (Field.Input_AppendChildren != null)
-                {
-                    @foreach (var field in Field.Input_AppendChildren)
-                    {
-                        <Control Field="field" />
-                    }
-                }
-            </div>
-        }
+<InputBase Field="@Field">
+@if (Field.Input_ReadOnly.HasValue && Field.Input_ReadOnly.Value)
+{
+    <input type="text" class="@ControlUtils.GetInputClass(Field)" @bind="@Field.Value" readonly>
+}
+else
+{
+    <input type="text" class="@ControlUtils.GetInputClass(Field)" @bind="@Field.Value">
+    <div class="input-group-append">
+        <button type="button" class="@ControlUtils.GetButtonClass(Field)" @onclick="selectFile">..</button>
     </div>
-
-    <InputDescription Description="@Field.Description" />
-    @if (!string.IsNullOrEmpty(Field.Input_ValidationMessage))
-    {
-        <div class="validation-message">@Field.Input_ValidationMessage</div>
-    }
-</div>
+}
+</InputBase>
 
 <ModalWindow @ref="modalWindow" DialogSizeExtraLarge="true" DialogCentered="false" ModalBodyCls="p-0" />

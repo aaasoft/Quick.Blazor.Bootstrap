@@ -1,0 +1,56 @@
+﻿@using Quick.Fields
+
+<div class="@ControlUtils.GetFormGroupClass(Field)">
+    @if (!string.IsNullOrEmpty(Field.Name))
+    {
+        <label for="@Field.Id">@Field.Name</label>
+    }
+    <div class="@ControlUtils.GetInputGroupClass(Field)">
+        @if (Field.Input_PrependText != null || Field.Input_PrependChildren != null)
+        {
+            <div class="input-group-prepend">
+                @if (Field.Input_PrependText != null)
+                {
+                    <div class="input-group-text">@Field.Input_PrependText</div>
+                }
+                @if (Field.Input_PrependChildren != null)
+                {
+                    @foreach (var field in Field.Input_PrependChildren)
+                    {
+                        <Control Field="field" />
+                    }
+                }
+            </div>
+        }
+        @ChildContent
+        @if (Field.Input_AppendText != null || Field.Input_AppendChildren != null)
+        {
+            <div class="input-group-append">
+                @if (Field.Input_AppendText != null)
+                {
+                    <div class="input-group-text">@Field.Input_AppendText</div>
+                }
+                @if (Field.Input_AppendChildren != null)
+                {
+                    @foreach (var field in Field.Input_AppendChildren)
+                    {
+                        <Control Field="field" />
+                    }
+                }
+            </div>
+        }
+    </div>
+    <small class="form-text text-muted">@Field.Description</small>
+    @if (!string.IsNullOrEmpty(Field.Input_ValidationMessage))
+    {
+        <div class="validation-message">@Field.Input_ValidationMessage</div>
+    }
+</div>
+
+@code
+{
+    [Parameter]
+    public FieldForGet Field { get; set; }
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}
