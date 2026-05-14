@@ -18,7 +18,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Quick.PtyNet" Version="1.0.4" />
-		<PackageReference Include="XtermBlazor" Version="2.3.0" />
+		<PackageReference Include="XtermBlazor" Version="2.4.0" />
 	</ItemGroup>
 
 	<ItemGroup>

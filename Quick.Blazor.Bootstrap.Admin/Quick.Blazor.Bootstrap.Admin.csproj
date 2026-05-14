@@ -20,7 +20,7 @@
 	<ItemGroup>
 		<PackageReference Include="BlazorDownloadFile" Version="2.4.0.2" />
 		<PackageReference Include="Quick.Shell" Version="1.0.4" />
-		<PackageReference Include="SharpCompress" Version="0.47.4" />
+		<PackageReference Include="SharpCompress" Version="0.48.0" />
 		<PackageReference Include="Tewr.Blazor.FileReader" Version="3.4.0.24340" />
 	</ItemGroup>
 	<ItemGroup>
