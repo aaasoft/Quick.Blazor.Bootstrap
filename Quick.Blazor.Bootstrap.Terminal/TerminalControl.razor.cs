@@ -1,8 +1,15 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿﻿using Microsoft.AspNetCore.Components;
 using Pty.Net;
 using Quick.Localize;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using XtermBlazor;
 
 namespace Quick.Blazor.Bootstrap.Terminal
@@ -70,7 +77,7 @@ namespace Quick.Blazor.Bootstrap.Terminal
                 Columns = Columns,
                 Rows = Rows
             };
-            if (OperatingSystem.IsWindows())
+            if(OperatingSystem.IsWindows())
                 terminalOptions.WindowsPty = new WindowsPty();
         }
 
@@ -101,22 +108,8 @@ namespace Quick.Blazor.Bootstrap.Terminal
 
         private void killShell()
         {
-            try
-            {
-                if (pty != null)
-                {
-                    if (OperatingSystem.IsMacOS())
-                    {
-                        var process = Process.GetProcessById(pty.Pid);
-                        if (process != null && !process.HasExited)
-                            process.Kill(true);
-                        return;
-                    }
-                    pty.Kill();
-                    pty.Dispose();
-                }
-            }
-            catch { }
+            if (pty != null)
+                pty.Kill();
         }
 
         private async Task newShell()
@@ -129,35 +122,15 @@ namespace Quick.Blazor.Bootstrap.Terminal
             string app = App;
             if (string.IsNullOrEmpty(app))
             {
-                string[] shells = null;
-                if (OperatingSystem.IsWindows())
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
-                    shells = ["powershell"];
-                }
-                else if (OperatingSystem.IsMacOS())
-                {
-                    shells =
-                    [
-                        "/bin/zsh",
-                        "/bin/bash",
-                        "sh"
-                    ];
+                    app = "powershell";
                 }
                 else
                 {
-                    shells =
-                    [
-                        "/bin/bash",
-                        "sh"
-                    ];
-                }
-                for (var i = 0; i < shells.Length; i++)
-                {
-                    app = shells[i];
-                    if (i == shells.Length - 1)
-                        break;
-                    if (File.Exists(app))
-                        break;
+                    app = "/bin/bash";
+                    if (!File.Exists(app))
+                        app = "sh";
                 }
             }
             var options = new PtyOptions
@@ -182,7 +155,7 @@ namespace Quick.Blazor.Bootstrap.Terminal
                 var buffer = new byte[1024];
                 try
                 {
-                    while (!cancallationToken.IsCancellationRequested)
+                    while (true)
                     {
                         var ret = await ptyReaderStream.ReadAsync(buffer, 0, buffer.Length, cancallationToken);
                         if (ret <= 0)
@@ -196,10 +169,9 @@ namespace Quick.Blazor.Bootstrap.Terminal
 
         private void Pty_ProcessExited(object sender, PtyExitedEventArgs e)
         {
-            cts.Cancel();
             pty.ProcessExited -= Pty_ProcessExited;
-            var message = Locale.GetString("Terminal process has exited with exit code {0}", e.ExitCode);
-            terminal?.WriteLine(Environment.NewLine + message);
+            var message = Locale.GetString("Terminal process has exited with exit code {0}",e.ExitCode);
+            terminal?.WriteLine(message);
             if (OperatingSystem.IsWindows())
             {
                 pty.Kill();
@@ -211,8 +183,8 @@ namespace Quick.Blazor.Bootstrap.Terminal
 
         public override void Dispose()
         {
-            killShell();
             base.Dispose();
+            killShell();
         }
     }
 }
