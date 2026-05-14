@@ -108,8 +108,24 @@ namespace Quick.Blazor.Bootstrap.Terminal
 
         private void killShell()
         {
-            if (pty != null)
-                pty.Kill();
+            try
+            {
+                if (pty != null)
+                {
+                    if (OperatingSystem.IsMacOS())
+                    {
+                        var process = Process.GetProcessById(pty.Pid);
+                        if (process != null && !process.HasExited)
+                            process.Kill(true);
+                        return;
+                    }
+                    pty.Kill();
+                }
+            }
+            catch
+            {
+                ExecuteCommand("exit");
+            }
         }
 
         private async Task newShell()
@@ -171,7 +187,7 @@ namespace Quick.Blazor.Bootstrap.Terminal
         {
             pty.ProcessExited -= Pty_ProcessExited;
             var message = Locale.GetString("Terminal process has exited with exit code {0}",e.ExitCode);
-            terminal?.WriteLine(message);
+            terminal?.WriteLine(Environment.NewLine + message);
             if (OperatingSystem.IsWindows())
             {
                 pty.Kill();
