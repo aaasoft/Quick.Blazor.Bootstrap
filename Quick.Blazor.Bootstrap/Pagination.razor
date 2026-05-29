@@ -1,62 +1,56 @@
-﻿@inherits ComponentBase_WithGettextSupport;
+﻿@using Microsoft.AspNetCore.Components.Forms
+@inherits ComponentBase_WithGettextSupport;
 
 @ChildContent
 <nav>
     <ul class="pagination">
         <li class="page-item @(FirstPageEnable ? "" : "disabled")">
-            <a href="javascript:;" class="page-link" @onclick="@(e => { ChangeOffset(0); })">@FirstPageText</a>
+            <a href="javascript:;" class="page-link" @onclick="@(e => { ChangeOffset(0); })">&laquo;</a>
         </li>
         <li class="page-item @(FirstPageEnable ? "" : "disabled")">
             <a href="javascript:;" class="page-link"
-                @onclick="@(e => { ChangeOffset(Offset - PageSize); })">@PreviousPageText</a>
+                @onclick="@(e => { ChangeOffset(Offset - PageSize); })">&lsaquo;</a>
         </li>
-        <li class="page-item">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon2">@PageText</span>
-                </div>
-                @if (PageIndexEditable)
-                {
-                    <input type="number" class="form-control" style="width: 5rem;" @bind-value="PageIndex" />
-                    @if (DisplayPageCount)
-                    {
-                        <div class="input-group-append">
-                            <span class="input-group-text" id="basic-addon2">/ @PageCount</span>
-                        </div>
-                    }
-                }
-                else
-                {
-                    <div class="input-group-append">
-                        @if (DisplayPageCount)
-                        {
-                            <span class="input-group-text" id="basic-addon2">@PageIndex / @PageCount</span>
-                        }
-                        else
-                        {
-                            <span class="input-group-text" id="basic-addon2">@PageIndex</span>
-                        }
-                    </div>
-                }
-            </div>
-        </li>
-        @if (DisplayRecordCount)
+        @if (PageIndexEditable)
         {
-            <li class="page-item">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon2">@RecordCountText@RecordCount</span>
-                    </div>
-                </div>
+            <li class="page-item disabled">
+                <InputNumber  class="form-control rounded-0 border-left-0" style="width: 5rem;" @bind-Value="PageIndex"></InputNumber>
             </li>
+            @if (DisplayPageCount)
+            {
+                <li class="page-item disabled">
+                    <span class="page-link">/ @PageCount</span>
+                </li>
+            }
+        }
+        else
+        {
+            @if (DisplayPageCount)
+            {
+                <li class="page-item disabled">
+                    <span class="page-link">@PageIndex / @PageCount</span>
+                </li>
+            }
+            else
+            {
+                <li class="page-item disabled">
+                    <span class="page-link">@PageIndex</span>
+                </li>
+            }
         }
         <li class="page-item @(LastPageEnable ? "" : "disabled")">
             <a href="javascript:;" class="page-link"
-                @onclick="@(e => { ChangeOffset(Offset + PageSize); })">@NextPageText</a>
+                @onclick="@(e => { ChangeOffset(Offset + PageSize); })">&rsaquo;</a>
         </li>
         <li class="page-item @(LastPageEnable ? "" : "disabled")">
             <a href="javascript:;" class="page-link"
-                @onclick="@(e => { ChangeOffset((PageCount - 1) * PageSize); })">@LastPageText</a>
+                @onclick="@(e => { ChangeOffset((PageCount - 1) * PageSize); })">&raquo;</a>
         </li>
+        @if (DisplayRecordCount)
+        {
+            <li class="page-item disabled">
+                <span class="page-link">@RecordCountText@RecordCount</span>
+            </li>
+        }
     </ul>
 </nav>

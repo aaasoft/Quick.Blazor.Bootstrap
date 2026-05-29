@@ -7,11 +7,6 @@ namespace Quick.Blazor.Bootstrap
     {
         [Parameter]
         public RenderFragment ChildContent { get; set; }
-        private string FirstPageText => Locale.GetString("First Page");
-        private string LastPageText => Locale.GetString("Last Page");
-        private string PreviousPageText => Locale.GetString("Previous Page");
-        private string NextPageText => Locale.GetString("Next Page");
-        private string PageText => Locale.GetString("Page");
         private string RecordCountText => Locale.GetString("Record Count:");
         [Parameter]
         public bool DisplayRecordCount { get; set; } = true;
@@ -62,7 +57,7 @@ namespace Quick.Blazor.Bootstrap
             {
                 if (value < 1 || value > PageCount)
                     return;
-                Offset = (value - 1) * PageSize;
+                ChangeOffset((value - 1) * PageSize);
             }
         }
         private int PageCount => RecordCount / PageSize + (RecordCount % PageSize == 0 ? 0 : 1);

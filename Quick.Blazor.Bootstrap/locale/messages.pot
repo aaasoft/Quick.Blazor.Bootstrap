@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"POT-Creation-Date: 2024-05-16 16:54:42+0800\n"
-"PO-Revision-Date: 2024-05-16 16:54:42+0800\n"
+"Project-Id-Version: Quick.Blazor.Bootstrap\n"
+"POT-Creation-Date: 2026-05-29 10:30:01+0800\n"
+"PO-Revision-Date: 2026-05-29 10:30:02+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -10,54 +10,43 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: GetText.NET Extractor\n"
 
-#: ../../Pagination.razor.cs:26
-msgid "Record Count:"
+#: ..\..\Tabs.razor.cs:39
+#, csharp-format
+msgid "An TabPane with the same key[{0}] already exists"
 msgstr ""
 
-#: ../../ModalLoading.razor.cs:21
-#: ../../ModalAlert.razor.cs:19
-#: ../../ModalPrompt.razor.cs:20
-msgid "Cancel"
+#: ..\..\Accordion.razor.cs:53
+msgid "An AccordionPane with the same key already exists"
 msgstr ""
 
-#: ../../Pagination.razor.cs:24
-msgid "Page"
-msgstr ""
-
-#: ../../NavMenu.razor.cs:62
-msgid "NavMenuItem's Key is null"
-msgstr ""
-
-#: ../../Pagination.razor.cs:16
-msgid "First Page"
-msgstr ""
-
-#: ../../ModalAlert.razor.cs:18
-#: ../../ModalPrompt.razor.cs:19
-msgid "OK"
-msgstr ""
-
-#: ../../Pagination.razor.cs:22
-msgid "Next Page"
-msgstr ""
-
-#: ../../NavMenu.razor.cs:67
-msgid "An NavMenuItem with the same key already exists"
-msgstr ""
-
-#: ../../Tabs.razor.cs:38
+#: ..\..\Tabs.razor.cs:34
 msgid "TabPane's Key is null"
 msgstr ""
 
-#: ../../Pagination.razor.cs:20
-msgid "Previous Page"
+#: ..\..\ModalPrompt.razor.cs:20
+#: ..\..\ModalAlert.razor.cs:45
+msgid "OK"
 msgstr ""
 
-#: ../../Pagination.razor.cs:18
-msgid "Last Page"
+#: ..\..\NavMenu.razor.cs:63
+msgid "NavMenuItem's Key is null"
 msgstr ""
 
-#: ../../Tabs.razor.cs:43
-msgid "An TabPane with the same key[{0}] already exists"
+#: ..\..\Accordion.razor.cs:48
+msgid "AccordionPane'sKey is null"
+msgstr ""
+
+#: ..\..\NavMenu.razor.cs:68
+msgid "An NavMenuItem with the same key already exists"
+msgstr ""
+
+#: ..\..\Pagination.razor.cs:10
+msgid "Record Count:"
+msgstr ""
+
+#: ..\..\ModalLoading.razor.cs:22
+#: ..\..\ModalPrompt.razor.cs:21
+#: ..\..\ModalAlert.razor.cs:46
+msgid "Cancel"
 msgstr ""
 

@@ -1,5 +1,18 @@
 ﻿@inherits ComponentBase_WithGettextSupport;
-
+<form>
+    <div class="custom-control custom-checkbox">
+        <InputCheckbox  class="custom-control-input" id="cbPageIndexEditable" @bind-Value="PageIndexEditable"/>
+        <label class="custom-control-label" for="cbPageIndexEditable">@TextPageIndexEditable</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+        <InputCheckbox  class="custom-control-input" id="cbDisplayPageCount" @bind-Value="DisplayPageCount"/>
+        <label class="custom-control-label" for="cbDisplayPageCount">@TextDisplayPageCount</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+        <InputCheckbox  class="custom-control-input" id="cbDisplayRecordCount" @bind-Value="DisplayRecordCount"/>
+        <label class="custom-control-label" for="cbDisplayRecordCount">@TextDisplayRecordCount</label>
+    </div>
+</form>
 <table class="table">
     <thead>
         <tr>
@@ -19,5 +32,8 @@
         }
     </tbody>
 </table>
-<Pagination @bind-PageSize="PageSize" @bind-Offset="Offset" RecordCount="@users.Length">
+<Pagination @bind-PageSize="PageSize" @bind-Offset="Offset" RecordCount="@users.Length"
+    PageIndexEditable="@PageIndexEditable"
+    DisplayPageCount="@DisplayPageCount"
+    DisplayRecordCount="@DisplayRecordCount">
 </Pagination>

@@ -1,61 +1,65 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-05-16 16:54:42+0800\n"
-"PO-Revision-Date: 2025-03-17 17:47+0800\n"
+"POT-Creation-Date: 2026-05-29 10:30:01+0800\n"
+"PO-Revision-Date: 2026-05-29 10:30+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.9\n"
 
-#: ../../Pagination.razor.cs:26
-msgid "Record Count:"
-msgstr "记录数:"
+#: ..\..\Tabs.razor.cs:39
+#, csharp-format
+msgid "An TabPane with the same key[{0}] already exists"
+msgstr "已经存在相同键[{0}]的TabPane"
 
-#: ../../ModalLoading.razor.cs:21 ../../ModalAlert.razor.cs:19
-#: ../../ModalPrompt.razor.cs:20
-msgid "Cancel"
-msgstr "取消"
+#: ..\..\Accordion.razor.cs:53
+msgid "An AccordionPane with the same key already exists"
+msgstr "已经存在相同键的TabPane"
 
-#: ../../Pagination.razor.cs:24
-msgid "Page"
-msgstr "页"
-
-#: ../../NavMenu.razor.cs:62
-msgid "NavMenuItem's Key is null"
-msgstr "NavMenuItem的Key为null"
-
-#: ../../Pagination.razor.cs:16
-msgid "First Page"
-msgstr "首页"
-
-#: ../../ModalAlert.razor.cs:18 ../../ModalPrompt.razor.cs:19
-msgid "OK"
-msgstr "确定"
-
-#: ../../Pagination.razor.cs:22
-msgid "Next Page"
-msgstr "下一页"
-
-#: ../../NavMenu.razor.cs:67
-msgid "An NavMenuItem with the same key already exists"
-msgstr "已经存在相关键的NavMenuItem"
-
-#: ../../Tabs.razor.cs:38
+#: ..\..\Tabs.razor.cs:34
 msgid "TabPane's Key is null"
 msgstr "TabPane的Key为null"
 
-#: ../../Pagination.razor.cs:20
-msgid "Previous Page"
-msgstr "上一页"
+#: ..\..\ModalPrompt.razor.cs:20 ..\..\ModalAlert.razor.cs:45
+msgid "OK"
+msgstr "确定"
 
-#: ../../Pagination.razor.cs:18
-msgid "Last Page"
-msgstr "末页"
+#: ..\..\NavMenu.razor.cs:63
+msgid "NavMenuItem's Key is null"
+msgstr "NavMenuItem的Key为null"
 
-#: ../../Tabs.razor.cs:43
-msgid "An TabPane with the same key[{0}] already exists"
-msgstr "已经存在相同键[{0}]的TabPane"
+#: ..\..\Accordion.razor.cs:48
+msgid "AccordionPane'sKey is null"
+msgstr "AccordionPane的Key为null"
+
+#: ..\..\NavMenu.razor.cs:68
+msgid "An NavMenuItem with the same key already exists"
+msgstr "已经存在相关键的NavMenuItem"
+
+#: ..\..\Pagination.razor.cs:10
+msgid "Record Count:"
+msgstr "记录数:"
+
+#: ..\..\ModalLoading.razor.cs:22 ..\..\ModalPrompt.razor.cs:21
+#: ..\..\ModalAlert.razor.cs:46
+msgid "Cancel"
+msgstr "取消"
+
+#~ msgid "Last Page"
+#~ msgstr "末页"
+
+#~ msgid "First Page"
+#~ msgstr "首页"
+
+#~ msgid "Previous Page"
+#~ msgstr "上一页"
+
+#~ msgid "Next Page"
+#~ msgstr "下一页"
+
+#~ msgid "Page"
+#~ msgstr "页"

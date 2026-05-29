@@ -1,113 +1,113 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Test.AspNetCore9\n"
-"POT-Creation-Date: 2024-12-12 14:24:52+0800\n"
-"PO-Revision-Date: 2024-12-12 14:28+0800\n"
+"POT-Creation-Date: 2026-05-29 10:25:33+0800\n"
+"PO-Revision-Date: 2026-05-29 10:28+0800\n"
 "Last-Translator: 张鹏 <scbeta@qq.com>\n"
 "Language-Team: \n"
 "Language: zh\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.9\n"
 
-#: ../../Shared/MainLayout.razor.cs:15
-msgid "FileSelect"
-msgstr "文件选择"
-
-#: ../../Shared/MainLayout.razor.cs:12
-msgid "Tree"
-msgstr "树形"
-
-#: ../../Pages/Index.razor.cs:10
-msgid "How is Blazor working for you?"
-msgstr "Blazor 如何为你工作？"
-
-#: ../../Pages/TreeTest.razor.cs:14
-msgid "Log: "
-msgstr "日志："
-
-#: ../../Shared/MainLayout.razor.cs:17
-msgid "Terminal"
-msgstr "终端"
-
-#: ../../Pages/AccordionTest.razor.cs:13
-msgid "Allow Multiple Pane Actived"
-msgstr "允许多个面板激活"
-
-#: ../../Pages/FileSelect.razor.cs:16
-msgid "Select file"
-msgstr "选择文件"
-
-#: ../../Shared/SurveyPrompt.razor.cs:11
-msgid "and tell us what you think."
-msgstr "并告诉我们您的想法。"
-
-#: ../../Shared/MainLayout.razor.cs:18
+#: ..\..\Components\Layout\MainLayout.razor.cs:18
 msgid "LogView"
 msgstr "日志查看"
 
-#: ../../Pages/TreeTest.razor.cs:13
-msgid "Collapse All"
-msgstr "全部收缩"
-
-#: ../../Shared/MainLayout.razor.cs:9
+#: ..\..\Components\Layout\MainLayout.razor.cs:9
 msgid "Home"
 msgstr "主页"
 
-#: ../../Pages/PaginationTest.razor.cs:13
-msgid "Last Name"
-msgstr "姓"
-
-#: ../../Shared/SurveyPrompt.razor.cs:10
-msgid "brief survey"
-msgstr "简单介绍"
-
-#: ../../Shared/MainLayout.razor.cs:19
-msgid "ReverseProxy"
-msgstr "反向代理"
-
-#: ../../Shared/MainLayout.razor.cs:10
-msgid "Tabs"
-msgstr "选项卡"
-
-#: ../../Pages/TreeTest.razor.cs:12
-msgid "Expand All"
-msgstr "全部展开"
-
-#: ../../Pages/FileSelect.razor.cs:15
-msgid "Zip File"
-msgstr "ZIP文件"
-
-#: ../../Shared/MainLayout.razor.cs:11
-msgid "Pagination"
-msgstr "分页器"
-
-#: ../../Shared/MainLayout.razor.cs:13
-msgid "Accordion"
-msgstr "手风琴"
-
-#: ../../Pages/PaginationTest.razor.cs:12
-msgid "First Name"
-msgstr "名"
-
-#: ../../Shared/SurveyPrompt.razor.cs:9
-msgid "Please take our"
-msgstr "请查看我们的"
-
-#: ../../Shared/MainLayout.razor.cs:14
-msgid "FileManage"
-msgstr "文件管理器"
-
-#: ../../Pages/Index.razor.cs:9
+#: ..\..\Components\Pages\Home.razor.cs:8
 msgid "Welcome to use Quick.Blazor.Bootstrap."
 msgstr "欢迎使用Quick.Blazor.Bootstrap。"
 
-#: ../../Shared/MainLayout.razor.cs:16
+#: ..\..\Components\Layout\MainLayout.razor.cs:15
+msgid "FileSelect"
+msgstr "文件选择"
+
+#: ..\..\Components\Layout\MainLayout.razor.cs:17
+msgid "Terminal"
+msgstr "终端"
+
+#: ..\..\Components\Pages\PaginationTest.razor.cs:8
+msgid "First Name"
+msgstr "名"
+
+#: ..\..\Components\Layout\MainLayout.razor.cs:13
+msgid "Accordion"
+msgstr "手风琴"
+
+#: ..\..\Components\Layout\MainLayout.razor.cs:12
+msgid "Tree"
+msgstr "树形"
+
+#: ..\..\Components\Pages\TreeTest.razor.cs:10
+msgid "Log: "
+msgstr "日志："
+
+#: ..\..\Components\Pages\PaginationTest.razor.cs:12
+msgid "Display Record Count"
+msgstr "显示记录数量"
+
+#: ..\..\Components\Layout\SurveyPrompt.razor.cs:9
+msgid "brief survey"
+msgstr "简单介绍"
+
+#: ..\..\Components\Pages\TreeTest.razor.cs:8
+msgid "Expand All"
+msgstr "全部展开"
+
+#: ..\..\Components\Layout\MainLayout.razor.cs:14
+msgid "FileManage"
+msgstr "文件管理器"
+
+#: ..\..\Components\Pages\TreeTest.razor.cs:9
+msgid "Collapse All"
+msgstr "全部收缩"
+
+#: ..\..\Components\Layout\MainLayout.razor.cs:16
 msgid "ProcessManage"
 msgstr "进程管理"
 
-#: ../../Pages/AccordionTest.razor.cs:16
+#: ..\..\Components\Layout\MainLayout.razor.cs:11
+msgid "Pagination"
+msgstr "分页器"
+
+#: ..\..\Components\Layout\SurveyPrompt.razor.cs:8
+msgid "Please take our"
+msgstr "请查看我们的"
+
+#: ..\..\Components\Pages\FileSelect.razor.cs:13
+msgid "Select file"
+msgstr "选择文件"
+
+#: ..\..\Components\Pages\AccordionTest.razor.cs:10
+msgid "Allow Multiple Pane Actived"
+msgstr "允许多个面板激活"
+
+#: ..\..\Components\Layout\MainLayout.razor.cs:19
+msgid "ReverseProxy"
+msgstr "反向代理"
+
+#: ..\..\Components\Layout\SurveyPrompt.razor.cs:10
+msgid "and tell us what you think."
+msgstr "并告诉我们您的想法。"
+
+#: ..\..\Components\Pages\PaginationTest.razor.cs:10
+msgid "Page Index Editable"
+msgstr "允许编辑页序号"
+
+#: ..\..\Components\Pages\FileSelect.razor.cs:12
+msgid "Zip File"
+msgstr "ZIP文件"
+
+#: ..\..\Components\Pages\PaginationTest.razor.cs:11
+msgid "Display Page Count"
+msgstr "显示总页数"
+
+#: ..\..\Components\Pages\AccordionTest.razor.cs:13
 msgid ""
 "The Lord of the Rings is an epic high-fantasy novel by J.R.R. Tolkien. Set "
 "in Middle-earth, the story began as a sequel to Tolkien's earlier work, The "
@@ -130,3 +130,15 @@ msgstr ""
 "类、矮人和精灵的其他力量之戒，以征服整个中土世界。故事从夏尔（Shire）的家常开"
 "始，这是一个让人想起英国乡村的霍比特人土地，故事横跨中土世界，主要通过霍比特"
 "人佛罗多、山姆、梅里和皮平的眼睛来摧毁至尊魔戒。"
+
+#: ..\..\Components\Pages\PaginationTest.razor.cs:9
+msgid "Last Name"
+msgstr "姓"
+
+#: ..\..\Components\Pages\Home.razor.cs:9
+msgid "How is Blazor working for you?"
+msgstr "Blazor 如何为你工作？"
+
+#: ..\..\Components\Layout\MainLayout.razor.cs:10
+msgid "Tabs"
+msgstr "选项卡"

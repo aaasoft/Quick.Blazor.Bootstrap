@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Test.AspNetCore9\n"
-"POT-Creation-Date: 2024-12-12 14:24:52+0800\n"
-"PO-Revision-Date: 2024-12-12 14:24:52+0800\n"
+"POT-Creation-Date: 2026-05-29 10:25:33+0800\n"
+"PO-Revision-Date: 2026-05-29 10:25:34+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -10,103 +10,103 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: GetText.NET Extractor\n"
 
-#: ../../Shared/MainLayout.razor.cs:15
-msgid "FileSelect"
-msgstr ""
-
-#: ../../Shared/MainLayout.razor.cs:12
-msgid "Tree"
-msgstr ""
-
-#: ../../Pages/Index.razor.cs:10
-msgid "How is Blazor working for you?"
-msgstr ""
-
-#: ../../Pages/TreeTest.razor.cs:14
-msgid "Log: "
-msgstr ""
-
-#: ../../Shared/MainLayout.razor.cs:17
-msgid "Terminal"
-msgstr ""
-
-#: ../../Pages/AccordionTest.razor.cs:13
-msgid "Allow Multiple Pane Actived"
-msgstr ""
-
-#: ../../Pages/FileSelect.razor.cs:16
-msgid "Select file"
-msgstr ""
-
-#: ../../Shared/SurveyPrompt.razor.cs:11
-msgid "and tell us what you think."
-msgstr ""
-
-#: ../../Shared/MainLayout.razor.cs:18
+#: ..\..\Components\Layout\MainLayout.razor.cs:18
 msgid "LogView"
 msgstr ""
 
-#: ../../Pages/TreeTest.razor.cs:13
-msgid "Collapse All"
-msgstr ""
-
-#: ../../Shared/MainLayout.razor.cs:9
+#: ..\..\Components\Layout\MainLayout.razor.cs:9
 msgid "Home"
 msgstr ""
 
-#: ../../Pages/PaginationTest.razor.cs:13
-msgid "Last Name"
-msgstr ""
-
-#: ../../Shared/SurveyPrompt.razor.cs:10
-msgid "brief survey"
-msgstr ""
-
-#: ../../Shared/MainLayout.razor.cs:19
-msgid "ReverseProxy"
-msgstr ""
-
-#: ../../Shared/MainLayout.razor.cs:10
-msgid "Tabs"
-msgstr ""
-
-#: ../../Pages/TreeTest.razor.cs:12
-msgid "Expand All"
-msgstr ""
-
-#: ../../Pages/FileSelect.razor.cs:15
-msgid "Zip File"
-msgstr ""
-
-#: ../../Shared/MainLayout.razor.cs:11
-msgid "Pagination"
-msgstr ""
-
-#: ../../Shared/MainLayout.razor.cs:13
-msgid "Accordion"
-msgstr ""
-
-#: ../../Pages/PaginationTest.razor.cs:12
-msgid "First Name"
-msgstr ""
-
-#: ../../Shared/SurveyPrompt.razor.cs:9
-msgid "Please take our"
-msgstr ""
-
-#: ../../Shared/MainLayout.razor.cs:14
-msgid "FileManage"
-msgstr ""
-
-#: ../../Pages/Index.razor.cs:9
+#: ..\..\Components\Pages\Home.razor.cs:8
 msgid "Welcome to use Quick.Blazor.Bootstrap."
 msgstr ""
 
-#: ../../Shared/MainLayout.razor.cs:16
+#: ..\..\Components\Layout\MainLayout.razor.cs:15
+msgid "FileSelect"
+msgstr ""
+
+#: ..\..\Components\Layout\MainLayout.razor.cs:17
+msgid "Terminal"
+msgstr ""
+
+#: ..\..\Components\Pages\PaginationTest.razor.cs:8
+msgid "First Name"
+msgstr ""
+
+#: ..\..\Components\Layout\MainLayout.razor.cs:13
+msgid "Accordion"
+msgstr ""
+
+#: ..\..\Components\Layout\MainLayout.razor.cs:12
+msgid "Tree"
+msgstr ""
+
+#: ..\..\Components\Pages\TreeTest.razor.cs:10
+msgid "Log: "
+msgstr ""
+
+#: ..\..\Components\Pages\PaginationTest.razor.cs:12
+msgid "Display Record Count"
+msgstr ""
+
+#: ..\..\Components\Layout\SurveyPrompt.razor.cs:9
+msgid "brief survey"
+msgstr ""
+
+#: ..\..\Components\Pages\TreeTest.razor.cs:8
+msgid "Expand All"
+msgstr ""
+
+#: ..\..\Components\Layout\MainLayout.razor.cs:14
+msgid "FileManage"
+msgstr ""
+
+#: ..\..\Components\Pages\TreeTest.razor.cs:9
+msgid "Collapse All"
+msgstr ""
+
+#: ..\..\Components\Layout\MainLayout.razor.cs:16
 msgid "ProcessManage"
 msgstr ""
 
-#: ../../Pages/AccordionTest.razor.cs:16
+#: ..\..\Components\Layout\MainLayout.razor.cs:11
+msgid "Pagination"
+msgstr ""
+
+#: ..\..\Components\Layout\SurveyPrompt.razor.cs:8
+msgid "Please take our"
+msgstr ""
+
+#: ..\..\Components\Pages\FileSelect.razor.cs:13
+msgid "Select file"
+msgstr ""
+
+#: ..\..\Components\Pages\AccordionTest.razor.cs:10
+msgid "Allow Multiple Pane Actived"
+msgstr ""
+
+#: ..\..\Components\Layout\MainLayout.razor.cs:19
+msgid "ReverseProxy"
+msgstr ""
+
+#: ..\..\Components\Layout\SurveyPrompt.razor.cs:10
+msgid "and tell us what you think."
+msgstr ""
+
+#: ..\..\Components\Pages\PaginationTest.razor.cs:10
+msgid "Page Index Editable"
+msgstr ""
+
+#: ..\..\Components\Pages\FileSelect.razor.cs:12
+msgid "Zip File"
+msgstr ""
+
+#: ..\..\Components\Pages\PaginationTest.razor.cs:11
+msgid "Display Page Count"
+msgstr ""
+
+#: ..\..\Components\Pages\AccordionTest.razor.cs:13
 msgid ""
 "The Lord of the Rings is an epic high-fantasy novel by J.R.R. Tolkien. Set in "
 "Middle-earth, the story began as a sequel to Tolkien's earlier work, The "
@@ -120,5 +120,17 @@ msgid ""
 "of the English countryside, the story ranges across Middle-earth, following "
 "the quest to destroy the One Ring mainly through the eyes of the hobbits "
 "Frodo, Sam, Merry, and Pippin."
+msgstr ""
+
+#: ..\..\Components\Pages\PaginationTest.razor.cs:9
+msgid "Last Name"
+msgstr ""
+
+#: ..\..\Components\Pages\Home.razor.cs:9
+msgid "How is Blazor working for you?"
+msgstr ""
+
+#: ..\..\Components\Layout\MainLayout.razor.cs:10
+msgid "Tabs"
 msgstr ""
 
