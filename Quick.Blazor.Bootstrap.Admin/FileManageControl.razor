@@ -84,7 +84,7 @@
                             <i class="@IconVerify" aria-hidden="true"></i>
                         </button>
                     }
-                    @if (DisplayCompressButton && SelectedItem != null && !isSelectedZipFile())
+                    @if (DisplayCompressButton && SelectedItem != null)
                     {
                         <button title="@TextCompress" type="button" class="btn btn-sm btn-secondary"
                             @onclick="btnCompress_Click">
