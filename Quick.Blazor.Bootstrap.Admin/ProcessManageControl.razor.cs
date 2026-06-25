@@ -10,21 +10,21 @@ namespace Quick.Blazor.Bootstrap.Admin
     [UnsupportedOSPlatform("browser")]
     public partial class ProcessManageControl : ComponentBase_WithGettextSupport
     {
-        private static string TextAskToKillProcess => Locale.GetString("Are you sure to kill process[Id: {0},Name: {1}]?");
-        private static string TextFailed => Locale.GetString("Failed");
-        private static string TextViewProcess => Locale.GetString("View Process");
-        private static string TextKillProcess => Locale.GetString("Kill Process");
-        private static string TextKillProcessTree => Locale.GetString("Kill Process Tree");
-        private static string TextKeywords => Locale.GetString("Keywords");
-        private static string TextColumnPID => Locale.GetString("PID");
-        private static string TextColumnName => Locale.GetString("Name");
-        private static string TextColumnThreads => Locale.GetString("Threads");
-        private static string TextColumnMemory => Locale.GetString("Memory");
-        private static string TextColumnOperate => Locale.GetString("Operate");
-        private static string TextOrderBy => Locale.GetString("OrderBy");
-        private static string TextOrderByPID => Locale.GetString("PID");
-        private static string TextOrderByName => Locale.GetString("Name");
-        private static string TextOrderByMemory => Locale.GetString("Memory");
+        private static string TextAskToKillProcess => Locale<ProcessManageControl>.GetString("Are you sure to kill process[Id: {0},Name: {1}]?");
+        private static string TextFailed => Locale<ProcessManageControl>.GetString("Failed");
+        private static string TextViewProcess => Locale<ProcessManageControl>.GetString("View Process");
+        private static string TextKillProcess => Locale<ProcessManageControl>.GetString("Kill Process");
+        private static string TextKillProcessTree => Locale<ProcessManageControl>.GetString("Kill Process Tree");
+        private static string TextKeywords => Locale<ProcessManageControl>.GetString("Keywords");
+        private static string TextColumnPID => Locale<ProcessManageControl>.GetString("PID");
+        private static string TextColumnName => Locale<ProcessManageControl>.GetString("Name");
+        private static string TextColumnThreads => Locale<ProcessManageControl>.GetString("Threads");
+        private static string TextColumnMemory => Locale<ProcessManageControl>.GetString("Memory");
+        private static string TextColumnOperate => Locale<ProcessManageControl>.GetString("Operate");
+        private static string TextOrderBy => Locale<ProcessManageControl>.GetString("OrderBy");
+        private static string TextOrderByPID => Locale<ProcessManageControl>.GetString("PID");
+        private static string TextOrderByName => Locale<ProcessManageControl>.GetString("Name");
+        private static string TextOrderByMemory => Locale<ProcessManageControl>.GetString("Memory");
 
         [Parameter]
         public string IconSearch { get; set; } = "fa fa-search";
@@ -184,7 +184,7 @@ namespace Quick.Blazor.Bootstrap.Admin
                         {
                             var process = Process.GetProcessById(info.PID);
                             if (process == null)
-                                throw new ApplicationException(Locale.GetString("Can't found process[Id:{0}].", info.PID));
+                                throw new ApplicationException(Locale<ProcessManageControl>.GetString("Can't found process[Id:{0}].", info.PID));
                             process.Kill(entireProcessTree);
                             search();
                         }

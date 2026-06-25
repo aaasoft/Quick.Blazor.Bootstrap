@@ -5,11 +5,11 @@ namespace Test.AspNetCore9.Components.Pages
 {
     public partial class PaginationTest : ComponentBase_WithGettextSupport
     {
-        public static string TextFirstName => Locale.GetString("First Name");
-        public static string TextLastName => Locale.GetString("Last Name");
-        public static string TextPageIndexEditable => Locale.GetString("Page Index Editable");
-        public static string TextDisplayPageCount => Locale.GetString("Display Page Count");
-        public static string TextDisplayRecordCount => Locale.GetString("Display Record Count");
+        public static string TextFirstName => Locale<PaginationTest>.GetString("First Name");
+        public static string TextLastName => Locale<PaginationTest>.GetString("Last Name");
+        public static string TextPageIndexEditable => Locale<PaginationTest>.GetString("Page Index Editable");
+        public static string TextDisplayPageCount => Locale<PaginationTest>.GetString("Display Page Count");
+        public static string TextDisplayRecordCount => Locale<PaginationTest>.GetString("Display Record Count");
 
         public bool PageIndexEditable { get; set; } = true;
         public bool DisplayPageCount { get; set; } = true;

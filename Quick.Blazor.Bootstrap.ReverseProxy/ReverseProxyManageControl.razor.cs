@@ -11,17 +11,17 @@ namespace Quick.Blazor.Bootstrap.ReverseProxy
         private ModalWindow modalWindow;
         private string searchKeywords;
 
-        private static string TextNew => Locale.GetString("New");
-        private static string TextKeywords => Locale.GetString("Keywords");
-        private static string TextName => Locale.GetString("Name");
-        private static string TextPath => Locale.GetString("Path");
-        private static string TextUrl => Locale.GetString("URL");
-        private static string TextOK => Locale.GetString("OK");
-        private static string TextVisit => Locale.GetString("Visit");
-        private static string TextEdit => Locale.GetString("Edit");
-        private static string TextDelete => Locale.GetString("Delete");
-        private static string TextError => Locale.GetString("Error");
-        private static string TextConfirmDelete => Locale.GetString("Do you want to delete Rule[{0}]?");
+        private static string TextNew => Locale<ReverseProxyManageControl>.GetString("New");
+        private static string TextKeywords => Locale<ReverseProxyManageControl>.GetString("Keywords");
+        private static string TextName => Locale<ReverseProxyManageControl>.GetString("Name");
+        private static string TextPath => Locale<ReverseProxyManageControl>.GetString("Path");
+        private static string TextUrl => Locale<ReverseProxyManageControl>.GetString("URL");
+        private static string TextOK => Locale<ReverseProxyManageControl>.GetString("OK");
+        private static string TextVisit => Locale<ReverseProxyManageControl>.GetString("Visit");
+        private static string TextEdit => Locale<ReverseProxyManageControl>.GetString("Edit");
+        private static string TextDelete => Locale<ReverseProxyManageControl>.GetString("Delete");
+        private static string TextError => Locale<ReverseProxyManageControl>.GetString("Error");
+        private static string TextConfirmDelete => Locale<ReverseProxyManageControl>.GetString("Do you want to delete Rule[{0}]?");
 
         [Parameter]
         public string IconNew { get; set; } = "fa fa-plus";
@@ -39,9 +39,9 @@ namespace Quick.Blazor.Bootstrap.ReverseProxy
         private void validateModel(ReverseProxyRule oldModel, ReverseProxyRule newModel)
         {
             if (!newModel.Path.StartsWith("/"))
-                throw new ArgumentException(Locale.GetString("Path must start with '/'."));
+                throw new ArgumentException(Locale<ReverseProxyManageControl>.GetString("Path must start with '/'."));
             if ((oldModel == null || oldModel.Path != newModel.Path) && ReverseProxyManager.Instance.Exists(newModel.Path))
-                throw new ArgumentException(Locale.GetString("Path [{0}] already exist.", newModel.Path));
+                throw new ArgumentException(Locale<ReverseProxyManageControl>.GetString("Path [{0}] already exist.", newModel.Path));
         }
 
         private void Create()

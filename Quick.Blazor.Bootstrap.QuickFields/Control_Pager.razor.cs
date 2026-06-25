@@ -1,4 +1,3 @@
-using System;
 using Microsoft.AspNetCore.Components;
 using Quick.Fields;
 using Quick.Localize;
@@ -7,12 +6,12 @@ namespace Quick.Blazor.Bootstrap.QuickFields;
 
 public partial class Control_Pager : ComponentBase_WithGettextSupport
 {
-    private static string TextFirst => Locale.GetString("First");
-    private static string TextPrev => Locale.GetString("Prev");
-    private static string TextNext => Locale.GetString("Next");
-    private static string TextLast => Locale.GetString("Last");
-    private static string TextRecords => Locale.GetString("Records:");
-    private static string TextPages => Locale.GetString("Pages:");
+    private static string TextFirst => Locale<Control_Pager>.GetString("First");
+    private static string TextPrev => Locale<Control_Pager>.GetString("Prev");
+    private static string TextNext => Locale<Control_Pager>.GetString("Next");
+    private static string TextLast => Locale<Control_Pager>.GetString("Last");
+    private static string TextRecords => Locale<Control_Pager>.GetString("Records:");
+    private static string TextPages => Locale<Control_Pager>.GetString("Pages:");
 
     [Parameter]
     public FieldForGet Field { get; set; }

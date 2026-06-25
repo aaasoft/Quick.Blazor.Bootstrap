@@ -7,7 +7,7 @@ namespace Quick.Blazor.Bootstrap.Admin
 {
     public partial class FileSelectControl : ComponentBase_WithGettextSupport
     {
-        private static string TextSelect => Locale.GetString("Select");
+        private static string TextSelect => Locale<FileSelectControl>.GetString("Select");
 
         [Parameter]
         public string BaseDir { get; set; }

@@ -18,9 +18,9 @@ namespace Quick.Blazor.Bootstrap.CrontabManager
         public IJSRuntime JSRuntime { get; set; }
         private LogViewControl logViewControl;
 
-        private string TextSuccess => Locale.GetString("Success");
-        private string TextSave => Locale.GetString("Save");
-        private string TextFailed => Locale.GetString("Failed");
+        private string TextSuccess => Locale<CrontabManageControl>.GetString("Success");
+        private string TextSave => Locale<CrontabManageControl>.GetString("Save");
+        private string TextFailed => Locale<CrontabManageControl>.GetString("Failed");
 
         [Parameter]
         public string IconSave { get; set; } = "fa fa-save";

@@ -13,14 +13,14 @@ public class CrontabManager
     private CancellationTokenSource cts;
     private CronJobContext[] contextList;
 
-    private static string TextJobString => Locale.GetString("Job[{0} {1}]");
-    private static string TextNoJobStartCancelled => Locale.GetString("Current has no jobs,start cancelled.");
-    private static string TextJobLoadedFirstExecuteTime => Locale.GetString("{0} loaded,first execute time: {1}");
-    private static string TextJobExecuting => Locale.GetString("{0} executing...");
-    private static string TextJobDone => Locale.GetString("Job done,exit code: {0}");
-    private static string TextJobNextExecuteTime => Locale.GetString("Job next execute time: {0}");
-    private static string TextStarted => Locale.GetString("Started");
-    private static string TextStoped => Locale.GetString("Stoped");
+    private static string TextJobString => Locale<CrontabManager>.GetString("Job[{0} {1}]");
+    private static string TextNoJobStartCancelled => Locale<CrontabManager>.GetString("Current has no jobs,start cancelled.");
+    private static string TextJobLoadedFirstExecuteTime => Locale<CrontabManager>.GetString("{0} loaded,first execute time: {1}");
+    private static string TextJobExecuting => Locale<CrontabManager>.GetString("{0} executing...");
+    private static string TextJobDone => Locale<CrontabManager>.GetString("Job done,exit code: {0}");
+    private static string TextJobNextExecuteTime => Locale<CrontabManager>.GetString("Job next execute time: {0}");
+    private static string TextStarted => Locale<CrontabManager>.GetString("Started");
+    private static string TextStoped => Locale<CrontabManager>.GetString("Stoped");
 
     //日志最多1000行
     public const int MAX_CONSOLE_OUTPUT_LINES = 1000;
@@ -69,7 +69,7 @@ public class CrontabManager
 
     private void pushLog(LogLevel level, string message)
     {
-        var levelString = Locale.GetString(level.ToString());
+        var levelString = Locale<CrontabManager>.GetString(level.ToString());
         addConsoleHistory($"[{levelString}] {message}");
     }
 

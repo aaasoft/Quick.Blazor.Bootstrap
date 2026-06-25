@@ -19,7 +19,7 @@ namespace Quick.Blazor.Bootstrap
         public string ModalBodyCls { get; set; }
         [Parameter]
         public string ModalFooterCls { get; set; }
-        public static string TextCancel => Locale.GetString("Cancel");
+        public static string TextCancel => Locale<ModalLoading>.GetString("Cancel");
 
         private string Title { get; set; }
         private string Content { get; set; }

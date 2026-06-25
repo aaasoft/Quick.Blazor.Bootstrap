@@ -5,9 +5,9 @@ namespace Test.AspNetCore9.Components.Pages
 {
     public partial class TreeTest:ComponentBase_WithGettextSupport
     {
-        public static string TextExpandAll=> Locale.GetString("Expand All");
-        public static string TextCollapseAll=> Locale.GetString("Collapse All");
-        public static string TextLog=> Locale.GetString("Log: ");
+        public static string TextExpandAll=> Locale<TreeTest>.GetString("Expand All");
+        public static string TextCollapseAll=> Locale<TreeTest>.GetString("Collapse All");
+        public static string TextLog=> Locale<TreeTest>.GetString("Log: ");
 
         public class AddressInfo
         {

@@ -7,7 +7,7 @@ namespace Quick.Blazor.Bootstrap
     {
         [Parameter]
         public RenderFragment ChildContent { get; set; }
-        private string RecordCountText => Locale.GetString("Record Count:");
+        private string RecordCountText => Locale<Pagination>.GetString("Record Count:");
         [Parameter]
         public bool DisplayRecordCount { get; set; } = true;
         [Parameter]

@@ -31,12 +31,12 @@ namespace Quick.Blazor.Bootstrap
         {
             if (string.IsNullOrEmpty(tabPane.Key))
             {
-                throw new ArgumentNullException(nameof(tabPane), Locale.GetString("TabPane's Key is null"));
+                throw new ArgumentNullException(nameof(tabPane), Locale<Tabs>.GetString("TabPane's Key is null"));
             }
 
             if (_panes.Select(p => p.Key).Contains(tabPane.Key))
             {
-                throw new ArgumentException(Locale.GetString("An TabPane with the same key[{0}] already exists",tabPane.Key));
+                throw new ArgumentException(Locale<Tabs>.GetString("An TabPane with the same key[{0}] already exists",tabPane.Key));
             }
             _panes.Add(tabPane);
         }

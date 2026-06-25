@@ -6,8 +6,8 @@ namespace Quick.Blazor.Bootstrap.Admin.Core;
 
 public class CommonTransferContext : IDisposable
 {
-    private static string TextSpeed => Locale.GetString("Speed");
-    private static string TextRemainingTime => Locale.GetString("Remaining Time");
+    private static string TextSpeed => Locale<CommonTransferContext>.GetString("Speed");
+    private static string TextRemainingTime => Locale<CommonTransferContext>.GetString("Remaining Time");
 
     private readonly UnitStringConverting storageUSC = UnitStringConverting.StorageUnitStringConverting;
     private System.Diagnostics.Stopwatch stopwatch;

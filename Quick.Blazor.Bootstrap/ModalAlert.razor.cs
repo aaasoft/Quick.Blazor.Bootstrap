@@ -42,8 +42,8 @@ namespace Quick.Blazor.Bootstrap
         [Parameter]
         public string ModalFooterCls { get; set; }
 
-        public static string TextOk => Locale.GetString("OK");
-        public static string TextCancel => Locale.GetString("Cancel");
+        public static string TextOk => Locale<ModalAlert>.GetString("OK");
+        public static string TextCancel => Locale<ModalAlert>.GetString("Cancel");
         public string[] ContentLines => Content?.Split('\n') ?? new string[0];
         private string Title { get; set; }
         private string Content { get; set; }

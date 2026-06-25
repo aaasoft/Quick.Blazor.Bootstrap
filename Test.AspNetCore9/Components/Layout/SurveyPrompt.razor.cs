@@ -5,7 +5,7 @@ namespace Test.AspNetCore9.Components.Layout;
 
 public partial class SurveyPrompt : ComponentBase_WithGettextSupport
 {
-    public static string TextPleaseTakeOur => Locale.GetString("Please take our");
-    public static string TextBriefSurvey => Locale.GetString("brief survey");
-    public static string TextAndTellUsWhatYouThink => Locale.GetString("and tell us what you think.");
+    public static string TextPleaseTakeOur => Locale<SurveyPrompt>.GetString("Please take our");
+    public static string TextBriefSurvey => Locale<SurveyPrompt>.GetString("brief survey");
+    public static string TextAndTellUsWhatYouThink => Locale<SurveyPrompt>.GetString("and tell us what you think.");
 }

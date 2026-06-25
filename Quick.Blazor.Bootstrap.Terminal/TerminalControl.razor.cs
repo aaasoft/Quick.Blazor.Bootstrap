@@ -1,15 +1,8 @@
 ﻿﻿using Microsoft.AspNetCore.Components;
 using Pty.Net;
 using Quick.Localize;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using XtermBlazor;
 
 namespace Quick.Blazor.Bootstrap.Terminal
@@ -22,10 +15,10 @@ namespace Quick.Blazor.Bootstrap.Terminal
         private Stream ptyWriteStream;
         private CancellationTokenSource cts;
 
-        private static string TextOpen => Locale.GetString("Open");
-        private static string TextClose => Locale.GetString("Close");
-        private static string TextColumn => Locale.GetString("Column");
-        private static string TextRow => Locale.GetString("Row");
+        private static string TextOpen => Locale<TerminalControl>.GetString("Open");
+        private static string TextClose => Locale<TerminalControl>.GetString("Close");
+        private static string TextColumn => Locale<TerminalControl>.GetString("Column");
+        private static string TextRow => Locale<TerminalControl>.GetString("Row");
 
         [Parameter]
         public string App { get; set; }
@@ -206,7 +199,7 @@ namespace Quick.Blazor.Bootstrap.Terminal
         private void Pty_ProcessExited(object sender, PtyExitedEventArgs e)
         {
             pty.ProcessExited -= Pty_ProcessExited;
-            var message = Locale.GetString("Terminal process has exited with exit code {0}",e.ExitCode);
+            var message = Locale<TerminalControl>.GetString("Terminal process has exited with exit code {0}",e.ExitCode);
             terminal?.WriteLine(Environment.NewLine + message);
             if (OperatingSystem.IsWindows())
             {

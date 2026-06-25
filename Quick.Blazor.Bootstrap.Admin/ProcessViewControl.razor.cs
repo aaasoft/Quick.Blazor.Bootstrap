@@ -20,23 +20,23 @@ namespace Quick.Blazor.Bootstrap.Admin
     [UnsupportedOSPlatform("browser")]
     public partial class ProcessViewControl : ComponentBase_WithGettextSupport
     {
-        private string TextProcessTitle => Locale.GetString("Process [{0}] {1}");
-        private string TextRefresh => Locale.GetString("Refresh");
-        private string TextSuccess => Locale.GetString("Success");
-        private string TextFailed => Locale.GetString("Failed");
-        private string TextAskToKillProcess => Locale.GetString("Are you sure to kill process[Id: {0},Name: {1}]?");
-        private string TextKillProcessTree => Locale.GetString("Kill Process Tree");
-        private string TextColumnPID => Locale.GetString("PID");
-        private string TextColumnName => Locale.GetString("Name");
-        private string TextColumnThreads => Locale.GetString("Threads");
-        private string TextColumnMemory => Locale.GetString("Memory");
-        private string TextColumnFileName => Locale.GetString("File Name");
-        private string TextColumnCmdLine => Locale.GetString("Cmd Line");
-        private string TextColumnWorkDirectory => Locale.GetString("Work Directory");
-        private string TextColumnStartTime => Locale.GetString("Start Time");
-        private string TextChildProcesses => Locale.GetString("Child Processes");
-        private string TextColumnError => Locale.GetString("Error");
-        private string TextProcessHasExited => Locale.GetString("Process has exited");
+        private string TextProcessTitle => Locale<ProcessViewControl>.GetString("Process [{0}] {1}");
+        private string TextRefresh => Locale<ProcessViewControl>.GetString("Refresh");
+        private string TextSuccess => Locale<ProcessViewControl>.GetString("Success");
+        private string TextFailed => Locale<ProcessViewControl>.GetString("Failed");
+        private string TextAskToKillProcess => Locale<ProcessViewControl>.GetString("Are you sure to kill process[Id: {0},Name: {1}]?");
+        private string TextKillProcessTree => Locale<ProcessViewControl>.GetString("Kill Process Tree");
+        private string TextColumnPID => Locale<ProcessViewControl>.GetString("PID");
+        private string TextColumnName => Locale<ProcessViewControl>.GetString("Name");
+        private string TextColumnThreads => Locale<ProcessViewControl>.GetString("Threads");
+        private string TextColumnMemory => Locale<ProcessViewControl>.GetString("Memory");
+        private string TextColumnFileName => Locale<ProcessViewControl>.GetString("File Name");
+        private string TextColumnCmdLine => Locale<ProcessViewControl>.GetString("Cmd Line");
+        private string TextColumnWorkDirectory => Locale<ProcessViewControl>.GetString("Work Directory");
+        private string TextColumnStartTime => Locale<ProcessViewControl>.GetString("Start Time");
+        private string TextChildProcesses => Locale<ProcessViewControl>.GetString("Child Processes");
+        private string TextColumnError => Locale<ProcessViewControl>.GetString("Error");
+        private string TextProcessHasExited => Locale<ProcessViewControl>.GetString("Process has exited");
 
         private UnitStringConverting storageUSC = UnitStringConverting.StorageUnitStringConverting;
 

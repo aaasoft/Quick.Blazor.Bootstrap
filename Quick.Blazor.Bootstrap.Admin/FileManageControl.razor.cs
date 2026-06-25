@@ -129,40 +129,40 @@ namespace Quick.Blazor.Bootstrap.Admin
         [Parameter]
         public bool OrderByAsc { get; set; } = true;
 
-        public static string TextLoading => Locale.GetString("Loading");
-        public static string TextConfirm => Locale.GetString("Confirm");
-        public static string TextConfirmDeleteFolder => Locale.GetString("Do you want to delete folder[{0}]?");
-        public static string TextConfirmDeleteFile => Locale.GetString("Do you want to delete file[{0}]?");
-        public static string TextInputNewName => Locale.GetString("Please input new name of [{0}]");
-        public static string TextSuccess => Locale.GetString("Success");
-        public static string TextCanceled => Locale.GetString("Canceled");
-        public static string TextFailed => Locale.GetString("Failed");
-        public static string TextFolderNotExist => Locale.GetString("Folder [{0}] not exist");
-        public static string TextUp => Locale.GetString("Up");
-        public static string TextNewFolder => Locale.GetString("New Folder");
-        public static string TextNewFolderPrompt => Locale.GetString("Please input new folder name");
-        public static string TextCouldNotCreateFolderOutOfBaseDir => Locale.GetString("Could not create folder out of BaseDir");
-        public static string TextUpload => Locale.GetString("Upload File");
-        public static string TextUploadFolder => Locale.GetString("Upload Folder");
-        public static string TextUploadReadFileInfo => Locale.GetString("Reading upload file info...");
-        public static string TextUploadFileExistReplace => Locale.GetString("File [{0}] was exist,do you want to replace it?");
-        public static string TextUploadFileUploading => Locale.GetString("Uploading file [{0}]...");
-        public static string TextRefresh => Locale.GetString("Refresh");
-        public static string TextDownload => Locale.GetString("Download");
-        public static string TextVerify => Locale.GetString("Verify");
-        public static string TextCompress => Locale.GetString("Compress");
-        private static string TextDecompress => Locale.GetString("Decompress");
+        public static string TextLoading => Locale<FileManageControl>.GetString("Loading");
+        public static string TextConfirm => Locale<FileManageControl>.GetString("Confirm");
+        public static string TextConfirmDeleteFolder => Locale<FileManageControl>.GetString("Do you want to delete folder[{0}]?");
+        public static string TextConfirmDeleteFile => Locale<FileManageControl>.GetString("Do you want to delete file[{0}]?");
+        public static string TextInputNewName => Locale<FileManageControl>.GetString("Please input new name of [{0}]");
+        public static string TextSuccess => Locale<FileManageControl>.GetString("Success");
+        public static string TextCanceled => Locale<FileManageControl>.GetString("Canceled");
+        public static string TextFailed => Locale<FileManageControl>.GetString("Failed");
+        public static string TextFolderNotExist => Locale<FileManageControl>.GetString("Folder [{0}] not exist");
+        public static string TextUp => Locale<FileManageControl>.GetString("Up");
+        public static string TextNewFolder => Locale<FileManageControl>.GetString("New Folder");
+        public static string TextNewFolderPrompt => Locale<FileManageControl>.GetString("Please input new folder name");
+        public static string TextCouldNotCreateFolderOutOfBaseDir => Locale<FileManageControl>.GetString("Could not create folder out of BaseDir");
+        public static string TextUpload => Locale<FileManageControl>.GetString("Upload File");
+        public static string TextUploadFolder => Locale<FileManageControl>.GetString("Upload Folder");
+        public static string TextUploadReadFileInfo => Locale<FileManageControl>.GetString("Reading upload file info...");
+        public static string TextUploadFileExistReplace => Locale<FileManageControl>.GetString("File [{0}] was exist,do you want to replace it?");
+        public static string TextUploadFileUploading => Locale<FileManageControl>.GetString("Uploading file [{0}]...");
+        public static string TextRefresh => Locale<FileManageControl>.GetString("Refresh");
+        public static string TextDownload => Locale<FileManageControl>.GetString("Download");
+        public static string TextVerify => Locale<FileManageControl>.GetString("Verify");
+        public static string TextCompress => Locale<FileManageControl>.GetString("Compress");
+        private static string TextDecompress => Locale<FileManageControl>.GetString("Decompress");
 
-        private static string TextRename => Locale.GetString("Rename");
-        private static string TextEdit => Locale.GetString("Edit");
+        private static string TextRename => Locale<FileManageControl>.GetString("Rename");
+        private static string TextEdit => Locale<FileManageControl>.GetString("Edit");
         [Parameter]
         public Dictionary<string, Encoding> EncodingDict { get; set; }
 
-        public static string TextDelete => Locale.GetString("Delete");
-        public static string TextPath => Locale.GetString("Path");
-        public static string TextLastWriteTime => Locale.GetString("Last Write Time");
-        public static string TextSize => Locale.GetString("Size");
-        public static string TextName => Locale.GetString("Name");
+        public static string TextDelete => Locale<FileManageControl>.GetString("Delete");
+        public static string TextPath => Locale<FileManageControl>.GetString("Path");
+        public static string TextLastWriteTime => Locale<FileManageControl>.GetString("Last Write Time");
+        public static string TextSize => Locale<FileManageControl>.GetString("Size");
+        public static string TextName => Locale<FileManageControl>.GetString("Name");
 
         [Parameter]
         public RenderFragment ToolbarAddonButtons { get; set; }
@@ -860,7 +860,7 @@ namespace Quick.Blazor.Bootstrap.Admin
             if (file.Length > 1 * 1024 * 1024)
             {
                 var fileInfoStr = $"{file.Name} ({storageUSC.GetString(file.Length, 2, true)}B)";
-                modalAlert.Show(TextConfirm, Locale.GetString("File [{0}] is too large,are you sure to edit it with text editor?", fileInfoStr), new() { OkCallback = openTextEditWindowAction });
+                modalAlert.Show(TextConfirm, Locale<FileManageControl>.GetString("File [{0}] is too large,are you sure to edit it with text editor?", fileInfoStr), new() { OkCallback = openTextEditWindowAction });
             }
             else
             {

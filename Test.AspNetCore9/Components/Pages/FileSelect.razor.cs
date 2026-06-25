@@ -9,8 +9,8 @@ public partial class FileSelect : ComponentBase_WithGettextSupport
     private ModalWindow modalWindow;
     private string filePath;
 
-    private static string TextZipFile => Locale.GetString("Zip File");
-    private static string TextSelectFile => Locale.GetString("Select file");
+    private static string TextZipFile => Locale<FileSelect>.GetString("Zip File");
+    private static string TextSelectFile => Locale<FileSelect>.GetString("Select file");
 
     private void selectFile()
     {

@@ -10,9 +10,9 @@ namespace Quick.Blazor.Bootstrap.Admin;
 public partial class ProxyDownloadControl : ComponentBase_WithGettextSupport
 {
     private UnitStringConverting storageUSC = UnitStringConverting.StorageUnitStringConverting;
-    private static string TextDownload => Locale.GetString("Download");
-    private static string TextCanceled => Locale.GetString("Canceled");
-    private static string TextFailed => Locale.GetString("Failed");
+    private static string TextDownload => Locale<ProxyDownloadControl>.GetString("Download");
+    private static string TextCanceled => Locale<ProxyDownloadControl>.GetString("Canceled");
+    private static string TextFailed => Locale<ProxyDownloadControl>.GetString("Failed");
 
     private ModalLoading modalLoading;
     private ModalAlert modalAlert;
