@@ -1,0 +1,9 @@
+<Solution>
+  <Project Path="Quick.Blazor.Bootstrap.Admin/Quick.Blazor.Bootstrap.Admin.csproj" />
+  <Project Path="Quick.Blazor.Bootstrap.CrontabManager/Quick.Blazor.Bootstrap.CrontabManager.csproj" />
+  <Project Path="Quick.Blazor.Bootstrap.QuickFields/Quick.Blazor.Bootstrap.QuickFields.csproj" />
+  <Project Path="Quick.Blazor.Bootstrap.ReverseProxy/Quick.Blazor.Bootstrap.ReverseProxy.csproj" />
+  <Project Path="Quick.Blazor.Bootstrap.Terminal/Quick.Blazor.Bootstrap.Terminal.csproj" />
+  <Project Path="Quick.Blazor.Bootstrap/Quick.Blazor.Bootstrap.csproj" />
+  <Project Path="Test.AspNetCore9/Test.AspNetCore9.csproj" />
+</Solution>
