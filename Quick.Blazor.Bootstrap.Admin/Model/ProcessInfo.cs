@@ -1,11 +1,8 @@
-﻿using System;
+﻿using Quick.Shell.PowerShell;
+using Quick.Shell.Utils;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Net;
 using System.Runtime.Versioning;
 using System.Text;
-using Quick.Shell.Utils;
 
 namespace Quick.Blazor.Bootstrap.Admin;
 
@@ -78,8 +75,17 @@ public class ProcessInfo
                             sb.Insert(4, '-');
                             StartTime = DateTime.Parse(sb.ToString());
                         }
-                        CmdLine = GetWmicResult($"wmic process where ProcessId={PID} get CommandLine");
-                        FileName = GetWmicResult($"wmic process where ProcessId={PID} get ExecutablePath");
+                        //高于Windows 11 24H2,则不能使用wmic了
+                        if (OperatingSystem.IsWindowsVersionAtLeast(10, 0, 26100))
+                        {
+                            CmdLine = GetCimInstanceResult($"(Get-CimInstance Win32_Process -Filter \"ProcessId={PID}\").CommandLine");
+                            FileName = GetCimInstanceResult($"(Get-CimInstance Win32_Process -Filter \"ProcessId={PID}\").ExecutablePath");
+                        }
+                        else
+                        {
+                            CmdLine = GetWmicResult($"wmic process where ProcessId={PID} get CommandLine");
+                            FileName = GetWmicResult($"wmic process where ProcessId={PID} get ExecutablePath");
+                        }
                     }
                     catch { }
                 }
@@ -88,6 +94,14 @@ public class ProcessInfo
         catch
         {
         }
+    }
+
+    private string GetCimInstanceResult(string commandLine)
+    {
+        var ret = PowerShellProcessContext.ExecuteCommand(commandLine);
+        if (ret.ExitCode != 0)
+            return null;
+        return ret.Output.Trim().Split(Environment.NewLine).Last();
     }
 
     private string GetWmicResult(string commandLine)
