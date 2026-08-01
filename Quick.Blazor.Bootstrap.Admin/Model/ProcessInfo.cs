@@ -65,23 +65,27 @@ public class ProcessInfo
                 {
                     try
                     {
-                        if (StartTime == DateTime.MinValue)
+                        var dict = WmiUtils.Query("Win32_Process", $"ProcessId={PID}", out _, "CommandLine", "ExecutablePath", "CreationDate")?.FirstOrDefault();
+                        if (dict != null)
                         {
-                            var line = WmiUtils.GetValue("Win32_Process", $"ProcessId={PID}", "CreationDate");
-                            if (line.Contains("+"))
+                            CmdLine = dict["CommandLine"];
+                            FileName = dict["ExecutablePath"];
+                            if (StartTime == DateTime.MinValue)
                             {
-                                var sb = new StringBuilder(line.Split('+')[0]);
-                                sb.Insert(12, ':');
-                                sb.Insert(10, ':');
-                                sb.Insert(8, ' ');
-                                sb.Insert(6, '-');
-                                sb.Insert(4, '-');
-                                line = sb.ToString();
+                                var line = dict["CreationDate"];
+                                if (line.Contains("+"))
+                                {
+                                    var sb = new StringBuilder(line.Split('+')[0]);
+                                    sb.Insert(12, ':');
+                                    sb.Insert(10, ':');
+                                    sb.Insert(8, ' ');
+                                    sb.Insert(6, '-');
+                                    sb.Insert(4, '-');
+                                    line = sb.ToString();
+                                }
+                                StartTime = DateTime.Parse(line);
                             }
-                            StartTime = DateTime.Parse(line);
                         }
-                        CmdLine = WmiUtils.GetValue("Win32_Process", $"ProcessId={PID}", "CommandLine");
-                        FileName = WmiUtils.GetValue("Win32_Process", $"ProcessId={PID}", "ExecutablePath");
                     }
                     catch { }
                 }
@@ -96,7 +100,8 @@ public class ProcessInfo
     {
         if (OperatingSystem.IsWindows())
         {
-            var ret = WmiUtils.Query("Win32_Process", $"ParentProcessId={PID}", "Name", "ProcessId");
+            int? queryProcessId;
+            var ret = WmiUtils.Query("Win32_Process", $"ParentProcessId={PID}", out queryProcessId, "Name", "ProcessId");
             return ret
             .Select(dict =>
             {
@@ -106,6 +111,7 @@ public class ProcessInfo
                     Name = dict["Name"]
                 };
             })
+            .Where(t => queryProcessId == null || t.PID != queryProcessId.Value)
             .ToArray();
         }
         else

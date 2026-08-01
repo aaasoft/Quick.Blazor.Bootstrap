@@ -25,7 +25,7 @@ public static class WmiUtils
                     using (inst)
                     {
                         var obj = inst.CimInstanceProperties[propertyName].Value;
-                        if(obj is DateTime dt)
+                        if (obj is DateTime dt)
                             return dt.ToString("yyyy-MM-dd HH:mm:ss");
                         return obj?.ToString();
                     }
@@ -55,10 +55,11 @@ public static class WmiUtils
     }
 
     [SupportedOSPlatform("windows")]
-    public static List<Dictionary<string,string>> Query(string table, string condition, params string[] propertyNames)
+    public static List<Dictionary<string, string>> Query(string table, string condition, out int? processId, params string[] propertyNames)
     {
-        var list = new List<Dictionary<string,string>>();
-        var propertyNamesString = string.Join(',',propertyNames);
+        processId = null;
+        var list = new List<Dictionary<string, string>>();
+        var propertyNamesString = string.Join(',', propertyNames);
         try
         {
             string wql = null;
@@ -73,8 +74,8 @@ public static class WmiUtils
                 foreach (var inst in instances)
                     using (inst)
                     {
-                        var dict = new Dictionary<string,string>();
-                        foreach(var propertyName in propertyNames)
+                        var dict = new Dictionary<string, string>();
+                        foreach (var propertyName in propertyNames)
                         {
                             var obj = inst.CimInstanceProperties[propertyName].Value;
                             if (obj is DateTime dt)
@@ -94,11 +95,16 @@ public static class WmiUtils
             else
                 commandLine = $"wmic path {table} where {condition} get {propertyNamesString}";
             var ret = ProcessUtils.ExecuteShell(commandLine);
+            processId = ret.ProcessId;
             if (ret.ExitCode != 0)
                 return list;
             var lines = ret.Output.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
+            if (lines.Length < 2)
+                return list;
             var headLine = lines[0];
             ICollection<Match> matchCollection = regexWmicResultHead.Matches(headLine);
+            if (matchCollection.Count == 0)
+                return list;
             var headList = new List<WmicResultHead>();
             foreach (var match in matchCollection)
             {
@@ -109,12 +115,13 @@ public static class WmiUtils
                     Length = match.Length
                 });
             }
-            foreach(var line in lines.Skip(1))
+            foreach (var line in lines.Skip(1))
             {
-                var dict = new Dictionary<string,string>();
-                foreach(var head in headList)
+                var dict = new Dictionary<string, string>();
+                foreach (var head in headList)
                 {
-                    dict[head.Name]= line.Substring(head.Index,head.Length).Trim();
+                    var length = Math.Min(head.Length, line.Length - head.Index);
+                    dict[head.Name] = line.Substring(head.Index, length).Trim();
                 }
                 list.Add(dict);
             }
