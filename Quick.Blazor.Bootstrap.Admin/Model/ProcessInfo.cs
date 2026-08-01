@@ -1,4 +1,5 @@
-﻿using Quick.Shell.PowerShell;
+﻿using Quick.Blazor.Bootstrap.Admin.Utils;
+using Quick.Shell.PowerShell;
 using Quick.Shell.Utils;
 using System.Diagnostics;
 using System.Runtime.Versioning;
@@ -66,26 +67,21 @@ public class ProcessInfo
                     {
                         if (StartTime == DateTime.MinValue)
                         {
-                            var line = GetWmicResult($"wmic process where ProcessId={PID} get CreationDate");
-                            var sb = new StringBuilder(line.Split('+')[0]);
-                            sb.Insert(12, ':');
-                            sb.Insert(10, ':');
-                            sb.Insert(8, ' ');
-                            sb.Insert(6, '-');
-                            sb.Insert(4, '-');
-                            StartTime = DateTime.Parse(sb.ToString());
+                            var line = WmiUtils.GetValue("Win32_Process", $"ProcessId={PID}", "CreationDate");
+                            if (line.Contains("+"))
+                            {
+                                var sb = new StringBuilder(line.Split('+')[0]);
+                                sb.Insert(12, ':');
+                                sb.Insert(10, ':');
+                                sb.Insert(8, ' ');
+                                sb.Insert(6, '-');
+                                sb.Insert(4, '-');
+                                line = sb.ToString();
+                            }
+                            StartTime = DateTime.Parse(line);
                         }
-                        //高于Windows 11 24H2,则不能使用wmic了
-                        if (OperatingSystem.IsWindowsVersionAtLeast(10, 0, 26100))
-                        {
-                            CmdLine = GetCimInstanceResult($"(Get-CimInstance Win32_Process -Filter \"ProcessId={PID}\").CommandLine");
-                            FileName = GetCimInstanceResult($"(Get-CimInstance Win32_Process -Filter \"ProcessId={PID}\").ExecutablePath");
-                        }
-                        else
-                        {
-                            CmdLine = GetWmicResult($"wmic process where ProcessId={PID} get CommandLine");
-                            FileName = GetWmicResult($"wmic process where ProcessId={PID} get ExecutablePath");
-                        }
+                        CmdLine = WmiUtils.GetValue("Win32_Process", $"ProcessId={PID}", "CommandLine");
+                        FileName = WmiUtils.GetValue("Win32_Process", $"ProcessId={PID}", "ExecutablePath");
                     }
                     catch { }
                 }
@@ -96,44 +92,20 @@ public class ProcessInfo
         }
     }
 
-    private string GetCimInstanceResult(string commandLine)
-    {
-        var ret = PowerShellProcessContext.ExecuteCommand(commandLine);
-        if (ret.ExitCode != 0)
-            return null;
-        return ret.Output.Trim().Split(Environment.NewLine).Last();
-    }
-
-    private string GetWmicResult(string commandLine)
-    {
-        var ret = ProcessUtils.ExecuteShell(commandLine);
-        if (ret.ExitCode != 0)
-            return null;
-        return string.Join(' ', ret.Output.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries).Skip(1)).Trim();
-    }
-
     public ProcessInfo[] GetChildProcesses()
     {
         if (OperatingSystem.IsWindows())
         {
-            var ret = ProcessUtils.ExecuteShell($"wmic process where ParentProcessId={PID} get Name,ProcessId");
-            if (ret.ExitCode != 0)
-                return null;
-            return ret.Output.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries).Skip(1)
-            .Select(line =>
+            var ret = WmiUtils.Query("Win32_Process", $"ParentProcessId={PID}", "Name", "ProcessId");
+            return ret
+            .Select(dict =>
             {
-                var segments = line.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
-                if (segments.Length < 2)
-                    return null;
-                var pid = int.Parse(segments.Last());
-                var name = string.Join(' ', segments.Take(segments.Length - 1));
                 return new ProcessInfo()
                 {
-                    PID = pid,
-                    Name = name
+                    PID = int.Parse(dict["ProcessId"]),
+                    Name = dict["Name"]
                 };
             })
-            .Where(t => t != null && t.PID != ret.ProcessId)
             .ToArray();
         }
         else
