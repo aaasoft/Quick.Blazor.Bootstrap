@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Quick.Blazor.Bootstrap.Admin\n"
-"POT-Creation-Date: 2026-08-03 12:08:16+0800\n"
-"PO-Revision-Date: 2026-08-03 12:09+0800\n"
+"POT-Creation-Date: 2026-08-03 14:35:01+0800\n"
+"PO-Revision-Date: 2026-08-03 14:35+0800\n"
 "Last-Translator: 张鹏 <scbeta@qq.com>\n"
 "Language-Team: \n"
 "Language: zh\n"
@@ -23,6 +23,14 @@ msgstr "重命名"
 msgid "Confirm"
 msgstr "确认"
 
+#: ..\..\ProcessModulesViewControl.razor.cs:18
+msgid "Module Memory Size"
+msgstr "模块内存大小"
+
+#: ..\..\ProcessModulesViewControl.razor.cs:15
+msgid "File Version"
+msgstr "文件版本"
+
 #: ..\..\FileManageControl.razor.cs:863
 #, csharp-format
 msgid "File [{0}] is too large,are you sure to edit it with text editor?"
@@ -41,13 +49,13 @@ msgstr "大小"
 msgid "Operate"
 msgstr "操作"
 
-#: ..\..\Core\CommonTransferContext.cs:10
-msgid "Remaining Time"
-msgstr "剩余时间"
-
 #: ..\..\FileManageControl.razor.cs:144
 msgid "Could not create folder out of BaseDir"
 msgstr "无法在[BaseDir]外部创建文件夹"
+
+#: ..\..\Core\CommonTransferContext.cs:10
+msgid "Remaining Time"
+msgstr "剩余时间"
 
 #: ..\..\ProcessViewControl.razor.cs:16
 msgid "View Modules"
@@ -73,7 +81,7 @@ msgstr "速度"
 msgid "Error"
 msgstr "错误"
 
-#: ..\..\ProcessThreadsViewControl.razor.cs:16
+#: ..\..\ProcessThreadsViewControl.razor.cs:15
 msgid "Start Address"
 msgstr "启动地址"
 
@@ -131,6 +139,11 @@ msgstr "上传文件夹"
 msgid "Thread Count"
 msgstr "线程数量"
 
+#: ..\..\ProcessModulesViewControl.razor.cs:13
+msgid "Module Name"
+msgstr "模块名"
+
+#: ..\..\ProcessModulesViewControl.razor.cs:14
 #: ..\..\ProcessViewControl.razor.cs:24
 msgid "File Name"
 msgstr "文件名"
@@ -147,7 +160,8 @@ msgstr "句柄数量"
 msgid "Process has exited"
 msgstr "进程已退出"
 
-#: ..\..\ProcessThreadsViewControl.razor.cs:13
+#: ..\..\ProcessThreadsViewControl.razor.cs:12
+#: ..\..\ProcessModulesViewControl.razor.cs:12
 #: ..\..\ProcessViewControl.razor.cs:14 ..\..\FileManageControl.razor.cs:150
 msgid "Refresh"
 msgstr "刷新"
@@ -160,17 +174,21 @@ msgstr "行"
 msgid "Keywords"
 msgstr "关键字"
 
+#: ..\..\ProcessModulesViewControl.razor.cs:16
+msgid "Base Address"
+msgstr "基础地址"
+
 #: ..\..\FileManageControl.razor.cs:132
 msgid "Loading"
 msgstr "加载中"
 
-#: ..\..\FileManageControl.razor.cs:135
-msgid "Do you want to delete file[{0}]?"
-msgstr "确定删除文件[{0}]?"
-
 #: ..\..\ProcessViewControl.razor.cs:28
 msgid "Child Processes"
 msgstr "子进程"
+
+#: ..\..\FileManageControl.razor.cs:135
+msgid "Do you want to delete file[{0}]?"
+msgstr "确定删除文件[{0}]?"
 
 #: ..\..\FileManageControl.razor.cs:148
 msgid "File [{0}] was exist,do you want to replace it?"
@@ -188,7 +206,7 @@ msgstr "下载"
 msgid "Reading upload file info..."
 msgstr "正在获取上传文件信息..."
 
-#: ..\..\ProcessThreadsViewControl.razor.cs:20
+#: ..\..\ProcessThreadsViewControl.razor.cs:19
 msgid "User Processor Time"
 msgstr "用户处理器时间"
 
@@ -196,7 +214,7 @@ msgstr "用户处理器时间"
 msgid "Verify"
 msgstr "校验"
 
-#: ..\..\ProcessThreadsViewControl.razor.cs:14
+#: ..\..\ProcessThreadsViewControl.razor.cs:13
 msgid "Thread Id"
 msgstr "线程编号"
 
@@ -204,13 +222,17 @@ msgstr "线程编号"
 msgid "Folder [{0}] not exist"
 msgstr "文件夹[{0}]不存在"
 
-#: ..\..\ProcessThreadsViewControl.razor.cs:18
+#: ..\..\ProcessThreadsViewControl.razor.cs:17
 msgid "Wait Reason"
 msgstr "等待原因"
 
 #: ..\..\ProcessViewControl.razor.cs:13
 msgid "Process [{0}] {1}"
 msgstr "进程 [{0}] {1}"
+
+#: ..\..\ProcessModulesViewControl.razor.cs:17
+msgid "Entry Point Address"
+msgstr "入口地址"
 
 #: ..\..\ProcessViewControl.razor.cs:15
 msgid "View Threads"
@@ -224,11 +246,11 @@ msgstr "删除"
 msgid "Uploading file [{0}]..."
 msgstr "正在上传文件[{0}]..."
 
-#: ..\..\ProcessThreadsViewControl.razor.cs:19
+#: ..\..\ProcessThreadsViewControl.razor.cs:18
 msgid "Total Process Time"
 msgstr "总处理器时间"
 
-#: ..\..\ProcessThreadsViewControl.razor.cs:21
+#: ..\..\ProcessThreadsViewControl.razor.cs:20
 msgid "Privileged Processor Time"
 msgstr "特权处理器时间"
 
@@ -240,8 +262,8 @@ msgstr "排序"
 msgid "Last Write Time"
 msgstr "修改时间"
 
-#: ..\..\TextEditControl.razor.cs:38 ..\..\ProxyDownloadControl.razor.cs:15
-#: ..\..\ProcessManageControl.razor.cs:14 ..\..\ProcessViewControl.razor.cs:18
+#: ..\..\ProcessManageControl.razor.cs:14 ..\..\TextEditControl.razor.cs:38
+#: ..\..\ProxyDownloadControl.razor.cs:15 ..\..\ProcessViewControl.razor.cs:18
 #: ..\..\FileManageControl.razor.cs:139
 msgid "Failed"
 msgstr "失败"
@@ -250,7 +272,7 @@ msgstr "失败"
 msgid "Please input new name of [{0}]"
 msgstr "请输入[{0}]的新名称"
 
-#: ..\..\ProcessThreadsViewControl.razor.cs:15
+#: ..\..\ProcessThreadsViewControl.razor.cs:14
 #: ..\..\ProcessViewControl.razor.cs:27
 msgid "Start Time"
 msgstr "启动时间"
@@ -260,7 +282,7 @@ msgstr "启动时间"
 msgid "Name"
 msgstr "名称"
 
-#: ..\..\ProcessThreadsViewControl.razor.cs:17
+#: ..\..\ProcessThreadsViewControl.razor.cs:16
 msgid "Thread State"
 msgstr "线程状态"
 

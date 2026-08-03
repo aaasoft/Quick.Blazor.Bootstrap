@@ -121,8 +121,11 @@ namespace Quick.Blazor.Bootstrap.Admin
         }
 
         private void ViewModules()
-        {
-            
+        {            
+            modalWindow.Show($"{TextViewModules} - {Title}", new DialogParameters<ProcessModulesViewControl>()
+            {
+                {t=>t.PID, PID}
+            });
         }
 
         private void btnKillProcess_Click()

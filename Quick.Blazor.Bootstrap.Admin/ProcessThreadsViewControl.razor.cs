@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Quick.Blazor.Bootstrap.Admin.Model;
 using Quick.Localize;
 using Quick.Utils;
 using System.Diagnostics;

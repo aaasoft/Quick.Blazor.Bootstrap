@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Quick.Blazor.Bootstrap.Admin\n"
-"POT-Creation-Date: 2026-08-03 12:08:16+0800\n"
-"PO-Revision-Date: 2026-08-03 12:08:16+0800\n"
+"POT-Creation-Date: 2026-08-03 14:35:01+0800\n"
+"PO-Revision-Date: 2026-08-03 14:35:01+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -20,6 +20,14 @@ msgstr ""
 
 #: ..\..\FileManageControl.razor.cs:133
 msgid "Confirm"
+msgstr ""
+
+#: ..\..\ProcessModulesViewControl.razor.cs:18
+msgid "Module Memory Size"
+msgstr ""
+
+#: ..\..\ProcessModulesViewControl.razor.cs:15
+msgid "File Version"
 msgstr ""
 
 #: ..\..\FileManageControl.razor.cs:863
@@ -41,12 +49,12 @@ msgstr ""
 msgid "Operate"
 msgstr ""
 
-#: ..\..\Core\CommonTransferContext.cs:10
-msgid "Remaining Time"
-msgstr ""
-
 #: ..\..\FileManageControl.razor.cs:144
 msgid "Could not create folder out of BaseDir"
+msgstr ""
+
+#: ..\..\Core\CommonTransferContext.cs:10
+msgid "Remaining Time"
 msgstr ""
 
 #: ..\..\ProcessViewControl.razor.cs:16
@@ -73,7 +81,7 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#: ..\..\ProcessThreadsViewControl.razor.cs:16
+#: ..\..\ProcessThreadsViewControl.razor.cs:15
 msgid "Start Address"
 msgstr ""
 
@@ -134,6 +142,11 @@ msgstr ""
 msgid "Thread Count"
 msgstr ""
 
+#: ..\..\ProcessModulesViewControl.razor.cs:13
+msgid "Module Name"
+msgstr ""
+
+#: ..\..\ProcessModulesViewControl.razor.cs:14
 #: ..\..\ProcessViewControl.razor.cs:24
 msgid "File Name"
 msgstr ""
@@ -151,7 +164,8 @@ msgstr ""
 msgid "Process has exited"
 msgstr ""
 
-#: ..\..\ProcessThreadsViewControl.razor.cs:13
+#: ..\..\ProcessThreadsViewControl.razor.cs:12
+#: ..\..\ProcessModulesViewControl.razor.cs:12
 #: ..\..\ProcessViewControl.razor.cs:14
 #: ..\..\FileManageControl.razor.cs:150
 msgid "Refresh"
@@ -165,16 +179,20 @@ msgstr ""
 msgid "Keywords"
 msgstr ""
 
+#: ..\..\ProcessModulesViewControl.razor.cs:16
+msgid "Base Address"
+msgstr ""
+
 #: ..\..\FileManageControl.razor.cs:132
 msgid "Loading"
 msgstr ""
 
-#: ..\..\FileManageControl.razor.cs:135
-msgid "Do you want to delete file[{0}]?"
-msgstr ""
-
 #: ..\..\ProcessViewControl.razor.cs:28
 msgid "Child Processes"
+msgstr ""
+
+#: ..\..\FileManageControl.razor.cs:135
+msgid "Do you want to delete file[{0}]?"
 msgstr ""
 
 #: ..\..\FileManageControl.razor.cs:148
@@ -194,7 +212,7 @@ msgstr ""
 msgid "Reading upload file info..."
 msgstr ""
 
-#: ..\..\ProcessThreadsViewControl.razor.cs:20
+#: ..\..\ProcessThreadsViewControl.razor.cs:19
 msgid "User Processor Time"
 msgstr ""
 
@@ -202,7 +220,7 @@ msgstr ""
 msgid "Verify"
 msgstr ""
 
-#: ..\..\ProcessThreadsViewControl.razor.cs:14
+#: ..\..\ProcessThreadsViewControl.razor.cs:13
 msgid "Thread Id"
 msgstr ""
 
@@ -210,12 +228,16 @@ msgstr ""
 msgid "Folder [{0}] not exist"
 msgstr ""
 
-#: ..\..\ProcessThreadsViewControl.razor.cs:18
+#: ..\..\ProcessThreadsViewControl.razor.cs:17
 msgid "Wait Reason"
 msgstr ""
 
 #: ..\..\ProcessViewControl.razor.cs:13
 msgid "Process [{0}] {1}"
+msgstr ""
+
+#: ..\..\ProcessModulesViewControl.razor.cs:17
+msgid "Entry Point Address"
 msgstr ""
 
 #: ..\..\ProcessViewControl.razor.cs:15
@@ -230,11 +252,11 @@ msgstr ""
 msgid "Uploading file [{0}]..."
 msgstr ""
 
-#: ..\..\ProcessThreadsViewControl.razor.cs:19
+#: ..\..\ProcessThreadsViewControl.razor.cs:18
 msgid "Total Process Time"
 msgstr ""
 
-#: ..\..\ProcessThreadsViewControl.razor.cs:21
+#: ..\..\ProcessThreadsViewControl.razor.cs:20
 msgid "Privileged Processor Time"
 msgstr ""
 
@@ -246,9 +268,9 @@ msgstr ""
 msgid "Last Write Time"
 msgstr ""
 
+#: ..\..\ProcessManageControl.razor.cs:14
 #: ..\..\TextEditControl.razor.cs:38
 #: ..\..\ProxyDownloadControl.razor.cs:15
-#: ..\..\ProcessManageControl.razor.cs:14
 #: ..\..\ProcessViewControl.razor.cs:18
 #: ..\..\FileManageControl.razor.cs:139
 msgid "Failed"
@@ -258,7 +280,7 @@ msgstr ""
 msgid "Please input new name of [{0}]"
 msgstr ""
 
-#: ..\..\ProcessThreadsViewControl.razor.cs:15
+#: ..\..\ProcessThreadsViewControl.razor.cs:14
 #: ..\..\ProcessViewControl.razor.cs:27
 msgid "Start Time"
 msgstr ""
@@ -269,7 +291,7 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: ..\..\ProcessThreadsViewControl.razor.cs:17
+#: ..\..\ProcessThreadsViewControl.razor.cs:16
 msgid "Thread State"
 msgstr ""
 
