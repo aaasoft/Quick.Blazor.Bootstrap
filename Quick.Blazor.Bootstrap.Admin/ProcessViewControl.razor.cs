@@ -1,19 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Quick.Blazor.Bootstrap.Admin.Model;
-using Quick.Blazor.Bootstrap.Admin.Utils;
-using Quick.Blazor.Bootstrap.Utils;
 using Quick.Localize;
-using Quick.Shell.Utils;
 using Quick.Utils;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Runtime.Versioning;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Quick.Blazor.Bootstrap.Admin
 {
@@ -28,8 +18,6 @@ namespace Quick.Blazor.Bootstrap.Admin
         private string TextKillProcessTree => Locale<ProcessViewControl>.GetString("Kill Process Tree");
         private string TextColumnThreadCount => Locale<ProcessViewControl>.GetString("Thread Count");
         private string TextColumnHandleCount => Locale<ProcessViewControl>.GetString("Handle Count");
-        private string TextColumnTotalProcessorTime => Locale<ProcessViewControl>.GetString("Total Processor Time");
-        private string TextColumnUserProcessorTime => Locale<ProcessViewControl>.GetString("User Processor Time");
         private string TextColumnMemory => Locale<ProcessViewControl>.GetString("Memory");
         private string TextColumnFileName => Locale<ProcessViewControl>.GetString("File Name");
         private string TextColumnCmdLine => Locale<ProcessViewControl>.GetString("Cmd Line");
@@ -53,7 +41,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         private string ExceptionString;
 
         private CancellationTokenSource cts = new CancellationTokenSource();
-        public bool ProcessHasExited { get; private set; } = true;
+        public bool ProcessHasExited { get; private set; } = false;
 
 
         private ModalAlert modalAlert;
@@ -63,10 +51,14 @@ namespace Quick.Blazor.Bootstrap.Admin
             try
             {
                 var process = Process.GetProcessById(PID);
-                ProcessHasExited = process.HasExited;
+                try
+                {
+                    ProcessHasExited = process.HasExited;
+                }
+                catch { }
                 process.WaitForExitAsync(cts.Token).ContinueWith(t =>
                 {
-                    if (t.IsCanceled)
+                    if (t.IsCanceled || t.IsFaulted)
                         return;
                     ProcessHasExited = true;
                     InvokeAsync(StateHasChanged);
@@ -86,7 +78,9 @@ namespace Quick.Blazor.Bootstrap.Admin
         {
             try
             {
-                return storageUSC.GetString(processInfo.Memory, 2, true) + "B";
+                if (processInfo.Memory == null)
+                    return null;
+                return storageUSC.GetString(processInfo.Memory.Value, 2, true) + "B";
             }
             catch
             {
@@ -118,7 +112,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         private void btnKillProcess_Click()
         {
             modalAlert.Show(TextKillProcessTree, string.Format(TextAskToKillProcess, PID, ProcessInfo.Name),
-                new ()
+                new()
                 {
                     OkCallback = () =>
                     {

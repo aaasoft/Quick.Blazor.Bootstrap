@@ -1,5 +1,4 @@
 ﻿using Quick.Blazor.Bootstrap.Admin.Utils;
-using Quick.Shell.PowerShell;
 using Quick.Shell.Utils;
 using System.Diagnostics;
 using System.Runtime.Versioning;
@@ -14,12 +13,10 @@ public class ProcessInfo
     public string FileName { get; set; }
     public string CmdLine { get; set; }
     public string WorkingDirectory { get; set; }
-    public int ThreadsCount { get; set; }
-    public int HandleCount { get; set; }
-    public long Memory { get; set; }
+    public int? ThreadsCount { get; set; }
+    public int? HandleCount { get; set; }
+    public long? Memory { get; set; }
     public DateTime StartTime { get; set; }
-    public TimeSpan TotalProcessorTime { get; }
-    public TimeSpan UserProcessorTime { get; }
 
     public ProcessInfo() { }
 
@@ -37,8 +34,6 @@ public class ProcessInfo
             ThreadsCount = process.Threads.Count;
             HandleCount = process.HandleCount;
             Memory = process.WorkingSet64;
-            TotalProcessorTime = process.TotalProcessorTime;
-            UserProcessorTime = process.UserProcessorTime;
 
             if (includeDetail)
             {

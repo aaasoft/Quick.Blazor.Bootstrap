@@ -42,26 +42,41 @@
             <tbody>
                 @if (!ProcessHasExited)
                 {
+                @if (ProcessInfo.Memory.HasValue)
+                {
                 <tr>
-                    <th style="min-width: 5rem;">@TextColumnMemory</th>
+                    <th style="min-width: 10rem;">@TextColumnMemory</th>
                     <td>@getProcessMemInfo(ProcessInfo)</td>
                 </tr>
+                }
+                @if (ProcessInfo.ThreadsCount.HasValue)
+                {
                 <tr>
                     <th>@TextColumnThreadCount</th>
                     <td>@ProcessInfo.ThreadsCount</td>
                 </tr>
+                }
+                @if (ProcessInfo.HandleCount.HasValue)
+                {
                 <tr>
                     <th>@TextColumnHandleCount</th>
                     <td>@ProcessInfo.HandleCount</td>
                 </tr>
+                }
+                @if (!string.IsNullOrEmpty(ProcessInfo.FileName))
+                {
                 <tr>
                     <th>@TextColumnFileName</th>
                     <td>@ProcessInfo.FileName</td>
                 </tr>
+                }
+                @if (!string.IsNullOrEmpty(ProcessInfo.CmdLine))
+                {
                 <tr>
                     <th>@TextColumnCmdLine</th>
                     <td>@ProcessInfo.CmdLine</td>
                 </tr>
+                }
                 @if (!string.IsNullOrEmpty(ProcessInfo.WorkingDirectory))
                 {
                 <tr>
@@ -72,14 +87,6 @@
                 <tr>
                     <th>@TextColumnStartTime</th>
                     <td>@ProcessInfo.StartTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
-                </tr>
-                <tr>
-                    <th>@TextColumnTotalProcessorTime</th>
-                    <td>@ProcessInfo.TotalProcessorTime</td>
-                </tr>
-                <tr>
-                    <th>@TextColumnUserProcessorTime</th>
-                    <td>@ProcessInfo.UserProcessorTime</td>
                 </tr>
                     @if (ChildProcesses != null && ChildProcesses.Length > 0)
                     {

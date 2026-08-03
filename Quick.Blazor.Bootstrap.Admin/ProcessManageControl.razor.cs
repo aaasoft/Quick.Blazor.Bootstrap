@@ -145,7 +145,9 @@ namespace Quick.Blazor.Bootstrap.Admin
         {
             try
             {
-                return storageUSC.GetString(processInfo.Memory, 2, true) + "B";
+                if (processInfo.Memory == null)
+                    return null;
+                return storageUSC.GetString(processInfo.Memory.Value, 2, true) + "B";
             }
             catch
             {
