@@ -17,7 +17,15 @@
                     <button type="button" class="btn btn-sm btn-secondary" @onclick="RefreshProcess">
                         @TextRefresh
                     </button>
-                    <button type="button" class="btn btn-sm btn-secondary mr-1" @onclick="btnKillProcess_Click">
+                    <button type="button" class="btn btn-sm btn-secondary" @onclick="ViewThreads">
+                        @TextViewThreads
+                    </button>
+                    <button type="button" class="btn btn-sm btn-secondary" @onclick="ViewModules">
+                        @TextViewModules
+                    </button>
+                </div>
+                <div class="btn-group" role="group" aria-label="BasicButtons">
+                    <button type="button" class="btn btn-sm btn-danger mr-1" @onclick="btnKillProcess_Click">
                         @TextKillProcessTree
                     </button>
                 </div>
@@ -130,3 +138,4 @@
     <ProcessViewControl PID="@CurrentChildProcess.PID" OtherButtons="@OtherButtons"></ProcessViewControl>
 }
 <ModalAlert @ref="modalAlert" DialogSizeExtraLarge />
+<ModalWindow @ref="modalWindow" DialogSizeExtraLarge />

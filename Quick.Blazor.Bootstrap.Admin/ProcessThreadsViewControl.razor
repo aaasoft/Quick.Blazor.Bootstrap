@@ -1,0 +1,56 @@
+﻿@inherits ComponentBase_WithGettextSupport;
+
+<div class="card-body small p-0">
+    @if (IsLoading)
+    {
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    }
+    else
+    {
+        <div class="m-2">
+            <div class="btn-group" role="group" aria-label="BasicButtons">
+                <button type="button" class="btn btn-sm btn-secondary" @onclick="RefreshProcess">
+                    @TextRefresh
+                </button>
+            </div>
+        </div>
+        <table class="table table-sm table-striped table-borderless table-hover mb-0" style="overflow-wrap: anywhere;">
+            <tbody>
+                <tr>
+                    <th>@TextColumnThreadId</th>
+                    <th>@TextColumnStartTime</th>
+                    <th>@TextColumnStartAddress</th>
+                    <th>@TextColumnThreadState</th>
+                    <th>@TextColumnWaitReason</th>
+                    <th>@TextColumnTotalProcessTime</th>
+                    <th>@TextColumnUserProcessorTime</th>
+                    <th>@TextColumnPrivilegedProcessorTime</th>
+                </tr>
+                @if (processThreads != null)
+                {
+                    @foreach (var thread in processThreads)
+                    {
+                        <tr>
+                            <td>@thread.Id</td>
+                            <td>@getStartTime(thread)</td>
+                            <td>@thread.StartAddress</td>
+                            <td>@thread.ThreadState</td>
+                            <td>@getWaitReason(thread)</td>
+                            <td>@getTotalProcessorTime(thread)</td>
+                            <td>@getUserProcessorTime(thread)</td>
+                            <td>@getPrivilegedProcessorTime(thread)</td>
+                        </tr>
+                    }
+                }
+                @if (!string.IsNullOrEmpty(ExceptionString))
+                {
+                    <tr>
+                        <td>@ExceptionString</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

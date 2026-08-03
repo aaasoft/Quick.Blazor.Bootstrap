@@ -12,6 +12,8 @@ namespace Quick.Blazor.Bootstrap.Admin
     {
         private string TextProcessTitle => Locale<ProcessViewControl>.GetString("Process [{0}] {1}");
         private string TextRefresh => Locale<ProcessViewControl>.GetString("Refresh");
+        private string TextViewThreads => Locale<ProcessViewControl>.GetString("View Threads");
+        private string TextViewModules => Locale<ProcessViewControl>.GetString("View Modules");
         private string TextSuccess => Locale<ProcessViewControl>.GetString("Success");
         private string TextFailed => Locale<ProcessViewControl>.GetString("Failed");
         private string TextAskToKillProcess => Locale<ProcessViewControl>.GetString("Are you sure to kill process[Id: {0},Name: {1}]?");
@@ -45,6 +47,7 @@ namespace Quick.Blazor.Bootstrap.Admin
 
 
         private ModalAlert modalAlert;
+        private ModalWindow modalWindow;
 
         protected override void OnParametersSet()
         {
@@ -107,6 +110,19 @@ namespace Quick.Blazor.Bootstrap.Admin
                 ExceptionString = ExceptionUtils.GetExceptionString(ex);
             }
             InvokeAsync(StateHasChanged);
+        }
+
+        private void ViewThreads()
+        {
+            modalWindow.Show($"{TextViewThreads} - {Title}", new DialogParameters<ProcessThreadsViewControl>()
+            {
+                {t=>t.PID, PID}
+            });
+        }
+
+        private void ViewModules()
+        {
+            
         }
 
         private void btnKillProcess_Click()
