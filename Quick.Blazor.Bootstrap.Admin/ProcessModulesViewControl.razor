@@ -23,7 +23,6 @@
                     <tr>
                         <th>@TextColumnModuleName</th>
                         <th>@TextColumnFileName</th>
-                        <th>@TextColumnFileVersion</th>
                         <th>@TextColumnBaseAddress</th>
                         <th>@TextColumnEntryPointAddress</th>
                         <th>@TextColumnModuleMemorySize</th>
@@ -33,7 +32,6 @@
                         <tr>
                             <td>@module.ModuleName</td>
                             <td>@module.FileName</td>
-                            <td>@module.FileVersionInfo.FileVersion</td>
                             <td>@module.BaseAddress</td>
                             <td>@module.EntryPointAddress</td>
                             <td>@(storageUSC.GetString(module.ModuleMemorySize, 2, true) + "B")</td>
