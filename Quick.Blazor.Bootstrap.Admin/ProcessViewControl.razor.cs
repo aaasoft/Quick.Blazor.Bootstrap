@@ -26,9 +26,10 @@ namespace Quick.Blazor.Bootstrap.Admin
         private string TextFailed => Locale<ProcessViewControl>.GetString("Failed");
         private string TextAskToKillProcess => Locale<ProcessViewControl>.GetString("Are you sure to kill process[Id: {0},Name: {1}]?");
         private string TextKillProcessTree => Locale<ProcessViewControl>.GetString("Kill Process Tree");
-        private string TextColumnPID => Locale<ProcessViewControl>.GetString("PID");
-        private string TextColumnName => Locale<ProcessViewControl>.GetString("Name");
-        private string TextColumnThreads => Locale<ProcessViewControl>.GetString("Threads");
+        private string TextColumnThreadCount => Locale<ProcessViewControl>.GetString("Thread Count");
+        private string TextColumnHandleCount => Locale<ProcessViewControl>.GetString("Handle Count");
+        private string TextColumnTotalProcessorTime => Locale<ProcessViewControl>.GetString("Total Processor Time");
+        private string TextColumnUserProcessorTime => Locale<ProcessViewControl>.GetString("User Processor Time");
         private string TextColumnMemory => Locale<ProcessViewControl>.GetString("Memory");
         private string TextColumnFileName => Locale<ProcessViewControl>.GetString("File Name");
         private string TextColumnCmdLine => Locale<ProcessViewControl>.GetString("Cmd Line");

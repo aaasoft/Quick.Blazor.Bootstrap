@@ -47,8 +47,12 @@
                     <td>@getProcessMemInfo(ProcessInfo)</td>
                 </tr>
                 <tr>
-                    <th>@TextColumnThreads</th>
+                    <th>@TextColumnThreadCount</th>
                     <td>@ProcessInfo.ThreadsCount</td>
+                </tr>
+                <tr>
+                    <th>@TextColumnHandleCount</th>
+                    <td>@ProcessInfo.HandleCount</td>
                 </tr>
                 <tr>
                     <th>@TextColumnFileName</th>
@@ -68,6 +72,14 @@
                 <tr>
                     <th>@TextColumnStartTime</th>
                     <td>@ProcessInfo.StartTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                </tr>
+                <tr>
+                    <th>@TextColumnTotalProcessorTime</th>
+                    <td>@ProcessInfo.TotalProcessorTime</td>
+                </tr>
+                <tr>
+                    <th>@TextColumnUserProcessorTime</th>
+                    <td>@ProcessInfo.UserProcessorTime</td>
                 </tr>
                     @if (ChildProcesses != null && ChildProcesses.Length > 0)
                     {

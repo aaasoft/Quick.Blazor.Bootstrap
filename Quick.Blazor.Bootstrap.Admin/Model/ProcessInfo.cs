@@ -15,8 +15,11 @@ public class ProcessInfo
     public string CmdLine { get; set; }
     public string WorkingDirectory { get; set; }
     public int ThreadsCount { get; set; }
+    public int HandleCount { get; set; }
     public long Memory { get; set; }
     public DateTime StartTime { get; set; }
+    public TimeSpan TotalProcessorTime { get; }
+    public TimeSpan UserProcessorTime { get; }
 
     public ProcessInfo() { }
 
@@ -32,7 +35,11 @@ public class ProcessInfo
             PID = process.Id;
             Name = process.ProcessName;
             ThreadsCount = process.Threads.Count;
+            HandleCount = process.HandleCount;
             Memory = process.WorkingSet64;
+            TotalProcessorTime = process.TotalProcessorTime;
+            UserProcessorTime = process.UserProcessorTime;
+
             if (includeDetail)
             {
                 try { StartTime = process.StartTime; }
