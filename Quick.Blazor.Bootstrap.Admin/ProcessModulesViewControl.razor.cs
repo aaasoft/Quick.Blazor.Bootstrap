@@ -12,8 +12,7 @@ namespace Quick.Blazor.Bootstrap.Admin
         private string TextRefresh => Locale<ProcessViewControl>.GetString("Refresh");
         private string TextColumnModuleName => Locale<ProcessViewControl>.GetString("Module Name");
         private string TextColumnFileName => Locale<ProcessViewControl>.GetString("File Name");
-        private string TextColumnBaseAddress => Locale<ProcessViewControl>.GetString("Base Address");
-        private string TextColumnEntryPointAddress => Locale<ProcessViewControl>.GetString("Entry Point Address");
+        private string TextColumnFileVersion => Locale<ProcessViewControl>.GetString("File Version");
         private string TextColumnModuleMemorySize => Locale<ProcessViewControl>.GetString("Module Memory Size");
 
         private readonly UnitStringConverting storageUSC = UnitStringConverting.StorageUnitStringConverting;
@@ -51,6 +50,18 @@ namespace Quick.Blazor.Bootstrap.Admin
                 IsLoading = false;
                 InvokeAsync(StateHasChanged);
             });
+        }
+
+        private string getFileVersion(ProcessModule module)
+        {
+            try
+            {
+                return module.FileVersionInfo?.FileVersion;
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

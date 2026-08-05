@@ -12,7 +12,6 @@ namespace Quick.Blazor.Bootstrap.Admin
         private string TextRefresh => Locale<ProcessViewControl>.GetString("Refresh");
         private string TextColumnThreadId => Locale<ProcessViewControl>.GetString("Thread Id");
         private string TextColumnStartTime => Locale<ProcessViewControl>.GetString("Start Time");
-        private string TextColumnStartAddress => Locale<ProcessViewControl>.GetString("Start Address");
         private string TextColumnThreadState => Locale<ProcessViewControl>.GetString("Thread State");
         private string TextColumnWaitReason => Locale<ProcessViewControl>.GetString("Wait Reason");
         private string TextColumnTotalProcessTime => Locale<ProcessViewControl>.GetString("Total Process Time");

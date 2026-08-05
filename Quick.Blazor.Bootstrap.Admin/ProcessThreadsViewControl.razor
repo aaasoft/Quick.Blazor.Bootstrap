@@ -23,7 +23,6 @@
                     <tr>
                         <th>@TextColumnThreadId</th>
                         <th>@TextColumnStartTime</th>
-                        <th>@TextColumnStartAddress</th>
                         <th>@TextColumnThreadState</th>
                         <th>@TextColumnWaitReason</th>
                         <th>@TextColumnTotalProcessTime</th>
@@ -35,7 +34,6 @@
                         <tr>
                             <td>@thread.Id</td>
                             <td>@getStartTime(thread)</td>
-                            <td>@thread.StartAddress</td>
                             <td>@thread.ThreadState</td>
                             <td>@getWaitReason(thread)</td>
                             <td>@getTotalProcessorTime(thread)</td>
