@@ -10,12 +10,12 @@ public partial class Controls : ComponentBase
     private ModalAlert modalAlert;
     private ToastStack toastStack;
 
-    public FieldForGet[] Fields { get; private set; }
+    public IEnumerable<FieldForGet> Fields { get; private set; }
 
     [Parameter]
-    public Action<FieldForGet, FieldForGet[]> OnFieldChangedAction { get; set; }
+    public Action<FieldForGet, IEnumerable<FieldForGet>> OnFieldChangedAction { get; set; }
 
-    public void SetFields(FieldForGet[] fields)
+    public void SetFields(IEnumerable<FieldForGet> fields)
     {
         travelFields(fields, field =>
         {
