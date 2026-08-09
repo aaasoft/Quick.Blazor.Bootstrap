@@ -21,7 +21,7 @@
 		<PackageReference Include="BlazorDownloadFile" Version="2.4.0.2" />
 		<PackageReference Include="Microsoft.Management.Infrastructure" Version="3.0.0" />
 		<PackageReference Include="Quick.Shell" Version="1.0.4" />
-		<PackageReference Include="SharpCompress" Version="0.50.1" />
+		<PackageReference Include="SharpCompress" Version="0.50.4" />
 		<PackageReference Include="Tewr.Blazor.FileReader" Version="3.4.0.24340" />
 	</ItemGroup>
 	<ItemGroup>

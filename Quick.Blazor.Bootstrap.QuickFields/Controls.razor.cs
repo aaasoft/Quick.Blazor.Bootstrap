@@ -78,7 +78,7 @@ public partial class Controls : ComponentBase
                     field.PropertyChanged -= OnFieldValueChanged;
     }
 
-    private void travelFields(FieldForGet[] fields, Action<FieldForGet> action)
+    private void travelFields(IEnumerable<FieldForGet> fields, Action<FieldForGet> action)
     {
         if (fields == null)
             return;
