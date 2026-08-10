@@ -55,7 +55,7 @@
                 </button>
             </th>
             <th class="border-0 p-0 m-0">
-                <button type="button" class="border btn btn-light btn-block m-0 rounded-0 text-left" @onclick="@(()=>changeOrderByAscOrDesc("threads"))">
+                <button type="button" class="border btn btn-light btn-block m-0 rounded-0 text-right" @onclick="@(() => changeOrderByAscOrDesc("threads"))">
                     @TextColumnThreads
                     <div class="float-right">
                         <i class="@getOrderByButtonIconClass("threads")" aria-hidden="true"></i>
@@ -63,7 +63,7 @@
                 </button>
             </th>
             <th class="border-0 p-0 m-0">
-                <button type="button" class="border btn btn-light btn-block m-0 rounded-0 text-left" @onclick="@(()=>changeOrderByAscOrDesc("memory"))">
+                <button type="button" class="border btn btn-light btn-block m-0 rounded-0 text-right" @onclick="@(()=>changeOrderByAscOrDesc("memory"))">
                     <i class="@getOrderByButtonIconClass("memory")" aria-hidden="true"></i>
                     @TextColumnMemory
                 </button>
@@ -78,8 +78,8 @@
                 <tr class="@(t == CurrentProcess? "table-active" : "")" @onclick="@(e => CurrentProcess = t)">
                     <th scope="row">@t.PID</th>
                     <td>@t.Name</td>
-                    <td>@t.ThreadsCount</td>
-                    <td>@getProcessMemInfo(t)</td>
+                    <td class="text-right">@t.ThreadsCount</td>
+                    <td class="text-right">@getProcessMemInfo(t)</td>
                 </tr>
             }
         }
