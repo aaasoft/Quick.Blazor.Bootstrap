@@ -24,7 +24,7 @@
                         <th>@TextColumnModuleName</th>
                         <th>@TextColumnFileName</th>
                         <th>@TextColumnFileVersion</th>
-                        <th>@TextColumnModuleMemorySize</th>
+                        <th class="text-right">@TextColumnModuleMemorySize</th>
                     </tr>
                     @foreach (var module in processModules)
                     {
@@ -32,7 +32,7 @@
                             <td>@module.ModuleName</td>
                             <td>@module.FileName</td>
                             <td>@getFileVersion(module)</td>
-                            <td>@(storageUSC.GetString(module.ModuleMemorySize, 2, true) + "B")</td>
+                            <td class="text-right">@(storageUSC.GetString(module.ModuleMemorySize, 2, true) + "B")</td>
                         </tr>
                     }
                 }
