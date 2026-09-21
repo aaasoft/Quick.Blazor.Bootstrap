@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Quick.Localize;
 using Quick.Shell.Utils;
 using Quick.Utils;
 
@@ -6,6 +7,8 @@ namespace Quick.Blazor.Bootstrap.Admin;
 
 public partial class CommandInterpreter : IDisposable
 {
+    private static string TextError => Locale<CommandInterpreter>.GetString("Error");
+
     public int ConsoleRows = 20;
     private string command;
     private LogViewControl logViewControl;
@@ -114,7 +117,7 @@ public partial class CommandInterpreter : IDisposable
         }
         catch (Exception ex)
         {
-            modalAlert.Show("错误", ExceptionUtils.GetExceptionString(ex));
+            modalAlert.Show(TextError, ExceptionUtils.GetExceptionString(ex));
         }
         _ = InvokeAsync(StateHasChanged);
     }
